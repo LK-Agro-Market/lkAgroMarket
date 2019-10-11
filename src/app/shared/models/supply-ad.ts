@@ -6,7 +6,7 @@ export interface SupplyAd {
   quantityUnit: string;
   pricePerUnit: number;
   images: File[];
-  video: File[];
+  video?: File;
   description: string;
   organic: boolean;
   expireDate: Date;

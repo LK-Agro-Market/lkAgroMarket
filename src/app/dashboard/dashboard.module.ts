@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   NbThemeModule,
@@ -11,7 +12,9 @@ import {
   NbSidebarModule,
   NbCardModule,
   NbSpinnerModule,
-  NbButtonModule
+  NbButtonModule,
+  NbSelectModule,
+  NbInputModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -29,6 +32,7 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     DashboardRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ReactiveFormsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
@@ -38,7 +42,9 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbTooltipModule,
     NbCardModule,
     NbSpinnerModule,
-    NbButtonModule
+    NbButtonModule,
+    NbSelectModule,
+    NbInputModule
   ]
 })
 export class DashboardModule {}
