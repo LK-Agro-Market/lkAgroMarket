@@ -9,9 +9,10 @@ import { botReplies, gifsLinks, imageLinks } from './reply';
 @Injectable()
 export class ChatShowcaseService {
   users: Observable<any[]>;
-  //selectedUser:any
+  
   
   loadMessages() {
+   
     return messages;
   }
 

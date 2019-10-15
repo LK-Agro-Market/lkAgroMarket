@@ -2,8 +2,9 @@ import { Component,Input } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
-
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import 'rxjs/operator/filter';
+import 'rxjs/add/operator/filter';
+import { filter } from 'rxjs/operators'
 
 
 
@@ -15,8 +16,8 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 export class ChatComponent {
-  
-  
+   user = JSON.parse(localStorage.getItem('user'));
+  currentUser: any;
   users: Observable<any[]>;
   selectedUser:any;
   avatar:any;
@@ -24,60 +25,32 @@ export class ChatComponent {
   content:string;
   constructor(private afs: AngularFirestore,protected chatShowcaseService:ChatShowcaseService) {
     this.users = afs.collection('users').valueChanges();
-    //this.messages = this.chatShowcaseService.loadMessages();
+   // if('sender == user' && 'reciever == selectedUser'){
     this.messages = afs.collection('chats').valueChanges();
+   // }
     
-
   }
+  /*ngOnInit(){
+    this.others =this.users.filter(users => !this.isAuthenticated(users));
+  }
+  isAuthenticated(users){
+   return this.currentUser = JSON.parse(localStorage.getItem('user'));
+  }*/
  
   UserClicked(users: any){
     this.selectedUser=users.displayName;
     this.avatar = users.photoURL;
+    const currentuser = JSON.parse(localStorage.getItem('user'));
+    this.currentUser=currentuser.displayName;
+
   }
  
-  /*sendMessage(event: any) {
-    const files = !event.files ? [] : event.files.map((file) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
-    
-
-    this.messages.push({
-      text: event.message,
-      date: new Date(),
-      reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: 'Jonh Doe',
-        avatar: 'https://i.gifer.com/no.gif',
-      },
-    });
-    const botReply = this.chatShowcaseService.reply(event.message);
-    if (botReply) {
-      setTimeout(() => { this.messages.push(botReply) }, 500);
-    }
-  }*/
-  /*addPost(content,date) {
-    const data = {
-      
-      content,
-      date:new Date()
-      
-    };
-    return this.afs.collection('chats').add({'content': data.content,'date': data.date});
-    
-  }*/
-  
-  addPost(event:any) {
+  sendMessage(event:any) {
     const user = JSON.parse(localStorage.getItem('user'));
-    
-    return this.afs.collection('chats').add({'content': event.message,'date': Date.now(),'avatar':user.photoURL,'uid':user.uid });
+    return this.afs.collection('chats').add({'content': event.message,'date': Date.now(),'avatar':user.photoURL,'sender':user.displayName,'reciever': this.selectedUser });
     
   }
+  
 }
 
   

@@ -13,9 +13,8 @@ import {
   NbListModule,
   NbUserModule,
   NbCardModule,
-  NbSearchModule,
-  NbInputModule,
-  NbMenuModule
+  NbButtonModule
+  
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -47,9 +46,8 @@ import { ChatShowcaseService } from './shared/services/chat-showcase.service';
     NbListModule,
     NbUserModule,
     NbCardModule,
-    NbSearchModule,
-    NbInputModule,
-    NbMenuModule.forRoot()
+    NbButtonModule
+    
     
   ],
   providers: [ChatShowcaseService],
