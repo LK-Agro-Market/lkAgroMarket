@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import {  RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -14,7 +14,6 @@ import {
   NbUserModule,
   NbCardModule,
   NbButtonModule
-  
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -25,8 +24,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { FarmerComponent } from './farmer/farmer.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatShowcaseService } from './shared/services/chat-showcase.service';
-
-
 
 @NgModule({
   declarations: [LayoutComponent, FarmerComponent, ChatComponent],
@@ -47,9 +44,7 @@ import { ChatShowcaseService } from './shared/services/chat-showcase.service';
     NbUserModule,
     NbCardModule,
     NbButtonModule
-    
-    
   ],
-  providers: [ChatShowcaseService],
+  providers: [ChatShowcaseService]
 })
 export class DashboardModule {}

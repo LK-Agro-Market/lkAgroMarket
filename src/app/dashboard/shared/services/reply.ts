@@ -1,10 +1,11 @@
-const botAvatar: string = 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png';
+const botAvatar: string =
+  'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png';
 
 export const gifsLinks: string[] = [
   'https://media.tenor.com/images/ac287fd06319e47b1533737662d5bfe8/tenor.gif',
   'https://i.gifer.com/no.gif',
   'https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif',
-  'http://www.reactiongifs.com/r/wnd1.gif',
+  'http://www.reactiongifs.com/r/wnd1.gif'
 ];
 export const imageLinks: string[] = [
   'https://picsum.photos/320/240/?image=357',
@@ -12,7 +13,7 @@ export const imageLinks: string[] = [
   'https://picsum.photos/320/240/?image=339',
   'https://picsum.photos/320/240/?image=387',
   'https://picsum.photos/320/240/?image=30',
-  'https://picsum.photos/320/240/?image=271',
+  'https://picsum.photos/320/240/?image=271'
 ];
 const fileLink: string = 'http://google.com';
 
@@ -27,14 +28,16 @@ export const botReplies = [
       date: new Date(),
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([H,h]elp)/g,
-    answerArray: [`No problem! Try sending a message containing word "hey", "image",
-    "gif", "file", "map", "quote", "file group" to see different message components`],
+    answerArray: [
+      `No problem! Try sending a message containing word "hey", "image",
+    "gif", "file", "map", "quote", "file group" to see different message components`
+    ],
     type: 'text',
     reply: {
       text: '',
@@ -42,9 +45,9 @@ export const botReplies = [
       date: new Date(),
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([I,i]mage)|(IMAGE)|([P,p]ic)|(Picture)/g,
@@ -58,14 +61,14 @@ export const botReplies = [
       files: [
         {
           url: '',
-          type: 'image/jpeg',
-        },
+          type: 'image/jpeg'
+        }
       ],
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([G,g]if)|(GIF)/g,
@@ -79,14 +82,14 @@ export const botReplies = [
       files: [
         {
           url: '',
-          type: 'image/gif',
-        },
+          type: 'image/gif'
+        }
       ],
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([F,f]ile group)|(FILE)/g,
@@ -100,23 +103,23 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'file-text-outline',
+          icon: 'file-text-outline'
         },
         {
           url: '',
-          type: 'image/gif',
+          type: 'image/gif'
         },
         {
           url: '',
-          type: 'image/jpeg',
-        },
+          type: 'image/jpeg'
+        }
       ],
       icon: 'file-text-outline',
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([F,f]ile)|(FILE)/g,
@@ -130,15 +133,15 @@ export const botReplies = [
       files: [
         {
           url: fileLink,
-          icon: 'file-text-outline',
-        },
+          icon: 'file-text-outline'
+        }
       ],
       icon: 'file-text-outline',
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([M,m]ap)|(MAP)/g,
@@ -153,9 +156,9 @@ export const botReplies = [
       longitude: 27.5998355,
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /([Q,q]uote)|(QUOTE)/g,
@@ -169,9 +172,9 @@ export const botReplies = [
       quote: '',
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
+        avatar: botAvatar
+      }
+    }
   },
   {
     regExp: /(.*)/g,
@@ -183,8 +186,8 @@ export const botReplies = [
       date: new Date(),
       user: {
         name: 'Bot',
-        avatar: botAvatar,
-      },
-    },
-  },
+        avatar: botAvatar
+      }
+    }
+  }
 ];
