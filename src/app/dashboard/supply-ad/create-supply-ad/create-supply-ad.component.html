@@ -1,6 +1,135 @@
-<nb-card accent="primary">
-  <nb-card-header>Create New Advertisement</nb-card-header>
+<nb-card
+  accent="info"
+  [nbSpinner]="processing"
+  nbSpinnerStatus="primary"
+  nbSpinnerSize="large"
+>
+  <nb-card-header>
+    Add new user
+  </nb-card-header>
   <nb-card-body>
-    add form
+    <form [formGroup]="supplyAdForm" (ngSubmit)="createSupplyAd()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-select
+              fullWidth
+              placeholder="Select Food Category"
+              formControlName="type"
+              (selectedChange)="retriveFoods()"
+            >
+              <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
+            </nb-select>
+            <div
+              *ngIf="attempted && !!formControls.type.errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="!!formControls.type.errors.required"
+                >Food category is required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-select
+              fullWidth
+              placeholder="Select Food Category"
+              formControlName="food"
+            >
+              <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
+                f
+              }}</nb-option>
+            </nb-select>
+            <div
+              *ngIf="attempted && !!formControls.food.errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="!!formControls.food.errors.required"
+                >Food name is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              formControlName="quantity"
+              placeholder="Quantity"
+            />
+            <div
+              *ngIf="attempted && !!formControls.quantity.errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="!!formControls.quantity.errors.required"
+                >Email is required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              formControlName="quantityUnit"
+              placeholder="Quantity Measure Unit"
+            />
+            <div
+              *ngIf="attempted && !!formControls.quantity.errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="!!formControls.quantity.errors.required"
+                >Email is required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              formControlName="pricePerUnit"
+              placeholder="Price Per Unit"
+            />
+            <div
+              *ngIf="attempted && !!formControls.quantity.errors"
+              class="invalid-feedback"
+            >
+              <span *ngIf="!!formControls.quantity.errors.required"
+                >Email is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="file" nbInput fullWidth (change)="img1Preview($event)" />
+          <div *ngIf="image1LL && image1LL !== null">
+            <img class="imagePreview" [src]="image1LL" />
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <input type="file" nbInput fullWidth (change)="img2Preview($event)" />
+          <div *ngIf="image2LL && image2LL !== null">
+            <img class="imagePreview" [src]="image2LL" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto text-right">
+          <button type="submit" nbButton>Add User</button>
+        </div>
+      </div>
+    </form>
   </nb-card-body>
 </nb-card>
