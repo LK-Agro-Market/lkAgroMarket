@@ -6,6 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
+import { Chat } from '../shared/services/chats';
 
 @Component({
   selector: 'app-chat',
@@ -13,6 +14,7 @@ import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
+  userData: any;
   user = JSON.parse(localStorage.getItem('user'));
   currentUser: any;
   users: Observable<any[]>;
@@ -26,10 +28,7 @@ export class ChatComponent {
   ) {
     this.users = afs.collection('users').valueChanges();
     this.messages = afs.collection('chats').valueChanges();
-    
   }
-  
-
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.avatar = users.photoURL;
@@ -38,13 +37,22 @@ export class ChatComponent {
   }
 
   sendMessage(event: any) {
+    const id = this.afs.createId();
     const user = JSON.parse(localStorage.getItem('user'));
-    return this.afs
+    this.afs
       .collection('chats')
       .add({
+        id,
         content: event.message,
         date: Date.now(),
         avatar: user.photoURL,
+        sender: user.displayName,
+        reciever: this.selectedUser
+      });
+    this.afs
+      .collection('chatrooms')
+      .add({
+        id,
         sender: user.displayName,
         reciever: this.selectedUser
       });
