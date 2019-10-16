@@ -6,10 +6,11 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import { UserDetailsService } from '../services/user-details.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     if (this.authService.isLoggedIn === false) {
       this.router.navigate(['login']);
-    } else if (this.userDetailsService.haveUserDetails === false) {
-      this.router.navigate(['registration']);
+      return false;
     }
     return true;
   }
