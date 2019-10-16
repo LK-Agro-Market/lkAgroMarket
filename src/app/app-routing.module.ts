@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
+import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
 
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -14,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => DashboardModule,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RegistrationGuard]
   },
   {
     path: 'login',
@@ -24,7 +25,7 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
-    canActivate: [RegistrationGuard]
+    canActivate: [AuthGuard, RegiReverseGuard]
   },
   {
     path: 'not-found',

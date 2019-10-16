@@ -55,11 +55,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(result => {
         this.ngZone.run(() => {
-          if (this.userDetailsService.haveUserDetails) {
-            this.router.navigate(['']);
-          } else {
-            this.router.navigate(['/registration']);
-          }
+          this.router.navigate(['']);
         });
         this.SetUserData(result.user);
       })
@@ -69,9 +65,9 @@ export class AuthService {
   }
 
   SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
+    const userRef: AngularFirestoreDocument<any> = this.afs
+      .collection('users')
+      .doc(user.uid);
     const userData: User = {
       uid: user.uid,
       email: user.email,
