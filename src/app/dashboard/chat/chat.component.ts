@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
-import { Chat } from '../shared/services/chats';
+import { Chats } from '../shared/services/chats';
 
 @Component({
   selector: 'app-chat',
@@ -14,6 +14,7 @@ import { Chat } from '../shared/services/chats';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
+  usersCollection: AngularFirestoreCollection<Chats>;
   userData: any;
   user = JSON.parse(localStorage.getItem('user'));
   currentUser: any;
@@ -27,34 +28,31 @@ export class ChatComponent {
     protected chatShowcaseService: ChatShowcaseService
   ) {
     this.users = afs.collection('users').valueChanges();
-    this.messages = afs.collection('chats').valueChanges();
   }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
+
+    this.usersCollection = this.afs.collection('chats', ref => ref.where('reciever', '<=', this.selectedUser )
+    .where('reciever', '>=', this.selectedUser ));
+    this.messages = this.usersCollection.valueChanges();
   }
 
   sendMessage(event: any) {
-    const id = this.afs.createId();
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs
       .collection('chats')
       .add({
-        id,
+       // id,
         content: event.message,
         date: Date.now(),
         avatar: user.photoURL,
         sender: user.displayName,
         reciever: this.selectedUser
       });
-    this.afs
-      .collection('chatrooms')
-      .add({
-        id,
-        sender: user.displayName,
-        reciever: this.selectedUser
-      });
+    // if('sender' == 'user.displayName' && 'reciever' == 'this.selectedUser'){
+  //  }
   }
 }
