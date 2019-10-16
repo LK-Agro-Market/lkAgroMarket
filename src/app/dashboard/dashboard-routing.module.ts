@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
-import { FarmerComponent } from './farmer/farmer.component';
+import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'farmer-dashboard',
-        component: FarmerComponent
+        component: SupplyAdComponent
       }
     ]
   }

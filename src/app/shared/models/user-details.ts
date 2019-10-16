@@ -10,4 +10,5 @@ export interface UserDetails {
   organizationAddress: string;
   longitude: number;
   latitude: number;
+  createdAt: Date;
 }

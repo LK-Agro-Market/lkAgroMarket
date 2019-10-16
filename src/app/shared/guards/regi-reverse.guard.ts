@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
+  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
-  CanActivate,
   Router
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-
+import { first, switchMap } from 'rxjs/operators';
 import { UserDetailsService } from '../services/user-details.service';
-import { switchMap, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationGuard implements CanActivate {
+export class RegiReverseGuard implements CanActivate {
   constructor(
     public userDetailsService: UserDetailsService,
     public router: Router
@@ -31,9 +30,9 @@ export class RegistrationGuard implements CanActivate {
       first(),
       switchMap(res => {
         if (res === true) {
-          return of(true);
+          this.router.navigate(['']);
         } else {
-          this.router.navigate(['registration']);
+          return of(true);
         }
       })
     );
