@@ -2,13 +2,20 @@
   <nb-layout-header subheader>
     <div class="row header-row">
       <div class="col title">
-        <span class="align-middle">LK Agro Market</span>
+        <img class="logo" src="../../../assets/logo.png" />
       </div>
-      <!-- <div class="col text-right" *ngIf="user">
-        <button class="align-middle" nbButton hero status="info" size="small" (click)="logout()">
+      <div class="col text-right allign-middle">
+        <button
+          class="logout"
+          nbButton
+          hero
+          status="success"
+          size="small"
+          (click)="logout()"
+        >
           <nb-icon icon="unlock-outline"></nb-icon>Sign out
         </button>
-      </div> -->
+      </div>
     </div>
   </nb-layout-header>
 

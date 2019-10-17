@@ -27,6 +27,7 @@
     "@nebular/theme": "^4.2.1",
     "@nrwl/workspace": "^8.5.1",
     "@types/events": "^3.0.0",
+    "bootstrap": "^4.3.1",
     "eva-icons": "^1.1.1",
     "firebase": "^6.4.0",
     "rxjs": "~6.4.0",

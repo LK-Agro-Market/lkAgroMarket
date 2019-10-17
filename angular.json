@@ -24,7 +24,14 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
+<<<<<<< HEAD
             "styles": ["src/styles.scss"],
+=======
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.scss"
+            ],
+>>>>>>> ab353352c7f74b7d7f53b250f5fc1d0cb4553119
             "scripts": []
           },
           "configurations": {

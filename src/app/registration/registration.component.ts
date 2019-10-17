@@ -105,7 +105,8 @@ export class RegistrationComponent implements OnInit {
       businessAddress: this.formControls.businessAddress.value,
       organization: this.formControls.organization.value,
       designation: this.formControls.designation.value,
-      organizationAddress: this.formControls.organization.value
+      organizationAddress: this.formControls.organization.value,
+      createdAt: new Date()
     };
 
     const user: User = JSON.parse(localStorage.getItem('user'));
