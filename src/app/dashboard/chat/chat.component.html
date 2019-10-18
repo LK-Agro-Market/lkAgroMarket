@@ -27,6 +27,7 @@
         [type]="msg.text"
         [message]="msg.content"
         [date]="msg.time"
+        [files]="msg.files"
         [avatar]="msg.avatar"
       >
       </nb-chat-message>
@@ -36,8 +37,8 @@
 
     <nb-card>
       <nb-card-body>
-        <nb-icon (click)="upload($event)" icon="attach-outline"></nb-icon>
-        <input type="file" (change)="upload($event)" accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif" />
+       <!-- <nb-icon (click)="upload($event)" icon="attach-outline"></nb-icon>-->
+        <input type="file" icon="attach-outline" (change)="upload($event)" accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif" />
       </nb-card-body>
     </nb-card>
   </nb-layout-column>

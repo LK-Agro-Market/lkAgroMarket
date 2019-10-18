@@ -9,6 +9,7 @@ import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
 import { Chats } from '../shared/services/chats';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { map } from 'rxjs/operators/map';
+import {finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -31,13 +32,17 @@ export class ChatComponent {
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
+  //////////////
+  snapshot: Observable<any>;
+  files: Observable<any>;
   constructor(
     private afs: AngularFirestore,
     protected chatShowcaseService: ChatShowcaseService,
     private afStorage: AngularFireStorage
   ) {
     this.users = afs.collection('users').valueChanges();
-    this.afs.collection('chats' , ref => ref.orderBy('date'));
+   // this.afs.collection('chats' , ref => ref.orderBy('date'));
+    this.files = afs.collection('files').valueChanges();
   }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
@@ -52,6 +57,7 @@ export class ChatComponent {
    }
 
   sendMessage(event: any) {
+   // const files = this.upload(event);
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs
       .collection('chats', ref => ref.orderBy('date'))
@@ -61,18 +67,34 @@ export class ChatComponent {
         avatar: user.photoURL,
         sender: user.displayName,
         reciever: this.selectedUser,
-        date: new Date()
+        date: new Date(),
+       // type: files.length ? 'file' : 'text',
+      //  files: files,
       });
     // this.afs.collection('chats' , ref => ref.orderBy('date', 'desc'));
     // if('sender' == 'user.displayName' && 'reciever' == 'this.selectedUser'){
   //  }
   }
-  upload(event) {
-    const id = Math.random().toString(36).substring(2);
-    this.ref = this.afStorage.ref(id);
-    this.task = this.ref.put(event.target.files[0]);
-    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
-    this.uploadProgress = this.task.percentageChanges();
-    this.downloadURL = this.ref.getDownloadURL();
-  }
+  // upload(event) {
+  //   const path = 'test/${new Date()}_${this.file.name}';
+  //   this.ref = this.afStorage.ref(path);
+  //   this.task = this.ref.put(event.target.files[0]);
+  //   this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+  //   this.uploadProgress = this.task.percentageChanges();
+  //   this.downloadURL = this.ref.getDownloadURL();
+  //   this.snapshot = this.task.snapshotChanges().pipe(
+  //     tap(console.log),
+  //     finalize(async () => {
+  //       this.downloadURL = await this.ref.getDownloadURL().toPromise();
+  //       this.afs.collection('files').add( { downloadURL: this.downloadURL, path });
+  //     })
+  //   );
+  //   const files = !event.files ? [] : event.files.map((file) => {
+  //     return {
+  //       url: file.src,
+  //       type: file.type,
+  //       icon: 'file-text-outline',
+  //     };
+  //   });
+  // }
 }

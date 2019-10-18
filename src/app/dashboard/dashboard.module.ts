@@ -30,9 +30,10 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatShowcaseService } from './shared/services/chat-showcase.service';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent, ChatComponent],
+  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent, ChatComponent, UploadFileComponent],
   imports: [
     CommonModule,
     RouterModule,
