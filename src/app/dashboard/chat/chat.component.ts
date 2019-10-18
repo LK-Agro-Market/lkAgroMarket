@@ -17,6 +17,7 @@ import {finalize, tap } from 'rxjs/operators';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
+  files: File[] = [];
   usersCollection: AngularFirestoreCollection<Chats>;
   userData: any;
   user = JSON.parse(localStorage.getItem('user'));
@@ -34,7 +35,9 @@ export class ChatComponent {
   downloadURL: Observable<string>;
   //////////////
   snapshot: Observable<any>;
-  files: Observable<any>;
+  // files: Observable<any>;
+  file: Observable<any>;
+  isHovering: boolean;
   constructor(
     private afs: AngularFirestore,
     protected chatShowcaseService: ChatShowcaseService,
@@ -42,7 +45,8 @@ export class ChatComponent {
   ) {
     this.users = afs.collection('users').valueChanges();
    // this.afs.collection('chats' , ref => ref.orderBy('date'));
-    this.files = afs.collection('files').valueChanges();
+    // this.files = afs.collection('files').valueChanges();
+    this.file = afs.collection('files').valueChanges();
   }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
@@ -97,4 +101,12 @@ export class ChatComponent {
   //     };
   //   });
   // }
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+  }
+  onDrop(files: FileList) {
+    for (let i = 0; i < files.length; i++) {
+      this.files.push(files.item(i));
+    }
+  }
 }

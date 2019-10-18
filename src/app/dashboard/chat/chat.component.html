@@ -30,6 +30,16 @@
         [files]="msg.files"
         [avatar]="msg.avatar"
       >
+      <ul>
+        <li class="text" *ngFor="let files of file | async">
+          <a href="{{files.downloadURL}}">{{files.downloadURL}}</a>
+          
+        </li>
+      </ul>
+      
+      <div *ngFor="let file of files">
+          <app-upload-file [file]="file"></app-upload-file>
+        </div>
       </nb-chat-message>
       <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
       </nb-chat-form>
@@ -38,7 +48,7 @@
     <nb-card>
       <nb-card-body>
        <!-- <nb-icon (click)="upload($event)" icon="attach-outline"></nb-icon>-->
-        <input type="file" icon="attach-outline" (change)="upload($event)" accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif" />
+       <input type="file" class="file-input" (change)="onDrop($event.target.files)" accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif">
       </nb-card-body>
     </nb-card>
   </nb-layout-column>
