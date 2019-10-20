@@ -18,7 +18,8 @@ import {finalize, tap } from 'rxjs/operators';
 })
 export class ChatComponent {
   files: File[] = [];
-  usersCollection: AngularFirestoreCollection<Chats>;
+  chatsCollection: AngularFirestoreCollection<Chats>;
+  repsCollection: AngularFirestoreCollection<Chats>;
   userData: any;
   user = JSON.parse(localStorage.getItem('user'));
   currentUser: any;
@@ -26,6 +27,7 @@ export class ChatComponent {
   selectedUser: any;
   avatar: any;
   messages: Observable<any[]>;
+  replies: Observable<any[]>;
   content: string;
   ////////
   ref: AngularFireStorageReference;
@@ -34,8 +36,8 @@ export class ChatComponent {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
   //////////////
+  percentage: Observable<number>;
   snapshot: Observable<any>;
-  // files: Observable<any>;
   file: Observable<any>;
   isHovering: boolean;
   constructor(
@@ -44,8 +46,6 @@ export class ChatComponent {
     private afStorage: AngularFireStorage
   ) {
     this.users = afs.collection('users').valueChanges();
-   // this.afs.collection('chats' , ref => ref.orderBy('date'));
-    // this.files = afs.collection('files').valueChanges();
     this.file = afs.collection('files').valueChanges();
   }
   UserClicked(users: any) {
@@ -53,18 +53,21 @@ export class ChatComponent {
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
-    this.afs.collection('chats' , ref => ref.orderBy('date'));
-    this.usersCollection = this.afs.collection('chats', ref => ref.where('reciever', '<=', this.selectedUser )
-    .where('reciever', '>=', this.selectedUser ));
-    this.messages = this.usersCollection.valueChanges();
+    this.chatsCollection = this.afs.collection('chats',
+     ref => ref.where('reciever', '==' , this.selectedUser)
+    .where('sender', '==', this.currentUser));
+    this.messages = this.chatsCollection.valueChanges();
+    ///////////
+    // this.repsCollection = this.afs.collection('chats', ref => ref.where('reciever', '<=', this.currentUser )
+    // .where('reciever', '>=', this.currentUser ));
+    // this.replies = this.chatsCollection.valueChanges();
     // this.afs.collection('chats' , ref => ref.orderBy('date'));
    }
 
   sendMessage(event: any) {
-   // const files = this.upload(event);
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs
-      .collection('chats', ref => ref.orderBy('date'))
+      .collection('chats', ref => ref.orderBy('date', 'desc' ))
       .add({
         content: event.message,
         time: Date.now(),
@@ -72,35 +75,12 @@ export class ChatComponent {
         sender: user.displayName,
         reciever: this.selectedUser,
         date: new Date(),
-       // type: files.length ? 'file' : 'text',
-      //  files: files,
-      });
-    // this.afs.collection('chats' , ref => ref.orderBy('date', 'desc'));
-    // if('sender' == 'user.displayName' && 'reciever' == 'this.selectedUser'){
-  //  }
+       // type: this.snapshot.length ? 'file' : 'text',
+    //   type: 'file',
+    //   files: files,
+    //   files: this.snapshot,
+     });
   }
-  // upload(event) {
-  //   const path = 'test/${new Date()}_${this.file.name}';
-  //   this.ref = this.afStorage.ref(path);
-  //   this.task = this.ref.put(event.target.files[0]);
-  //   this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
-  //   this.uploadProgress = this.task.percentageChanges();
-  //   this.downloadURL = this.ref.getDownloadURL();
-  //   this.snapshot = this.task.snapshotChanges().pipe(
-  //     tap(console.log),
-  //     finalize(async () => {
-  //       this.downloadURL = await this.ref.getDownloadURL().toPromise();
-  //       this.afs.collection('files').add( { downloadURL: this.downloadURL, path });
-  //     })
-  //   );
-  //   const files = !event.files ? [] : event.files.map((file) => {
-  //     return {
-  //       url: file.src,
-  //       type: file.type,
-  //       icon: 'file-text-outline',
-  //     };
-  //   });
-  // }
   toggleHover(event: boolean) {
     this.isHovering = event;
   }
