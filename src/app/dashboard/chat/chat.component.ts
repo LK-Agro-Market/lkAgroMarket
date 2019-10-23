@@ -57,16 +57,6 @@ export class ChatComponent {
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
-    // this.chatCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.selectedUser)
-    // .where('sender', '==', this.currentUser));
-    // ///////////////////////////////////////////////////////
-    // this.repsCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.currentUser)
-    // .where('sender', '==', this.selectedUser));
-    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // this.messages = this.chatCollection.valueChanges();
-    // this.replies = this.repsCollection.valueChanges();
     this.chatCollection = this.afs
     .collection('chats', ref => ref.where('reciever', '==' , this.selectedUser)
     .where('sender', '==', this.currentUser));
