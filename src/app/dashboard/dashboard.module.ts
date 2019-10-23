@@ -14,7 +14,8 @@ import {
   NbSpinnerModule,
   NbButtonModule,
   NbSelectModule,
-  NbInputModule
+  NbInputModule,
+  NbUserModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -44,7 +45,8 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbSpinnerModule,
     NbButtonModule,
     NbSelectModule,
-    NbInputModule
+    NbInputModule,
+    NbUserModule
   ]
 })
 export class DashboardModule {}
