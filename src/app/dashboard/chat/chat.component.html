@@ -22,7 +22,7 @@
     </nb-card>
 
     <nb-chat size="large">
-      <nb-chat-message
+      <!-- <nb-chat-message
       *ngFor="let msg of replies | async"
       [type]="msg.text"
       [message]="msg.content"
@@ -31,17 +31,13 @@
       [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
      
     >
-    </nb-chat-message>
+    </nb-chat-message> -->
       <nb-chat-message
         *ngFor="let msg of messages | async"
         [type]="msg.text"
         [message]="msg.content"
         [date]="msg.time"
-        [avatar]="msg.avatar"
-        [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
-       
-      >
-      </nb-chat-message>
+        [avatar]="msg.avatar"></nb-chat-message>
       <!-- <nb-chat-message>
        <div *ngFor="let file of files">
         <app-upload-file [file]="file"></app-upload-file>

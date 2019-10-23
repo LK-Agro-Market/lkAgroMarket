@@ -27,8 +27,10 @@ export class ChatComponent {
   userData: any;
   user = JSON.parse(localStorage.getItem('user'));
   currentUser: any;
+  currentId: any;
   users: Observable<any[]>;
   selectedUser: any;
+  selectedId: any;
   avatar: any;
   messages: Observable<any[]>;
   replies: Observable<any[]>;
@@ -54,15 +56,18 @@ export class ChatComponent {
   }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
+    this.selectedId = users.uid;
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
+    this.currentId = currentuser.uid;
+    //////////////////
     this.chatCollection = this.afs
-    .collection('chats', ref => ref.where('reciever', '==' , this.selectedUser)
-    .where('sender', '==', this.currentUser));
+    .collection('chats', ref => ref.where('rid', '==' , this.selectedId)
+    .where('sid', '==', this.currentId));
     this.repsCollection = this.afs.collection('chats',
-     ref => ref.where('reciever', '==' , this.currentUser)
-    .where('sender', '==', this.selectedUser));
+     ref => ref.where('rid', '==' , this.currentId)
+    .where('sid', '==', this.selectedId));
     this.messages = Observable
     .combineLatest(this.chatCollection.valueChanges(),
                    this.repsCollection.valueChanges())
@@ -86,7 +91,9 @@ export class ChatComponent {
         avatar: user.photoURL,
         sender: user.displayName,
         reciever: this.selectedUser,
-        date: new Date()
+        date: new Date(),
+        sid: user.uid,
+        rid: this.selectedId
      });
   }
   toggleHover(event: boolean) {
