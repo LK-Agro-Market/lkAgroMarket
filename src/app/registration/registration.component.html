@@ -200,11 +200,10 @@
                           <label *ngIf="this.selectedUserType == 'Buyer'"
                             >Home Address<span class="asterisk">*</span></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="homeAddress"
-                          />
+                          ></textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="
@@ -227,11 +226,11 @@
                               >*</span
                             ></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="businessAddress"
-                          />
+                          >
+                          </textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="
@@ -306,11 +305,10 @@
                               >*</span
                             ></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="organizationAddress"
-                          />
+                          ></textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="
