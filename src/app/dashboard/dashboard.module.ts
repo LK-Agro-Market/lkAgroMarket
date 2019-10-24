@@ -14,7 +14,9 @@ import {
   NbSpinnerModule,
   NbButtonModule,
   NbSelectModule,
-  NbInputModule
+  NbInputModule,
+  NbAccordionModule,
+  NbUserModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -24,9 +26,18 @@ import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { ForumComponent } from './forum/forum.component';
+import { ListForumComponent } from './forum/list-forum/list-forum.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent],
+  // tslint:disable-next-line: max-line-length
+  declarations: [
+    LayoutComponent,
+    SupplyAdComponent,
+    CreateSupplyAdComponent,
+    ForumComponent,
+    ListForumComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -44,7 +55,9 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbSpinnerModule,
     NbButtonModule,
     NbSelectModule,
-    NbInputModule
+    NbInputModule,
+    NbAccordionModule,
+    NbUserModule
   ]
 })
 export class DashboardModule {}

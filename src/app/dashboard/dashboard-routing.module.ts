@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
-
+import { ForumComponent } from './forum/forum.component';
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +17,14 @@ const routes: Routes = [
       {
         path: 'farmer-dashboard',
         component: SupplyAdComponent
+      },
+      {
+        path: 'farmer-dashboard',
+        component: SupplyAdComponent
+      },
+      {
+        path: 'forum',
+        component: ForumComponent
       }
     ]
   }

@@ -11,7 +11,8 @@ import {
   NbLayoutModule,
   NbStepperModule,
   NbButtonModule,
-  NbCardModule
+  NbCardModule,
+  NbMenuModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 

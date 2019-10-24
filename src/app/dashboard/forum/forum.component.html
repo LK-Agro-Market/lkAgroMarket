@@ -1,0 +1,79 @@
+<nb-card>
+  <nb-card-body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="add-new-container">
+            <h4 class="font-weight-bold mt-0 mb-4" id="profile-name">
+              {{ user.displayName }}
+            </h4>
+            <button nbButton status="primary" (click)="toggle()" id="add-btn">
+              Create New
+            </button>
+          </div>
+
+          <nb-accordion style="margin-top: 20px; margin-bottom: 20px;">
+            <nb-accordion-item #item>
+              <nb-accordion-item-body>
+                <form
+                  [formGroup]="discussionForm"
+                  novalidate
+                  (ngSubmit)="onSubmit()"
+                  #discform="ngForm"
+                >
+                  <label for="title" style="margin-left: 5px;"> Title </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="title"
+                    nbInput
+                    fullWidth
+                    fieldSize="small"
+                    status="primary"
+                    placeholder="Title"
+                    required
+                  />
+                  <div
+                    class="validation-feedback"
+                    *ngIf="
+                      !!formControls.title.errors &&
+                      !!formControls.title.touched
+                    "
+                  >
+                    Title is required
+                  </div>
+                  <label
+                    for="description"
+                    style="margin-top: 20px; margin-left: 5px;"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    formControlName="des"
+                    nbInput
+                    fullWidth
+                    status="primary"
+                    placeholder="Description"
+                  ></textarea>
+                  <button
+                    nbButton
+                    shape="round"
+                    size="small"
+                    status="success"
+                    class="float-right"
+                    style="margin-top: 20px;"
+                    [disabled]="!discussionForm.valid"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+
+          <app-list-forum></app-list-forum>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
