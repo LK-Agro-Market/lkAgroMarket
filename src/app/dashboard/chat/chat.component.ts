@@ -4,12 +4,15 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
 import { Chats } from '../shared/services/chats';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { map } from 'rxjs/operators/map';
-import {finalize, tap } from 'rxjs/operators';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
+import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-chat',
@@ -19,6 +22,7 @@ import {finalize, tap } from 'rxjs/operators';
 export class ChatComponent {
   files: File[] = [];
   chatsCollection: AngularFirestoreCollection<Chats>;
+  chatCollection: AngularFirestoreCollection<Chats>;
   repsCollection: AngularFirestoreCollection<Chats>;
   userData: any;
   user = JSON.parse(localStorage.getItem('user'));
@@ -29,15 +33,6 @@ export class ChatComponent {
   messages: Observable<any[]>;
   replies: Observable<any[]>;
   content: string;
-  ////////
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-  uploadState: Observable<string>;
-  uploadProgress: Observable<number>;
-  downloadURL: Observable<string>;
-  //////////////
-  percentage: Observable<number>;
-  snapshot: Observable<any>;
   file: Observable<any>;
   isHovering: boolean;
   constructor(
@@ -48,37 +43,60 @@ export class ChatComponent {
     this.users = afs.collection('users').valueChanges();
     this.file = afs.collection('files').valueChanges();
   }
+  compFn = (a, b) => {
+    if (a.time < b.time) {
+      return -1;
+    }
+    if (a.time > b.time) {
+      return 1;
+    }
+    return 0;
+  }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
-    this.chatsCollection = this.afs.collection('chats',
-     ref => ref.where('reciever', '==' , this.selectedUser)
+    // this.chatCollection = this.afs.collection('chats',
+    //  ref => ref.where('reciever', '==' , this.selectedUser)
+    // .where('sender', '==', this.currentUser));
+    // ///////////////////////////////////////////////////////
+    // this.repsCollection = this.afs.collection('chats',
+    //  ref => ref.where('reciever', '==' , this.currentUser)
+    // .where('sender', '==', this.selectedUser));
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // this.messages = this.chatCollection.valueChanges();
+    // this.replies = this.repsCollection.valueChanges();
+    this.chatCollection = this.afs
+    .collection('chats', ref => ref.where('reciever', '==' , this.selectedUser)
     .where('sender', '==', this.currentUser));
-    this.messages = this.chatsCollection.valueChanges();
-    ///////////
-    // this.repsCollection = this.afs.collection('chats', ref => ref.where('reciever', '<=', this.currentUser )
-    // .where('reciever', '>=', this.currentUser ));
-    // this.replies = this.chatsCollection.valueChanges();
-    // this.afs.collection('chats' , ref => ref.orderBy('date'));
+    this.repsCollection = this.afs.collection('chats',
+     ref => ref.where('reciever', '==' , this.currentUser)
+    .where('sender', '==', this.selectedUser));
+    this.messages = Observable
+    .combineLatest(this.chatCollection.valueChanges(),
+                   this.repsCollection.valueChanges())
+    .switchMap(chats => {
+        const [chatCollection, repsCollection] = chats;
+        const combined = chatCollection.concat(repsCollection);
+        return Observable.of(combined);
+    })
+    .pipe(
+      map(combined => combined.sort(this.compFn))
+    );
    }
 
-  sendMessage(event: any) {
+  sendMessage(event: any, reply: boolean) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs
-      .collection('chats', ref => ref.orderBy('date', 'desc' ))
+      .collection('chats')
       .add({
         content: event.message,
         time: Date.now(),
         avatar: user.photoURL,
         sender: user.displayName,
         reciever: this.selectedUser,
-        date: new Date(),
-       // type: this.snapshot.length ? 'file' : 'text',
-    //   type: 'file',
-    //   files: files,
-    //   files: this.snapshot,
+        date: new Date()
      });
   }
   toggleHover(event: boolean) {

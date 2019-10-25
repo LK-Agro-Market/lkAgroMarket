@@ -23,34 +23,28 @@
 
     <nb-chat size="large">
       <nb-chat-message
+      *ngFor="let msg of replies | async"
+      [type]="msg.text"
+      [message]="msg.content"
+      [date]="msg.time"
+      [avatar]="msg.avatar"
+      [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
+     
+    >
+    </nb-chat-message>
+      <nb-chat-message
         *ngFor="let msg of messages | async"
         [type]="msg.text"
         [message]="msg.content"
         [date]="msg.time"
         [avatar]="msg.avatar"
         [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
+       
       >
       </nb-chat-message>
-      <!-- <nb-chat-message
-        *ngFor="let msg of replies | async"
-        [type]="msg.text"
-        [message]="msg.content"
-        [date]="msg.time"
-        [avatar]="msg.avatar"
-        [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
-      >
-      </nb-chat-message>
-      <nb-chat-message *ngFor="let files of file | async"
-      [type]="files.file"
-      [date]="files.time"
-      [files] ="[ { url: files.downloadURL, type: 'image/jpeg' } ]"
-      [avatar]="files.avatar"
-      >
-      <li class="text" *ngFor="let files of file | async">
-          <a href="{{files.downloadURL}}">{{files.downloadURL}}</a>
-          
-        </li>
-      </nb-chat-message> -->
+   
+     
+   
       <!-- <nb-chat-message>
        <div *ngFor="let file of files">
         <app-upload-file [file]="file"></app-upload-file>
