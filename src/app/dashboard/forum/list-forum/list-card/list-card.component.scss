@@ -1,0 +1,74 @@
+  .pro-img-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+  .pro-img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+  }
+  .pro-name {
+    margin-top: 8px;
+    font-size: 14px;
+    margin-left: -20%;
+  }
+  .header-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .fotter-container{
+    display: flex;
+    flex-direction: row;
+  }
+  .btn-like{
+    margin-left: 350px;
+    margin-top: 15px;
+  }
+  .btn-com{
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+  .media-body {
+    padding-left: 20px;
+  }
+  #postDate {
+    margin-top: -3%;
+    font-size: 14px;
+    margin-left: 330px;
+    color: #598bff;
+  }
+  #postTitle {
+    font-size: 16px;
+    font-weight: 100;
+    margin-top: 20px;
+    color: #091c7a;
+  }
+  #postDesc {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .view-btn{
+    margin-top: 5px;
+    font-size: 15px;
+    width: 100px;
+    height: 35px;
+  }
+  t-header{
+    height: 10px;
+  }
+  .count-like{
+    margin-top: 15px;
+    margin-left: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 300;
+    color: orangered;
+  }
+  .count-com{
+    margin-top: 15px;
+    margin-left: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 300;
+    color: blueviolet;
+  }
+  

@@ -3,6 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
+            <nb-alert status="success" *ngIf="showMsg==='success'"><strong>Success...</strong>You have been successfully submitted!</nb-alert>
+            <nb-alert status="danger" *ngIf="showMsg==='error'" ><strong>Error...</strong> Can`t submit </nb-alert>
           <div class="add-new-container">
             <h4 class="font-weight-bold mt-0 mb-4" id="profile-name">
               {{ user.displayName }}
@@ -10,6 +12,7 @@
             <button nbButton status="primary" (click)="toggle()" id="add-btn">
               Create New
             </button>
+            
           </div>
 
           <nb-accordion style="margin-top: 20px; margin-bottom: 20px;">
@@ -33,15 +36,6 @@
                     placeholder="Title"
                     required
                   />
-                  <div
-                    class="validation-feedback"
-                    *ngIf="
-                      !!formControls.title.errors &&
-                      !!formControls.title.touched
-                    "
-                  >
-                    Title is required
-                  </div>
                   <label
                     for="description"
                     style="margin-top: 20px; margin-left: 5px;"

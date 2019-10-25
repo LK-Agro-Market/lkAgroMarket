@@ -3,7 +3,6 @@ import { User } from 'src/app/shared/models/user';
 import {
   FormControl,
   FormGroup,
-  FormBuilder,
   Validators
 } from '@angular/forms';
 import { ForumService } from './forum.service';
@@ -11,14 +10,16 @@ import { ForumService } from './forum.service';
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.scss']
+  styleUrls: ['./forum.component.scss'],
 })
+
 export class ForumComponent implements OnInit {
   discussionForm = new FormGroup({
     title: new FormControl('', Validators.required),
     des: new FormControl(''),
     dateTime: new FormControl('')
   });
+  showMsg = '';
 
   get title() {
     return this.discussionForm.get('title');
@@ -40,9 +41,6 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {}
 
-  success() {
-    this.alertService.success('Successfully submitted...');
-  }
   onSubmit() {
     if (this.formControls.title.errors) {
       return false;
@@ -52,14 +50,14 @@ export class ForumComponent implements OnInit {
     const dateTime = new Date();
     const userId = this.user.uid;
     const userName = this.user.displayName;
-
     if (this.title != null) {
       this.forumService.createPost(title, des, dateTime, userId, userName);
+      this.toggle();
       this.title.setValue('');
       this.des.setValue('');
-      this.toggle();
+      this.showMsg =  'success';
     } else {
-      // asdnasjd
+      this.showMsg = 'error';
     }
   }
 }

@@ -1,0 +1,38 @@
+<nb-accordion>
+    <nb-accordion-item>
+        <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="temp">
+            <div class="gold-members p-4">
+                <div class="media">
+                    <div class="pro-img-container">
+                        <img class="pro-img" src="assets/icon1.jpg" alt="Profile image" />
+                        <a href="#" class="pro-name" (click)="toggleMain()">{{temp.userName}} </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="header-container">
+                            <span class="float-right text-info" id="postDate">
+                                <b>Posted on </b><i>{{temp.date.toDate() | date: 'MMM d, y h:mm:ss a' }}</i>
+                            </span>
+                            <span id="postTitle">{{ temp.title }}</span>
+                            <br />
+                        </div>
+                        <div class="fotter-container">
+                            <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
+                                View {{ viewButton ? 'More' : 'Less' }}
+                            </button>
+                            <nb-icon icon="heart-outline" status="success" class="float-right btn-like"></nb-icon>
+                            <p class="count-like">7</p>
+                            <nb-icon icon="star-outline" status="info" class="float-right btn-com"></nb-icon>
+                            <p class="count-com">15</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+             
+            <p class="text-dark" id="postDesc"> {{temp.description}} </p>
+            <hr>
+            <button nbButton status="primary" outline size="small" class="float-right comment-btn">Add Comment</button>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

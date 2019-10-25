@@ -1,37 +1,7 @@
-.pro-img-container {
-  display: flex;
-  flex-direction: column;
-}
-.pro-img {
-  width: 65px;
-  height: 65px;
-  border: 3px solid black;
-  border-radius: 50%;
-}
-.pro-name {
-  margin-top: 8px;
-  font-size: 14px;
-  margin-left: -20%;
-}
-#dis-title {
-  color: slateblue;
-}
-.media-body {
-  padding-left: 30px;
-}
-#postDate {
-  margin-top: -3%;
-  font-size: 14px;
-}
-#postTitle {
-  font-size: 16px;
-  font-weight: 100;
-  color: goldenrod;
-}
-#postDesc {
-  margin-top: 10px;
-  font-size: 12px;
-}
-.comment-btn {
-  margin-bottom: 0;
+
+.sec{
+  width: 830px;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }

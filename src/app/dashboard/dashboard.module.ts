@@ -16,7 +16,9 @@ import {
   NbSelectModule,
   NbInputModule,
   NbAccordionModule,
-  NbUserModule
+  NbUserModule,
+  NbAlertModule,
+  NbBadgeModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -28,15 +30,16 @@ import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
+import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 
 @NgModule({
-  // tslint:disable-next-line: max-line-length
   declarations: [
     LayoutComponent,
     SupplyAdComponent,
     CreateSupplyAdComponent,
     ForumComponent,
-    ListForumComponent
+    ListForumComponent,
+    ListCardComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +60,11 @@ import { ListForumComponent } from './forum/list-forum/list-forum.component';
     NbSelectModule,
     NbInputModule,
     NbAccordionModule,
-    NbUserModule
+    NbUserModule,
+    NbIconModule,
+    NbAlertModule,
+    NbBadgeModule,
+    NbEvaIconsModule
   ]
 })
 export class DashboardModule {}

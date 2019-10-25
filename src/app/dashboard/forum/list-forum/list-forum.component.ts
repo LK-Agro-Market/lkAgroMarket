@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ForumService } from '../forum.service';
 import { first } from 'rxjs/operators';
@@ -10,16 +10,11 @@ import { first } from 'rxjs/operators';
 })
 export class ListForumComponent implements OnInit {
   items: any[];
-
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
-    this.forumService
-      .getAll()
-      .pipe()
-      .subscribe(items => {
-        this.items = items;
-        console.log(items);
-      });
+    this.forumService.getAll().pipe().subscribe(items => {
+      this.items = items;
+    });
   }
 }
