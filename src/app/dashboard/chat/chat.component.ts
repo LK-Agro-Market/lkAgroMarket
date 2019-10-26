@@ -5,8 +5,7 @@ import {
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
-import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
-import { Chats } from '../shared/services/chats';
+import { Chats } from './chats';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/switchMap';
@@ -39,7 +38,6 @@ export class ChatComponent {
   isHovering: boolean;
   constructor(
     private afs: AngularFirestore,
-    protected chatShowcaseService: ChatShowcaseService,
     private afStorage: AngularFireStorage
   ) {
     this.users = afs.collection('users').valueChanges();
@@ -60,32 +58,17 @@ export class ChatComponent {
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
-    // this.chatCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.selectedUser)
-    // .where('sender', '==', this.currentUser));
-    // ///////////////////////////////////////////////////////
-    // this.repsCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.currentUser)
-    // .where('sender', '==', this.selectedUser));
-    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // this.messages = this.chatCollection.valueChanges();
-    // this.replies = this.repsCollection.valueChanges();
-    this.chatCollection = this.afs
-    .collection('chats', ref => ref.where('reciever', '==' , this.selectedUser)
-    .where('sender', '==', this.currentUser));
-    this.repsCollection = this.afs.collection('chats',
-     ref => ref.where('reciever', '==' , this.currentUser)
-    .where('sender', '==', this.selectedUser));
     this.currentId = currentuser.uid;
     //////////////////
     this.chatCollection = this.afs
     .collection('chats', ref => ref.where('rid', '==' , this.selectedId)
     .where('sid', '==', this.currentId));
+    ///////////////////
     this.repsCollection = this.afs.collection('chats',
      ref => ref.where('rid', '==' , this.currentId)
     .where('sid', '==', this.selectedId));
+    //////////////
     this.messages = Observable
-    // .combineLatest(this.chatCollection.valueChanges(),
      .combineLatest(this.chatCollection.valueChanges().pipe(
       map(res => {
         res.forEach(r => {
@@ -93,11 +76,9 @@ export class ChatComponent {
           return r;
         });
         return res; })
-    //   map(res as Chats[])
      ),
                    this.repsCollection.valueChanges()
                    .pipe(
-                   // map(res => res as any[]),
                    map(res => {
                      res.forEach(r => {
                        r.reply = false;

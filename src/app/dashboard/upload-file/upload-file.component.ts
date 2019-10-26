@@ -6,7 +6,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import {finalize, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators/map';
 import { firestore } from 'firebase';
-import { Files } from '../shared/services/files';
+import { Files } from './files';
 interface Post {
   downloadURL: string;
 }

@@ -27,7 +27,6 @@ import { environment } from '../../environments/environment';
 
 import { LayoutComponent } from './layout/layout.component';
 import { ChatComponent } from './chat/chat.component';
-import { ChatShowcaseService } from './shared/services/chat-showcase.service';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
@@ -58,6 +57,6 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
     NbSelectModule,
     NbInputModule
   ],
-  providers: [ChatShowcaseService]
+  providers: []
 })
 export class DashboardModule {}
