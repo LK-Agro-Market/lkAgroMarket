@@ -32,7 +32,7 @@
      
     >
     </nb-chat-message> -->
-      <nb-chat-message
+      <!-- <nb-chat-message
       *ngFor="let msg of replies | async"
       [type]="msg.text"
       [message]="msg.content"
@@ -41,24 +41,19 @@
       [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
      
     >
-    </nb-chat-message>
+    </nb-chat-message> -->
       <nb-chat-message
         *ngFor="let msg of messages | async"
         [type]="msg.text"
         [message]="msg.content"
         [date]="msg.time"
-<<<<<<< HEAD
         [avatar]="msg.avatar"
         [files] ="[ { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' } ]"
-       
+       [reply]="msg.reply"
       >
       </nb-chat-message>
    
      
-   
-=======
-        [avatar]="msg.avatar"></nb-chat-message>
->>>>>>> c8ebcd550a8d26d94d6727379e4e94052943c7bd
       <!-- <nb-chat-message>
        <div *ngFor="let file of files">
         <app-upload-file [file]="file"></app-upload-file>

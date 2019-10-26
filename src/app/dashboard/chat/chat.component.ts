@@ -85,8 +85,27 @@ export class ChatComponent {
      ref => ref.where('rid', '==' , this.currentId)
     .where('sid', '==', this.selectedId));
     this.messages = Observable
-    .combineLatest(this.chatCollection.valueChanges(),
-                   this.repsCollection.valueChanges())
+    // .combineLatest(this.chatCollection.valueChanges(),
+     .combineLatest(this.chatCollection.valueChanges().pipe(
+      map(res => {
+        res.forEach(r => {
+          r.reply = true;
+          return r;
+        });
+        return res; })
+    //   map(res as Chats[])
+     ),
+                   this.repsCollection.valueChanges()
+                   .pipe(
+                   // map(res => res as any[]),
+                   map(res => {
+                     res.forEach(r => {
+                       r.reply = false;
+                       return r;
+                     });
+                     return res; })
+                 )
+                )
     .switchMap(chats => {
         const [chatCollection, repsCollection] = chats;
         const combined = chatCollection.concat(repsCollection);
@@ -109,7 +128,8 @@ export class ChatComponent {
         reciever: this.selectedUser,
         date: new Date(),
         sid: user.uid,
-        rid: this.selectedId
+        rid: this.selectedId,
+        reply: true
      });
   }
   toggleHover(event: boolean) {
