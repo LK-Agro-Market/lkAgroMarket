@@ -5,8 +5,7 @@ import {
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
-import { ChatShowcaseService } from '../shared/services/chat-showcase.service';
-import { Chats } from '../shared/services/chats';
+import { Chats } from './chats';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/switchMap';
@@ -39,7 +38,6 @@ export class ChatComponent {
   isHovering: boolean;
   constructor(
     private afs: AngularFirestore,
-    protected chatShowcaseService: ChatShowcaseService,
     private afStorage: AngularFireStorage
   ) {
     this.users = afs.collection('users').valueChanges();
@@ -85,8 +83,25 @@ export class ChatComponent {
      ref => ref.where('rid', '==' , this.currentId)
     .where('sid', '==', this.selectedId));
     this.messages = Observable
-    .combineLatest(this.chatCollection.valueChanges(),
-                   this.repsCollection.valueChanges())
+   //  .combineLatest(this.chatCollection.valueChanges(),
+     .combineLatest(this.chatCollection.valueChanges().pipe(
+      map(res => {
+        res.forEach(r => {
+          r.reply = true;
+        });
+        return res; })
+    ),
+                   this.repsCollection.valueChanges()
+                   .pipe(
+                    map(res => res as any[]),
+                   map(res => {
+                     res.forEach(r => {
+                       r.reply = false;
+                     });
+                     return res;
+                   })
+                 )
+                )
     .switchMap(chats => {
         const [chatCollection, repsCollection] = chats;
         const combined = chatCollection.concat(repsCollection);
@@ -109,7 +124,8 @@ export class ChatComponent {
         reciever: this.selectedUser,
         date: new Date(),
         sid: user.uid,
-        rid: this.selectedId
+        rid: this.selectedId,
+        reply: true
      });
   }
   toggleHover(event: boolean) {
