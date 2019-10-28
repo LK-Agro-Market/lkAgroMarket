@@ -40,4 +40,11 @@ export class SupplyAdService {
     > = this.afs.collection('supplyAd');
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
   }
+
+  getAds(userId): Observable<SupplyAd[]> {
+    return this.afs
+      .collection('supplyAd', ref => ref.where('owner', '==', userId))
+      .valueChanges()
+      .pipe(map(res => res as SupplyAd[]));
+  }
 }

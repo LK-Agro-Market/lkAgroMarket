@@ -25,9 +25,17 @@ import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent],
+  declarations: [
+    LayoutComponent,
+    SupplyAdComponent,
+    CreateSupplyAdComponent,
+    ListSupplyAdsComponent,
+    ProfileComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,

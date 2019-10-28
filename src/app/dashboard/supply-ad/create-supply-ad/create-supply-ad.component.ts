@@ -4,6 +4,7 @@ import { Subscription, forkJoin } from 'rxjs';
 
 import { SupplyAdService } from '../supply-ad.service';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -12,6 +13,7 @@ import { SupplyAd } from 'src/app/shared/models/supply-ad';
 })
 export class CreateSupplyAdComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
+  user: User = JSON.parse(localStorage.getItem('user'));
   supplyAdForm: FormGroup;
   attempted = false;
   processing = false;
@@ -178,7 +180,8 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           expireDate: this.formControls.expireDate.value,
           createdAt: new Date(),
           views: 0,
-          contactClicks: 0
+          contactClicks: 0,
+          owner: this.user.uid
         };
         this.subscriptions.push(
           this.supplyAdService.createAd(supplyAd).subscribe(() => {
