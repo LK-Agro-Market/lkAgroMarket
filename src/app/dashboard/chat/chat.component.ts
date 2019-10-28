@@ -69,28 +69,10 @@ export class ChatComponent {
     .where('sid', '==', this.selectedId));
     //////////////
     this.messages = Observable
-<<<<<<< HEAD
-   //  .combineLatest(this.chatCollection.valueChanges(),
-=======
->>>>>>> 84127747e959193661e9d229252cc933fc84ed77
      .combineLatest(this.chatCollection.valueChanges().pipe(
       map(res => {
         res.forEach(r => {
           r.reply = true;
-<<<<<<< HEAD
-        });
-        return res; })
-    ),
-                   this.repsCollection.valueChanges()
-                   .pipe(
-                    map(res => res as any[]),
-                   map(res => {
-                     res.forEach(r => {
-                       r.reply = false;
-                     });
-                     return res;
-                   })
-=======
           return r;
         });
         return res; })
@@ -103,7 +85,6 @@ export class ChatComponent {
                        return r;
                      });
                      return res; })
->>>>>>> 84127747e959193661e9d229252cc933fc84ed77
                  )
                 )
     .switchMap(chats => {
