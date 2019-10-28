@@ -58,36 +58,26 @@ export class ChatComponent {
     this.avatar = users.photoURL;
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
-    // this.chatCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.selectedUser)
-    // .where('sender', '==', this.currentUser));
-    // ///////////////////////////////////////////////////////
-    // this.repsCollection = this.afs.collection('chats',
-    //  ref => ref.where('reciever', '==' , this.currentUser)
-    // .where('sender', '==', this.selectedUser));
-    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // this.messages = this.chatCollection.valueChanges();
-    // this.replies = this.repsCollection.valueChanges();
-    this.chatCollection = this.afs
-    .collection('chats', ref => ref.where('reciever', '==' , this.selectedUser)
-    .where('sender', '==', this.currentUser));
-    this.repsCollection = this.afs.collection('chats',
-     ref => ref.where('reciever', '==' , this.currentUser)
-    .where('sender', '==', this.selectedUser));
     this.currentId = currentuser.uid;
     //////////////////
     this.chatCollection = this.afs
     .collection('chats', ref => ref.where('rid', '==' , this.selectedId)
     .where('sid', '==', this.currentId));
+    ///////////////////
     this.repsCollection = this.afs.collection('chats',
      ref => ref.where('rid', '==' , this.currentId)
     .where('sid', '==', this.selectedId));
+    //////////////
     this.messages = Observable
+<<<<<<< HEAD
    //  .combineLatest(this.chatCollection.valueChanges(),
+=======
+>>>>>>> 84127747e959193661e9d229252cc933fc84ed77
      .combineLatest(this.chatCollection.valueChanges().pipe(
       map(res => {
         res.forEach(r => {
           r.reply = true;
+<<<<<<< HEAD
         });
         return res; })
     ),
@@ -100,6 +90,20 @@ export class ChatComponent {
                      });
                      return res;
                    })
+=======
+          return r;
+        });
+        return res; })
+     ),
+                   this.repsCollection.valueChanges()
+                   .pipe(
+                   map(res => {
+                     res.forEach(r => {
+                       r.reply = false;
+                       return r;
+                     });
+                     return res; })
+>>>>>>> 84127747e959193661e9d229252cc933fc84ed77
                  )
                 )
     .switchMap(chats => {
