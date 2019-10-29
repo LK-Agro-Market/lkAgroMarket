@@ -10,7 +10,7 @@ export class ForumService {
 
   constructor(private db: AngularFirestore) {}
 
-  createPost(title, des, dateTime, postUserId, postUserName) {
+  createPost(title, des, dateTime, postUserId, postUserName, showFarmer, showBuyer) {
     return this.db
       .collection('forum')
       .add({
@@ -18,7 +18,9 @@ export class ForumService {
         description: des,
         date: dateTime,
         userID: postUserId,
-        userName: postUserName
+        userName: postUserName,
+        showFarmer: showFarmer,
+        showBuyer: showBuyer,
       });
   }
 

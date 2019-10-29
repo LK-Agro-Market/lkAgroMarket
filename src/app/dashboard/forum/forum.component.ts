@@ -17,9 +17,11 @@ export class ForumComponent implements OnInit {
   discussionForm = new FormGroup({
     title: new FormControl('', Validators.required),
     des: new FormControl(''),
-    dateTime: new FormControl('')
+    dateTime: new FormControl(''),
   });
   showMsg = '';
+  showFarmer =  false;
+  showBuyer  = false;
 
   get title() {
     return this.discussionForm.get('title');
@@ -41,6 +43,10 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {}
 
+  checkValue(event: any) {
+    console.log(event.returnValue);
+  }
+
   onSubmit() {
     if (this.formControls.title.errors) {
       return false;
@@ -50,8 +56,10 @@ export class ForumComponent implements OnInit {
     const dateTime = new Date();
     const userId = this.user.uid;
     const userName = this.user.displayName;
-    if (this.title != null) {
-      this.forumService.createPost(title, des, dateTime, userId, userName);
+    const showFarmer = this.showFarmer;
+    const showBuyer = this.showBuyer;
+    if ((this.title !== null)  && (this.showFarmer !== false  || this.showBuyer !== false)) {
+      this.forumService.createPost(title, des, dateTime, userId, userName, showFarmer, showBuyer);
       this.toggle();
       this.title.setValue('');
       this.des.setValue('');

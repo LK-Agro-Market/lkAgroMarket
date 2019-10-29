@@ -49,6 +49,10 @@
                     status="primary"
                     placeholder="Description"
                   ></textarea>
+                  <div class="check-container">
+                    <nb-checkbox status="info" (change)="showFarmer = !showFarmer" >Show Farmers</nb-checkbox>
+                    <nb-checkbox status="info" (change)="showBuyer = !showBuyer" >Show Buyers</nb-checkbox>
+                  </div>
                   <button
                     nbButton
                     shape="round"
@@ -56,9 +60,7 @@
                     status="success"
                     class="float-right"
                     style="margin-top: 20px;"
-                    [disabled]="!discussionForm.valid"
-                  >
-                    Submit
+                    [disabled]="!discussionForm.valid">Submit
                   </button>
                 </form>
               </nb-accordion-item-body>

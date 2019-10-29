@@ -71,4 +71,13 @@
     font-weight: 300;
     color: blueviolet;
   }
-  
+  .comment-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+  }
+  .comment-btn{
+    height: 30px;
+    margin-top: 30px;
+    margin-left: 10px;
+  }

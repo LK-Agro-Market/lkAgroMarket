@@ -18,7 +18,8 @@ import {
   NbAccordionModule,
   NbUserModule,
   NbAlertModule,
-  NbBadgeModule
+  NbBadgeModule,
+  NbCheckboxModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -64,7 +65,8 @@ import { ListCardComponent } from './forum/list-forum/list-card/list-card.compon
     NbIconModule,
     NbAlertModule,
     NbBadgeModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbCheckboxModule
   ]
 })
 export class DashboardModule {}

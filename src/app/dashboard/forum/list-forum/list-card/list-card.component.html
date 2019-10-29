@@ -4,7 +4,7 @@
             <div class="gold-members p-4">
                 <div class="media">
                     <div class="pro-img-container">
-                        <img class="pro-img" src="assets/icon1.jpg" alt="Profile image" />
+                        <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
                         <a href="#" class="pro-name" (click)="toggleMain()">{{temp.userName}} </a>
                     </div>
                     <div class="media-body">
@@ -32,7 +32,10 @@
              
             <p class="text-dark" id="postDesc"> {{temp.description}} </p>
             <hr>
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn">Add Comment</button>
+            <div class="comment-container">
+                <textarea nbInput fullWidth placeholder="Add comment" status="primary"></textarea>
+                <button nbButton status="primary" outline size="small" class="float-right comment-btn">Add comment</button>
+            </div>      
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
