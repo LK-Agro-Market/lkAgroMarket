@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-import { finalize } from 'rxjs/operators';
+import { finalize , tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -40,6 +40,12 @@ export class ChatComponent {
   /////
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
+  task: AngularFireUploadTask;
+  percentage: Observable<number>;
+  snapshot: Observable<any>;
+  ref: AngularFireStorageReference;
+  url = '';
+  // files: Observable<any>;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -117,19 +123,38 @@ export class ChatComponent {
         reply: true
      });
   }
-  // 
   uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = 'test/';
-    const fileRef = this.afStorage.ref(filePath);
-    const task = this.afStorage.upload(filePath, file);
-
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-        finalize(() => this.downloadURL = fileRef.getDownloadURL() )
-     )
-    .subscribe()
-  }
+      const user = JSON.parse(localStorage.getItem('user'));
+      const file = event.target.files[0];
+      const filePath = 'test/';
+      const fileRef = this.afStorage.ref(filePath);
+      const task = this.afStorage.upload(filePath, file);
+      this.ref = this.afStorage.ref(filePath);
+  
+      // observe percentage changes
+      this.uploadPercent = task.percentageChanges();
+      // get notified when the download URL is available
+      task.snapshotChanges().pipe(
+        finalize(async () => {
+                 this.downloadURL = await this.ref.getDownloadURL().toPromise();
+                 this.afs.collection('chats').add( {
+                    // downloadURL: this.downloadURL,
+                    content: '' ,
+                    avatar: user.photoURL,
+                    // path ,
+                     type : 'file',
+                     time: Date.now(),
+                     date: new Date(),
+                     sender: user.displayName,
+                    // reciever: this.selectedUser,
+                     sid: user.uid,
+                     // rid: this.selectedId,
+                     reply: true,
+                   files: {url: this.downloadURL }
+                     // url: this.downloadURL
+                   });
+               })
+      )
+      .subscribe();
+              }
 }
