@@ -12,6 +12,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -36,6 +37,9 @@ export class ChatComponent {
   content: string;
   file: Observable<any>;
   isHovering: boolean;
+  /////
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -113,12 +117,19 @@ export class ChatComponent {
         reply: true
      });
   }
-  toggleHover(event: boolean) {
-    this.isHovering = event;
-  }
-  onDrop(files: FileList) {
-    for (let i = 0; i < files.length; i++) {
-      this.files.push(files.item(i));
-    }
+  // 
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'test/';
+    const fileRef = this.afStorage.ref(filePath);
+    const task = this.afStorage.upload(filePath, file);
+
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => this.downloadURL = fileRef.getDownloadURL() )
+     )
+    .subscribe()
   }
 }
