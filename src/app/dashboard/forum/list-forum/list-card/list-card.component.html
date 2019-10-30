@@ -1,18 +1,18 @@
 <nb-accordion>
     <nb-accordion-item>
-        <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="temp">
+        <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="item">
             <div class="gold-members p-4">
                 <div class="media">
                     <div class="pro-img-container">
                         <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                        <a href="#" class="pro-name" (click)="toggleMain()">{{temp.userName}} </a>
+                        <a href="#" class="pro-name" (click)="toggleMain()">{{item.userName}} </a>
                     </div>
                     <div class="media-body">
                         <div class="header-container">
                             <span class="float-right text-info" id="postDate">
-                                <b>Posted on </b><i>{{temp.date.toDate() | date: 'MMM d, y h:mm:ss a' }}</i>
+                                <b>Posted on </b><i>{{item.date.toDate() | date: 'MMM d, y h:mm:ss a' }}</i>
                             </span>
-                            <span id="postTitle">{{ temp.title }}</span>
+                            <span id="postTitle">{{ item.title }}</span>
                             <br />
                         </div>
                         <div class="fotter-container">
@@ -30,12 +30,23 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
              
-            <p class="text-dark" id="postDesc"> {{temp.description}} </p>
+            <p class="text-dark" id="postDesc"> {{item.description}} </p>
             <hr>
-            <div class="comment-container">
-                <textarea nbInput fullWidth placeholder="Add comment" status="primary"></textarea>
-                <button nbButton status="primary" outline size="small" class="float-right comment-btn">Add comment</button>
-            </div>      
+            <form [formGroup]="commentForm"
+                    novalidate
+                    (ngSubmit)="createComment()"
+                    #commform="ngForm">
+                <div class="comment-container">
+                    <textarea class="form-control"
+                        formControlName="comment" 
+                        nbInput 
+                        fullWidth 
+                        placeholder="Add comment" 
+                        status="primary">
+                    </textarea>
+                    <button nbButton status="primary" outline size="small" class="float-right comment-btn">Reply</button>
+                </div>
+            </form>      
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>

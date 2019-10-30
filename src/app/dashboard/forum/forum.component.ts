@@ -17,11 +17,12 @@ export class ForumComponent implements OnInit {
   discussionForm = new FormGroup({
     title: new FormControl('', Validators.required),
     des: new FormControl(''),
-    dateTime: new FormControl(''),
   });
+
   showMsg = '';
-  showFarmer =  false;
-  showBuyer  = false;
+  massage = '';
+  showFarmer =  true;
+  showBuyer  = true;
 
   get title() {
     return this.discussionForm.get('title');
@@ -43,14 +44,7 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {}
 
-  checkValue(event: any) {
-    console.log(event.returnValue);
-  }
-
   onSubmit() {
-    if (this.formControls.title.errors) {
-      return false;
-    }
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
@@ -58,14 +52,22 @@ export class ForumComponent implements OnInit {
     const userName = this.user.displayName;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
-    if ((this.title !== null)  && (this.showFarmer !== false  || this.showBuyer !== false)) {
-      this.forumService.createPost(title, des, dateTime, userId, userName, showFarmer, showBuyer);
-      this.toggle();
-      this.title.setValue('');
-      this.des.setValue('');
-      this.showMsg =  'success';
+
+    if (this.title !== null) {
+      if (this.showFarmer === true || this.showBuyer === true) {
+        this.forumService.createPost(title, des, dateTime, userId, userName, showFarmer, showBuyer);
+        this.toggle();
+        this.title.setValue('');
+        this.des.setValue('');
+        this.showMsg =  'success';
+        this.massage = 'You have been successfully submitted!';
+      } else {
+          this.showMsg = 'error';
+          this.massage = 'please chose category';
+      }
     } else {
       this.showMsg = 'error';
+      this.massage = 'title is required';
     }
   }
 }

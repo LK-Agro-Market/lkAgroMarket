@@ -3,8 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-            <nb-alert status="success" *ngIf="showMsg==='success'"><strong>Success...</strong>You have been successfully submitted!</nb-alert>
-            <nb-alert status="danger" *ngIf="showMsg==='error'" ><strong>Error...</strong> Can`t submit </nb-alert>
+            <nb-alert status="success" *ngIf="showMsg==='success'"><strong>Success...</strong>{{massage}}</nb-alert>
+            <nb-alert status="danger" *ngIf="showMsg==='error'" ><strong>Error...</strong>{{massage}}</nb-alert>
           <div class="add-new-container">
             <h4 class="font-weight-bold mt-0 mb-4" id="profile-name">
               {{ user.displayName }}
@@ -50,8 +50,8 @@
                     placeholder="Description"
                   ></textarea>
                   <div class="check-container">
-                    <nb-checkbox status="info" (change)="showFarmer = !showFarmer" >Show Farmers</nb-checkbox>
-                    <nb-checkbox status="info" (change)="showBuyer = !showBuyer" >Show Buyers</nb-checkbox>
+                    <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked] = "showFarmer">Show Farmers</nb-checkbox>
+                    <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked] = "showBuyer">Show Buyers</nb-checkbox>
                   </div>
                   <button
                     nbButton
