@@ -14,6 +14,7 @@ export class ListCardComponent implements OnInit {
   });
 
   viewButton = true;
+  comments: any[];
 
   get comm() {
     return this.commentForm.get('comment');
@@ -29,21 +30,29 @@ export class ListCardComponent implements OnInit {
   toggleMain() {
     this.accordion.toggle();
   }
+
   constructor(private forumService: ForumService) {
-   }
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.forumService.getComment().pipe().subscribe(comments => {
+      this.comments = comments;
+    });
+  }
 
-  createComment() {
+  onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.item.id;
     const userId = this.user.uid;
     const userName = this.user.displayName;
 
-    if (this.comm !== null) {
+    if (this.commentForm.valid) {
       this.forumService.createComment(comm, dateTime, postID, userId, userName);
       this.comm.setValue('');
+    } else {
+      // this.msgStatus.emit('error');
+      // this.msg.emit('Please enter comment to reply');
     }
   }
 

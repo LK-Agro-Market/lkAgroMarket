@@ -19,7 +19,9 @@ import {
   NbUserModule,
   NbAlertModule,
   NbBadgeModule,
-  NbCheckboxModule
+  NbCheckboxModule,
+  NbMenuModule,
+  NbListModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -32,6 +34,7 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
 import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
+import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { ListCardComponent } from './forum/list-forum/list-card/list-card.compon
     CreateSupplyAdComponent,
     ForumComponent,
     ListForumComponent,
-    ListCardComponent
+    ListCardComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +70,9 @@ import { ListCardComponent } from './forum/list-forum/list-card/list-card.compon
     NbAlertModule,
     NbBadgeModule,
     NbEvaIconsModule,
-    NbCheckboxModule
+    NbCheckboxModule,
+    NbMenuModule,
+    NbListModule
   ]
 })
 export class DashboardModule {}

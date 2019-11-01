@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import {
   FormControl,
@@ -44,7 +44,7 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
+  onCreate() {
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
@@ -53,21 +53,23 @@ export class ForumComponent implements OnInit {
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
 
-    if (this.title !== null) {
+    if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         this.forumService.createPost(title, des, dateTime, userId, userName, showFarmer, showBuyer);
         this.toggle();
         this.title.setValue('');
         this.des.setValue('');
-        this.showMsg =  'success';
-        this.massage = 'You have been successfully submitted!';
+        this.showNotification ('success', 'You have been successfully submitted!');
       } else {
-          this.showMsg = 'error';
-          this.massage = 'please chose category';
+        this.showNotification('error', 'please chose category');
       }
     } else {
-      this.showMsg = 'error';
-      this.massage = 'title is required';
+      this.showNotification('error', 'title is required');
     }
+  }
+
+  showNotification(msgStatus: string, msg: string ) {
+    this.showMsg = msgStatus;
+    this.massage = msg;
   }
 }

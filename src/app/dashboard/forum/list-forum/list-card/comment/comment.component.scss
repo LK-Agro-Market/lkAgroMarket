@@ -1,10 +1,12 @@
-t-header{
-  height: 10px;
+nb-accordion{
+  max-height: 600px;
 }
-.media{
+.comnt-container{
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
+
 .pro-img-container {
   display: flex;
   flex-direction: row;
@@ -12,9 +14,10 @@ t-header{
   margin-top:-3%;
 }
 .pro-img {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
+  margin-top: 10px;
 }
 .pro-header-container{
   display: flex;
@@ -22,10 +25,9 @@ t-header{
 }
 .pro-name {
   margin-top: 10px;
-  font-size: 17px;
+  font-size: 15px;
   margin-left: 30px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
 }
 #postDate {
   margin-top: -2%;
@@ -33,13 +35,12 @@ t-header{
   margin-left: 30px;
   color: #598bff;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
 }
 .like-container{
   display: flex;
   flex-direction: row;
   position: absolute;
-  right: 40px;
+  padding-left: 400px;
 }
 .btn-like{
   margin-left: 10px;
@@ -61,48 +62,8 @@ t-header{
   font-weight: 300;
   color: blueviolet;
 }
-.media-body {
-  padding-top: 20px;
-}
-#postTitle {
-  font-size: 15px;
-  font-weight: 100;
-  margin-top: 100px;
-}
-.card-fotter-container{
-  display: flex;
-  flex-direction: row;
-}
-.view-btn{
-  margin-top: 5px;
-  font-size: 15px;
-  width: 100px;
-}
-.edit-btn{
-  margin-top: 5px;
-  font-size: 15px;
-  margin-left: 20px;
-}
-.end-btn{
-  margin-top: 5px;
-  font-size: 15px;
-  margin-left: 20px;  
-}
-#postDesc {
+#postDesc{
   margin-top: 10px;
+  marker-end: 20px;
   font-size: 13px;
 }
-.add-comment-container {
-  display: flex;
-  flex-direction: row;
-  margin-left: 10px;
-}
-.comment-btn{
-  margin-top: 8px;
-  margin-left: 30px;
-}
-
-  
-
-  
-  

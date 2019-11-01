@@ -19,10 +19,6 @@ const routes: Routes = [
         component: SupplyAdComponent
       },
       {
-        path: 'farmer-dashboard',
-        component: SupplyAdComponent
-      },
-      {
         path: 'forum',
         component: ForumComponent
       }

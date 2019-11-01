@@ -57,7 +57,8 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     NbStepperModule,
     NbButtonModule,
     NbCardModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbMenuModule.forRoot(),
   ],
   providers: [
     AuthGuard,

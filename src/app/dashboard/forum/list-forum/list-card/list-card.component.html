@@ -5,24 +5,32 @@
                 <div class="media">
                     <div class="pro-img-container">
                         <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                        <a href="#" class="pro-name" (click)="toggleMain()">{{item.userName}} </a>
+                        <div class="pro-header-container">
+                            <a href="#" class="pro-name" (click)="toggleMain()"> {{item.userName}} </a>
+                            <span class="text-info" id="postDate">
+                              <b>Posted on</b> <i> {{item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+                            </span>
+                            <div class="float-right like-container">
+                                <button nbButton ghost status="success" size="medium" class="float-right btn-like">
+                                    <nb-icon icon="checkmark" ></nb-icon>
+                                </button>
+                                <p class="count-like">7</p>
+                                <button nbButton ghost status="info" size="medium" class="float-right btn-com">
+                                    <nb-icon icon="email" ></nb-icon>
+                                </button>
+                                <p class="count-com">15</p> 
+                            </div>
+                        </div>
                     </div>
                     <div class="media-body">
-                        <div class="header-container">
-                            <span class="float-right text-info" id="postDate">
-                                <b>Posted on </b><i>{{item.date.toDate() | date: 'MMM d, y h:mm:ss a' }}</i>
-                            </span>
-                            <span id="postTitle">{{ item.title }}</span>
-                            <br />
-                        </div>
-                        <div class="fotter-container">
+                        <span id="postTitle"> {{ item.title }} </span>
+                        <hr>
+                        <div class="card-fotter-container">
                             <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
                                 View {{ viewButton ? 'More' : 'Less' }}
                             </button>
-                            <nb-icon icon="heart-outline" status="success" class="float-right btn-like"></nb-icon>
-                            <p class="count-like">7</p>
-                            <nb-icon icon="star-outline" status="info" class="float-right btn-com"></nb-icon>
-                            <p class="count-com">15</p>
+                            <button nbButton *ngIf="true" status="primary"  size="small" class="edit-btn" > Edit </button>
+                            <button *ngIf="true" nbButton status="danger"  size="small" class="end-btn" > End </button>     
                         </div>
                     </div>
                 </div>
@@ -34,19 +42,26 @@
             <hr>
             <form [formGroup]="commentForm"
                     novalidate
-                    (ngSubmit)="createComment()"
+                    (ngSubmit)="onCreate()"
                     #commform="ngForm">
-                <div class="comment-container">
+                <div class="add-comment-container">
                     <textarea class="form-control"
                         formControlName="comment" 
                         nbInput 
                         fullWidth 
-                        placeholder="Add comment" 
-                        status="primary">
+                        placeholder="Join the discussion..." 
+                        status="primary"
+                        required 
+                        style="height: 40px;">
                     </textarea>
-                    <button nbButton status="primary" outline size="small" class="float-right comment-btn">Reply</button>
+                    <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small">Comment</button>
                 </div>
-            </form>      
+            </form>  
+            <hr>
+            <div class="comt">
+                <p>Comments</p>
+                <app-comment></app-comment>
+            </div> 
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>

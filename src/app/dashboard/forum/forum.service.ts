@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +36,7 @@ export class ForumService {
     });
   }
 
-  getAll() {
+  getPost() {
     return this.db.collection('forum').snapshotChanges().pipe(
       map(postItems => postItems.map(postItem => {
         const data = postItem.payload.doc.data();
@@ -46,4 +45,18 @@ export class ForumService {
       }))
     );
   }
+
+  getComment(id: number) {
+    return this.db.collection('comment').snapshotChanges().pipe(
+      map(comments => comments.map(comment => {
+        const data = comment.payload.doc.data();
+        const id = comment.payload.doc;
+        return {id, ...data};
+      }))
+    );
+  }
+
+
+
+
 }
