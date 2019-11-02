@@ -1,13 +1,27 @@
 <div class="container">
   <div class="row" id="row">
     <div class="col-md-6 offset-md-6" id="right">
-      <img src="../../assets/logo.png" class="logo">
+      <img src="../../assets/logo.png" class="logo" />
       <h2>Login With</h2>
-      <button class="btn btn-default" type="button" (click)="authService.GoogleAuth()">
-        <img src="https://img.icons8.com/color/30/000000/google-logo.png" style="vertical-align:middle; margin-right:8px;"><span>Google</span>
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="authService.GoogleAuth()"
+      >
+        <img
+          src="https://img.icons8.com/color/30/000000/google-logo.png"
+          style="vertical-align:middle; margin-right:8px;"
+        /><span>Google</span>
       </button>
-      <button class="btn btn-default" type="button" (click)="authService.GoogleAuth()">
-        <img src="https://img.icons8.com/color/30/000000/clapperboard--v2.png" style="vertical-align:middle; margin-right:8px;"><span>Microsoft</span>
+      <button
+        class="btn btn-default"
+        type="button"
+        (click)="authService.GoogleAuth()"
+      >
+        <img
+          src="https://img.icons8.com/color/30/000000/clapperboard--v2.png"
+          style="vertical-align:middle; margin-right:8px;"
+        /><span>Microsoft</span>
       </button>
       <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">

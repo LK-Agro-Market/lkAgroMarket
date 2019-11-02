@@ -15,7 +15,13 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbInputModule,
-  NbUserModule
+  NbAccordionModule,
+  NbUserModule,
+  NbAlertModule,
+  NbBadgeModule,
+  NbCheckboxModule,
+  NbMenuModule,
+  NbListModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -25,9 +31,21 @@ import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { ForumComponent } from './forum/forum.component';
+import { ListForumComponent } from './forum/list-forum/list-forum.component';
+import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
+import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent],
+  declarations: [
+    LayoutComponent,
+    SupplyAdComponent,
+    CreateSupplyAdComponent,
+    ForumComponent,
+    ListForumComponent,
+    ListCardComponent,
+    CommentComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -46,7 +64,15 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbButtonModule,
     NbSelectModule,
     NbInputModule,
-    NbUserModule
+    NbAccordionModule,
+    NbUserModule,
+    NbIconModule,
+    NbAlertModule,
+    NbBadgeModule,
+    NbEvaIconsModule,
+    NbCheckboxModule,
+    NbMenuModule,
+    NbListModule
   ]
 })
 export class DashboardModule {}
