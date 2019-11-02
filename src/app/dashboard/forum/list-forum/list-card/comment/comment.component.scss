@@ -1,7 +1,7 @@
-nb-accordion{
+nb-accordion {
   max-height: 600px;
 }
-.comnt-container{
+.comnt-container {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -11,7 +11,7 @@ nb-accordion{
   display: flex;
   flex-direction: row;
   margin-left: 10px;
-  margin-top:-3%;
+  margin-top: -3%;
 }
 .pro-img {
   width: 45px;
@@ -19,7 +19,7 @@ nb-accordion{
   border-radius: 50%;
   margin-top: 10px;
 }
-.pro-header-container{
+.pro-header-container {
   display: flex;
   flex-direction: column;
 }
@@ -27,42 +27,44 @@ nb-accordion{
   margin-top: 10px;
   font-size: 15px;
   margin-left: 30px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 #postDate {
   margin-top: -2%;
   font-size: 12px;
   margin-left: 30px;
   color: #598bff;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
-.like-container{
+.like-container {
   display: flex;
   flex-direction: row;
   position: absolute;
   padding-left: 400px;
 }
-.btn-like{
+.btn-like {
   margin-left: 10px;
 }
-.count-like{
+.count-like {
   margin-top: 15px;
   margin-left: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
   color: orangered;
 }
-.btn-com{
+.btn-com {
   margin-left: 30px;
 }
-.count-com{
+.count-com {
   margin-top: 15px;
   margin-right: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
   color: blueviolet;
 }
-#postDesc{
+#postDesc {
   margin-top: 10px;
   marker-end: 20px;
   font-size: 13px;

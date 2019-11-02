@@ -1,33 +1,44 @@
 <nb-accordion>
-    <nb-accordion-item *ngFor="let comment of comments">
-        
-        <nb-accordion-item-header>
-            <div class="comnt-container">
-                <div class="pro-img-container">
-                    <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                    <div class="pro-header-container">
-                        <a href="#" class="pro-name">{{comment.userName}}</a>
-                        <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> {{comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
-                        </span>
-                        <div class="float-right like-container">
-                            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                                <nb-icon icon="checkmark"></nb-icon>
-                            </button>
-                            <p class="count-like">6</p>
-                            <button nbButton ghost status="info" size="medium" class="float-right btn-com">
-                                <nb-icon icon="email"></nb-icon>
-                            </button>
-                            <p class="count-com">9</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-dark" id="postDesc">{{comment.comment}}</p>
+  <nb-accordion-item *ngFor="let comment of comments">
+    <nb-accordion-item-header>
+      <div class="comnt-container">
+        <div class="pro-img-container">
+          <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
+          <div class="pro-header-container">
+            <a href="#" class="pro-name">{{ comment.userName }}</a>
+            <span class="text-info" id="postDate">
+              <b>Commented on</b>
+              <i> {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+            </span>
+            <div class="float-right like-container">
+              <button
+                nbButton
+                ghost
+                status="success"
+                size="medium"
+                class="float-right btn-like"
+              >
+                <nb-icon icon="checkmark"></nb-icon>
+              </button>
+              <p class="count-like">6</p>
+              <button
+                nbButton
+                ghost
+                status="info"
+                size="medium"
+                class="float-right btn-com"
+              >
+                <nb-icon icon="email"></nb-icon>
+              </button>
+              <p class="count-com">9</p>
             </div>
-        </nb-accordion-item-header>
-        <nb-accordion-item-body>
-            <p>sexxxxxx</p>
-        </nb-accordion-item-body>
-
-    </nb-accordion-item>
+          </div>
+        </div>
+        <p class="text-dark" id="postDesc">{{ comment.comment }}</p>
+      </div>
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <p>sexxxxxx</p>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
 </nb-accordion>

@@ -1,8 +1,11 @@
-
 <div class="col-md-9">
   <div class="list-container">
-    <nb-alert status="success" *ngIf="showMsg==='success'">{{massage}}</nb-alert>
-    <nb-alert status="danger" *ngIf="showMsg==='error'" >{{massage}}</nb-alert>
+    <nb-alert status="success" *ngIf="showMsg === 'success'">{{
+      massage
+    }}</nb-alert>
+    <nb-alert status="danger" *ngIf="showMsg === 'error'">{{
+      massage
+    }}</nb-alert>
     <div class="add-new-container">
       <h4 class="font-weight-bold mt-0 mb-4" id="profile-name">
         {{ user.displayName }}
@@ -10,7 +13,6 @@
       <button nbButton status="primary" (click)="toggle()" id="add-btn">
         Create New
       </button>
-      
     </div>
 
     <nb-accordion style="margin-top: 20px; margin-bottom: 20px;">
@@ -34,11 +36,7 @@
               placeholder="Title"
               required
             />
-            <label
-              for="description"
-              id="form-title"
-              style="margin-top: 20px;"
-            >
+            <label for="description" id="form-title" style="margin-top: 20px;">
               Description
             </label>
             <textarea
@@ -49,8 +47,18 @@
               placeholder="Description"
             ></textarea>
             <div class="check-container">
-              <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked] = "showFarmer">Show Farmers</nb-checkbox>
-              <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked] = "showBuyer">Show Buyers</nb-checkbox>
+              <nb-checkbox
+                status="info"
+                (change)="showFarmer = !showFarmer"
+                [checked]="showFarmer"
+                >Show Farmers</nb-checkbox
+              >
+              <nb-checkbox
+                status="info"
+                (change)="showBuyer = !showBuyer"
+                [checked]="showBuyer"
+                >Show Buyers</nb-checkbox
+              >
               <button
                 nbButton
                 shape="round"
@@ -58,7 +66,9 @@
                 status="success"
                 class="float-right"
                 style="margin-top: 5px;"
-                [disabled]="!discussionForm.valid">Submit
+                [disabled]="!discussionForm.valid"
+              >
+                Submit
               </button>
             </div>
           </form>

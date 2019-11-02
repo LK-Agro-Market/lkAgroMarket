@@ -10,7 +10,7 @@ import { ForumService } from '../../forum.service';
 })
 export class ListCardComponent implements OnInit {
   commentForm = new FormGroup({
-    comment: new FormControl('', Validators.required),
+    comment: new FormControl('', Validators.required)
   });
 
   viewButton = true;
@@ -31,15 +31,17 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService) {
-  }
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {
-    this.forumService.getComment(this.item.id).pipe().subscribe(comments => {
-      this.comments = comments;
-      console.log(this.item.id);
-      console.log(this.comments);
-    });
+    this.forumService
+      .getComment(this.item.id)
+      .pipe()
+      .subscribe(comments => {
+        this.comments = comments;
+        console.log(this.item.id);
+        console.log(this.comments);
+      });
   }
 
   onCreate() {
@@ -57,6 +59,4 @@ export class ListCardComponent implements OnInit {
       // this.msg.emit('Please enter comment to reply');
     }
   }
-
-
 }

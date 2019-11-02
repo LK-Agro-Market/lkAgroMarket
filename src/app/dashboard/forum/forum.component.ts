@@ -1,28 +1,23 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-import {
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.scss'],
+  styleUrls: ['./forum.component.scss']
 })
-
 export class ForumComponent implements OnInit {
   discussionForm = new FormGroup({
     title: new FormControl('', Validators.required),
-    des: new FormControl(''),
+    des: new FormControl('')
   });
 
   showMsg = '';
   massage = '';
-  showFarmer =  true;
-  showBuyer  = true;
+  showFarmer = true;
+  showBuyer = true;
 
   get title() {
     return this.discussionForm.get('title');
@@ -55,11 +50,22 @@ export class ForumComponent implements OnInit {
 
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
-        this.forumService.createPost(title, des, dateTime, userId, userName, showFarmer, showBuyer);
+        this.forumService.createPost(
+          title,
+          des,
+          dateTime,
+          userId,
+          userName,
+          showFarmer,
+          showBuyer
+        );
         this.toggle();
         this.title.setValue('');
         this.des.setValue('');
-        this.showNotification ('success', 'You have been successfully submitted!');
+        this.showNotification(
+          'success',
+          'You have been successfully submitted!'
+        );
       } else {
         this.showNotification('error', 'please chose category');
       }
@@ -68,7 +74,7 @@ export class ForumComponent implements OnInit {
     }
   }
 
-  showNotification(msgStatus: string, msg: string ) {
+  showNotification(msgStatus: string, msg: string) {
     this.showMsg = msgStatus;
     this.massage = msg;
   }

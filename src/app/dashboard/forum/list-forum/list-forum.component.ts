@@ -11,8 +11,11 @@ export class ListForumComponent implements OnInit {
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
-    this.forumService.getPost().pipe().subscribe(items => {
-      this.items = items;
-    });
+    this.forumService
+      .getPost()
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
+      });
   }
 }
