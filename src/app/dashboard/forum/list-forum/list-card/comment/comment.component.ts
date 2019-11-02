@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
-  @Input() item: any;
+  @Input() comments: any;
   constructor() { }
 
   ngOnInit() {

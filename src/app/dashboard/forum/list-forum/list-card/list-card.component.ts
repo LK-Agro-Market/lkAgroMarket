@@ -35,8 +35,10 @@ export class ListCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.forumService.getComment().pipe().subscribe(comments => {
+    this.forumService.getComment(this.item.id).pipe().subscribe(comments => {
       this.comments = comments;
+      console.log(this.item.id);
+      console.log(this.comments);
     });
   }
 

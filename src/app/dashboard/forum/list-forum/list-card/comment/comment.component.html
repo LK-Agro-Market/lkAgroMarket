@@ -1,14 +1,14 @@
-<nb-accordion >
-    <nb-accordion-item>
-
-        <nb-accordion-item-header aria-disabled="true"> 
+<nb-accordion>
+    <nb-accordion-item *ngFor="let comment of comments">
+        
+        <nb-accordion-item-header>
             <div class="comnt-container">
                 <div class="pro-img-container">
                     <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
                     <div class="pro-header-container">
-                        <a href="#" class="pro-name"> Ravindu Ramesh</a>
+                        <a href="#" class="pro-name">{{comment.userName}}</a>
                         <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> 23/10/2019 12:17:4 PM </i>
+                            <b>Commented on</b> <i> {{comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                         </span>
                         <div class="float-right like-container">
                             <button nbButton ghost status="success" size="medium" class="float-right btn-like">
@@ -22,144 +22,12 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-dark" id="postDesc">
-                    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
-                    Originally, nebula was a name for any diffuse astronomical object,
-                    including galaxies beyond the Milky Way.
-                </p>
+                <p class="text-dark" id="postDesc">{{comment.comment}}</p>
             </div>
         </nb-accordion-item-header>
-        <nb-accordion-item-body></nb-accordion-item-body>
-
-        <nb-accordion-item-header>
-            <div class="comnt-container">
-                <div class="pro-img-container">
-                    <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                    <div class="pro-header-container">
-                        <a href="#" class="pro-name"> Udeni Dilrukshi </a>
-                        <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> 31/10/2019 1:07:40 AM </i>
-                        </span>
-                        <div class="float-right like-container">
-                            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                                <nb-icon icon="checkmark"></nb-icon>
-                            </button>
-                            <p class="count-like">2</p>
-                            <button nbButton ghost status="info" size="medium" class="float-right btn-com">
-                                <nb-icon icon="email"></nb-icon>
-                            </button>
-                            <p class="count-com">3</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-dark" id="postDesc">
-                    you get a run-time null reference error. It is possible to define the component first with the
-                    help of the forwardRef()
-                    method as explained in this blog post. You can also use forward references to break circular
-                    dependencies.
-                    See an example in the DI Cookbook.
-                </p>
-            </div>
-        </nb-accordion-item-header>
-
-        <nb-accordion-item-header>
-            <div class="comnt-container">
-                <div class="pro-img-container">
-                    <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                    <div class="pro-header-container">
-                        <a href="#" class="pro-name"> Praveen Chanaka </a>
-                        <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> 31/10/2019 1:07:40 AM </i>
-                        </span>
-                        <div class="float-right like-container">
-                            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                                <nb-icon icon="checkmark"></nb-icon>
-                            </button>
-                            <p class="count-like">4</p>
-                            <button nbButton ghost status="info" size="medium" class="float-right btn-com">
-                                <nb-icon icon="email"></nb-icon>
-                            </button>
-                            <p class="count-com">11</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-dark" id="postDesc">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                    Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                    sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                    proident.
-                </p>
-            </div>
-        </nb-accordion-item-header>
-
-        <nb-accordion-item-header>
-            <div class="comnt-container">
-                <div class="pro-img-container">
-                    <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                    <div class="pro-header-container">
-                        <a href="#" class="pro-name"> Banura Hettiarachchi </a>
-                        <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> 31/10/2019 1:07:40 AM </i>
-                        </span>
-                        <div class="float-right like-container">
-                            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                                <nb-icon icon="checkmark"></nb-icon>
-                            </button>
-                            <p class="count-like">4</p>
-                            <button nbButton ghost status="info" size="medium" class="float-right btn-com">
-                                <nb-icon icon="email"></nb-icon>
-                            </button>
-                            <p class="count-com">7</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-dark" id="postDesc">
-                    If your control element is targeting a single collapsible element – i.e. the data-target attribute
-                    is pointing to an id selector – you should add the aria-controls attribute to the control element,
-                    containing the id of the collapsible element. Modern screen readers and similar assistive
-                    technologies make use of
-                    this attribute to provide users with additional shortcuts to navigate directly to the collapsible
-                    element itself.
-                </p>
-            </div>
-        </nb-accordion-item-header>
-
-        <nb-accordion-item-header>
-            <div class="comnt-container">
-                <div class="pro-img-container">
-                    <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
-                    <div class="pro-header-container">
-                        <a href="#" class="pro-name"> Ravindu Ramesh </a>
-                        <span class="text-info" id="postDate">
-                            <b>Commented on</b> <i> 31/10/2019 1:07:40 AM </i>
-                        </span>
-                        <div class="float-right like-container">
-                            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                                <nb-icon icon="checkmark"></nb-icon>
-                            </button>
-                            <p class="count-like">20</p>
-                            <button nbButton ghost status="info" size="medium" class="float-right btn-com">
-                                <nb-icon icon="email"></nb-icon>
-                            </button>
-                            <p class="count-com">120</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-dark" id="postDesc">
-                    Be sure to add aria-expanded to the control element. This attribute explicitly conveys the
-                    current state of the collapsible element tied to the control to screen readers and similar assistive
-                    technologies.
-                    If the collapsible element is closed by default, the attribute on the control element should have a
-                    value of aria-expanded="false".
-                    If you’ve set the collapsible element to be open by default using the show class, set
-                    aria-expanded="true" on the control instead.
-                    The plugin will automatically toggle this attribute on the control based on whether or not the
-                    collapsible element has been opened
-                </p>
-            </div>
-        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <p>sexxxxxx</p>
+        </nb-accordion-item-body>
 
     </nb-accordion-item>
 </nb-accordion>

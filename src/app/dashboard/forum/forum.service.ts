@@ -46,8 +46,8 @@ export class ForumService {
     );
   }
 
-  getComment(id: number) {
-    return this.db.collection('comment').snapshotChanges().pipe(
+  getComment(commentID) {
+    return this.db.collection('comment', ref => ref.where('id', '==', commentID)).snapshotChanges().pipe(
       map(comments => comments.map(comment => {
         const data = comment.payload.doc.data();
         const id = comment.payload.doc;
