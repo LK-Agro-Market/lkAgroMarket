@@ -35,7 +35,7 @@ export class ChatComponent {
   messages: Observable<any[]>;
   replies: Observable<any[]>;
   content: string;
-  file: Observable<any>;
+ file: Observable<any>;
   isHovering: boolean;
   /////
   uploadPercent: Observable<number>;
@@ -44,7 +44,8 @@ export class ChatComponent {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   ref: AngularFireStorageReference;
-  url = '';
+  // file: any;
+ // url = '';
   // files: Observable<any>;
   constructor(
     private afs: AngularFirestore,
@@ -120,20 +121,44 @@ export class ChatComponent {
         date: new Date(),
         sid: user.uid,
         rid: this.selectedId,
-        reply: true
+        reply: true,
+        type: 'text'
      });
   }
   uploadFile(event) {
       const user = JSON.parse(localStorage.getItem('user'));
       const file = event.target.files[0];
-      const filePath = 'test/';
+      const filePath = 'test/${new Date()}_${this.file.name}';
       const fileRef = this.afStorage.ref(filePath);
       const task = this.afStorage.upload(filePath, file);
       this.ref = this.afStorage.ref(filePath);
   
       // observe percentage changes
       this.uploadPercent = task.percentageChanges();
+      // const files = !event.files ? [] : event.files.map((file) => {
+      //   return {
+      //     url: file.src,
+      //     type: file.type,
+      //     icon: 'file-text-outline',
+      //   };
+      // });
       // get notified when the download URL is available
+      // const files =  {
+      //     return : {
+      //       url: file.url,
+      //       type: file.type,
+      //       icon: 'file-text-outline',
+      //     },
+      //   }
+      // this.downloadURL = this.ref.getDownloadURL();
+      // const files = !event.files ? [] : event.files.map((file) => {
+      //   return {
+      //     url: file.downloadURL,
+      //     type: file.type,
+      //     icon: 'file-text-outline',
+      //   };
+      // });
+      ///////////
       task.snapshotChanges().pipe(
         finalize(async () => {
                  this.downloadURL = await this.ref.getDownloadURL().toPromise();
@@ -142,16 +167,17 @@ export class ChatComponent {
                     content: '' ,
                     avatar: user.photoURL,
                     // path ,
-                     type : 'file',
+                    type : 'file',
                      time: Date.now(),
                      date: new Date(),
                      sender: user.displayName,
-                    // reciever: this.selectedUser,
+                     reciever: this.selectedUser,
                      sid: user.uid,
-                     // rid: this.selectedId,
+                     rid: this.selectedId,
                      reply: true,
-                   files: {url: this.downloadURL }
-                     // url: this.downloadURL
+                   files: {url: this.downloadURL , type : 'file' }
+                    //  url: this.downloadURL,
+                   //   files: files
                    });
                })
       )
