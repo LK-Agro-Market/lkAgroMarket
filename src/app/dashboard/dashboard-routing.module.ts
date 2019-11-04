@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForumComponent } from './forum/forum.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'profile/:profileOwner',
         component: ProfileComponent
+      },
+      {
+        path: 'forum',
+        component: ForumComponent
       }
     ]
   }

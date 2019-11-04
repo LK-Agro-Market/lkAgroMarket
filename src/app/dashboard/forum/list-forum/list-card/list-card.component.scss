@@ -1,0 +1,103 @@
+t-header {
+  height: 10px;
+}
+.media {
+  display: flex;
+  flex-direction: column;
+}
+.pro-img-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: -3%;
+}
+.pro-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+.pro-header-container {
+  display: flex;
+  flex-direction: column;
+}
+.pro-name {
+  margin-top: 10px;
+  font-size: 17px;
+  margin-left: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+#postDate {
+  margin-top: -2%;
+  font-size: 12px;
+  margin-left: 30px;
+  color: #598bff;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+.like-container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 40px;
+}
+.btn-like {
+  margin-left: 10px;
+}
+.count-like {
+  margin-top: 15px;
+  margin-left: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: orangered;
+}
+.btn-com {
+  margin-left: 30px;
+}
+.count-com {
+  margin-top: 15px;
+  margin-right: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: blueviolet;
+}
+.media-body {
+  padding-top: 20px;
+}
+#postTitle {
+  font-size: 15px;
+  font-weight: 100;
+  margin-top: 100px;
+}
+.card-fotter-container {
+  display: flex;
+  flex-direction: row;
+}
+.view-btn {
+  margin-top: 5px;
+  font-size: 15px;
+  width: 100px;
+}
+.edit-btn {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+.end-btn {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+#postDesc {
+  margin-top: 10px;
+  font-size: 13px;
+}
+.add-comment-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+.comment-btn {
+  margin-top: 8px;
+  margin-left: 30px;
+}

@@ -23,7 +23,7 @@
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
-    "@nebular/eva-icons": "4.2.1",
+    "@nebular/eva-icons": "^4.2.1",
     "@nebular/theme": "^4.2.1",
     "@nrwl/workspace": "^8.5.1",
     "@types/events": "^3.0.0",

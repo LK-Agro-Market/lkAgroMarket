@@ -1,0 +1,121 @@
+<nb-accordion>
+  <nb-accordion-item>
+    <nb-accordion-item-header
+      id="t-header"
+      (click)="viewButton = !viewButton"
+      *ngIf="item"
+    >
+      <div class="gold-members p-4">
+        <div class="media">
+          <div class="pro-img-container">
+            <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
+            <div class="pro-header-container">
+              <a href="#" class="pro-name" (click)="toggleMain()">
+                {{ item.userName }}
+              </a>
+              <span class="text-info" id="postDate">
+                <b>Posted on</b>
+                <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+              </span>
+              <div class="float-right like-container">
+                <button
+                  nbButton
+                  ghost
+                  status="success"
+                  size="medium"
+                  class="float-right btn-like"
+                >
+                  <nb-icon icon="checkmark"></nb-icon>
+                </button>
+                <p class="count-like">7</p>
+                <button
+                  nbButton
+                  ghost
+                  status="info"
+                  size="medium"
+                  class="float-right btn-com"
+                >
+                  <nb-icon icon="email"></nb-icon>
+                </button>
+                <p class="count-com">15</p>
+              </div>
+            </div>
+          </div>
+          <div class="media-body">
+            <span id="postTitle"> {{ item.title }} </span>
+            <hr />
+            <div class="card-fotter-container">
+              <button
+                nbButton
+                status="primary"
+                outline
+                size="small"
+                class="view-btn"
+                (click)="toggleMain()"
+              >
+                View {{ viewButton ? 'More' : 'Less' }}
+              </button>
+              <button
+                nbButton
+                *ngIf="true"
+                status="primary"
+                size="small"
+                class="edit-btn"
+              >
+                Edit
+              </button>
+              <button
+                *ngIf="true"
+                nbButton
+                status="danger"
+                size="small"
+                class="end-btn"
+              >
+                End
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <p class="text-dark" id="postDesc">{{ item.description }}</p>
+      <hr />
+      <form
+        [formGroup]="commentForm"
+        novalidate
+        (ngSubmit)="onCreate()"
+        #commform="ngForm"
+      >
+        <div class="add-comment-container">
+          <textarea
+            class="form-control"
+            formControlName="comment"
+            nbInput
+            fullWidth
+            placeholder="Join the discussion..."
+            status="primary"
+            required
+            style="height: 40px;"
+          >
+          </textarea>
+          <button
+            nbButton
+            status="primary"
+            outline
+            size="small"
+            class="float-right comment-btn"
+            size="small"
+          >
+            Comment
+          </button>
+        </div>
+      </form>
+      <hr />
+      <div class="comt">
+        <p>Comments</p>
+        <app-comment [comments]="comments"></app-comment>
+      </div>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>

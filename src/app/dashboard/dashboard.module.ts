@@ -15,7 +15,13 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbInputModule,
-  NbUserModule
+  NbAccordionModule,
+  NbUserModule,
+  NbAlertModule,
+  NbBadgeModule,
+  NbCheckboxModule,
+  NbMenuModule,
+  NbListModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -28,6 +34,10 @@ import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForumComponent } from './forum/forum.component';
+import { ListForumComponent } from './forum/list-forum/list-forum.component';
+import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
+import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +46,10 @@ import { ProfileComponent } from './profile/profile.component';
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
     ProfileComponent
+    ForumComponent,
+    ListForumComponent,
+    ListCardComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +70,15 @@ import { ProfileComponent } from './profile/profile.component';
     NbButtonModule,
     NbSelectModule,
     NbInputModule,
-    NbUserModule
+    NbAccordionModule,
+    NbUserModule,
+    NbIconModule,
+    NbAlertModule,
+    NbBadgeModule,
+    NbEvaIconsModule,
+    NbCheckboxModule,
+    NbMenuModule,
+    NbListModule
   ]
 })
 export class DashboardModule {}
