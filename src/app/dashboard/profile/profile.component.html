@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<form [formGroup]="supplyAdForm">
+  <input type="file" (change)="file1ChangeEvent($event)" />
+
+  <image-cropper
+    [imageChangedEvent]="image1ChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="image1Cropped($event)"
+  ></image-cropper>
+
+  <img [src]="supplyAdForm.value.image1" />
+</form>

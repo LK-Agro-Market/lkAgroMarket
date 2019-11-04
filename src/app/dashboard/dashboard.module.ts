@@ -18,6 +18,7 @@ import {
   NbUserModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -43,6 +44,7 @@ import { ProfileComponent } from './profile/profile.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
