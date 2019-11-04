@@ -1,11 +1,7 @@
 <div class="col-md-9">
   <div class="list-container">
-    <nb-alert status="success" *ngIf="showMsg === 'success'">{{
-      massage
-    }}</nb-alert>
-    <nb-alert status="danger" *ngIf="showMsg === 'error'">{{
-      massage
-    }}</nb-alert>
+    <nb-alert status="success" *ngIf="showMsg === 'success'">{{massage}}</nb-alert>
+    <nb-alert status="danger" *ngIf="showMsg === 'error'">{{massage}}</nb-alert>
     <div class="add-new-container">
       <h4 class="font-weight-bold mt-0 mb-4" id="profile-name">
         {{ user.displayName }}

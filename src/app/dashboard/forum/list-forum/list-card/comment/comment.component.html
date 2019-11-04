@@ -3,9 +3,11 @@
     <nb-accordion-item-header>
       <div class="comnt-container">
         <div class="pro-img-container">
-          <img class="pro-img" src="assets/icon1.jpeg" alt="Profile image" />
+          <img class="pro-img" src="{{comment.userImage}}" alt="Profile image" />
           <div class="pro-header-container">
-            <a href="#" class="pro-name">{{ comment.userName }}</a>
+            <a href="#" class="pro-name">
+              {{ comment.userName }}
+            </a>            
             <span class="text-info" id="postDate">
               <b>Commented on</b>
               <i> {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>

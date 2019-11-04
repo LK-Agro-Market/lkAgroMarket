@@ -18,6 +18,7 @@ export class ForumService {
     dateTime,
     postUserId,
     postUserName,
+    postUserImage,
     showFarmer,
     showBuyer
   ) {
@@ -27,18 +28,27 @@ export class ForumService {
       date: dateTime,
       userID: postUserId,
       userName: postUserName,
+      userImage: postUserImage,
       showFarmer: showFarmer,
       showBuyer: showBuyer
     });
   }
 
-  createComment(comm, dateTime, postID, commentUserId, commentUserName) {
+  createComment(
+    comm,
+    dateTime,
+    postID,
+    commentUserId,
+    commentUserName,
+    commentUserImage
+  ) {
     return this.db.collection('comment').add({
       comment: comm,
       date: dateTime,
       id: postID,
       userID: commentUserId,
-      userName: commentUserName
+      userName: commentUserName,
+      userImage: commentUserImage
     });
   }
 
@@ -71,4 +81,6 @@ export class ForumService {
         )
       );
   }
+
+ 
 }
