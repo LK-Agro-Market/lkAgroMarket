@@ -13,4 +13,5 @@ export interface SupplyAd {
   createdAt: Date;
   views: number;
   contactClicks: number;
+  owner: string;
 }
