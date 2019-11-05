@@ -45,7 +45,7 @@ import { CommentComponent } from './forum/list-forum/list-card/comment/comment.c
     SupplyAdComponent,
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
-    ProfileComponent
+    ProfileComponent,
     ForumComponent,
     ListForumComponent,
     ListCardComponent,
