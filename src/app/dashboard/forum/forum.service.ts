@@ -52,6 +52,23 @@ export class ForumService {
     });
   }
 
+  createReply(
+    rpl,
+    dateTime,
+    commentId,
+    replyUserId,
+    replyUserName,
+    replyUserImage
+  ) {
+    return this.db.collection('comment').doc(commentId).collection('reply').add({
+      reply: rpl,
+      date: dateTime,
+      userID: replyUserId,
+      userName: replyUserName,
+      userImage: replyUserImage
+    });
+  }
+
   getPost() {
     return this.db
       .collection('forum')
@@ -60,27 +77,27 @@ export class ForumService {
         map(postItems =>
           postItems.map(postItem => {
             const data = postItem.payload.doc.data();
-            const id = postItem.payload.doc.id;
-            return { id, ...data };
+            const key = postItem.payload.doc.id;
+            return {key, ...data};
           })
         )
       );
   }
 
-  getComment(commentID) {
+  getComment(postID) {
     return this.db
-      .collection('comment', ref => ref.where('id', '==', commentID))
+      .collection('comment', ref => ref.where('id', '==', postID))
       .snapshotChanges()
       .pipe(
         map(comments =>
           comments.map(comment => {
             const data = comment.payload.doc.data();
-            const id = comment.payload.doc;
-            return { id, ...data };
+            const key = comment.payload.doc.id;
+            return {key, ...data};
           })
         )
       );
   }
 
- 
+
 }
