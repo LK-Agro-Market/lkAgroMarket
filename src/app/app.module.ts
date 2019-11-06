@@ -33,6 +33,7 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
+import { NotificationService } from './shared/services/notification.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     RegistrationGuard,
     RegiReverseGuard,
     AuthService,
-    UserDetailsService
+    UserDetailsService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

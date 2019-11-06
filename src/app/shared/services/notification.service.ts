@@ -14,7 +14,7 @@ export class NotificationService {
       status,
       hasIcon: false,
       position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
-      duration: 10000,
+      duration: 5000,
       destroyByClick: true
     });
   }
