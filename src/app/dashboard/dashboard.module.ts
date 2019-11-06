@@ -12,15 +12,21 @@ import {
   NbIconModule,
   NbSidebarModule,
   NbChatModule,
-  NbListModule,
-  NbUserModule,
   NbCardModule,
   NbSpinnerModule,
   NbButtonModule,
   NbSelectModule,
-  NbInputModule
+  NbInputModule,
+  NbAccordionModule,
+  NbUserModule,
+  NbAlertModule,
+  NbBadgeModule,
+  NbCheckboxModule,
+  NbMenuModule,
+  NbListModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -29,13 +35,25 @@ import { LayoutComponent } from './layout/layout.component';
 import { ChatComponent } from './chat/chat.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ForumComponent } from './forum/forum.component';
+import { ListForumComponent } from './forum/list-forum/list-forum.component';
+import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
+import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     SupplyAdComponent,
     CreateSupplyAdComponent,
-    ChatComponent
+    ChatComponent,
+    ListSupplyAdsComponent,
+    ProfileComponent,
+    ForumComponent,
+    ListForumComponent,
+    ListCardComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +63,7 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     AngularFirestoreModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
@@ -59,7 +78,12 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbCardModule,
     NbSpinnerModule,
     NbSelectModule,
-    NbInputModule
+    NbInputModule,
+    NbAccordionModule,
+    NbAlertModule,
+    NbBadgeModule,
+    NbCheckboxModule,
+    NbMenuModule,
   ],
   providers: []
 })

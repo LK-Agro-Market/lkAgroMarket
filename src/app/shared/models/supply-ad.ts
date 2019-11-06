@@ -5,12 +5,13 @@ export interface SupplyAd {
   quantity: number;
   quantityUnit: string;
   pricePerUnit: number;
-  images: File[];
+  images: string[];
   video?: File;
   description: string;
-  organic: boolean;
+  organic: string;
   expireDate: Date;
   createdAt: Date;
   views: number;
   contactClicks: number;
+  owner: string;
 }

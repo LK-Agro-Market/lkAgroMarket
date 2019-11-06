@@ -11,7 +11,8 @@ import {
   NbLayoutModule,
   NbStepperModule,
   NbButtonModule,
-  NbCardModule
+  NbCardModule,
+  NbMenuModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -55,7 +56,9 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     NbEvaIconsModule,
     NbStepperModule,
     NbButtonModule,
-    NbCardModule
+    NbCardModule,
+    NbEvaIconsModule,
+    NbMenuModule.forRoot()
   ],
   providers: [
     AuthGuard,
