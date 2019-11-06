@@ -6,7 +6,11 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Chats } from './chats';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask
+} from '@angular/fire/storage';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
@@ -51,7 +55,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  }
+  };
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
@@ -60,57 +64,54 @@ export class ChatComponent {
     this.currentUser = currentuser.displayName;
     this.currentId = currentuser.uid;
     //////////////////
-    this.chatCollection = this.afs
-    .collection('chats', ref => ref.where('rid', '==' , this.selectedId)
-    .where('sid', '==', this.currentId));
+    this.chatCollection = this.afs.collection('chats', ref =>
+      ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
+    );
     ///////////////////
-    this.repsCollection = this.afs.collection('chats',
-     ref => ref.where('rid', '==' , this.currentId)
-    .where('sid', '==', this.selectedId));
+    this.repsCollection = this.afs.collection('chats', ref =>
+      ref.where('rid', '==', this.currentId).where('sid', '==', this.selectedId)
+    );
     //////////////
-    this.messages = Observable
-     .combineLatest(this.chatCollection.valueChanges().pipe(
-      map(res => {
-        res.forEach(r => {
-          r.reply = true;
-          return r;
-        });
-        return res; })
-     ),
-                   this.repsCollection.valueChanges()
-                   .pipe(
-                   map(res => {
-                     res.forEach(r => {
-                       r.reply = false;
-                       return r;
-                     });
-                     return res; })
-                 )
-                )
-    .switchMap(chats => {
+    this.messages = Observable.combineLatest(
+      this.chatCollection.valueChanges().pipe(
+        map(res => {
+          res.forEach(r => {
+            r.reply = true;
+            return r;
+          });
+          return res;
+        })
+      ),
+      this.repsCollection.valueChanges().pipe(
+        map(res => {
+          res.forEach(r => {
+            r.reply = false;
+            return r;
+          });
+          return res;
+        })
+      )
+    )
+      .switchMap(chats => {
         const [chatCollection, repsCollection] = chats;
         const combined = chatCollection.concat(repsCollection);
         return Observable.of(combined);
-    })
-    .pipe(
-      map(combined => combined.sort(this.compFn))
-    );
-   }
+      })
+      .pipe(map(combined => combined.sort(this.compFn)));
+  }
 
   sendMessage(event: any, reply: boolean) {
     const user = JSON.parse(localStorage.getItem('user'));
-    this.afs
-      .collection('chats')
-      .add({
-        content: event.message,
-        time: Date.now(),
-        avatar: user.photoURL,
-        sender: user.displayName,
-        reciever: this.selectedUser,
-        date: new Date(),
-        sid: user.uid,
-        rid: this.selectedId,
-        reply: true
-     });
+    this.afs.collection('chats').add({
+      content: event.message,
+      time: Date.now(),
+      avatar: user.photoURL,
+      sender: user.displayName,
+      reciever: this.selectedUser,
+      date: new Date(),
+      sid: user.uid,
+      rid: this.selectedId,
+      reply: true
+    });
   }
 }
