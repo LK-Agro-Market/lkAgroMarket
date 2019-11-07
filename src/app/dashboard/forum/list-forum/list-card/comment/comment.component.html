@@ -1,55 +1,50 @@
-<nb-accordion *ngFor="let comment of comments">
-  <nb-accordion-item>
-    <nb-accordion-item-header>
-      <div class="comnt-container">
-        <div class="pro-img-container">
-          <img class="pro-img" src="{{comment.userImage}}" alt="Profile image" />
-          <div class="pro-header-container">
-            <a href="#" class="pro-name">
-              {{ comment.userName }} 
-            </a>            
-            <span class="text-info" id="postDate">
-              <b>Commented on</b>
-              <i> {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
-            </span>
-            <div class="float-right like-container">
-              <button
-                nbButton
-                ghost
-                status="success"
-                size="medium"
-                class="float-right btn-like"
-              >
-                <nb-icon icon="checkmark"></nb-icon>
-              </button>
-              <p class="count-like">6</p>
-              <button
-                nbButton
-                ghost
-                status="info"
-                size="medium"
-                class="float-right btn-com"
-              >
-                <nb-icon icon="email"></nb-icon>
-              </button>
-              <p class="count-com">9</p>
+<div class="card-cantainer">
+  <nb-accordion>
+    <nb-accordion-item autoCollapse="true">
+      <nb-accordion-item-header>
+        <div class="comnt-container">
+          <div class="pro-img-container">
+            <img class="pro-img" src="{{comment.userImage}}" alt="Profile image" />
+            <div class="pro-header-container">
+              <a href="#" class="pro-name">
+                {{ comment.userName }}
+              </a>
+              <span class="text-info" id="postDate">
+                <b>Commented on</b>
+                <i> {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+              </span>
+              <div class="float-right like-container">
+                <button nbButton ghost status="success" size="medium" class="float-right btn-like">
+                  <nb-icon icon="checkmark"></nb-icon>
+                </button>
+                <p class="count-like">6</p>
+                <button nbButton ghost status="info" size="medium" class="float-right btn-com">
+                  <nb-icon icon="email"></nb-icon>
+                </button>
+                <p class="count-com">9</p>
+              </div>
             </div>
           </div>
+          <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
         </div>
-        <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
-      </div>
-    </nb-accordion-item-header>
-    <nb-accordion-item-body>
-      <p>Reply for comment</p>
-      <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
-        <div class="add-reply-container">
-          <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Add reply..." status="primary" required style="height: 40px;">
+      </nb-accordion-item-header>
+      <nb-accordion-item-body>
+        <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
+          <div class="add-reply-container">
+            <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Add reply..."
+              status="primary" required style="height: 40px;">
           </textarea>
-          <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small">
-            Reply
-          </button>
+            <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small">
+              Reply
+            </button>
+          </div>
+        </form>
+        <hr />
+        <div class="reply-container">
+          <p class="reply-titel">Reply for comment</p>
+          <app-reply [commentId]="commentId"></app-reply>
         </div>
-      </form>
-    </nb-accordion-item-body>
-  </nb-accordion-item>
-</nb-accordion>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+  </nb-accordion>
+</div>

@@ -12,12 +12,14 @@ export class CommentComponent implements OnInit {
   replyForm = new FormGroup({
     reply: new FormControl('', Validators.required)
   });
-cmnt;
+
+  commentId;
+
   get rply() {
     return this.replyForm.get('reply');
   }
 
-  @Input() comments: any[];
+  @Input() comment: any;
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
@@ -25,24 +27,24 @@ cmnt;
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
-
+    this.commentId = this.comment.key;
   }
 
   onCreate() {
     const rply = this.replyForm.controls.reply.value as string;
     const dateTime = new Date();
-    const commentID = this.comments.key;
-
+    const commentID = this.comment.key;
     const userId = this.user.uid;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 
+    console.log(this.comment.key);
     if (this.replyForm.valid) {
       this.forumService.createReply(rply, dateTime, commentID, userId, userName, userImage);
       this.rply.setValue('');
     } else {
       // this.msgStatus.emit('error');
-      // this.msg.emit('Please enterreply');
+      // this.msg.emit('Please entrreply');
     }
   }
 }

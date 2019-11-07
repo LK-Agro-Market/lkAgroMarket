@@ -14,7 +14,7 @@ export class ListCardComponent implements OnInit {
   });
 
   viewButton = true;
-  comments: any;
+  comments: any[];
   cmntId: any;
   userImageURL;
 
@@ -41,9 +41,8 @@ export class ListCardComponent implements OnInit {
       .pipe()
       .subscribe(comments => {
         this.comments = comments;
-        this.cmntId = this.comments.key;
-        console.log(this.comments);
       });
+
   }
 
   onCreate() {

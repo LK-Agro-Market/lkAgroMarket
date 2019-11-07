@@ -60,9 +60,10 @@ export class ForumService {
     replyUserName,
     replyUserImage
   ) {
-    return this.db.collection('comment').doc(commentId).collection('reply').add({
+    return this.db.collection('reply').add({
       reply: rpl,
       date: dateTime,
+      commentID: commentId,
       userID: replyUserId,
       userName: replyUserName,
       userImage: replyUserImage
@@ -93,6 +94,21 @@ export class ForumService {
           comments.map(comment => {
             const data = comment.payload.doc.data();
             const key = comment.payload.doc.id;
+            return {key, ...data};
+          })
+        )
+      );
+  }
+
+  getReply(commentID) {
+    return this.db
+      .collection('reply', ref => ref.where('commentID', '==', commentID))
+      .snapshotChanges()
+      .pipe(
+        map(replies =>
+          replies.map(reply => {
+            const data = reply.payload.doc.data();
+            const key = reply.payload.doc.id;
             return {key, ...data};
           })
         )

@@ -1,4 +1,9 @@
-t-header {
+.card-cantainer{
+  overflow: hidden;
+  height: auto;
+  transition: all 1s;
+}
+.t-header {
   height: 10px;
 }
 .media {

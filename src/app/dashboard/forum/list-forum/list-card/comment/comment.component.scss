@@ -74,7 +74,15 @@ nb-accordion {
   flex-direction: row;
   margin-left: 10px;
 }
+.card-cantainer{
+  overflow: hidden;
+  height: auto;
+  transition: all 1s;
+}
 .reply-btn {
   margin-top: 8px;
   margin-left: 30px;
+}
+.reply-titel{
+  margin-top: 10px;
 }
