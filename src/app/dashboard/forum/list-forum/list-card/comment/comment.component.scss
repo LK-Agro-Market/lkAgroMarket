@@ -69,7 +69,7 @@ nb-accordion {
   margin-right: 25px;
   font-size: 13px;
 }
-.add-reply-container {
+.add-reply {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
@@ -85,4 +85,8 @@ nb-accordion {
 }
 .reply-titel{
   margin-top: 10px;
+}
+.reply-container{
+  max-height: 700px;
+  overflow-y: scroll;
 }

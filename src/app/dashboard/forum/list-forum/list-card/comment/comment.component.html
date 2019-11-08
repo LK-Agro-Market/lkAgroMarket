@@ -28,19 +28,19 @@
           <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
         </div>
       </nb-accordion-item-header>
-      <nb-accordion-item-body>
+      <nb-accordion-item-body class="reply-container">
         <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
-          <div class="add-reply-container">
+          <div class="add-reply">
             <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Add reply..."
               status="primary" required style="height: 40px;">
-          </textarea>
+            </textarea>
             <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small">
               Reply
             </button>
           </div>
         </form>
-        <hr />
-        <div class="reply-container">
+        <hr/>
+        <div >
           <p class="reply-titel">Reply for comment</p>
           <app-reply [commentId]="commentId"></app-reply>
         </div>
