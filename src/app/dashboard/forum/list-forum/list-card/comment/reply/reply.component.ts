@@ -7,10 +7,9 @@ import { ForumService } from 'src/app/dashboard/forum/forum.service';
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
-
   replies: any;
 
-  constructor(private forumService: ForumService) { }
+  constructor(private forumService: ForumService) {}
 
   @Input() commentId: any;
 
@@ -22,5 +21,4 @@ export class ReplyComponent implements OnInit {
         this.replies = replies;
       });
   }
-
 }

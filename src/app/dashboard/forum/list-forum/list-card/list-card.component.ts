@@ -42,7 +42,6 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
-
   }
 
   onCreate() {
@@ -54,12 +53,18 @@ export class ListCardComponent implements OnInit {
     const userImage = this.user.photoURL;
 
     if (this.commentForm.valid) {
-      this.forumService.createComment(comm, dateTime, postID, userId, userName, userImage);
+      this.forumService.createComment(
+        comm,
+        dateTime,
+        postID,
+        userId,
+        userName,
+        userImage
+      );
       this.comm.setValue('');
     } else {
       // this.msgStatus.emit('error');
       // this.msg.emit('Please enter comment to reply');
     }
   }
-
 }

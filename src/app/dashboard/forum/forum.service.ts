@@ -79,7 +79,7 @@ export class ForumService {
           postItems.map(postItem => {
             const data = postItem.payload.doc.data();
             const key = postItem.payload.doc.id;
-            return {key, ...data};
+            return { key, ...data };
           })
         )
       );
@@ -94,7 +94,7 @@ export class ForumService {
           comments.map(comment => {
             const data = comment.payload.doc.data();
             const key = comment.payload.doc.id;
-            return {key, ...data};
+            return { key, ...data };
           })
         )
       );
@@ -109,11 +109,9 @@ export class ForumService {
           replies.map(reply => {
             const data = reply.payload.doc.data();
             const key = reply.payload.doc.id;
-            return {key, ...data};
+            return { key, ...data };
           })
         )
       );
   }
-
-
 }

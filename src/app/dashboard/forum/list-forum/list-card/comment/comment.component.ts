@@ -40,7 +40,14 @@ export class CommentComponent implements OnInit {
 
     console.log(this.comment.key);
     if (this.replyForm.valid) {
-      this.forumService.createReply(rply, dateTime, commentID, userId, userName, userImage);
+      this.forumService.createReply(
+        rply,
+        dateTime,
+        commentID,
+        userId,
+        userName,
+        userImage
+      );
       this.rply.setValue('');
     } else {
       // this.msgStatus.emit('error');
