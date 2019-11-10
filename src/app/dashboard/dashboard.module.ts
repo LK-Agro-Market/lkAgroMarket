@@ -36,6 +36,7 @@ import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
+import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply
     ListForumComponent,
     ListCardComponent,
     CommentComponent,
-    ReplyComponent
+    ReplyComponent,
+    UserProfileCardComponent
   ],
   imports: [
     CommonModule,
