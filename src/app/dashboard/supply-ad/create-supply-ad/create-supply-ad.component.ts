@@ -4,6 +4,8 @@ import { Subscription, forkJoin } from 'rxjs';
 
 import { SupplyAdService } from '../supply-ad.service';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
+import { User } from 'src/app/shared/models/user';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -12,6 +14,7 @@ import { SupplyAd } from 'src/app/shared/models/supply-ad';
 })
 export class CreateSupplyAdComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
+  user: User = JSON.parse(localStorage.getItem('user'));
   supplyAdForm: FormGroup;
   attempted = false;
   processing = false;
@@ -55,10 +58,15 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     'Strawberry',
     'Watermelon'
   ];
-  image1LL: String = '';
-  image2LL: String = '';
-  image3LL: String = '';
-  image4LL: String = '';
+
+  image1ChangedEvent: any = '';
+  image2ChangedEvent: any = '';
+  image3ChangedEvent: any = '';
+  image4ChangedEvent: any = '';
+  image1LL: string = '';
+  image2LL: string = '';
+  image3LL: string = '';
+  image4LL: string = '';
 
   get formControls() {
     return this.supplyAdForm.controls;
@@ -97,28 +105,52 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     this.supplyAdForm.controls.food.reset();
   }
 
-  imgPreview(event, imageNum) {
-    const file = (event.target as HTMLInputElement).files[0];
-    const change: Object = {};
-    change[imageNum] = file;
-    this.supplyAdForm.patchValue(change);
-    this.supplyAdForm.get(imageNum).updateValueAndValidity();
-
+  file1ChangeEvent(event: any): void {
+    this.image1ChangedEvent = event;
+  }
+  image1Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image1: event.file });
     const reader = new FileReader();
     reader.onload = () => {
-      if (imageNum === 'image1') {
-        this.image1LL = reader.result as string;
-      } else if (imageNum === 'image2') {
-        this.image2LL = reader.result as string;
-      } else if (imageNum === 'image3') {
-        this.image3LL = reader.result as string;
-      } else {
-        this.image4LL = reader.result as string;
-      }
+      this.image1LL = reader.result as string;
     };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(event.file);
+  }
+
+  file2ChangeEvent(event: any): void {
+    this.image2ChangedEvent = event;
+  }
+  image2Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image2: event.file });
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image2LL = reader.result as string;
+    };
+    reader.readAsDataURL(event.file);
+  }
+
+  file3ChangeEvent(event: any): void {
+    this.image3ChangedEvent = event;
+  }
+  image3Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image3: event.file });
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image3LL = reader.result as string;
+    };
+    reader.readAsDataURL(event.file);
+  }
+
+  file4ChangeEvent(event: any): void {
+    this.image4ChangedEvent = event;
+  }
+  image4Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image4: event.file });
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image4LL = reader.result as string;
+    };
+    reader.readAsDataURL(event.file);
   }
 
   createSupplyAd() {
@@ -136,7 +168,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
         adId
       )
     ];
-    if (this.image2LL !== '') {
+    if (this.formControls.image2.value !== '') {
       uploadTasks.push(
         this.supplyAdService.uploadImg(
           this.formControls.image2.value,
@@ -145,7 +177,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
         )
       );
     }
-    if (this.image3LL !== '') {
+    if (this.formControls.image3.value !== '') {
       uploadTasks.push(
         this.supplyAdService.uploadImg(
           this.formControls.image3.value,
@@ -154,7 +186,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
         )
       );
     }
-    if (this.image4LL !== '') {
+    if (this.formControls.image4.value !== '') {
       uploadTasks.push(
         this.supplyAdService.uploadImg(
           this.formControls.image4.value,
@@ -178,12 +210,22 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           expireDate: this.formControls.expireDate.value,
           createdAt: new Date(),
           views: 0,
-          contactClicks: 0
+          contactClicks: 0,
+          owner: this.user.uid
         };
         this.subscriptions.push(
           this.supplyAdService.createAd(supplyAd).subscribe(() => {
             this.attempted = false;
             this.processing = false;
+            this.supplyAdForm.reset();
+            this.image1ChangedEvent = '';
+            this.image2ChangedEvent = '';
+            this.image3ChangedEvent = '';
+            this.image4ChangedEvent = '';
+            this.image1LL = '';
+            this.image2LL = '';
+            this.image3LL = '';
+            this.image4LL = '';
           })
         );
       })
