@@ -18,6 +18,7 @@ export class ForumService {
     dateTime,
     postUserId,
     postUserName,
+    postUserImage,
     showFarmer,
     showBuyer
   ) {
@@ -27,18 +28,45 @@ export class ForumService {
       date: dateTime,
       userID: postUserId,
       userName: postUserName,
+      userImage: postUserImage,
       showFarmer: showFarmer,
       showBuyer: showBuyer
     });
   }
 
-  createComment(comm, dateTime, postID, commentUserId, commentUserName) {
+  createComment(
+    comm,
+    dateTime,
+    postID,
+    commentUserId,
+    commentUserName,
+    commentUserImage
+  ) {
     return this.db.collection('comment').add({
       comment: comm,
       date: dateTime,
       id: postID,
       userID: commentUserId,
-      userName: commentUserName
+      userName: commentUserName,
+      userImage: commentUserImage
+    });
+  }
+
+  createReply(
+    rpl,
+    dateTime,
+    commentId,
+    replyUserId,
+    replyUserName,
+    replyUserImage
+  ) {
+    return this.db.collection('reply').add({
+      reply: rpl,
+      date: dateTime,
+      commentID: commentId,
+      userID: replyUserId,
+      userName: replyUserName,
+      userImage: replyUserImage
     });
   }
 
@@ -50,23 +78,38 @@ export class ForumService {
         map(postItems =>
           postItems.map(postItem => {
             const data = postItem.payload.doc.data();
-            const id = postItem.payload.doc.id;
-            return { id, ...data };
+            const key = postItem.payload.doc.id;
+            return { key, ...data };
           })
         )
       );
   }
 
-  getComment(commentID) {
+  getComment(postID) {
     return this.db
-      .collection('comment', ref => ref.where('id', '==', commentID))
+      .collection('comment', ref => ref.where('id', '==', postID))
       .snapshotChanges()
       .pipe(
         map(comments =>
           comments.map(comment => {
             const data = comment.payload.doc.data();
-            const id = comment.payload.doc;
-            return { id, ...data };
+            const key = comment.payload.doc.id;
+            return { key, ...data };
+          })
+        )
+      );
+  }
+
+  getReply(commentID) {
+    return this.db
+      .collection('reply', ref => ref.where('commentID', '==', commentID))
+      .snapshotChanges()
+      .pipe(
+        map(replies =>
+          replies.map(reply => {
+            const data = reply.payload.doc.data();
+            const key = reply.payload.doc.id;
+            return { key, ...data };
           })
         )
       );

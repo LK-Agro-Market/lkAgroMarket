@@ -1,15 +1,9 @@
-.card-cantainer {
-  overflow: hidden;
-  height: auto;
-  transition: all 1s;
-}
-.t-header {
-  height: 10px;
-}
-.media {
+.reply-card {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
+
 .pro-img-container {
   display: flex;
   flex-direction: row;
@@ -17,9 +11,10 @@
   margin-top: -3%;
 }
 .pro-img {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
+  margin-top: 10px;
 }
 .pro-header-container {
   display: flex;
@@ -27,7 +22,7 @@
 }
 .pro-name {
   margin-top: 10px;
-  font-size: 17px;
+  font-size: 15px;
   margin-left: 30px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
@@ -44,7 +39,7 @@
   display: flex;
   flex-direction: row;
   position: absolute;
-  right: 40px;
+  padding-left: 400px;
 }
 .btn-like {
   margin-left: 10px;
@@ -66,47 +61,6 @@
   font-weight: 300;
   color: blueviolet;
 }
-.media-body {
-  padding-top: 20px;
-}
-#postTitle {
-  font-size: 15px;
-  font-weight: 100;
-  margin-top: 100px;
-}
-.card-fotter-container {
-  display: flex;
-  flex-direction: row;
-}
-.view-btn {
-  margin-top: 5px;
-  font-size: 15px;
-  width: 100px;
-}
-.edit-btn {
-  margin-top: 5px;
-  font-size: 15px;
-  margin-left: 20px;
-}
-.end-btn {
-  margin-top: 5px;
-  font-size: 15px;
-  margin-left: 20px;
-}
-#postDesc {
+.reply-body {
   margin-top: 10px;
-  font-size: 13px;
-}
-.add-comment-container {
-  display: flex;
-  flex-direction: row;
-  margin-left: 10px;
-}
-.comment-btn {
-  margin-top: 8px;
-  margin-left: 30px;
-}
-.comment-sec {
-  max-height: 750px;
-  overflow-y: visible;
 }
