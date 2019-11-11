@@ -6,7 +6,7 @@ import { SupplyAdService } from '../supply-ad.service';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { User } from 'src/app/shared/models/user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -76,7 +76,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private supplyAdService: SupplyAdService,
-    private notification: NotificationService
+    private readonly notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -228,10 +228,9 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
             this.image2LL = '';
             this.image3LL = '';
             this.image4LL = '';
-            this.notification.create(
-              'New supply advertisement is created',
+            this.notifier.notify(
               'success',
-              'Ad Created Successfully!'
+              'New supply advertisement is created'
             );
           })
         );
