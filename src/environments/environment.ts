@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyANFHQ-5VUl_IMp6ntbphvFmW4BrbKsoRQ',
-    authDomain: 'sexy-c99a9.firebaseapp.com',
-    databaseURL: 'https://sexy-c99a9.firebaseio.com',
-    projectId: 'sexy-c99a9',
-    storageBucket: 'sexy-c99a9.appspot.com',
-    messagingSenderId: '148787421491',
-    appId: '1:148787421491:web:86d6e12bf844a962405e46',
-    measurementId: 'G-WR71T3SH37'
+    apiKey: "AIzaSyBepvLLzy1t5QPM5IuDhoUIFvQ1R1icoFY",
+    authDomain: "lkagromarketcrud.firebaseapp.com",
+    databaseURL: "https://lkagromarketcrud.firebaseio.com",
+    projectId: "lkagromarketcrud",
+    storageBucket: "lkagromarketcrud.appspot.com",
+    messagingSenderId: "627128110045",
+    appId: "1:627128110045:web:4a5339f25fb1ed6f004434",
+    measurementId: "G-GL44PCQCD2"
   },
   googleMap: {
     apiKey: 'AIzaSyDPHKNX6jV8y91K6C8ZyaBVB2QQbkohx2w'

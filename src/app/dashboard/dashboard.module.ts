@@ -38,6 +38,9 @@ import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
+import { DemandAdComponent } from './demand-ad/demand-ad.component';
+import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
+import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 
 @NgModule({
   declarations: [
@@ -45,11 +48,14 @@ import { CommentComponent } from './forum/list-forum/list-card/comment/comment.c
     SupplyAdComponent,
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
-    ProfileComponent
+    ProfileComponent,
     ForumComponent,
     ListForumComponent,
     ListCardComponent,
-    CommentComponent
+    CommentComponent,
+    DemandAdComponent,
+    CreateDemandAdComponent,
+    ListDemandAdComponent
   ],
   imports: [
     CommonModule,

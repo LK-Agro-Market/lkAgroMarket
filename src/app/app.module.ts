@@ -12,7 +12,8 @@ import {
   NbStepperModule,
   NbButtonModule,
   NbCardModule,
-  NbMenuModule
+  NbMenuModule,
+  NbActionsModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -32,6 +33,8 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     NbButtonModule,
     NbCardModule,
     NbEvaIconsModule,
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+    NbActionsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthGuard,
