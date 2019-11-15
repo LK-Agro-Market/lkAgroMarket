@@ -19,7 +19,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Farmer"
-                        (change)="show()"
                       />
                       Farmer
                     </div>
@@ -31,7 +30,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Buyer"
-                        (change)="show()"
                       />
                       Buyer
                     </div>
@@ -46,7 +44,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Administrator"
-                        (change)="show()"
                       />
                       Administrator
                     </div>
@@ -68,6 +65,7 @@
                       [latitude]="latitude"
                       [longitude]="longitude"
                       [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"
                     ></agm-marker>
                   </agm-map>
                   <button nbButton nbStepperPrevious>prev</button>

@@ -38,6 +38,7 @@ import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { CommentComponent } from './forum/list-forum/list-card/comment/comment.c
     NbEvaIconsModule,
     NbCheckboxModule,
     NbMenuModule,
-    NbListModule
+    NbListModule,
+    AgmCoreModule.forRoot(environment.googleMap)
   ]
 })
 export class DashboardModule {}

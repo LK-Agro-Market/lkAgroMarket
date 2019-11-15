@@ -28,6 +28,17 @@
           Update Profile
         </nb-card-header>
         <nb-card-body>
+          Location
+          <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker
+              [(latitude)]="latitude"
+              [(longitude)]="longitude"
+              [markerDraggable]="profileOwnerId == viewer.uid"
+              (dragEnd)="markerDragEnd($event)"
+            ></agm-marker>
+          </agm-map>
+          <br />
+          <br />
           <form [formGroup]="userDetailsForm" (ngSubmit)="updateProfile()">
             <div class="row">
               <div class="col-sm-6">

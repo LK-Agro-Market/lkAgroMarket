@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/models/user';
 import { Subscription } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { UserDetails } from 'src/app/shared/models/user-details';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   selectedUserType: string = '';
 
   userDetailsForm: FormGroup;
+  latitude: number;
+  longitude: number;
 
   get formControls() {
     return this.userDetailsForm.controls;
@@ -35,7 +38,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private readonly notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -77,6 +81,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
               organizationAddress: userDetails.organizationAddress
             });
             this.selectedUserType = userDetails.userLevel;
+            this.longitude = userDetails.longitude;
+            this.latitude = userDetails.latitude;
           });
       })
     );
@@ -86,6 +92,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
+  }
+
+  markerDragEnd($event: any) {
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
   }
 
   updateProfile() {
@@ -119,8 +130,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.processing = true;
 
     const userDetails: Partial<UserDetails> = {
-      // longitude: this.longitude,
-      // latitude: this.latitude,
+      longitude: this.longitude,
+      latitude: this.latitude,
       nic: this.formControls.nic.value,
       contact: this.formControls.contact.value,
       district: this.formControls.district.value,
@@ -136,6 +147,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.processing = false;
           this.attempted = false;
+          this.notifier.notify('success', 'Updated your profile info');
         })
     );
   }
