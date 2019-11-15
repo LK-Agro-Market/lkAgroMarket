@@ -1,14 +1,246 @@
-<form [formGroup]="supplyAdForm">
-  <input type="file" (change)="file1ChangeEvent($event)" />
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card border-success" *ngIf="profileOwnerUser">
+        <img [src]="profileOwnerUser.photoURL" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ profileOwnerUser.displayName }}
+            <span class="user-level">- {{ selectedUserType }}</span>
+          </h5>
+          <p class="card-text">{{ profileOwnerUser.email }}</p>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-primary">Contact</button>
+          <button href="#" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <nb-card
+        accent="info"
+        [nbSpinner]="processing"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+        *ngIf="profileOwnerUser"
+      >
+        <nb-card-header class="card-header-content">
+          Update Profile
+        </nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="userDetailsForm" (ngSubmit)="updateProfile()">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>NIC Number<span class="asterisk">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="nic"
+                    [ngClass]="{
+                      'is-invalid': formControls.nic.errors && attempted
+                    }"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  />
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.nic.errors && attempted"
+                  >
+                    <span *ngIf="!!formControls.nic.errors.pattern"
+                      >Please provide valid NIC number</span
+                    >
+                    <span *ngIf="!!formControls.nic.errors.required"
+                      >NIC number is required</span
+                    >
+                  </div>
+                </div>
+              </div>
 
-  <image-cropper
-    [imageChangedEvent]="image1ChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="4 / 3"
-    [resizeToWidth]="128"
-    format="png"
-    (imageCropped)="image1Cropped($event)"
-  ></image-cropper>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Contact Number<span class="asterisk">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="contact"
+                    [ngClass]="{
+                      'is-invalid': formControls.contact.errors && attempted
+                    }"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  />
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.contact.errors && attempted"
+                  >
+                    <span *ngIf="!!formControls.contact.errors.pattern"
+                      >Please provide valid phone number</span
+                    >
+                    <span *ngIf="!!formControls.contact.errors.required"
+                      >Contact number is required</span
+                    >
+                  </div>
+                </div>
+              </div>
 
-  <img [src]="supplyAdForm.value.image1" />
-</form>
+              <div class="col-sm-6" *ngIf="selectedUserType == 'Farmer'">
+                <div class="form-group">
+                  <label>District<span class="asterisk">*</span></label>
+                  <nb-select
+                    fullWidth
+                    formControlName="district"
+                    [(selected)]="userDetailsForm.value.district"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  >
+                    <nb-option value="Ampara">Ampara</nb-option>
+                    <nb-option value="Anuradhapura">Anuradhapura</nb-option>
+                    <nb-option value="Badulla">Badulla</nb-option>
+                    <nb-option value="Batticaloa">Batticaloa</nb-option>
+                    <nb-option value="Colombo">Colombo</nb-option>
+                    <nb-option value="Galle">Galle</nb-option>
+                    <nb-option value="Gampaha">Gampaha</nb-option>
+                    <nb-option value="Hambantota">Hambantota</nb-option>
+                    <nb-option value="Jaffna">Jaffna</nb-option>
+                    <nb-option value="Kalutara">Kalutara</nb-option>
+                    <nb-option value="Kandy">Kandy</nb-option>
+                    <nb-option value="Kegalle">Kegalle</nb-option>
+                    <nb-option value="Kilinochchi">Kilinochchi</nb-option>
+                    <nb-option value="Kurunegala">Kurunegala</nb-option>
+                    <nb-option value="Mannar">Mannar</nb-option>
+                    <nb-option value="Matale">Matale</nb-option>
+                    <nb-option value="Matara">Matara</nb-option>
+                    <nb-option value="Moneragala">Moneragala</nb-option>
+                    <nb-option value="Mullaitivu">Mullaitivu</nb-option>
+                    <nb-option value="Nuwara Eliya">Nuwara Eliya</nb-option>
+                    <nb-option value="Polonnaruwa">Polonnaruwa</nb-option>
+                    <nb-option value="Puttalam">Puttalam</nb-option>
+                    <nb-option value="Ratnapura">Ratnapura</nb-option>
+                    <nb-option value="Trincomalee">Trincomalee</nb-option>
+                    <nb-option value="Vavuniya">Vavuniya</nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <div
+                class="col-sm-12"
+                *ngIf="
+                  selectedUserType == 'Buyer' || selectedUserType == 'Farmer'
+                "
+              >
+                <div class="form-group">
+                  <label *ngIf="selectedUserType == 'Farmer'"
+                    >Home/Store Address<span class="asterisk">*</span></label
+                  >
+                  <label *ngIf="selectedUserType == 'Buyer'"
+                    >Home Address<span class="asterisk">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    formControlName="homeAddress"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  ></textarea>
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.homeAddress.errors && attempted"
+                  >
+                    Home address is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12" *ngIf="selectedUserType == 'Buyer'">
+                <div class="form-group">
+                  <label>Business Address<span class="asterisk">*</span></label>
+                  <textarea
+                    class="form-control"
+                    formControlName="businessAddress"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  >
+                  </textarea>
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.businessAddress.errors && attempted"
+                  >
+                    Business address is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6" *ngIf="selectedUserType == 'Administrator'">
+                <div class="form-group">
+                  <label
+                    >Organization Name<span class="asterisk">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="organization"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  />
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.organization.errors && attempted"
+                  >
+                    Organization name is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6" *ngIf="selectedUserType == 'Administrator'">
+                <div class="form-group">
+                  <label>Designation<span class="asterisk">*</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="designation"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  />
+                  <div
+                    class="text-danger"
+                    *ngIf="!!formControls.designation.errors && attempted"
+                  >
+                    Designation is required
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-sm-12"
+                *ngIf="selectedUserType == 'Administrator'"
+              >
+                <div class="form-group">
+                  <label
+                    >Organization Address<span class="asterisk">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    formControlName="organizationAddress"
+                    [attr.disabled]="profileOwnerId != viewer.uid ? '' : null"
+                  ></textarea>
+                  <div
+                    class="text-danger"
+                    *ngIf="
+                      !!formControls.organizationAddress.errors && attempted
+                    "
+                  >
+                    Organization address is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 text-right">
+                <button
+                  type="submit"
+                  nbButton
+                  *ngIf="viewer.uid == profileOwnerId"
+                >
+                  Update Profile
+                </button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

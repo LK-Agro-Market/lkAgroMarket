@@ -81,8 +81,8 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
-      type: ['', Validators.required],
-      food: ['', Validators.required],
+      type: ['Vegitable', Validators.required],
+      food: ['Onion', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
