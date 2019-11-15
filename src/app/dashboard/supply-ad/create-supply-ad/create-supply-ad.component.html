@@ -16,8 +16,8 @@
             <nb-select
               fullWidth
               placeholder="Select Category"
-              formControlName="type"
               (selectedChange)="retriveFoods()"
+              [(selected)]="supplyAdForm.value.type"
             >
               <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
             </nb-select>
@@ -37,7 +37,7 @@
             <nb-select
               fullWidth
               placeholder="Select Harvest/ Agro Product"
-              formControlName="food"
+              [(selected)]="supplyAdForm.value.food"
             >
               <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
                 f

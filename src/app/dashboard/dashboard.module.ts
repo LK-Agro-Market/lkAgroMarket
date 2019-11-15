@@ -27,6 +27,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { AgmCoreModule } from '@agm/core';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -88,6 +89,8 @@ import { UserProfileCardComponent } from './forum/user-profile-card/user-profile
     NbBadgeModule,
     NbCheckboxModule,
     NbMenuModule,
+    NbListModule,
+    AgmCoreModule.forRoot(environment.googleMap)
   ],
   providers: []
 })
