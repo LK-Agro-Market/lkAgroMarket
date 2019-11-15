@@ -1,0 +1,42 @@
+<nb-layout>
+  <nb-sidebar>
+    <nb-list>
+      <nb-list-item *ngFor="let u of users | async">
+        <button
+          nbButton
+          fullwidth
+          (click)="UserClicked(u)"
+          *ngIf="user.uid != u.uid"
+        >
+          <nb-user [name]="u.displayName" [picture]="u.photoURL"></nb-user>
+        </button>
+      </nb-list-item>
+    </nb-list>
+  </nb-sidebar>
+
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-body>
+        <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-chat size="large">
+      <nb-chat-message
+        *ngFor="let msg of messages | async"
+        [type]="msg.text"
+        [message]="msg.content"
+        [date]="msg.time"
+        [avatar]="msg.avatar"
+        [reply]="msg.reply"
+      >
+      </nb-chat-message>
+      <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+      </nb-chat-form>
+    </nb-chat>
+
+    <nb-card>
+      <nb-card-body> </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

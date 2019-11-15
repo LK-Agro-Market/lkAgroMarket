@@ -12,7 +12,8 @@ import {
   NbStepperModule,
   NbButtonModule,
   NbCardModule,
-  NbMenuModule
+  NbMenuModule,
+  NbToastrModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
+import { ChatComponent } from './chat/chat.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'farmer-dashboard',
         component: SupplyAdComponent
+      },
+      {
+        path: 'chat-dashboard',
+        component: ChatComponent
       },
       {
         path: 'profile/:profileOwner',
