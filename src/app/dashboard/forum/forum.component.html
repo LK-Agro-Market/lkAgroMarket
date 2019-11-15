@@ -5,12 +5,6 @@
 
   <div class="forum-post-container">
     <div class="list-container">
-      <nb-alert status="success" *ngIf="showMsg === 'success'">{{
-        massage
-      }}</nb-alert>
-      <nb-alert status="danger" *ngIf="showMsg === 'error'">{{
-        massage
-      }}</nb-alert>
       <nb-accordion style="margin-top: 20px; margin-bottom: 20px;">
         <nb-accordion-item #item>
           <nb-accordion-item-body>
@@ -57,6 +51,7 @@
                   status="info"
                   (change)="showBuyer = !showBuyer"
                   [checked]="showBuyer"
+                  style="margin-left: 10px;"
                   >Show Buyers
                 </nb-checkbox>
                 <button
@@ -80,7 +75,7 @@
   </div>
 
   <div class="side-bar-continer">
-    <button nbButton status="primary" (click)="toggle()" id="add-btn">
+    <button nbButton status="primary" (click)="toggle()"  id="add-btn">
       Create New
     </button>
   </div>
