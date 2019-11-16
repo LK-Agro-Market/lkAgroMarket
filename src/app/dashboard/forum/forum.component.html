@@ -1,6 +1,6 @@
 <div class="main-container">
   <div class="user-profile">
-    <app-user-profile-card></app-user-profile-card>
+    <app-user-profile-card (showMypostOnly)="changePostType($event)"></app-user-profile-card>
   </div>
 
   <div class="forum-post-container">
@@ -70,7 +70,7 @@
           </nb-accordion-item-body>
         </nb-accordion-item>
       </nb-accordion>
-      <app-list-forum></app-list-forum>
+      <app-list-forum [showMyPost]="showMyPost"></app-list-forum>
     </div>
   </div>
 

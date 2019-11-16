@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from 'firebase';
 
 @Component({
@@ -11,8 +11,21 @@ export class UserProfileCardComponent implements OnInit {
   userEmail;
   userImg;
 
+  showMyPost;
+
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: User = JSON.parse(localStorage.getItem('userDetails'));
+  @Output() showMypostOnly: EventEmitter<boolean> =   new EventEmitter();
+
+  showMy() {
+    this.showMyPost = true;
+    this.showMypostOnly.emit(this.showMyPost);
+  }
+
+  showAll() {
+    this.showMyPost = false;
+    this.showMypostOnly.emit(this.showMyPost);
+  }
 
   constructor() { }
 
@@ -20,7 +33,6 @@ export class UserProfileCardComponent implements OnInit {
     this.userName = this.user.displayName;
     this.userEmail = this.user.email;
     this.userImg = this.user.photoURL;
-    console.log(this.userName);
   }
 
 }

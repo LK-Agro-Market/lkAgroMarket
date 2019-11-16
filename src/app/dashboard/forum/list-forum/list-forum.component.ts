@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from '../forum.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-list-forum',
@@ -10,9 +11,33 @@ export class ListForumComponent implements OnInit {
   items: any[];
   postUser: any;
 
-  constructor(private forumService: ForumService) {}
+  user: User = JSON.parse(localStorage.getItem('user'));
+
+  @Input() showMyPost;
+  constructor(private forumService: ForumService) { }
 
   ngOnInit() {
+    this.allPosts();
+  }
+
+  ngOnChanges() {
+    if (this.showMyPost) {
+      this.myPost();
+    } else {
+      this.allPosts();
+    }
+  }
+
+  myPost() {
+    this.forumService
+      .getPostByID(this.user.uid)
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
+      });
+  }
+
+  allPosts() {
     this.forumService
       .getPost()
       .pipe()

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
@@ -17,6 +17,7 @@ export class ForumComponent implements OnInit {
 
   showFarmer = true;
   showBuyer = true;
+  showMyPost = false;
 
   get title() {
     return this.discussionForm.get('title');
@@ -38,6 +39,10 @@ export class ForumComponent implements OnInit {
               private toastrService: NbToastrService) {}
 
   ngOnInit() {}
+
+  changePostType(showMyPost: boolean) {
+    this.showMyPost = showMyPost;
+  }
 
   showToast( status ) {
     this.toastrService.show('message', { status } );

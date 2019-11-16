@@ -4,10 +4,11 @@
             <img class="pro-img" src="{{userImg}}" alt="Profile image" />
             <a href="#" class="pro-name"> {{userName}} </a>
             <span class="mb-2 user-level">Administrator</span>
-            <span class="mb-2 user-mail" >{{userEmail}}</span>
-            <span class="mb-2 user-mobile" >+94 77 9232611</span>
+            <span class="mb-2 user-mail">{{userEmail}}</span>
+            <span class="mb-2 user-mobile">+94 77 9232611</span>
         </div>
-        <button nbButton ghost status="success">MY POST</button>
-        <button nbButton ghost status="success">ALL</button>
+        <button class="btn" (click)="showMy()">MY POST </button>
+        <button class="btn active " (click)="showAll()">ALL </button>
     </nb-card>
 </div>
+

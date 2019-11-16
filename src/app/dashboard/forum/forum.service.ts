@@ -85,6 +85,21 @@ export class ForumService {
       );
   }
 
+  getPostByID(userId) {
+    return this.db
+      .collection('forum', ref => ref.where('userID', '==', userId))
+      .snapshotChanges()
+      .pipe(
+        map(postItems =>
+          postItems.map(postItem => {
+            const data = postItem.payload.doc.data();
+            const key = postItem.payload.doc.id;
+            return { key, ...data };
+          })
+        )
+      );
+  }
+
   getComment(postID) {
     return this.db
       .collection('comment', ref => ref.where('id', '==', postID))
