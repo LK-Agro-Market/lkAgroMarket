@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from 'firebase';
 
+
 @Component({
   selector: 'app-user-profile-card',
   templateUrl: './user-profile-card.component.html',
@@ -15,7 +16,7 @@ export class UserProfileCardComponent implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: User = JSON.parse(localStorage.getItem('userDetails'));
-  @Output() showMypostOnly: EventEmitter<boolean> =   new EventEmitter();
+  @Output() showMypostOnly: EventEmitter<boolean> = new EventEmitter();
 
   showMy() {
     this.showMyPost = true;
@@ -34,5 +35,4 @@ export class UserProfileCardComponent implements OnInit {
     this.userEmail = this.user.email;
     this.userImg = this.user.photoURL;
   }
-
 }

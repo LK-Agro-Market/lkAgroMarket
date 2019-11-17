@@ -38,14 +38,17 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    width: 180px;
-    height: 40px;
-    border-color: #EDF1F7;  
-    border-width: 3px;
-    color: #42b883;
-    font-size: 15px;
+    width: 150px;
+    height: 35px;
+    border-color: #7a4579;  
+    border-width: 1.5px;
+    color: #7a4579;
+    font-size: 13px;
 }
-.active, .btn:hover {
-    background-color:#EDF1F7; 
-    color: black;  
-  }
+.btn:focus,
+.btn:active,
+.btn.active {
+    background-color:#7a4579; 
+    color: white;  
+}
+
