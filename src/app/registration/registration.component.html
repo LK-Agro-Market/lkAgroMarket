@@ -19,7 +19,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Farmer"
-                        (change)="show()"
                       />
                       Farmer
                     </div>
@@ -31,7 +30,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Buyer"
-                        (change)="show()"
                       />
                       Buyer
                     </div>
@@ -46,7 +44,6 @@
                         [(ngModel)]="selectedUserType"
                         name="userType"
                         value="Administrator"
-                        (change)="show()"
                       />
                       Administrator
                     </div>
@@ -68,6 +65,7 @@
                       [latitude]="latitude"
                       [longitude]="longitude"
                       [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"
                     ></agm-marker>
                   </agm-map>
                   <button nbButton nbStepperPrevious>prev</button>
@@ -88,6 +86,7 @@
                             type="text"
                             class="form-control"
                             formControlName="nic"
+                            placeholder="ex - 972772530v"
                             [ngClass]="{
                               'is-invalid':
                                 formControls.nic.errors &&
@@ -122,6 +121,7 @@
                             type="text"
                             class="form-control"
                             formControlName="contact"
+                            placeholder="ex - 0779999999"
                             [ngClass]="{
                               'is-invalid':
                                 formControls.contact.errors &&
@@ -147,7 +147,7 @@
 
                       <div
                         class="col-sm-6"
-                        *ngIf="this.selectedUserType == 'farmer'"
+                        *ngIf="selectedUserType == 'Farmer'"
                       >
                         <div class="form-group">
                           <label>District<span class="asterisk">*</span></label>
@@ -187,24 +187,23 @@
                       <div
                         class="col-sm-12"
                         *ngIf="
-                          this.selectedUserType == 'Buyer' ||
-                          this.selectedUserType == 'Farmer'
+                          selectedUserType == 'Buyer' ||
+                          selectedUserType == 'Farmer'
                         "
                       >
                         <div class="form-group">
-                          <label *ngIf="this.selectedUserType == 'Farmer'"
+                          <label *ngIf="selectedUserType == 'Farmer'"
                             >Home/Store Address<span class="asterisk"
                               >*</span
                             ></label
                           >
-                          <label *ngIf="this.selectedUserType == 'Buyer'"
+                          <label *ngIf="selectedUserType == 'Buyer'"
                             >Home Address<span class="asterisk">*</span></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="homeAddress"
-                          />
+                          ></textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="
@@ -219,7 +218,7 @@
 
                       <div
                         class="col-sm-12"
-                        *ngIf="this.selectedUserType == 'Buyer'"
+                        *ngIf="selectedUserType == 'Buyer'"
                       >
                         <div class="form-group">
                           <label
@@ -227,11 +226,11 @@
                               >*</span
                             ></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="businessAddress"
-                          />
+                          >
+                          </textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="
@@ -246,7 +245,7 @@
 
                       <div
                         class="col-sm-6"
-                        *ngIf="this.selectedUserType == 'Administrator'"
+                        *ngIf="selectedUserType == 'Administrator'"
                       >
                         <div class="form-group">
                           <label
@@ -273,7 +272,7 @@
 
                       <div
                         class="col-sm-6"
-                        *ngIf="this.selectedUserType == 'Administrator'"
+                        *ngIf="selectedUserType == 'Administrator'"
                       >
                         <div class="form-group">
                           <label
@@ -298,7 +297,7 @@
 
                       <div
                         class="col-sm-12"
-                        *ngIf="this.selectedUserType == 'administrator'"
+                        *ngIf="selectedUserType == 'Administrator'"
                       >
                         <div class="form-group">
                           <label
@@ -306,11 +305,10 @@
                               >*</span
                             ></label
                           >
-                          <input
-                            type="text"
+                          <textarea
                             class="form-control"
                             formControlName="organizationAddress"
-                          />
+                          ></textarea>
                           <div
                             class="validation-feedback"
                             *ngIf="

@@ -2,11 +2,21 @@
   <nb-layout-header subheader>
     <div class="row header-row">
       <div class="col title">
-        <img class="logo" src="../../../assets/logo.png" />
+        <img class="logo" src="../../../assets/logo2.jpg" />
       </div>
-      <div class="col text-right allign-middle">
+      <div class="col-auto text-right align-middle">
+        <nb-user
+          size="large"
+          [name]="user.displayName"
+          title="Farmer"
+          [picture]="user.photoURL"
+          [routerLink]="['/profile', user.uid]"
+        >
+        </nb-user>
+      </div>
+      <div class="col-auto text-right align-middle">
         <button
-          class="logout"
+          class="logout-btn"
           nbButton
           hero
           status="success"

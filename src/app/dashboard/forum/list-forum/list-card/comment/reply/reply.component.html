@@ -1,0 +1,41 @@
+<div class="reply-card" *ngFor="let reply of replies">
+  <div class="reply">
+    <div class="pro-img-container">
+      <img class="pro-img" src="{{ reply.userImage }}" alt="Profile image" />
+      <div class="pro-header-container">
+        <a href="#" class="pro-name"> {{ reply.userName }} </a>
+        <span class="text-info" id="postDate">
+          <b>Replied on</b>
+          <i> {{ reply.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+        </span>
+        <div class="float-right like-container">
+          <button
+            nbButton
+            ghost
+            status="success"
+            size="medium"
+            class="float-right btn-like"
+          >
+            <nb-icon icon="checkmark"></nb-icon>
+          </button>
+          <p class="count-like">6</p>
+          <button
+            nbButton
+            ghost
+            status="info"
+            size="medium"
+            class="float-right btn-com"
+          >
+            <nb-icon icon="email"></nb-icon>
+          </button>
+          <p class="count-com">9</p>
+        </div>
+      </div>
+    </div>
+    <div class="reply-body">
+      <p class="text-dark">
+        {{ reply.reply }}
+      </p>
+    </div>
+  </div>
+</div>

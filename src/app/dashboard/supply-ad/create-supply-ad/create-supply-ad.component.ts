@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 
 import { SupplyAdService } from '../supply-ad.service';
+import { SupplyAd } from 'src/app/shared/models/supply-ad';
+import { User } from 'src/app/shared/models/user';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -11,6 +15,7 @@ import { SupplyAdService } from '../supply-ad.service';
 })
 export class CreateSupplyAdComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
+  user: User = JSON.parse(localStorage.getItem('user'));
   supplyAdForm: FormGroup;
   attempted = false;
   processing = false;
@@ -54,15 +59,15 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     'Strawberry',
     'Watermelon'
   ];
-  image1LL: String;
-  image2LL: String;
-  image3LL: String;
-  image4LL: String;
 
-  image1URL: String;
-  image2URL: String;
-  image3URL: String;
-  image4URL: String;
+  image1ChangedEvent: any = '';
+  image2ChangedEvent: any = '';
+  image3ChangedEvent: any = '';
+  image4ChangedEvent: any = '';
+  image1LL: string = '';
+  image2LL: string = '';
+  image3LL: string = '';
+  image4LL: string = '';
 
   get formControls() {
     return this.supplyAdForm.controls;
@@ -70,23 +75,24 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private supplyAdService: SupplyAdService
+    private supplyAdService: SupplyAdService,
+    private readonly notifier: NotifierService
   ) {}
 
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
-      type: ['', Validators.required],
-      food: ['', Validators.required],
+      type: ['Vegitable', Validators.required],
+      food: ['Onion', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
-      image1: [null, Validators.required],
-      image2: [null],
-      image3: [null],
-      image4: [null],
+      image1: ['', Validators.required],
+      image2: [''],
+      image3: [''],
+      image4: [''],
       description: ['', Validators.required],
-      organic: [false, Validators.required],
-      expireDate: [new Date(), Validators.required]
+      organic: ['', Validators.required],
+      expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
   }
 
@@ -101,60 +107,52 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     this.supplyAdForm.controls.food.reset();
   }
 
-  img1Preview(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.supplyAdForm.patchValue({
-      image1: file
-    });
-    this.supplyAdForm.get('image1').updateValueAndValidity();
-
+  file1ChangeEvent(event: any): void {
+    this.image1ChangedEvent = event;
+  }
+  image1Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image1: event.file });
     const reader = new FileReader();
     reader.onload = () => {
       this.image1LL = reader.result as string;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(event.file);
   }
 
-  img2Preview(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.supplyAdForm.patchValue({
-      image2: file
-    });
-    this.supplyAdForm.get('image2').updateValueAndValidity();
-
+  file2ChangeEvent(event: any): void {
+    this.image2ChangedEvent = event;
+  }
+  image2Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image2: event.file });
     const reader = new FileReader();
     reader.onload = () => {
       this.image2LL = reader.result as string;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(event.file);
   }
 
-  img3Preview(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.supplyAdForm.patchValue({
-      image3: file
-    });
-    this.supplyAdForm.get('image3').updateValueAndValidity();
-
+  file3ChangeEvent(event: any): void {
+    this.image3ChangedEvent = event;
+  }
+  image3Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image3: event.file });
     const reader = new FileReader();
     reader.onload = () => {
       this.image3LL = reader.result as string;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(event.file);
   }
 
-  img4Preview(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.supplyAdForm.patchValue({
-      image4: file
-    });
-    this.supplyAdForm.get('image4').updateValueAndValidity();
-
+  file4ChangeEvent(event: any): void {
+    this.image4ChangedEvent = event;
+  }
+  image4Cropped(event: ImageCroppedEvent) {
+    this.supplyAdForm.patchValue({ image4: event.file });
     const reader = new FileReader();
     reader.onload = () => {
       this.image4LL = reader.result as string;
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(event.file);
   }
 
   createSupplyAd() {
@@ -164,33 +162,79 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     }
     this.processing = true;
 
+    const adId = this.supplyAdService.getAdId();
+    let uploadTasks = [
+      this.supplyAdService.uploadImg(
+        this.formControls.image1.value,
+        'image1',
+        adId
+      )
+    ];
+    if (this.formControls.image2.value !== '') {
+      uploadTasks.push(
+        this.supplyAdService.uploadImg(
+          this.formControls.image2.value,
+          'image2',
+          adId
+        )
+      );
+    }
+    if (this.formControls.image3.value !== '') {
+      uploadTasks.push(
+        this.supplyAdService.uploadImg(
+          this.formControls.image3.value,
+          'image3',
+          adId
+        )
+      );
+    }
+    if (this.formControls.image4.value !== '') {
+      uploadTasks.push(
+        this.supplyAdService.uploadImg(
+          this.formControls.image4.value,
+          'image4',
+          adId
+        )
+      );
+    }
     this.subscriptions.push(
-      this.supplyAdService
-        .uploadImg(this.formControls.image1.value)
-        .subscribe(url => {
-          this.image1URL = url;
-        })
-    );
-    this.subscriptions.push(
-      this.supplyAdService
-        .uploadImg(this.formControls.image2.value)
-        .subscribe(url => {
-          this.image2URL = url;
-        })
-    );
-    this.subscriptions.push(
-      this.supplyAdService
-        .uploadImg(this.formControls.image3.value)
-        .subscribe(url => {
-          this.image3URL = url;
-        })
-    );
-    this.subscriptions.push(
-      this.supplyAdService
-        .uploadImg(this.formControls.image4.value)
-        .subscribe(url => {
-          this.image4URL = url;
-        })
+      forkJoin(uploadTasks).subscribe(urls => {
+        const supplyAd: SupplyAd = {
+          id: adId,
+          type: this.formControls.type.value,
+          food: this.formControls.food.value,
+          quantity: this.formControls.quantity.value,
+          quantityUnit: this.formControls.quantityUnit.value,
+          pricePerUnit: this.formControls.pricePerUnit.value,
+          images: urls,
+          description: this.formControls.description.value,
+          organic: this.formControls.organic.value,
+          expireDate: this.formControls.expireDate.value,
+          createdAt: new Date(),
+          views: 0,
+          contactClicks: 0,
+          owner: this.user.uid
+        };
+        this.subscriptions.push(
+          this.supplyAdService.createAd(supplyAd).subscribe(() => {
+            this.attempted = false;
+            this.processing = false;
+            this.supplyAdForm.reset();
+            this.image1ChangedEvent = '';
+            this.image2ChangedEvent = '';
+            this.image3ChangedEvent = '';
+            this.image4ChangedEvent = '';
+            this.image1LL = '';
+            this.image2LL = '';
+            this.image3LL = '';
+            this.image4LL = '';
+            this.notifier.notify(
+              'success',
+              'New supply advertisement is created'
+            );
+          })
+        );
+      })
     );
   }
 }
