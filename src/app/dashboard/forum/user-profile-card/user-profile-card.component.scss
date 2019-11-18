@@ -34,21 +34,25 @@
     font-size: 13px;
     color: blueviolet;
 }
-.btn{
+#card-btn{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     width: 150px;
     height: 35px;
+    font-size: 13px;
     border-color: #7a4579;  
     border-width: 1.5px;
+}
+.btn{    
+    background-color: transparent;
     color: #7a4579;
-    font-size: 13px;
 }
-.btn:focus,
-.btn:active,
-.btn.active {
+.btnSelect{
     background-color:#7a4579; 
-    color: white;  
+    color: white;
 }
+
+      
+
 

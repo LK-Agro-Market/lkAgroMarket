@@ -1,6 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { User } from 'firebase';
-
 
 @Component({
   selector: 'app-user-profile-card',
@@ -12,21 +11,12 @@ export class UserProfileCardComponent implements OnInit {
   userEmail;
   userImg;
 
-  showMyPost;
-
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: User = JSON.parse(localStorage.getItem('userDetails'));
+
   @Output() showMypostOnly: EventEmitter<boolean> = new EventEmitter();
-
-  showMy() {
-    this.showMyPost = true;
-    this.showMypostOnly.emit(this.showMyPost);
-  }
-
-  showAll() {
-    this.showMyPost = false;
-    this.showMypostOnly.emit(this.showMyPost);
-  }
+  @ViewChild('my') my;
+  @ViewChild('all') all;
 
   constructor() { }
 
@@ -34,5 +24,25 @@ export class UserProfileCardComponent implements OnInit {
     this.userName = this.user.displayName;
     this.userEmail = this.user.email;
     this.userImg = this.user.photoURL;
+    this.showMy(false);
   }
+
+  showMy(showMyPost) {   // change post view my posts/all posts
+    this.showMypostOnly.emit(showMyPost);
+    if (showMyPost) {
+      this.my.nativeElement.classList.remove('btn');
+      this.my.nativeElement.classList.add('btnSelect');
+      this.all.nativeElement.classList.remove('btnSelect');
+      this.all.nativeElement.classList.add('btn');
+    } else {
+      this.my.nativeElement.classList.remove('btnSelect');
+      this.my.nativeElement.classList.add('btn');
+      this.all.nativeElement.classList.remove('btn');
+      this.all.nativeElement.classList.add('btnSelect');
+    }
+
+  }
+
+
+
 }

@@ -7,7 +7,8 @@
             <span class="mb-2 user-mail">{{userEmail}}</span>
             <span class="mb-2 user-mobile">+94 77 9232611</span>
         </div>
-        <button class="btn" (click)="showMy()">MY POST </button>
-        <button class="active btn" (click)="showAll()">ALL </button>
+        <button (click)="showMy(true)" #my id="card-btn">MY POST </button>
+        <button (click)="showMy(false)" #all id="card-btn">ALL </button>
     </nb-card>
+    
 </div>
