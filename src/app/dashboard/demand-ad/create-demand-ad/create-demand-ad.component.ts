@@ -116,12 +116,5 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
         this.buyerAdform.reset();
         this.attempted = false;
       
-
-      
-      
-      
-      
-      
-      
-    }
+      }
 }

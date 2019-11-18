@@ -31,7 +31,6 @@ getdemandAds(userID):Observable<DemandAd[]>{
   return this.afs.collection("demandAd",ref=>ref.where('owner', '==', userID))
   .valueChanges()
   .pipe(map(res => res as DemandAd[]));
-}
-
+  }
 }
 

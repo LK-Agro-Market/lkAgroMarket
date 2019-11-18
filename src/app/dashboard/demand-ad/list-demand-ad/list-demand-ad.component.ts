@@ -3,6 +3,7 @@ import { DemandAdService } from '../demand-ad.service';
 import { User } from 'src/app/shared/models/user';
 import { DemandAd } from 'src/app/shared/models/demand-ad';
 import { Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -15,12 +16,18 @@ export class ListDemandAdComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   demandAdList: DemandAd[];
 
-  constructor(private demandAdsevice: DemandAdService) { }
+  constructor(private demandAdsevice: DemandAdService,
+    private afs : AngularFirestore) { }
 
   ngOnInit() {
     this.demandAdsevice.getdemandAds(this.user.uid).subscribe(res=>{
       this.demandAdList = res;
     })
   }
+  deleteAd(id:string){
+    if(confirm("Are you sure to delete this AD?")){
+    this.afs.doc('demandAd/'+ id).delete()
 
+  }
+ }
 }
