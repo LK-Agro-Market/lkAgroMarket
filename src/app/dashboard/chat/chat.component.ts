@@ -39,7 +39,7 @@ export class ChatComponent {
   messages: Observable<any[]>;
   replies: Observable<any[]>;
   content: string;
- file: Observable<any>;
+  file: Observable<any>;
   isHovering: boolean;
   /////
   constructor(
@@ -57,7 +57,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  }
+  };
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
