@@ -16,6 +16,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import { finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -40,6 +41,7 @@ export class ChatComponent {
   content: string;
   file: Observable<any>;
   isHovering: boolean;
+  /////
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
