@@ -31,7 +31,12 @@ import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent, ChatComponent],
+  declarations: [
+    LayoutComponent,
+    SupplyAdComponent,
+    CreateSupplyAdComponent,
+    ChatComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,

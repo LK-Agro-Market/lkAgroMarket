@@ -28,8 +28,7 @@
         [message]="msg.content"
         [date]="msg.time"
         [avatar]="msg.avatar"
-       [reply]="msg.reply"
-       [files]="[ { url: 'msg.url', type: 'image/jpeg' } ]"
+        [reply]="msg.reply"
       >
       </nb-chat-message>
       <!-- <nb-chat-message
@@ -48,7 +47,11 @@
 
     <nb-card>
       <nb-card-body>
-          <input type="file" (change)="uploadFile($event)" accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif" />
+        <input
+          type="file"
+          (change)="uploadFile($event)"
+          accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif"
+        />
       </nb-card-body>
     </nb-card>
   </nb-layout-column>
