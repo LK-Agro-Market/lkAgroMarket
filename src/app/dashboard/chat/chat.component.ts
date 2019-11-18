@@ -42,15 +42,6 @@ export class ChatComponent {
  file: Observable<any>;
   isHovering: boolean;
   /////
-  uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
-  task: AngularFireUploadTask;
-  percentage: Observable<number>;
-  snapshot: Observable<any>;
-  ref: AngularFireStorageReference;
-  // file: any;
- // url = '';
-  // files: Observable<any>;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -66,7 +57,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  };
+  }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
@@ -124,41 +115,5 @@ export class ChatComponent {
       rid: this.selectedId,
       reply: true
     });
-  }
-  uploadFile(event) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const file = event.target.files[0];
-    const filePath = 'test/';
-    const fileRef = this.afStorage.ref(filePath);
-    const task = this.afStorage.upload(filePath, file);
-    this.ref = this.afStorage.ref(filePath);
-
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(async () => {
-          this.downloadURL = await this.ref.getDownloadURL().toPromise();
-          this.afs.collection('chats').add({
-            // downloadURL: this.downloadURL,
-            content: '',
-            avatar: user.photoURL,
-            // path ,
-            type: 'file',
-            time: Date.now(),
-            date: new Date(),
-            sender: user.displayName,
-            // reciever: this.selectedUser,
-            sid: user.uid,
-            // rid: this.selectedId,
-            reply: true,
-            files: { url: this.downloadURL }
-            // url: this.downloadURL
-          });
-        })
-      )
-      .subscribe();
   }
 }

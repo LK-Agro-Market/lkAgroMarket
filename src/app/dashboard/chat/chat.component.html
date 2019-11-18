@@ -31,27 +31,13 @@
         [reply]="msg.reply"
       >
       </nb-chat-message>
-      <!-- <nb-chat-message
-       
-      message="Image message"
-      type="file"
-      sender="John Doe"
-      [reply]="true"
-      [date]="date"
-      [files]="[ { url: 'https://firebasestorage.googleapis.com/v0/b/lk-agro-market.appspot.com/o/test?alt=media&token=1479880b-7152-4bf1-8995-0870e95da820', type: 'image/jpeg' } ]"
-      >
-      </nb-chat-message> -->
       <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
       </nb-chat-form>
     </nb-chat>
 
     <nb-card>
       <nb-card-body>
-        <input
-          type="file"
-          (change)="uploadFile($event)"
-          accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif"
-        />
+       
       </nb-card-body>
     </nb-card>
   </nb-layout-column>
