@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
-import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-forum',
@@ -36,8 +35,7 @@ export class ForumComponent implements OnInit {
   }
 
   constructor(
-    private forumService: ForumService,
-    private toastrService: NbToastrService
+    private forumService: ForumService
   ) {}
 
   ngOnInit() {}
@@ -46,9 +44,9 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-  showToast(status) {
-    this.toastrService.show('message', { status });
-  }
+//   showToast(status) {
+// //
+//   }
 
   onCreate() {
     const title = this.discussionForm.controls.title.value as string;
@@ -72,12 +70,12 @@ export class ForumComponent implements OnInit {
           showFarmer,
           showBuyer
         );
-        this.showToast('success');
+        // this.showToast('success');
         this.title.setValue('');
         this.des.setValue('');
         this.toggle();
       } else {
-        this.showToast('danger');
+        // this.showToast('danger');
       }
     } else {
     }

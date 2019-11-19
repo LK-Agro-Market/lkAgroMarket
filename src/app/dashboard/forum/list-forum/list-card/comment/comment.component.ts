@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'firebase';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../../forum.service';
-import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-comment',
@@ -26,17 +25,16 @@ export class CommentComponent implements OnInit {
   formControls = this.replyForm.controls;
 
   constructor(
-    private forumService: ForumService,
-    private toastrService: NbToastrService
+    private forumService: ForumService
   ) {}
 
   ngOnInit() {
     this.commentId = this.comment.key;
   }
 
-  showToast(status) {
-    this.toastrService.show('message', { status });
-  }
+  // showToast(status) {
+  //   // this.toastrService.show('message', { status });
+  // }
 
   onCreate() {
     const rply = this.replyForm.controls.reply.value as string;
@@ -57,9 +55,9 @@ export class CommentComponent implements OnInit {
         userImage
       );
       this.rply.setValue('');
-      this.showToast('success');
+      // this.showToast('success');
     } else {
-      this.showToast('danger');
+      // this.showToast('danger');
     }
   }
 }

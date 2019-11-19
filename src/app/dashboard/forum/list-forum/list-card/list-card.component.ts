@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
-import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-list-card',
@@ -35,8 +34,7 @@ export class ListCardComponent implements OnInit {
   }
 
   constructor(
-    private forumService: ForumService,
-    private toastrService: NbToastrService
+    private forumService: ForumService
   ) {}
 
   ngOnInit() {
@@ -48,9 +46,9 @@ export class ListCardComponent implements OnInit {
       });
   }
 
-  showToast(status) {
-    this.toastrService.show('message', { status });
-  }
+  // showToast(status) {
+  //   // this.toastrService.show('message', { status });
+  // }
 
   onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
@@ -70,9 +68,9 @@ export class ListCardComponent implements OnInit {
         userImage
       );
       this.comm.setValue('');
-      this.showToast('success');
+      // this.showToast('success');
     } else {
-      this.showToast('danger');
+      // this.showToast('danger');
     }
   }
 }
