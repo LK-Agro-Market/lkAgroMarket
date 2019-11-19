@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileOwnerId: string = '';
   profileOwnerUser: User;
   selectedUserType: string = '';
+  numOfFollowers: number = 0;
 
   userDetailsForm: FormGroup;
   latitude: number;
@@ -66,6 +67,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .getProfileOwner(this.profileOwnerId)
           .subscribe(user => {
             this.profileOwnerUser = user;
+            this.subscriptions.push(
+              this.profileService
+                .getFollowers(this.profileOwnerUser)
+                .subscribe(followers => {
+                  this.numOfFollowers = followers.length;
+                })
+            );
           });
         this.profileService
           .getProfileOwnerUserDetails(this.profileOwnerId)
@@ -150,5 +158,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.notifier.notify('success', 'Updated your profile info');
         })
     );
+  }
+
+  followUser() {
+    this.profileService.followUser(this.profileOwnerUser, this.viewer.uid);
   }
 }
