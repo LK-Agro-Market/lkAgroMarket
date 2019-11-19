@@ -13,9 +13,11 @@ import {
   NbButtonModule,
   NbCardModule,
   NbMenuModule,
-  NbActionsModule
+  NbActionsModule,
+  NbToastrModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,8 +35,48 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
-
 import { ToastrModule } from 'ngx-toastr';
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 3000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 @NgModule({
   declarations: [
@@ -63,7 +105,8 @@ import { ToastrModule } from 'ngx-toastr';
     NbEvaIconsModule,
     NbMenuModule.forRoot(),
     NbActionsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [
     AuthGuard,

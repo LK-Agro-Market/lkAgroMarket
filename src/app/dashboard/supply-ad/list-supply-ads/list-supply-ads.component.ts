@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SupplyAdService } from '../supply-ad.service';
 import { Subscription } from 'rxjs';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
@@ -9,7 +9,7 @@ import { User } from 'src/app/shared/models/user';
   templateUrl: './list-supply-ads.component.html',
   styleUrls: ['./list-supply-ads.component.scss']
 })
-export class ListSupplyAdsComponent implements OnInit {
+export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
   supplyAdList: SupplyAd[];
@@ -17,8 +17,16 @@ export class ListSupplyAdsComponent implements OnInit {
   constructor(private supplyAdService: SupplyAdService) {}
 
   ngOnInit() {
-    this.supplyAdService.getAds(this.user.uid).subscribe(res => {
-      this.supplyAdList = res;
-    });
+    this.subscriptions.push(
+      this.supplyAdService.getAds(this.user.uid).subscribe(res => {
+        this.supplyAdList = res;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 }
