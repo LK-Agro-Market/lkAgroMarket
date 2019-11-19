@@ -8,9 +8,8 @@ describe('CreateDemandAdComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateDemandAdComponent ]
-    })
-    .compileComponents();
+      declarations: [CreateDemandAdComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
