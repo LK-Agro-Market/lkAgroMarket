@@ -8,6 +8,8 @@ import { ForumService } from '../forum.service';
 })
 export class ListForumComponent implements OnInit {
   items: any[];
+  postUser: any;
+
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {

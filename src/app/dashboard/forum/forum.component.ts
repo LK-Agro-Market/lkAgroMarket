@@ -45,6 +45,7 @@ export class ForumComponent implements OnInit {
     const dateTime = new Date();
     const userId = this.user.uid;
     const userName = this.user.displayName;
+    const userImage = this.user.photoURL;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
 
@@ -56,6 +57,7 @@ export class ForumComponent implements OnInit {
           dateTime,
           userId,
           userName,
+          userImage,
           showFarmer,
           showBuyer
         );
