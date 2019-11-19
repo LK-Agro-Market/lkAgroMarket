@@ -1,0 +1,45 @@
+<nb-card accent="success">
+  <nb-card-header>
+    <div class="card-header-content">
+      <span class="text-left">
+        Your Current Advertisments
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let property of demandAdList">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ property.food }}
+                <span class="food-type">- {{ property.foodtype }}</span>
+              </h5>
+              <p class="card-text">{{ property.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Quantity - {{ property.expectedamount }}
+              </li>
+              <li class="list-group-item">
+                Price per unit - Rs. {{ property.priceperunit }}
+              </li>
+              <li class="list-group-item">
+                Deadline - {{ property.deadline }}
+              </li>
+            </ul>
+            <div class="card-body">
+              <button class="btn btn-primary" (click)="editAd(property)">
+                Update
+              </button>
+              <button class="btn btn-danger" (click)="deleteAd(property.id)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

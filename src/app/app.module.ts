@@ -13,6 +13,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbMenuModule,
+  NbActionsModule,
   NbToastrModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -34,6 +35,7 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
+import { ToastrModule } from 'ngx-toastr';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -102,6 +104,8 @@ const customNotifierOptions: NotifierOptions = {
     NbCardModule,
     NbEvaIconsModule,
     NbMenuModule.forRoot(),
+    NbActionsModule,
+    ToastrModule.forRoot(),
     NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [
