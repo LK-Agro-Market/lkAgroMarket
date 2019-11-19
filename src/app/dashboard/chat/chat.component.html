@@ -24,7 +24,7 @@
     <nb-chat size="large">
       <nb-chat-message
         *ngFor="let msg of messages | async"
-        [type]="msg.text"
+        type="msg.type"
         [message]="msg.content"
         [date]="msg.time"
         [avatar]="msg.avatar"
