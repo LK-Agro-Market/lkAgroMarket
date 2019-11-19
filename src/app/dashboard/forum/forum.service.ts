@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireList } from '@angular/fire/database';
+import { AngularFireList, snapshotChanges } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 @Injectable({

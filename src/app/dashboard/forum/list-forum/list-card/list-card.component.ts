@@ -34,8 +34,10 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService,
-              private toastrService: NbToastrService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit() {
     this.forumService
@@ -46,8 +48,8 @@ export class ListCardComponent implements OnInit {
       });
   }
 
-  showToast( status ) {
-    this.toastrService.show('message', { status } );
+  showToast(status) {
+    this.toastrService.show('message', { status });
   }
 
   onCreate() {

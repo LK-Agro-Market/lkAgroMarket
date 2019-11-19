@@ -55,7 +55,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  }
+  };
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;

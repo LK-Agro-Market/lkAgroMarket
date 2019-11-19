@@ -35,8 +35,10 @@ export class ForumComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService,
-              private toastrService: NbToastrService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit() {}
 
@@ -44,8 +46,8 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-  showToast( status ) {
-    this.toastrService.show('message', { status } );
+  showToast(status) {
+    this.toastrService.show('message', { status });
   }
 
   onCreate() {
@@ -80,5 +82,4 @@ export class ForumComponent implements OnInit {
     } else {
     }
   }
-
 }

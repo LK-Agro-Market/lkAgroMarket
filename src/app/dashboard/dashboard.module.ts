@@ -87,7 +87,7 @@ import { UserProfileCardComponent } from './forum/user-profile-card/user-profile
     NbAlertModule,
     NbBadgeModule,
     NbCheckboxModule,
-    NbMenuModule,
+    NbMenuModule
   ],
   providers: []
 })

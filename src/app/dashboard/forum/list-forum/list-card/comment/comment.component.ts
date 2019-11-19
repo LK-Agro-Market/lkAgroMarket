@@ -25,15 +25,17 @@ export class CommentComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
-  constructor(private forumService: ForumService,
-              private toastrService: NbToastrService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit() {
     this.commentId = this.comment.key;
   }
 
-  showToast( status ) {
-    this.toastrService.show('message', { status } );
+  showToast(status) {
+    this.toastrService.show('message', { status });
   }
 
   onCreate() {
@@ -60,5 +62,4 @@ export class CommentComponent implements OnInit {
       this.showToast('danger');
     }
   }
-
 }

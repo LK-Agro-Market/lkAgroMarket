@@ -14,10 +14,11 @@ export class ListForumComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
 
   @Input() showMyPost;
-  constructor(private forumService: ForumService) { }
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {
     this.allPosts();
+    this.forumService.getSomething();
   }
 
   ngOnChanges() {
