@@ -18,7 +18,7 @@ export class ListForumComponent implements OnInit {
 
   ngOnInit() {
     this.allPosts();
-    // this.forumService.getSomething();
+    this.forumService.getCount('forum');
   }
 
   ngOnChanges() {

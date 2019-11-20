@@ -129,4 +129,10 @@ export class ForumService {
         )
       );
   }
+
+  getCount(collectionName) {
+    this.db.collection(collectionName).get().subscribe(doc => {
+      console.log(doc.size);
+      });
+  }
 }
