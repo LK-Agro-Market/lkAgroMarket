@@ -3,14 +3,21 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .main-container {
+  margin-top: -3%;
   display: flex;
   flex-direction: row;
 }
 .forum-post-container {
-  margin-top: 5px;
+  margin-top: 50px;
   margin-left: 75px;
+  display: flex;
+  flex-direction: column;
+}
+.add-post-container{
+  position: relative;
 }
 .list-container {
+  margin-top: -5%;
   width: 800px;
 }
 #add-btn {
@@ -18,11 +25,6 @@
   height: 40px;
   margin-top: 50px;
   margin-left: 75px;
-}
-#titelError {
-  margin-top: 10px;
-  margin-left: 20px;
-  color: red;
 }
 .validation-feedback {
   color: red;
