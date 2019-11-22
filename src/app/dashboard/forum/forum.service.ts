@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireList } from '@angular/fire/database';
+import { AngularFireList, snapshotChanges } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -85,6 +85,21 @@ export class ForumService {
       );
   }
 
+  getPostByID(userId) {
+    return this.db
+      .collection('forum', ref => ref.where('userID', '==', userId))
+      .snapshotChanges()
+      .pipe(
+        map(postItems =>
+          postItems.map(postItem => {
+            const data = postItem.payload.doc.data();
+            const key = postItem.payload.doc.id;
+            return { key, ...data };
+          })
+        )
+      );
+  }
+
   getComment(postID) {
     return this.db
       .collection('comment', ref => ref.where('id', '==', postID))
@@ -113,5 +128,11 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getCount(collectionName) {
+    this.db.collection(collectionName).get().subscribe(doc => {
+      console.log(doc.size);
+      });
   }
 }

@@ -33,7 +33,9 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService
+  ) {}
 
   ngOnInit() {
     this.forumService
@@ -43,6 +45,10 @@ export class ListCardComponent implements OnInit {
         this.comments = comments;
       });
   }
+
+  // showToast(status) {
+  //   // this.toastrService.show('message', { status });
+  // }
 
   onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
@@ -62,9 +68,9 @@ export class ListCardComponent implements OnInit {
         userImage
       );
       this.comm.setValue('');
+      // this.showToast('success');
     } else {
-      // this.msgStatus.emit('error');
-      // this.msg.emit('Please enter comment to reply');
+      // this.showToast('danger');
     }
   }
 }

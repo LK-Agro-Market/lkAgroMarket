@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
@@ -14,10 +14,9 @@ export class ForumComponent implements OnInit {
     des: new FormControl('')
   });
 
-  showMsg = '';
-  massage = '';
   showFarmer = true;
   showBuyer = true;
+  showMyPost = false;
 
   get title() {
     return this.discussionForm.get('title');
@@ -35,9 +34,19 @@ export class ForumComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService
+  ) {}
 
   ngOnInit() {}
+
+  changePostType(showMyPost: boolean) {
+    this.showMyPost = showMyPost;
+  }
+
+//   showToast(status) {
+// //
+//   }
 
   onCreate() {
     const title = this.discussionForm.controls.title.value as string;
@@ -61,23 +70,14 @@ export class ForumComponent implements OnInit {
           showFarmer,
           showBuyer
         );
-        this.toggle();
+        // this.showToast('success');
         this.title.setValue('');
         this.des.setValue('');
-        this.showNotification(
-          'success',
-          'You have been successfully submitted!'
-        );
+        this.toggle();
       } else {
-        this.showNotification('error', 'please chose category');
+        // this.showToast('danger');
       }
     } else {
-      this.showNotification('error', 'title is required');
     }
-  }
-
-  showNotification(msgStatus: string, msg: string) {
-    this.showMsg = msgStatus;
-    this.massage = msg;
   }
 }
