@@ -7,12 +7,6 @@
       <!-- <div>
         <input #keywordInput id="keyword-search-input" nbInput type="text" placeholder="Keyword Search"
           (input)="onNewKeyword(keywordInput.value)" maxlength="32" />
-        <nb-select placeholder="Order By" (selectedChange)="onNewSortKey($event)">
-          <nb-option value="displayName">Name</nb-option>
-          <nb-option value="email">Email</nb-option>
-          <nb-option value="role">Role</nb-option>
-          <nb-option value="entity">Entity</nb-option>
-        </nb-select>
       </div> -->
     </div>
   </nb-card-header>
@@ -22,6 +16,12 @@
         <div class="col-sm-4" *ngFor="let supplyAd of supplyAdList">
           <div class="card">
             <img [src]="supplyAd.images[0]" class="card-img-top" />
+            <nb-badge
+              text="Organic"
+              status="success"
+              position="top right"
+              *ngIf="supplyAd.organic == 'Organic'"
+            ></nb-badge>
             <div class="card-body">
               <h5 class="card-title">
                 {{ supplyAd.food }}
@@ -41,6 +41,7 @@
               </li>
             </ul>
             <div class="card-body">
+              <button class="btn btn-success">Mark As Sold</button>
               <button class="btn btn-primary">Update</button>
               <button href="#" class="btn btn-danger">Delete</button>
             </div>

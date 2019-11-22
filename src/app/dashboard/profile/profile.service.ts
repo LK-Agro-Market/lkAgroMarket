@@ -34,4 +34,24 @@ export class ProfileService {
     const userRef = this.afs.collection('userDetails').doc(ownerId);
     return from(userRef.update(userDetails));
   }
+
+  followUser(profileOwnerUser: User, viewerId: string): Observable<void> {
+    const followerRef = this.afs
+      .collection('followers')
+      .doc(viewerId + profileOwnerUser.uid);
+    return from(
+      followerRef.set({
+        follower: viewerId,
+        following: profileOwnerUser
+      })
+    );
+  }
+
+  getFollowers(profileOwnerUser: User) {
+    return this.afs
+      .collection('followers', ref =>
+        ref.where('following', '==', profileOwnerUser)
+      )
+      .valueChanges();
+  }
 }

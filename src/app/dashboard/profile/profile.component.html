@@ -9,10 +9,26 @@
             <span class="user-level">- {{ selectedUserType }}</span>
           </h5>
           <p class="card-text">{{ profileOwnerUser.email }}</p>
+          <p class="card-text">Followers - {{ numOfFollowers }}</p>
         </div>
         <div class="card-body">
-          <button class="btn btn-primary">Contact</button>
-          <button href="#" class="btn btn-danger">Delete</button>
+          <button
+            class="btn btn-success"
+            *ngIf="profileOwnerId != viewer.uid"
+            (click)="followUser()"
+          >
+            Follow
+          </button>
+          <button class="btn btn-info" *ngIf="profileOwnerId != viewer.uid">
+            Chat
+          </button>
+          <button
+            href="#"
+            class="btn btn-danger"
+            *ngIf="profileOwnerId == viewer.uid"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
