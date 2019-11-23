@@ -12,23 +12,24 @@
   flex-direction: row;
 }
 .header{
-  margin-top: 8px;
-  height: 80px;
   display: flex;
   flex-direction: row;
 }
-.forum-container {
+.list-container{
   width: 800px;
-  margin-top: 10px;
   margin-left: 75px;
   display: flex;
   flex-direction: column;
 }
-
+.form-container {
+  margin-top: -3%;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+}
 #add-btn {
   width: 120px;
   height: 40px;
-  margin-top: 20px;
   margin-left: auto;
 }
 .validation-feedback {
@@ -45,6 +46,6 @@
 }
 .side-bar-continer{
   width: 500px;
-  margin-top: 10px;
+  margin-top: -0.75%;
   margin-left: 30px;
 }
