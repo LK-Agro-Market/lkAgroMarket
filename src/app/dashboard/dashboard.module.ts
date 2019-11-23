@@ -18,16 +18,12 @@ import {
   NbSelectModule,
   NbInputModule,
   NbAccordionModule,
-<<<<<<< HEAD
-  NbUserModule
-=======
   NbUserModule,
   NbAlertModule,
   NbBadgeModule,
   NbCheckboxModule,
   NbMenuModule,
   NbListModule
->>>>>>> 38dc43d322b763c1df4f429499fb7ae4166ca7fe
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -97,10 +93,7 @@ import { UserProfileCardComponent } from './forum/user-profile-card/user-profile
     NbSelectModule,
     NbInputModule,
     NbAccordionModule,
-<<<<<<< HEAD
-    NbUserModule
-  ]
-=======
+    NbUserModule,
     NbAlertModule,
     NbBadgeModule,
     NbCheckboxModule,
@@ -109,6 +102,5 @@ import { UserProfileCardComponent } from './forum/user-profile-card/user-profile
     AgmCoreModule.forRoot(environment.googleMap)
   ],
   providers: []
->>>>>>> 38dc43d322b763c1df4f429499fb7ae4166ca7fe
 })
 export class DashboardModule {}
