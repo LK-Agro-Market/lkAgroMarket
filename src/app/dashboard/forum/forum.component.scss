@@ -3,26 +3,34 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .main-container {
+  margin-top: -3%;
+  display: flex;
+  flex-direction: column;
+}
+.body-container{
   display: flex;
   flex-direction: row;
 }
-.forum-post-container {
-  margin-top: 5px;
-  margin-left: 75px;
+.header{
+  display: flex;
+  flex-direction: row;
 }
-.list-container {
+.list-container{
   width: 800px;
+  margin-left: 75px;
+  display: flex;
+  flex-direction: column;
+}
+.form-container {
+  margin-top: -3%;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
 }
 #add-btn {
   width: 120px;
   height: 40px;
-  margin-top: 50px;
-  margin-left: 75px;
-}
-#titelError {
-  margin-top: 10px;
-  margin-left: 20px;
-  color: red;
+  margin-left: auto;
 }
 .validation-feedback {
   color: red;
@@ -35,4 +43,9 @@
   margin-left: 5px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
+}
+.side-bar-continer{
+  width: 500px;
+  margin-top: -0.75%;
+  margin-left: 30px;
 }
