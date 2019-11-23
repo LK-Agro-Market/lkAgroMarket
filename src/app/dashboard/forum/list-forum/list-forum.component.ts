@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from '../forum.service';
-import { first } from 'rxjs/operators';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-list-forum',
@@ -10,16 +9,41 @@ import { first } from 'rxjs/operators';
 })
 export class ListForumComponent implements OnInit {
   items: any[];
+  postUser: any;
 
+  user: User = JSON.parse(localStorage.getItem('user'));
+
+  @Input() showMyPost;
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
+    this.allPosts();
+    this.forumService.getCount('forum');
+  }
+
+  ngOnChanges() {
+    if (this.showMyPost) {
+      this.myPost();
+    } else {
+      this.allPosts();
+    }
+  }
+
+  myPost() {
     this.forumService
-      .getAll()
+      .getPostByID(this.user.uid)
       .pipe()
       .subscribe(items => {
         this.items = items;
-        console.log(items);
+      });
+  }
+
+  allPosts() {
+    this.forumService
+      .getPost()
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
       });
   }
 }

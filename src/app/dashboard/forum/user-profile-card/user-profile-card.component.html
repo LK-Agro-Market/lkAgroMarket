@@ -1,0 +1,13 @@
+<div class="user-container">
+  <nb-card size="medium">
+    <div class="pro-container">
+      <img class="pro-img" src="{{ userImg }}" alt="Profile image" />
+      <a href="#" class="pro-name"> {{ userName }} </a>
+      <span class="mb-2 user-level">Administrator</span>
+      <span class="mb-2 user-mail">{{ userEmail }}</span>
+      <span class="mb-2 user-mobile">+94 77 9232611</span>
+    </div>
+    <button (click)="showMy(true)" #my id="card-btn">My Posts</button>
+    <button (click)="showMy(false)" #all id="card-btn">Public</button>
+  </nb-card>
+</div>

@@ -23,7 +23,7 @@ export class SupplyAdService {
     return this.afs.createId();
   }
 
-  uploadImg(image: File, name: string, adId: string): Observable<string> {
+  uploadImg(image: string, name: string, adId: string): Observable<string> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     const filePath = user.uid + '/ads/' + adId + '/' + name;
     const fileRef = this.afStorage.ref(filePath);
@@ -39,5 +39,12 @@ export class SupplyAdService {
       SupplyAd
     > = this.afs.collection('supplyAd');
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
+  }
+
+  getAds(userId): Observable<SupplyAd[]> {
+    return this.afs
+      .collection('supplyAd', ref => ref.where('owner', '==', userId))
+      .valueChanges()
+      .pipe(map(res => res as SupplyAd[]));
   }
 }

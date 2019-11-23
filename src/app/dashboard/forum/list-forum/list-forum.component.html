@@ -1,28 +1,3 @@
-<div
-  *ngFor="let item of items"
-  class="bg-white card mb-4 order-list shadow p-3 mb-5 bg-white rounded"
->
-  <div class="gold-members p-4">
-    <div class="media">
-      <div class="pro-img-container">
-        <img class="pro-img" src="assets/icon1.jpg" alt="Profile image" />
-        <a href="#" class="pro-name">{{ item.userName }}</a>
-      </div>
-      <div class="media-body">
-        <span class="float-right text-info" id="postDate"
-          ><b>Posted on </b>
-          <i>{{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }}</i></span
-        >
-        <span id="postTitle">{{ item.title }}</span>
-        <br />
-        <p class="text-dark" id="postDesc">{{ item.description }}</p>
-        <hr />
-        <div class="float-right">
-          <button nbButton status="primary" size="small" class="comment-btn">
-            Comment
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="sec" *ngFor="let item of items">
+  <app-list-card [item]="item"></app-list-card>
 </div>

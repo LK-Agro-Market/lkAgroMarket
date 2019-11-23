@@ -1,11 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
 
 @Component({
@@ -16,9 +11,12 @@ import { ForumService } from './forum.service';
 export class ForumComponent implements OnInit {
   discussionForm = new FormGroup({
     title: new FormControl('', Validators.required),
-    des: new FormControl(''),
-    dateTime: new FormControl('')
+    des: new FormControl('')
   });
+
+  showFarmer = true;
+  showBuyer = true;
+  showMyPost = false;
 
   get title() {
     return this.discussionForm.get('title');
@@ -36,30 +34,50 @@ export class ForumComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService
+  ) {}
 
   ngOnInit() {}
 
-  success() {
-    this.alertService.success('Successfully submitted...');
+  changePostType(showMyPost: boolean) {
+    this.showMyPost = showMyPost;
   }
-  onSubmit() {
-    if (this.formControls.title.errors) {
-      return false;
-    }
+
+//   showToast(status) {
+// //
+//   }
+
+  onCreate() {
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
     const userId = this.user.uid;
     const userName = this.user.displayName;
+    const userImage = this.user.photoURL;
+    const showFarmer = this.showFarmer;
+    const showBuyer = this.showBuyer;
 
-    if (this.title != null) {
-      this.forumService.createPost(title, des, dateTime, userId, userName);
-      this.title.setValue('');
-      this.des.setValue('');
-      this.toggle();
+    if (this.discussionForm.valid) {
+      if (this.showFarmer === true || this.showBuyer === true) {
+        this.forumService.createPost(
+          title,
+          des,
+          dateTime,
+          userId,
+          userName,
+          userImage,
+          showFarmer,
+          showBuyer
+        );
+        // this.showToast('success');
+        this.title.setValue('');
+        this.des.setValue('');
+        this.toggle();
+      } else {
+        // this.showToast('danger');
+      }
     } else {
-      // asdnasjd
     }
   }
 }
