@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from 'src/app/dashboard/forum/forum.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-reply',
@@ -7,18 +8,20 @@ import { ForumService } from 'src/app/dashboard/forum/forum.service';
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
-  replies: any;
+  showBtn;
 
   constructor(private forumService: ForumService) {}
 
-  @Input() commentId: any;
+  @Input() reply: any;
+
+  user: User = JSON.parse(localStorage.getItem('user'));
 
   ngOnInit() {
-    this.forumService
-      .getReply(this.commentId)
-      .pipe()
-      .subscribe(replies => {
-        this.replies = replies;
-      });
+
+    if (this.reply.userID === this.user.uid) {
+      this.showBtn = true;
+    } else {
+      this.showBtn = false;
+    }
   }
 }

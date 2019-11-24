@@ -12,8 +12,9 @@ export class CommentComponent implements OnInit {
   replyForm = new FormGroup({
     reply: new FormControl('', Validators.required)
   });
-
-  commentId;
+  replies: any[];
+  showBtn;
+  isEnd;
 
   get rply() {
     return this.replyForm.get('reply');
@@ -26,10 +27,28 @@ export class CommentComponent implements OnInit {
 
   constructor(
     private forumService: ForumService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.commentId = this.comment.key;
+    this.isEnd = this.comment.endThread;
+    if (this.isEnd) {
+      this.replyForm.get('reply').disable();
+    }
+    // show edit and end button
+    if (this.comment.userID === this.user.uid) {
+      this.showBtn = true;
+    } else {
+      this.showBtn = false;
+    }
+
+    // load replies
+    this.forumService
+      .getReply(this.comment.key)
+      .pipe()
+      .subscribe(replies => {
+        this.replies = replies;
+        console.log(this.replies);
+      });
   }
 
   // showToast(status) {
@@ -44,7 +63,6 @@ export class CommentComponent implements OnInit {
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 
-    console.log(this.comment.key);
     if (this.replyForm.valid) {
       this.forumService.createReply(
         rply,

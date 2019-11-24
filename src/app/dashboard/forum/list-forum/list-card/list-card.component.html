@@ -36,8 +36,11 @@
                 <button nbButton *ngIf="true" status="primary" size="small" class="edit-btn" [hidden]="!showBtn">
                   Edit
                 </button>
-                <button *ngIf="true" nbButton status="danger" size="small" class="end-btn" [hidden]="!showBtn">
+                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn">
                   End
+                </button>
+                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn">
+                  Delete
                 </button>
               </div>
             </div>
@@ -50,9 +53,9 @@
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
             <textarea class="form-control" formControlName="comment" nbInput fullWidth
-              placeholder="Join the discussion..." status="primary" required style="height: 40px;">
+              placeholder="Join the discussion..." status="primary" required style="height: 40px;" [disabled]="isEnd">
             </textarea>
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small">
+            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small" [disabled]="isEnd" >
               Comment
             </button>
           </div>

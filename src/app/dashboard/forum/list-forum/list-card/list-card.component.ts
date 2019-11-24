@@ -9,28 +9,27 @@ import { ForumService } from '../../forum.service';
   styleUrls: ['./list-card.component.scss']
 })
 export class ListCardComponent implements OnInit {
-  commentForm = new FormGroup({
-    comment: new FormControl('', Validators.required)
-  });
+
+  @Input() item: any;
+  @ViewChild('item', { static: false }) accordion;
 
   viewButton = true;
   comments: any[];
   cmntId: any;
   userImageURL;
-  currentUser;
-  postUser;
   showBtn;
+  isEnd;
+
+  commentForm = new FormGroup({
+    comment: new FormControl('', Validators.required)
+  });
 
   get comm() {
     return this.commentForm.get('comment');
   }
 
-  @Input() item: any;
-
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
-
-  @ViewChild('item', { static: false }) accordion;
 
   toggleMain() {
     this.accordion.toggle();
@@ -41,12 +40,19 @@ export class ListCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isEnd = this.item.endThread;
+    if (this.isEnd) {
+      this.commentForm.get('comment').disable();
+    }
+
+    // show edit and end button
     if (this.item.userID === this.user.uid) {
       this.showBtn = true;
     } else {
       this.showBtn = false;
     }
-    console.log(this.showBtn);
+
+    // load comments
     this.forumService
       .getComment(this.item.key)
       .pipe()
@@ -55,9 +61,6 @@ export class ListCardComponent implements OnInit {
       });
   }
 
-  // showToast(status) {
-  //   // this.toastrService.show('message', { status });
-  // }
 
   onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
@@ -74,7 +77,8 @@ export class ListCardComponent implements OnInit {
         postID,
         userId,
         userName,
-        userImage
+        userImage,
+        false,
       );
       this.comm.setValue('');
       // this.showToast('success');

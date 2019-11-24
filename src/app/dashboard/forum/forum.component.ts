@@ -68,7 +68,8 @@ export class ForumComponent implements OnInit {
           userName,
           userImage,
           showFarmer,
-          showBuyer
+          showBuyer,
+          false,
         );
         // this.showToast('success');
         this.title.setValue('');

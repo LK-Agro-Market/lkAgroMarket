@@ -13,24 +13,26 @@ export class ForumService {
   constructor(private db: AngularFirestore) {}
 
   createPost(
-    title,
+    postTitle,
     des,
     dateTime,
     postUserId,
     postUserName,
     postUserImage,
-    showFarmer,
-    showBuyer
+    showFarmers,
+    showBuyers,
+    isEnd
   ) {
     return this.db.collection('forum').add({
-      title: title,
+      title: postTitle,
       description: des,
       date: dateTime,
       userID: postUserId,
       userName: postUserName,
       userImage: postUserImage,
-      showFarmer: showFarmer,
-      showBuyer: showBuyer
+      showFarmer: showFarmers,
+      showBuyer: showBuyers,
+      endThread: isEnd,
     });
   }
 
@@ -40,7 +42,8 @@ export class ForumService {
     postID,
     commentUserId,
     commentUserName,
-    commentUserImage
+    commentUserImage,
+    isEnd,
   ) {
     return this.db.collection('comment').add({
       comment: comm,
@@ -48,7 +51,8 @@ export class ForumService {
       id: postID,
       userID: commentUserId,
       userName: commentUserName,
-      userImage: commentUserImage
+      userImage: commentUserImage,
+      endThread: isEnd,
     });
   }
 
@@ -72,7 +76,7 @@ export class ForumService {
 
   getPost() {
     return this.db
-      .collection('forum')
+      .collection('forum', ref => ref.orderBy('date' , 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -87,7 +91,7 @@ export class ForumService {
 
   getPostByID(userId) {
     return this.db
-      .collection('forum', ref => ref.where('userID', '==', userId))
+      .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date' , 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -102,7 +106,7 @@ export class ForumService {
 
   getComment(postID) {
     return this.db
-      .collection('comment', ref => ref.where('id', '==', postID))
+      .collection('comment', ref => ref.where('id', '==', postID).orderBy('date' , 'desc'))
       .snapshotChanges()
       .pipe(
         map(comments =>
@@ -117,7 +121,7 @@ export class ForumService {
 
   getReply(commentID) {
     return this.db
-      .collection('reply', ref => ref.where('commentID', '==', commentID))
+      .collection('reply', ref => ref.where('commentID', '==', commentID).orderBy('date' , 'desc'))
       .snapshotChanges()
       .pipe(
         map(replies =>

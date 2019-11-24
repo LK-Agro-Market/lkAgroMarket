@@ -90,3 +90,13 @@ nb-accordion {
   max-height: 700px;
   overflow-y: scroll;
 }
+.card-fotter-container {
+  display: flex;
+  flex-direction: row;
+}
+.edit-btn, .end-btn, .delete-btn{
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+  height: 25px;
+}

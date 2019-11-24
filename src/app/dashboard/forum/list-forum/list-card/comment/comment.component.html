@@ -4,11 +4,7 @@
       <nb-accordion-item-header>
         <div class="comnt-container">
           <div class="pro-img-container">
-            <img
-              class="pro-img"
-              src="{{ comment.userImage }}"
-              alt="Profile image"
-            />
+            <img class="pro-img" src="{{ comment.userImage }}" alt="Profile image" />
             <div class="pro-header-container">
               <a href="#" class="pro-name">
                 {{ comment.userName }}
@@ -20,23 +16,11 @@
                 </i>
               </span>
               <div class="float-right like-container">
-                <button
-                  nbButton
-                  ghost
-                  status="success"
-                  size="medium"
-                  class="float-right btn-like"
-                >
+                <button nbButton ghost status="success" size="medium" class="float-right btn-like">
                   <nb-icon icon="checkmark"></nb-icon>
                 </button>
                 <p class="count-like">6</p>
-                <button
-                  nbButton
-                  ghost
-                  status="info"
-                  size="medium"
-                  class="float-right btn-com"
-                >
+                <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                   <nb-icon icon="email"></nb-icon>
                 </button>
                 <p class="count-com">9</p>
@@ -44,36 +28,26 @@
             </div>
           </div>
           <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
-          <hr />
+          <div class="card-fotter-container">
+            <button nbButton *ngIf="true" status="primary" size="tiny" class="edit-btn" [hidden]="!showBtn">
+              Edit
+            </button>
+            <button nbButton *ngIf="true" status="danger" size="tiny" class="end-btn" [hidden]="!showBtn">
+              End
+            </button>
+            <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn">
+              Delete
+            </button>
+          </div>
         </div>
       </nb-accordion-item-header>
       <nb-accordion-item-body class="reply-container">
-        <form
-          [formGroup]="replyForm"
-          novalidate
-          (ngSubmit)="onCreate()"
-          #commform="ngForm"
-        >
+        <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-reply">
-            <textarea
-              class="form-control"
-              formControlName="reply"
-              nbInput
-              fullWidth
-              placeholder="Add reply..."
-              status="primary"
-              required
-              style="height: 40px;"
-            >
+            <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Add reply..."
+              status="primary" required style="height: 40px;" [disabled]="isEnd">
             </textarea>
-            <button
-              nbButton
-              status="primary"
-              outline
-              size="small"
-              class="float-right reply-btn"
-              size="small"
-            >
+            <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small" [disabled]="isEnd">
               Reply
             </button>
           </div>
@@ -81,7 +55,9 @@
         <hr />
         <div>
           <p class="reply-titel">Reply for comment</p>
-          <app-reply [commentId]="commentId"></app-reply>
+          <div *ngFor="let reply of replies">
+            <app-reply [reply]="reply"></app-reply>
+          </div>
         </div>
       </nb-accordion-item-body>
     </nb-accordion-item>
