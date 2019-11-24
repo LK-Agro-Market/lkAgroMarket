@@ -36,7 +36,7 @@
                 <button nbButton *ngIf="true" status="primary" size="small" class="edit-btn" [hidden]="!showBtn">
                   Edit
                 </button>
-                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn">
+                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn" (click)="changeEndProperty()">
                   End
                 </button>
                 <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn">

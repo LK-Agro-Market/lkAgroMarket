@@ -136,7 +136,15 @@ export class ForumService {
 
   getCount(collectionName) {
     this.db.collection(collectionName).get().subscribe(doc => {
-      console.log(doc.size);
+      //
       });
+  }
+
+  changePostView(key, value) {
+    this.db.collection('forum').doc(key).update({endThread: value});
+  }
+
+  changeCommentView(key, value) {
+    this.db.collection('comment').doc(key).update({endThread: value});
   }
 }

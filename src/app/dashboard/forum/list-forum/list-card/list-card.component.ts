@@ -10,15 +10,15 @@ import { ForumService } from '../../forum.service';
 })
 export class ListCardComponent implements OnInit {
 
-  @Input() item: any;
-  @ViewChild('item', { static: false }) accordion;
-
   viewButton = true;
   comments: any[];
   cmntId: any;
   userImageURL;
   showBtn;
   isEnd;
+
+  @Input() item: any;
+  @ViewChild('item', { static: false }) accordion;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -30,10 +30,6 @@ export class ListCardComponent implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
-
-  toggleMain() {
-    this.accordion.toggle();
-  }
 
   constructor(
     private forumService: ForumService
@@ -61,7 +57,6 @@ export class ListCardComponent implements OnInit {
       });
   }
 
-
   onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
@@ -86,4 +81,14 @@ export class ListCardComponent implements OnInit {
       // this.showToast('danger');
     }
   }
+
+  toggleMain() {
+    this.accordion.toggle();
+  }
+
+  changeEndProperty() {
+    this.forumService.changePostView(this.item.key, !this.item.endThread);
+  }
+
+
 }

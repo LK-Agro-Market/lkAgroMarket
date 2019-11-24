@@ -51,10 +51,6 @@ export class CommentComponent implements OnInit {
       });
   }
 
-  // showToast(status) {
-  //   // this.toastrService.show('message', { status });
-  // }
-
   onCreate() {
     const rply = this.replyForm.controls.reply.value as string;
     const dateTime = new Date();
@@ -78,4 +74,9 @@ export class CommentComponent implements OnInit {
       // this.showToast('danger');
     }
   }
+
+  changeEndProperty(){
+    this.forumService.changeCommentView(this.comment.key, !this.comment.endThread);
+  }
+
 }
