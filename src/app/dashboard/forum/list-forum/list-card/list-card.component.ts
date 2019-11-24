@@ -86,8 +86,12 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  changeEndProperty() {
-    this.forumService.changePostView(this.item.key, !this.item.endThread);
+  endOrViewPost() {
+    this.forumService.changeEndProperty('forum', this.item.key, !this.item.endThread);
+  }
+
+  deletePost() {
+    this.forumService.deleteDocment('forum', this.item.key);
   }
 
 

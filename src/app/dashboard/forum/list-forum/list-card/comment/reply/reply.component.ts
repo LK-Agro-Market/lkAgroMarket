@@ -24,4 +24,8 @@ export class ReplyComponent implements OnInit {
       this.showBtn = false;
     }
   }
+
+  deleteReply() {
+    this.forumService.deleteDocment('reply', this.reply.key);
+  }
 }

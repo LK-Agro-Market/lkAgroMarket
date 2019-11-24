@@ -75,8 +75,11 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  changeEndProperty(){
-    this.forumService.changeCommentView(this.comment.key, !this.comment.endThread);
+  endOrViewComment() {
+    this.forumService.changeEndProperty('comment', this.comment.key, !this.comment.endThread);
   }
 
+  deleteComment() {
+    this.forumService.deleteDocment('comment', this.comment.key);
+  }
 }

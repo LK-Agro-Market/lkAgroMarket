@@ -140,11 +140,11 @@ export class ForumService {
       });
   }
 
-  changePostView(key, value) {
-    this.db.collection('forum').doc(key).update({endThread: value});
+  changeEndProperty(collection, key, value) {
+    this.db.collection(collection).doc(key).update({endThread: value});
   }
 
-  changeCommentView(key, value) {
-    this.db.collection('comment').doc(key).update({endThread: value});
+  deleteDocment(collection, key){
+    this.db.collection(collection).doc(key).delete();
   }
 }

@@ -28,7 +28,7 @@
         <button nbButton *ngIf="true" status="primary" size="tiny" class="edit-btn" [hidden]="!showBtn">
           Edit
         </button>
-        <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn">
+        <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn" (click)="deleteReply()">
           Delete
         </button>
       </div>
