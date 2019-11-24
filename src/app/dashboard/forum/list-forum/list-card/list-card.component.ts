@@ -17,6 +17,9 @@ export class ListCardComponent implements OnInit {
   comments: any[];
   cmntId: any;
   userImageURL;
+  currentUser;
+  postUser;
+  showBtn;
 
   get comm() {
     return this.commentForm.get('comment');
@@ -38,6 +41,12 @@ export class ListCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.item.userID === this.user.uid) {
+      this.showBtn = true;
+    } else {
+      this.showBtn = false;
+    }
+    console.log(this.showBtn);
     this.forumService
       .getComment(this.item.key)
       .pipe()
