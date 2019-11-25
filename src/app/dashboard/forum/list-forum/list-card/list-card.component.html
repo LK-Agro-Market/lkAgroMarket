@@ -22,7 +22,7 @@
                   <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                     <nb-icon icon="email"></nb-icon>
                   </button>
-                  <p class="count-com">15</p>
+                  <p class="count-com" >{{count}}</p>
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@
         <div class="comment-sec">
           <p>Comments</p>
           <div *ngFor="let comment of comments">
-            <app-comment [comment]="comment"></app-comment>
+            <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>
         </div>
       </nb-accordion-item-body>

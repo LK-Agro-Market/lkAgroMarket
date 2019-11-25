@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'firebase';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../../forum.service';
@@ -9,18 +9,24 @@ import { ForumService } from '../../../forum.service';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  replyForm = new FormGroup({
-    reply: new FormControl('', Validators.required)
-  });
+
   replies: any[];
   showBtn;
   isEnd;
+  count;
+
+  @Input() comment: any;
+  @Input() postId: any;
+
+  @Output() changeCommentCount = new EventEmitter();
+
+  replyForm = new FormGroup({
+    reply: new FormControl('', Validators.required)
+  });
 
   get rply() {
     return this.replyForm.get('reply');
   }
-
-  @Input() comment: any;
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
@@ -30,6 +36,8 @@ export class CommentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getReplyCount();
+
     this.isEnd = this.comment.endThread;
     if (this.isEnd) {
       this.replyForm.get('reply').disable();
@@ -47,14 +55,15 @@ export class CommentComponent implements OnInit {
       .pipe()
       .subscribe(replies => {
         this.replies = replies;
-        console.log(this.replies);
       });
+
   }
 
   onCreate() {
     const rply = this.replyForm.controls.reply.value as string;
     const dateTime = new Date();
     const commentID = this.comment.key;
+    const postID = this.postId;
     const userId = this.user.uid;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
@@ -64,11 +73,13 @@ export class CommentComponent implements OnInit {
         rply,
         dateTime,
         commentID,
+        postID,
         userId,
         userName,
         userImage
       );
       this.rply.setValue('');
+      this.getReplyCount();
       // this.showToast('success');
     } else {
       // this.showToast('danger');
@@ -79,7 +90,15 @@ export class CommentComponent implements OnInit {
     this.forumService.changeEndProperty('comment', this.comment.key, !this.comment.endThread);
   }
 
-  deleteComment() {
+  deleteComments() {
+    this.forumService.deleteReplyList('commentID', this.comment.key).subscribe();
     this.forumService.deleteDocment('comment', this.comment.key);
+    this.changeCommentCount.emit();
+  }
+
+  getReplyCount() {
+    this.forumService.getCount('reply', 'commentID', this.comment.key).subscribe(count => {
+      this.count = count;
+    });
   }
 }

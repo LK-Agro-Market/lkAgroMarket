@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ForumService } from 'src/app/dashboard/forum/forum.service';
 import { User } from 'firebase';
 
@@ -9,10 +9,10 @@ import { User } from 'firebase';
 })
 export class ReplyComponent implements OnInit {
   showBtn;
+  @Input() reply: any;
+  @Output() changeReplyCount = new EventEmitter();
 
   constructor(private forumService: ForumService) {}
-
-  @Input() reply: any;
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
@@ -27,5 +27,8 @@ export class ReplyComponent implements OnInit {
 
   deleteReply() {
     this.forumService.deleteDocment('reply', this.reply.key);
+    this.changeReplyCount.emit();
   }
+
+
 }

@@ -10,9 +10,9 @@ export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
-  createPost(
+  createPost( 
     postTitle,
     des,
     dateTime,
@@ -39,7 +39,7 @@ export class ForumService {
   createComment(
     comm,
     dateTime,
-    postID,
+    postId,
     commentUserId,
     commentUserName,
     commentUserImage,
@@ -48,7 +48,7 @@ export class ForumService {
     return this.db.collection('comment').add({
       comment: comm,
       date: dateTime,
-      id: postID,
+      postID: postId,
       userID: commentUserId,
       userName: commentUserName,
       userImage: commentUserImage,
@@ -60,6 +60,7 @@ export class ForumService {
     rpl,
     dateTime,
     commentId,
+    postId,
     replyUserId,
     replyUserName,
     replyUserImage
@@ -68,15 +69,17 @@ export class ForumService {
       reply: rpl,
       date: dateTime,
       commentID: commentId,
+      postID: postId,
       userID: replyUserId,
       userName: replyUserName,
       userImage: replyUserImage
     });
+    console.log('done');
   }
 
-  getPost() {
+  getPost() { // get all
     return this.db
-      .collection('forum', ref => ref.orderBy('date' , 'desc'))
+      .collection('forum', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -89,9 +92,9 @@ export class ForumService {
       );
   }
 
-  getPostByID(userId) {
+  getPostByID(userId) { // get post by user id
     return this.db
-      .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date' , 'desc'))
+      .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -104,9 +107,9 @@ export class ForumService {
       );
   }
 
-  getComment(postID) {
+  getComment(postKey) { // get comments
     return this.db
-      .collection('comment', ref => ref.where('id', '==', postID).orderBy('date' , 'desc'))
+      .collection('comment', ref => ref.where('postID', '==', postKey).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(comments =>
@@ -119,9 +122,9 @@ export class ForumService {
       );
   }
 
-  getReply(commentID) {
+  getReply(commentId) { // get replies
     return this.db
-      .collection('reply', ref => ref.where('commentID', '==', commentID).orderBy('date' , 'desc'))
+      .collection('reply', ref => ref.where('commentID', '==', commentId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(replies =>
@@ -134,17 +137,45 @@ export class ForumService {
       );
   }
 
-  getCount(collectionName) {
-    this.db.collection(collectionName).get().subscribe(doc => {
-      //
-      });
+  getCount(collection, field, key) {  // get counts(coments/replies)
+    return this.db.collection(collection, ref => ref.where(field, '==', key)).get().pipe(
+      map(coll => coll.size)
+    );
   }
 
-  changeEndProperty(collection, key, value) {
-    this.db.collection(collection).doc(key).update({endThread: value});
+  changeEndProperty(collection, key, value) { // change end or start thread
+    this.db.collection(collection).doc(key).update({ endThread: value });
   }
 
-  deleteDocment(collection, key){
+  deleteDocment(collection, key) { // delete document by key
     this.db.collection(collection).doc(key).delete();
+  }
+
+  deleteReplyList(field, id) {  // delete replies by feild
+    return this.db
+      .collection('reply', ref => ref.where(field, '==', id))
+      .snapshotChanges()
+      .pipe(
+        map(replies =>
+          replies.map(reply => {
+            const key = reply.payload.doc.id;
+            this.db.collection('reply').doc(key).delete();
+          })
+        )
+      );
+  }
+
+  deleteCommentList(field, id) {  // delte comments by field
+    return this.db
+      .collection('comment', ref => ref.where(field, '==', id))
+      .snapshotChanges()
+      .pipe(
+        map(comments =>
+          comments.map(comment => {
+            const key = comment.payload.doc.id;
+            this.db.collection('comment').doc(key).delete();
+          })
+        )
+      );
   }
 }

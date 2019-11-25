@@ -38,15 +38,12 @@ export class ForumComponent implements OnInit {
     private forumService: ForumService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   changePostType(showMyPost: boolean) {
     this.showMyPost = showMyPost;
   }
-
-//   showToast(status) {
-// //
-//   }
 
   onCreate() {
     const title = this.discussionForm.controls.title.value as string;
@@ -81,4 +78,5 @@ export class ForumComponent implements OnInit {
     } else {
     }
   }
+
 }

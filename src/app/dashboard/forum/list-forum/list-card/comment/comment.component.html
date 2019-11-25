@@ -23,7 +23,7 @@
                 <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                   <nb-icon icon="email"></nb-icon>
                 </button>
-                <p class="count-com">9</p>
+                <p class="count-rep">{{count}}</p>
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <button nbButton *ngIf="true" status="danger" size="tiny" class="end-btn" [hidden]="!showBtn" (click)="endOrViewComment()">
               End
             </button>
-            <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn" (click)="deleteComment()">
+            <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn" (click)="deleteComments()">
               Delete
             </button>
           </div>
@@ -56,7 +56,7 @@
         <div>
           <p class="reply-titel">Reply for comment</p>
           <div *ngFor="let reply of replies">
-            <app-reply [reply]="reply"></app-reply>
+            <app-reply [reply]="reply" (changeReplyCount)="getReplyCount()"></app-reply>
           </div>
         </div>
       </nb-accordion-item-body>

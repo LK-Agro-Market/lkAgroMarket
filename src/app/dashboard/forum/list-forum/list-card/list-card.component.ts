@@ -16,6 +16,8 @@ export class ListCardComponent implements OnInit {
   userImageURL;
   showBtn;
   isEnd;
+  count;
+  postId;
 
   @Input() item: any;
   @ViewChild('item', { static: false }) accordion;
@@ -33,9 +35,12 @@ export class ListCardComponent implements OnInit {
 
   constructor(
     private forumService: ForumService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.getCommentCount();
+    this.postId = this.item.key;
+
     this.isEnd = this.item.endThread;
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
@@ -55,6 +60,7 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
+
   }
 
   onCreate() {
@@ -76,6 +82,7 @@ export class ListCardComponent implements OnInit {
         false,
       );
       this.comm.setValue('');
+      this.getCommentCount();
       // this.showToast('success');
     } else {
       // this.showToast('danger');
@@ -86,13 +93,21 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  endOrViewPost() {
+  endOrViewPost() { // change post (end or start)
     this.forumService.changeEndProperty('forum', this.item.key, !this.item.endThread);
   }
 
-  deletePost() {
+  deletePost() {  // Delete post
+    this.forumService.deleteReplyList('postID', this.item.key).subscribe();
+    this.forumService.deleteCommentList('postID', this.item.key).subscribe();
     this.forumService.deleteDocment('forum', this.item.key);
+    this.getCommentCount();
   }
 
+  getCommentCount() { // get comment count
+    this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
+      this.count = count;
+    });
+  }
 
 }
