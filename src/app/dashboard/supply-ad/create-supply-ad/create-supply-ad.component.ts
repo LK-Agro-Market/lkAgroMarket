@@ -82,7 +82,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
       type: ['Vegitable', Validators.required],
-      food: ['Onion', Validators.required],
+      food: ['Carrot', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
@@ -94,6 +94,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
       organic: ['', Validators.required],
       expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
+    this.retriveFoods();
   }
 
   ngOnDestroy() {
