@@ -24,11 +24,17 @@ export class CommentComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService
+  ) {}
 
   ngOnInit() {
     this.commentId = this.comment.key;
   }
+
+  // showToast(status) {
+  //   // this.toastrService.show('message', { status });
+  // }
 
   onCreate() {
     const rply = this.replyForm.controls.reply.value as string;
@@ -49,9 +55,9 @@ export class CommentComponent implements OnInit {
         userImage
       );
       this.rply.setValue('');
+      // this.showToast('success');
     } else {
-      // this.msgStatus.emit('error');
-      // this.msg.emit('Please entrreply');
+      // this.showToast('danger');
     }
   }
 }

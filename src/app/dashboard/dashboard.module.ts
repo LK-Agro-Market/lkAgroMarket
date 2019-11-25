@@ -48,6 +48,7 @@ import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
+import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
 //demand ad
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
@@ -70,7 +71,8 @@ import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply
     DemandAdComponent,
     CreateDemandAdComponent,
     ListDemandAdComponent,
-    ReplyComponent
+    ReplyComponent,
+    UserProfileCardComponent
   ],
   imports: [
     CommonModule,
