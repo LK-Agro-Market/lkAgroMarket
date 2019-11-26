@@ -62,7 +62,7 @@
         </form>
         <hr />
         <div class="comment-sec">
-          <p>Comments</p>
+          <p style="margin-left: 20px;">Comments</p>
           <div *ngFor="let comment of comments">
             <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>

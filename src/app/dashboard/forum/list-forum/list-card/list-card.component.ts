@@ -40,19 +40,17 @@ export class ListCardComponent implements OnInit {
   ngOnInit() {
     this.getCommentCount();
     this.postId = this.item.key;
-
     this.isEnd = this.item.endThread;
+
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
-
     // show edit and end button
     if (this.item.userID === this.user.uid) {
       this.showBtn = true;
     } else {
       this.showBtn = false;
     }
-
     // load comments
     this.forumService
       .getComment(this.item.key)

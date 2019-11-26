@@ -54,8 +54,8 @@
         </form>
         <hr />
         <div>
-          <p class="reply-titel">Reply for comment</p>
-          <div *ngFor="let reply of replies">
+          <p class="reply-titel" style="margin-left: 30px;">Reply for comment</p>
+          <div *ngFor="let reply of replies" >
             <app-reply [reply]="reply" (changeReplyCount)="getReplyCount()"></app-reply>
           </div>
         </div>
