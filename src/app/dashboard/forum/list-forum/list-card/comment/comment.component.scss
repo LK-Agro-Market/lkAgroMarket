@@ -1,5 +1,13 @@
+.main-container{
+  display: flex;
+  flex-direction: row;
+}
+.vl {
+  margin-left: 20px;
+  border-left: 1px solid blueviolet;
+}
 nb-accordion {
-  max-height: 600px;
+  max-height: inherit;
 }
 .comnt-container {
   display: flex;
