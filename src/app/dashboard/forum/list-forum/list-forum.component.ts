@@ -11,17 +11,18 @@ export class ListForumComponent implements OnInit {
   items: any[];
   postUser: any;
 
+  @Input() showMyPost;
+
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  @Input() showMyPost;
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
     this.allPosts();
-    // this.forumService.getCount('forum');
   }
 
   ngOnChanges() {
+  // change post view
     if (this.showMyPost) {
       this.myPost();
     } else {
@@ -29,7 +30,7 @@ export class ListForumComponent implements OnInit {
     }
   }
 
-  myPost() {
+  myPost() { // get my post only
     this.forumService
       .getPostByID(this.user.uid)
       .pipe()
@@ -38,7 +39,7 @@ export class ListForumComponent implements OnInit {
       });
   }
 
-  allPosts() {
+  allPosts() {  // get all post
     this.forumService
       .getPost()
       .pipe()

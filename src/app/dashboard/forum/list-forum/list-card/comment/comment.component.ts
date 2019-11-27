@@ -17,16 +17,11 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: any;
   @Input() postId: any;
-
   @Output() changeCommentCount = new EventEmitter();
 
   replyForm = new FormGroup({
     reply: new FormControl('', Validators.required)
   });
-
-  get rply() {
-    return this.replyForm.get('reply');
-  }
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
@@ -34,6 +29,10 @@ export class CommentComponent implements OnInit {
   constructor(
     private forumService: ForumService
   ) { }
+
+  get rply() {
+    return this.replyForm.get('reply');
+  }
 
   ngOnInit() {
     this.getReplyCount();
@@ -60,6 +59,7 @@ export class CommentComponent implements OnInit {
   }
 
   onCreate() {
+    // crete reply
     const rply = this.replyForm.controls.reply.value as string;
     const dateTime = new Date();
     const commentID = this.comment.key;

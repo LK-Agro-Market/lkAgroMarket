@@ -26,16 +26,16 @@ export class ListCardComponent implements OnInit {
     comment: new FormControl('', Validators.required)
   });
 
-  get comm() {
-    return this.commentForm.get('comment');
-  }
-
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
   constructor(
     private forumService: ForumService
   ) { }
+
+  get comm() {
+    return this.commentForm.get('comment');
+  }
 
   ngOnInit() {
     this.getCommentCount();
@@ -61,7 +61,7 @@ export class ListCardComponent implements OnInit {
 
   }
 
-  onCreate() {
+  onCreate() {  // create comment
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.item.key;

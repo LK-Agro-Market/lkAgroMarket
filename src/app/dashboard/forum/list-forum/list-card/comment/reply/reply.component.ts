@@ -9,12 +9,13 @@ import { User } from 'firebase';
 })
 export class ReplyComponent implements OnInit {
   showBtn;
+
   @Input() reply: any;
   @Output() changeReplyCount = new EventEmitter();
 
-  constructor(private forumService: ForumService) {}
-
   user: User = JSON.parse(localStorage.getItem('user'));
+
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {
 
