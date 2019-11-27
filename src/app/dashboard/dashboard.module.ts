@@ -29,6 +29,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ChatComponent } from './chat/chat.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent, ChatComponent],
@@ -54,7 +55,8 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
     NbCardModule,
     NbSpinnerModule,
     NbSelectModule,
-    NbInputModule
+    NbInputModule,
+    FormsModule
   ],
   providers: []
 })

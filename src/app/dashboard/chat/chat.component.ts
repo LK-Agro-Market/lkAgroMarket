@@ -13,6 +13,16 @@ import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import { finalize , tap } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+
+interface Post {
+  
+  content: string;
+}
+interface PostId extends Post {
+  id: string;
+}
 
 @Component({
   selector: 'app-chat',
@@ -47,6 +57,9 @@ export class ChatComponent {
   // file: any;
  // url = '';
   // files: Observable<any>;
+  chatDoc: AngularFirestoreDocument<Post>;
+  chat: Observable<Post>;
+///////////////////
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -108,12 +121,12 @@ export class ChatComponent {
     );
    }
 
-  sendMessage(event: any, reply: boolean) {
+  sendMessage(content) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs
       .collection('chats')
       .add({
-        content: event.message,
+        content: this.content,
         time: Date.now(),
         avatar: user.photoURL,
         sender: user.displayName,
@@ -125,48 +138,26 @@ export class ChatComponent {
         type: 'text'
      });
   }
+  getPost(chatId) {
+    this.chatDoc = this.afs.doc('chats/' + chatId);
+    this.chat = this.chatDoc.valueChanges();
+  }
+  ////////////////////////////////////////////////
   uploadFile(event) {
       const user = JSON.parse(localStorage.getItem('user'));
       const file = event.target.files[0];
-      const filePath = 'test/${new Date()}_${this.file.name}';
+      const filePath = '/chats/' + Date.now() + '-' + this.files[0];
       const fileRef = this.afStorage.ref(filePath);
       const task = this.afStorage.upload(filePath, file);
       this.ref = this.afStorage.ref(filePath);
-  
       // observe percentage changes
       this.uploadPercent = task.percentageChanges();
-      // const files = !event.files ? [] : event.files.map((file) => {
-      //   return {
-      //     url: file.src,
-      //     type: file.type,
-      //     icon: 'file-text-outline',
-      //   };
-      // });
-      // get notified when the download URL is available
-      // const files =  {
-      //     return : {
-      //       url: file.url,
-      //       type: file.type,
-      //       icon: 'file-text-outline',
-      //     },
-      //   }
-      // this.downloadURL = this.ref.getDownloadURL();
-      // const files = !event.files ? [] : event.files.map((file) => {
-      //   return {
-      //     url: file.downloadURL,
-      //     type: file.type,
-      //     icon: 'file-text-outline',
-      //   };
-      // });
-      ///////////
       task.snapshotChanges().pipe(
         finalize(async () => {
                  this.downloadURL = await this.ref.getDownloadURL().toPromise();
                  this.afs.collection('chats').add( {
-                    // downloadURL: this.downloadURL,
                     content: '' ,
                     avatar: user.photoURL,
-                    // path ,
                     type : 'file',
                      time: Date.now(),
                      date: new Date(),
@@ -175,8 +166,9 @@ export class ChatComponent {
                      sid: user.uid,
                      rid: this.selectedId,
                      reply: true,
-                   files: {url: this.downloadURL , type : 'file' }
-                    //  url: this.downloadURL,
+                  //   files: {file: {url: this.downloadURL , type: 'image/jpeg' }}
+                   //  files: {url: this.downloadURL , type: 'image/jpeg' }
+                      url: this.downloadURL,
                    //   files: files
                    });
                })
