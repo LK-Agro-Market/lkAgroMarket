@@ -1,6 +1,6 @@
 nb-sidebar {
   width: 400px;
- // background-color: rgb(195, 241, 202);
+  // background-color: rgb(195, 241, 202);
 }
 nb-card {
   width: 1200px;
@@ -10,11 +10,13 @@ nb-card nb-icon {
   float: right;
   font-size: 2rem;
   margin-left: 50px;
- // color: blue;
+  // color: blue;
 }
-
+nb-chat-form {
+  // color: rgb(19, 231, 83);
+}
 nb-layout-column nb-card {
-//  background-color: rgb(71, 211, 106);
+  //  background-color: rgb(71, 211, 106);
 }
 nb-list {
   width: 400px;

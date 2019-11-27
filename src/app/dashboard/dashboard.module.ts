@@ -32,7 +32,12 @@ import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-sup
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LayoutComponent, SupplyAdComponent, CreateSupplyAdComponent, ChatComponent],
+  declarations: [
+    LayoutComponent,
+    SupplyAdComponent,
+    CreateSupplyAdComponent,
+    ChatComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
