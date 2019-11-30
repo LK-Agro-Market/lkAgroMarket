@@ -48,6 +48,7 @@ import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-dem
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
 import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
+import { FileUploadDirective } from './forum/file-upload.directive';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { UserProfileCardComponent } from './forum/user-profile-card/user-profile
     CreateDemandAdComponent,
     ListDemandAdComponent,
     ReplyComponent,
-    UserProfileCardComponent
+    UserProfileCardComponent,
+    FileUploadDirective
   ],
   imports: [
     CommonModule,
