@@ -16,7 +16,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-<<<<<<< HEAD
 import { finalize , tap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -28,9 +27,6 @@ interface Post {
 interface PostId extends Post {
   id: string;
 }
-=======
-import { finalize, tap } from 'rxjs/operators';
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
 
 @Component({
   selector: 'app-chat',
@@ -130,7 +126,6 @@ export class ChatComponent {
 
   sendMessage(content) {
     const user = JSON.parse(localStorage.getItem('user'));
-<<<<<<< HEAD
     this.afs
       .collection('chats')
       .add({
@@ -145,19 +140,6 @@ export class ChatComponent {
         reply: true,
         type: 'text'
      });
-=======
-    this.afs.collection('chats').add({
-      content: event.message,
-      time: Date.now(),
-      avatar: user.photoURL,
-      sender: user.displayName,
-      reciever: this.selectedUser,
-      date: new Date(),
-      sid: user.uid,
-      rid: this.selectedId,
-      reply: true
-    });
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
   }
   getPost(chatId) {
     this.chatDoc = this.afs.doc('chats/' + chatId);
@@ -165,7 +147,6 @@ export class ChatComponent {
   }
   ////////////////////////////////////////////////
   uploadFile(event) {
-<<<<<<< HEAD
       const user = JSON.parse(localStorage.getItem('user'));
       const file = event.target.files[0];
       const filePath = '/chats/' + Date.now() + '-' + this.files[0];
@@ -194,40 +175,6 @@ export class ChatComponent {
                    //   files: files
                    });
                })
-=======
-    const user = JSON.parse(localStorage.getItem('user'));
-    const file = event.target.files[0];
-    const filePath = 'test/';
-    const fileRef = this.afStorage.ref(filePath);
-    const task = this.afStorage.upload(filePath, file);
-    this.ref = this.afStorage.ref(filePath);
-
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(async () => {
-          this.downloadURL = await this.ref.getDownloadURL().toPromise();
-          this.afs.collection('chats').add({
-            // downloadURL: this.downloadURL,
-            content: '',
-            avatar: user.photoURL,
-            // path ,
-            type: 'file',
-            time: Date.now(),
-            date: new Date(),
-            sender: user.displayName,
-            // reciever: this.selectedUser,
-            sid: user.uid,
-            // rid: this.selectedId,
-            reply: true,
-            files: { url: this.downloadURL }
-            // url: this.downloadURL
-          });
-        })
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
       )
       .subscribe();
   }
