@@ -16,7 +16,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-<<<<<<< HEAD
 import { finalize , tap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -28,9 +27,6 @@ interface Post {
 interface PostId extends Post {
   id: string;
 }
-=======
-import { finalize, tap } from 'rxjs/operators';
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
 
 @Component({
   selector: 'app-chat',
@@ -56,7 +52,6 @@ export class ChatComponent {
   file: Observable<any>;
   isHovering: boolean;
   /////
-<<<<<<< HEAD
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   task: AngularFireUploadTask;
@@ -69,8 +64,6 @@ export class ChatComponent {
   chatDoc: AngularFirestoreDocument<Post>;
   chat: Observable<Post>;
 ///////////////////
-=======
->>>>>>> dbdff1490d41840a413fa6430342e7aa7c900baa
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -86,7 +79,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  };
+  }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
@@ -148,7 +141,7 @@ export class ChatComponent {
         type: 'text'
      });
 
-
+    }
   getPost(chatId) {
     this.chatDoc = this.afs.doc('chats/' + chatId);
     this.chat = this.chatDoc.valueChanges();
@@ -184,43 +177,7 @@ export class ChatComponent {
                    //   files: files
                    });
                })
-=======
-    const user = JSON.parse(localStorage.getItem('user'));
-    const file = event.target.files[0];
-    const filePath = 'test/';
-    const fileRef = this.afStorage.ref(filePath);
-    const task = this.afStorage.upload(filePath, file);
-    this.ref = this.afStorage.ref(filePath);
-
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(async () => {
-          this.downloadURL = await this.ref.getDownloadURL().toPromise();
-          this.afs.collection('chats').add({
-            // downloadURL: this.downloadURL,
-            content: '',
-            avatar: user.photoURL,
-            // path ,
-            type: 'file',
-            time: Date.now(),
-            date: new Date(),
-            sender: user.displayName,
-            // reciever: this.selectedUser,
-            sid: user.uid,
-            // rid: this.selectedId,
-            reply: true,
-            files: { url: this.downloadURL }
-            // url: this.downloadURL
-          });
-        })
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
-      )
-      .subscribe();
-=======
->>>>>>> dbdff1490d41840a413fa6430342e7aa7c900baa
-  }
+      );
 }
+}
+
