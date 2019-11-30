@@ -61,8 +61,9 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  show() {
-    console.log(this.selectedUserType);
+  markerDragEnd($event: any) {
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
   }
 
   submit() {

@@ -53,9 +53,10 @@ export class ChatComponent {
   messages: Observable<any[]>;
   replies: Observable<any[]>;
   content: string;
- file: Observable<any>;
+  file: Observable<any>;
   isHovering: boolean;
   /////
+<<<<<<< HEAD
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   task: AngularFireUploadTask;
@@ -68,6 +69,8 @@ export class ChatComponent {
   chatDoc: AngularFirestoreDocument<Post>;
   chat: Observable<Post>;
 ///////////////////
+=======
+>>>>>>> dbdff1490d41840a413fa6430342e7aa7c900baa
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage
@@ -130,7 +133,6 @@ export class ChatComponent {
 
   sendMessage(content) {
     const user = JSON.parse(localStorage.getItem('user'));
-<<<<<<< HEAD
     this.afs
       .collection('chats')
       .add({
@@ -145,27 +147,15 @@ export class ChatComponent {
         reply: true,
         type: 'text'
      });
-=======
-    this.afs.collection('chats').add({
-      content: event.message,
-      time: Date.now(),
-      avatar: user.photoURL,
-      sender: user.displayName,
-      reciever: this.selectedUser,
-      date: new Date(),
-      sid: user.uid,
-      rid: this.selectedId,
-      reply: true
-    });
->>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
-  }
+
+
   getPost(chatId) {
     this.chatDoc = this.afs.doc('chats/' + chatId);
     this.chat = this.chatDoc.valueChanges();
   }
   ////////////////////////////////////////////////
   uploadFile(event) {
-<<<<<<< HEAD
+
       const user = JSON.parse(localStorage.getItem('user'));
       const file = event.target.files[0];
       const filePath = '/chats/' + Date.now() + '-' + this.files[0];
@@ -230,5 +220,7 @@ export class ChatComponent {
 >>>>>>> 08f5df1f4feb0783a463629bfe3692f332990fd4
       )
       .subscribe();
+=======
+>>>>>>> dbdff1490d41840a413fa6430342e7aa7c900baa
   }
 }

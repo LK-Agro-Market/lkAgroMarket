@@ -1,0 +1,53 @@
+<nb-card accent="success">
+  <nb-card-header>
+    <div class="card-header-content">
+      <span class="text-left">
+        Your Current Advertisments
+      </span>
+      <!-- <div>
+        <input #keywordInput id="keyword-search-input" nbInput type="text" placeholder="Keyword Search"
+          (input)="onNewKeyword(keywordInput.value)" maxlength="32" />
+      </div> -->
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let supplyAd of supplyAdList">
+          <div class="card">
+            <img [src]="supplyAd.images[0]" class="card-img-top" />
+            <nb-badge
+              text="Organic"
+              status="success"
+              position="top right"
+              *ngIf="supplyAd.organic == 'Organic'"
+            ></nb-badge>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ supplyAd.food }}
+                <span class="food-type">- {{ supplyAd.type }}</span>
+              </h5>
+              <p class="card-text">{{ supplyAd.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+              </li>
+              <li class="list-group-item">
+                Price per unit - Rs. {{ supplyAd.pricePerUnit }}
+              </li>
+              <li class="list-group-item">
+                Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+              </li>
+            </ul>
+            <div class="card-body">
+              <button class="btn btn-success">Mark As Sold</button>
+              <button class="btn btn-primary">Update</button>
+              <button href="#" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
