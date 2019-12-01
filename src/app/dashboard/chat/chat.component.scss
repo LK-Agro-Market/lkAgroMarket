@@ -38,6 +38,7 @@ ul li {
   padding:10px;
  // margin-bottom:5px;
   color:#0b0c0e;
+ // list-style-type:none;
  // width: 1000px;
  // border-radius: 50%;
 }
@@ -45,7 +46,7 @@ ul li {
   text-align: right;
   background-color: #dedfe2;
   border-radius: 20px;
-//  width: 600px;
+  width: 600px;
   float: right;
   margin-bottom:5px;
   padding:10px 10px;
@@ -54,11 +55,16 @@ ul li {
   text-align: left;
   background-color: #94adf0;
   border-radius: 20px;
-//  width: 600px;
+  width: 600px;
   float: left;
   margin-bottom:5px;
   padding:10px 10px;
 }
+// #content {
+//   background-color: #94adf0;
+//   padding:10px 10px;
+//   color:#0b0c0e;
+// }
 #stime {
   text-align: left;
 }

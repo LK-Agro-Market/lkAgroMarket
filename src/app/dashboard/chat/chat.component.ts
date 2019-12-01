@@ -19,6 +19,7 @@ import 'rxjs/add/operator/map';
 import { finalize , tap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Location } from '@angular/common';
 
 interface Post {
   
@@ -66,7 +67,8 @@ export class ChatComponent {
 ///////////////////
   constructor(
     private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private location: Location
   ) {
     this.users = afs.collection('users').valueChanges();
     this.file = afs.collection('files').valueChanges();
@@ -79,7 +81,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  };
+  }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
@@ -87,6 +89,7 @@ export class ChatComponent {
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
     this.currentId = currentuser.uid;
+    this.location.replaceState('/chat-dashboard/', this.selectedUser);
     //////////////////
     this.chatCollection = this.afs.collection('chats', ref =>
       ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
@@ -140,7 +143,12 @@ export class ChatComponent {
         reply: true,
         type: 'text'
      });
+    this.resetForm();
+    this.location.replaceState('/chat-dashboard');
   }
+  resetForm(){
+    this.content = '';
+}
   getPost(chatId) {
     this.chatDoc = this.afs.doc('chats/' + chatId);
     this.chat = this.chatDoc.valueChanges();
