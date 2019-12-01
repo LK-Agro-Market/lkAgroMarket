@@ -30,14 +30,15 @@ nb-list nb-list-item {
 }
 ul {
   list-style-type:none;
- // width:100%;
+  width:100%;
   margin:0;padding:0;
 }
 ul li {
 //  background-color:#f8f9fc;
- // padding:10px;
+  padding:10px;
  // margin-bottom:5px;
   color:#0b0c0e;
+ // list-style-type:none;
  // width: 1000px;
  // border-radius: 50%;
 }
@@ -59,6 +60,11 @@ ul li {
   margin-bottom:5px;
   padding:10px 10px;
 }
+// #content {
+//   background-color: #94adf0;
+//   padding:10px 10px;
+//   color:#0b0c0e;
+// }
 #stime {
   text-align: left;
 }
@@ -95,10 +101,18 @@ ul li {
   cursor: pointer;
   font-size: 17px;
   height: 33px;
-  position: absolute;
+  position: relative;
   right: 0;
-  top: 11px;
+//  top: 11px;
   width: 33px;
+}
+.input_msg_write input{
+  width: 400px;
+  border-radius: 5%;
+  padding: 10px 5px;
+}
+#A {
+  position: fixed;
 }
 
 

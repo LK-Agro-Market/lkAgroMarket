@@ -1,4 +1,4 @@
-<div id="all">
+<div id="A">
 <nb-layout>
   <nb-sidebar>
     <nb-list>
@@ -37,11 +37,11 @@
                   <p id="stime"> {{msg.time | date:'h:mm a '}}</p> 
                 </div> 
                 <div id= "rid" *ngIf="msg.sid != this.currentId">
-                    {{msg.content}}
+                        {{msg.content}}
                     <img id="image" src="{{msg.url}}">
                      <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf">  -->
                     <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
-                  </div>              
+                  </div>            
                 </li>
               </ul>
             </div>
