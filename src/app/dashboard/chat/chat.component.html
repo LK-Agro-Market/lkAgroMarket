@@ -1,61 +1,75 @@
 <div id="A">
-<nb-layout>
-  <nb-sidebar>
-    <nb-list>
-      <nb-list-item *ngFor="let u of users | async">
-        <button
-          nbButton
-          fullwidth
-          status="basic"
-          (click)="UserClicked(u)"
-          *ngIf="user.uid != u.uid"
-        >
-          <nb-user [name]="u.displayName" [picture]="u.photoURL"></nb-user>
-        </button>
-      </nb-list-item>
-    </nb-list>
-  </nb-sidebar>
+  <nb-layout>
+    <nb-sidebar>
+      <nb-list>
+        <nb-list-item *ngFor="let u of users | async">
+          <button
+            nbButton
+            fullwidth
+            status="basic"
+            (click)="UserClicked(u)"
+            *ngIf="user.uid != u.uid"
+          >
+            <nb-user [name]="u.displayName" [picture]="u.photoURL"></nb-user>
+          </button>
+        </nb-list-item>
+      </nb-list>
+    </nb-sidebar>
 
-  <nb-layout-column>
-    <nb-card>
-      <nb-card-body>
-        <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
-      </nb-card-body>
-    </nb-card>
+    <nb-layout-column>
+      <nb-card>
+        <nb-card-body>
+          <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
+        </nb-card-body>
+      </nb-card>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
             <div class="card-body msg_card_body">
-            
-            <ul *ngFor="let msg of messages | async">
+              <ul *ngFor="let msg of messages | async">
                 <li (click)="getPost(msg.id)">
-                  <div id= "sid" *ngIf="msg.sid == this.currentId">
-                  {{msg.content}}
-                  <img id="image" src="{{msg.url}}">
-                  <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf"> -->
-                  <p id="stime"> {{msg.time | date:'h:mm a '}}</p> 
-                </div> 
-                <div id= "rid" *ngIf="msg.sid != this.currentId">
-                        {{msg.content}}
-                    <img id="image" src="{{msg.url}}">
-                     <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf">  -->
-                    <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
-                  </div>            
+                  <div id="sid" *ngIf="msg.sid == this.currentId">
+                    {{ msg.content }}
+                    <img id="image" src="{{ msg.url }}" />
+                    <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf"> -->
+                    <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p>
+                  </div>
+                  <div id="rid" *ngIf="msg.sid != this.currentId">
+                    {{ msg.content }}
+                    <img id="image" src="{{ msg.url }}" />
+                    <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf">  -->
+                    <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>
+                  </div>
                 </li>
               </ul>
             </div>
-          <div class="type_msg">
+            <div class="type_msg">
               <div class="input_msg_write">
-                <input type="text" [(ngModel)]="content" class="write_msg" placeholder="Type a message" />
-                <button class="msg_send_btn" (click)="sendMessage($event)" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                <input type="file"  (change)="uploadFile($event)" accept=".png,.jpg" />
+                <input
+                  type="text"
+                  [(ngModel)]="content"
+                  class="write_msg"
+                  placeholder="Type a message"
+                />
+                <button
+                  class="msg_send_btn"
+                  (click)="sendMessage($event)"
+                  type="button"
+                >
+                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+                <input
+                  type="file"
+                  (change)="uploadFile($event)"
+                  accept=".png,.jpg"
+                />
               </div>
             </div>
-        </div> 
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- <nb-card>
+      <!-- <nb-card>
       <nb-card-body>
         <input
           type="file"
@@ -64,6 +78,6 @@
         />
       </nb-card-body>
     </nb-card> -->
-  </nb-layout-column>
-</nb-layout>
+    </nb-layout-column>
+  </nb-layout>
 </div>

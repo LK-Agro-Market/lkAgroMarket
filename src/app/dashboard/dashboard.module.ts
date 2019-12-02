@@ -58,7 +58,6 @@ import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-dem
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
 
-
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -112,7 +111,6 @@ import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply
     NbMenuModule,
     NbListModule,
     AgmCoreModule.forRoot(environment.googleMap)
-
   ],
   providers: []
 })

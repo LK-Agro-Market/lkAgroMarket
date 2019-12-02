@@ -33,9 +33,7 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(
-    private forumService: ForumService
-  ) {}
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {
     this.forumService

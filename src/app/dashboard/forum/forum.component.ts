@@ -34,9 +34,7 @@ export class ForumComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  constructor(
-    private forumService: ForumService
-  ) {}
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {}
 
@@ -44,9 +42,9 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-//   showToast(status) {
-// //
-//   }
+  //   showToast(status) {
+  // //
+  //   }
 
   onCreate() {
     const title = this.discussionForm.controls.title.value as string;

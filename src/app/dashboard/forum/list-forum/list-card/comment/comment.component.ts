@@ -24,9 +24,7 @@ export class CommentComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
-  constructor(
-    private forumService: ForumService
-  ) {}
+  constructor(private forumService: ForumService) {}
 
   ngOnInit() {
     this.commentId = this.comment.key;
