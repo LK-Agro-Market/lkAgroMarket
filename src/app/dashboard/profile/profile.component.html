@@ -14,21 +14,28 @@
         <div class="card-body">
           <button
             class="btn btn-success"
-            *ngIf="profileOwnerId != viewer.uid"
+            *ngIf="profileOwnerId != viewer.uid && isViewerFollowThisProfile == false"
             (click)="followUser()"
           >
             Follow
           </button>
+          <button
+            class="btn btn-warning"
+            *ngIf="profileOwnerId != viewer.uid && isViewerFollowThisProfile == true"
+            (click)="unfollowUser()"
+          >
+            Unfollow
+          </button>
           <button class="btn btn-info" *ngIf="profileOwnerId != viewer.uid">
             Chat
           </button>
-          <button
+          <!-- <button
             href="#"
             class="btn btn-danger"
             *ngIf="profileOwnerId == viewer.uid"
           >
             Delete
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

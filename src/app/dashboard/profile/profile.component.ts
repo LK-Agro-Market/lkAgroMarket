@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileOwnerUser: User;
   selectedUserType: string = '';
   numOfFollowers: number = 0;
+  isViewerFollowThisProfile: boolean;
 
   userDetailsForm: FormGroup;
   latitude: number;
@@ -69,8 +70,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.subscriptions.push(
               this.profileService
                 .getFollowers(this.profileOwnerUser)
-                .subscribe(followers => {
-                  this.numOfFollowers = followers.length;
+                .subscribe(follows => {
+                  this.numOfFollowers = follows.length;
+                  const viewerInFollowers = follows.filter((follow)=>{
+                    return follow.follower == this.viewer.uid
+                  });
+                  if (viewerInFollowers.length > 0) {
+                    this.isViewerFollowThisProfile = true;
+                  } else {
+                    this.isViewerFollowThisProfile = false;
+                  }
                 })
             );
           });
@@ -160,6 +169,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   followUser() {
-    this.profileService.followUser(this.profileOwnerUser, this.viewer.uid);
+    this.subscriptions.push(
+    this.profileService.followUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+    );
+  }
+
+  unfollowUser() {
+    this.subscriptions.push(
+      this.profileService.unfollowUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+    );
   }
 }
