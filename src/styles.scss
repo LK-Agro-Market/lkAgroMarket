@@ -5,5 +5,3 @@
 @include nb-install() {
   @include nb-theme-global();
 }
-
-@import '~angular-notifier/styles.css';
