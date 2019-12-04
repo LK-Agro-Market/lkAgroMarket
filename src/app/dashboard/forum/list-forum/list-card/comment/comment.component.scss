@@ -64,8 +64,29 @@ nb-accordion {
   font-weight: 300;
   color: blueviolet;
 }
-#postDesc {
+#postCommnt {
   margin-top: 10px;
-  marker-end: 20px;
+  margin-right: 25px;
   font-size: 13px;
+}
+.add-reply {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+.card-cantainer {
+  overflow: hidden;
+  height: auto;
+  transition: all 1s;
+}
+.reply-btn {
+  margin-top: 8px;
+  margin-left: 30px;
+}
+.reply-titel {
+  margin-top: 10px;
+}
+.reply-container {
+  max-height: 700px;
+  overflow-y: scroll;
 }

@@ -15,6 +15,8 @@ export class ListCardComponent implements OnInit {
 
   viewButton = true;
   comments: any[];
+  cmntId: any;
+  userImageURL;
 
   get comm() {
     return this.commentForm.get('comment');
@@ -35,24 +37,30 @@ export class ListCardComponent implements OnInit {
 
   ngOnInit() {
     this.forumService
-      .getComment(this.item.id)
+      .getComment(this.item.key)
       .pipe()
       .subscribe(comments => {
         this.comments = comments;
-        console.log(this.item.id);
-        console.log(this.comments);
       });
   }
 
   onCreate() {
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
-    const postID = this.item.id;
+    const postID = this.item.key;
     const userId = this.user.uid;
     const userName = this.user.displayName;
+    const userImage = this.user.photoURL;
 
     if (this.commentForm.valid) {
-      this.forumService.createComment(comm, dateTime, postID, userId, userName);
+      this.forumService.createComment(
+        comm,
+        dateTime,
+        postID,
+        userId,
+        userName,
+        userImage
+      );
       this.comm.setValue('');
     } else {
       // this.msgStatus.emit('error');
