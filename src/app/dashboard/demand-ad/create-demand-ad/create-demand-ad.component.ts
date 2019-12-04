@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DemandAd } from 'src/app/shared/models/demand-ad';
 import { DemandAdService } from '../demand-ad.service';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
 
