@@ -4,6 +4,7 @@ import { map, take } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { Observable, from } from 'rxjs';
 import { UserDetails } from 'src/app/shared/models/user-details';
+import { Follower } from 'src/app/shared/models/follower';
 
 @Injectable({
   providedIn: 'root'
@@ -47,11 +48,23 @@ export class ProfileService {
     );
   }
 
-  getFollowers(profileOwnerUser: User) {
+  unfollowUser(profileOwnerUser: User, viewerId: string): Observable<void> {
+    const followerRef = this.afs
+      .collection('followers')
+      .doc(viewerId + profileOwnerUser.uid);
+    return from(
+      followerRef.delete()
+    );
+  }
+
+  getFollowers(profileOwnerUser: User): Observable<Follower[]> {
     return this.afs
       .collection('followers', ref =>
         ref.where('following', '==', profileOwnerUser)
       )
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        map(follower => follower as Follower[])
+      );
   }
 }

@@ -4,14 +4,72 @@
       <span class="text-left">
         Your Current Advertisments
       </span>
-      <!-- <div>
-        <input #keywordInput id="keyword-search-input" nbInput type="text" placeholder="Keyword Search"
-          (input)="onNewKeyword(keywordInput.value)" maxlength="32" />
-      </div> -->
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
+      <div class="row">
+          <!-- <div class="col">
+              <nb-select
+                #typeFilter
+                multiple
+                fullWidth
+                (selectedChange)="onFilterCompanies()"
+                placeholder="Filter Companies"
+              >
+                <nb-option
+                  *ngFor="let company of allCompanies"
+                  [value]="company.companyId"
+                  >{{ company.name }}</nb-option
+                >
+              </nb-select>
+            </div> -->
+        <!-- <div class="col">
+              <nb-select
+                #foodFilter
+                multiple
+                fullWidth
+                (selectedChange)="onFilterCompanies()"
+                placeholder="Filter Companies"
+              >
+                <nb-option
+                  *ngFor="let company of allCompanies"
+                  [value]="company.companyId"
+                  >{{ company.name }}</nb-option
+                >
+              </nb-select>
+            </div> -->
+        <!-- <div class="col">
+              <nb-select
+                #districtFilter
+                multiple
+                fullWidth
+                (selectedChange)="onFilterCompanies()"
+                placeholder="Filter Companies"
+              >
+                <nb-option
+                  *ngFor="let company of allCompanies"
+                  [value]="company.companyId"
+                  >{{ company.name }}</nb-option
+                >
+              </nb-select>
+            </div> -->
+            <!-- <div class="col">
+              <nb-select
+                #unitPriceRangeFilter
+                multiple
+                fullWidth
+                (selectedChange)="onFilterCompanies()"
+                placeholder="Filter Companies"
+              >
+                <nb-option
+                  *ngFor="let company of allCompanies"
+                  [value]="company.companyId"
+                  >{{ company.name }}</nb-option
+                >
+              </nb-select>
+            </div> -->
+      </div>
       <div class="row">
         <div class="col-sm-4" *ngFor="let supplyAd of supplyAdList">
           <div class="card">
