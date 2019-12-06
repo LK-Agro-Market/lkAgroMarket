@@ -24,10 +24,10 @@
                   style="margin-left: 10px;">Show Buyers
                 </nb-checkbox>
 
-                <div class="dropzone" dropZone>
+                <div class="dropzone" appFileUpload (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
                   <div class="file">
                     <label class="file-label">
-                      <input class="file-input" type="file" >
+                      <input class="file-input" type="file" (change)="startUpload($event.target.files)">
                       <span class="file-cta">
                       </span>
                     </label>
