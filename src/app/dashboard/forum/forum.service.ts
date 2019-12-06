@@ -10,9 +10,9 @@ export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) { }
 
-  createPost( 
+  createPost(
     postTitle,
     des,
     dateTime,
@@ -21,9 +21,10 @@ export class ForumService {
     postUserImage,
     showFarmers,
     showBuyers,
-    isEnd
+    isEnd,
+    path,
   ) {
-    return this.db.collection('forum').add({
+    return this.afs.collection('forum').add({
       title: postTitle,
       description: des,
       date: dateTime,
@@ -33,6 +34,7 @@ export class ForumService {
       showFarmer: showFarmers,
       showBuyer: showBuyers,
       endThread: isEnd,
+      filePath: path,
     });
   }
 
@@ -45,7 +47,7 @@ export class ForumService {
     commentUserImage,
     isEnd,
   ) {
-    return this.db.collection('comment').add({
+    return this.afs.collection('comment').add({
       comment: comm,
       date: dateTime,
       postID: postId,
@@ -65,7 +67,7 @@ export class ForumService {
     replyUserName,
     replyUserImage
   ) {
-    return this.db.collection('reply').add({
+    return this.afs.collection('reply').add({
       reply: rpl,
       date: dateTime,
       commentID: commentId,
@@ -78,7 +80,7 @@ export class ForumService {
   }
 
   getPost() { // get all
-    return this.db
+    return this.afs
       .collection('forum', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -93,7 +95,7 @@ export class ForumService {
   }
 
   getPostByID(userId) { // get post by user id
-    return this.db
+    return this.afs
       .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -108,7 +110,7 @@ export class ForumService {
   }
 
   getComment(postKey) { // get comments
-    return this.db
+    return this.afs
       .collection('comment', ref => ref.where('postID', '==', postKey).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -123,7 +125,7 @@ export class ForumService {
   }
 
   getReply(commentId) { // get replies
-    return this.db
+    return this.afs
       .collection('reply', ref => ref.where('commentID', '==', commentId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -138,42 +140,42 @@ export class ForumService {
   }
 
   getCount(collection, field, key) {  // get counts(coments/replies)
-    return this.db.collection(collection, ref => ref.where(field, '==', key)).get().pipe(
+    return this.afs.collection(collection, ref => ref.where(field, '==', key)).get().pipe(
       map(coll => coll.size)
     );
   }
 
   changeEndProperty(collection, key, value) { // change end or start thread
-    this.db.collection(collection).doc(key).update({ endThread: value });
+    this.afs.collection(collection).doc(key).update({ endThread: value });
   }
 
   deleteDocment(collection, key) { // delete document by key
-    this.db.collection(collection).doc(key).delete();
+    this.afs.collection(collection).doc(key).delete();
   }
 
   deleteReplyList(field, id) {  // delete replies by feild
-    return this.db
+    return this.afs
       .collection('reply', ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
         map(replies =>
           replies.map(reply => {
             const key = reply.payload.doc.id;
-            this.db.collection('reply').doc(key).delete();
+            this.afs.collection('reply').doc(key).delete();
           })
         )
       );
   }
 
   deleteCommentList(field, id) {  // delte comments by field
-    return this.db
+    return this.afs
       .collection('comment', ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
         map(comments =>
           comments.map(comment => {
             const key = comment.payload.doc.id;
-            this.db.collection('comment').doc(key).delete();
+            this.afs.collection('comment').doc(key).delete();
           })
         )
       );

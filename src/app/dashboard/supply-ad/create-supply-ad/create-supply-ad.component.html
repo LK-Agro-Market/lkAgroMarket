@@ -1,9 +1,4 @@
-<nb-card
-  accent="info"
-  [nbSpinner]="processing"
-  nbSpinnerStatus="primary"
-  nbSpinnerSize="large"
->
+<nb-card accent="info" [nbSpinner]="processing" nbSpinnerStatus="primary" nbSpinnerSize="large">
   <nb-card-header class="card-header-content">
     Create New Advertisement
   </nb-card-header>
@@ -13,43 +8,24 @@
         <div class="col-sm-6">
           <label>Harvest/ Agro product category</label>
           <div class="form-group">
-            <nb-select
-              fullWidth
-              placeholder="Select Category"
-              (selectedChange)="retriveFoods()"
-              formControlName="type"
-            >
+            <nb-select fullWidth placeholder="Select Category" (selectedChange)="retriveFoods()" formControlName="type">
               <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
             </nb-select>
-            <div
-              *ngIf="attempted && !!formControls.type.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.type.errors.required"
-                >Food category is required</span
-              >
+            <div *ngIf="attempted && !!formControls.type.errors" class="text-danger">
+              <span *ngIf="!!formControls.type.errors.required">Food category is required</span>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label>Harvest/ Agro product</label>
-            <nb-select
-              fullWidth
-              placeholder="Select Harvest/ Agro Product"
-              formControlName="food"
-            >
+            <nb-select fullWidth placeholder="Select Harvest/ Agro Product" formControlName="food">
               <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
                 f
               }}</nb-option>
             </nb-select>
-            <div
-              *ngIf="attempted && !!formControls.food.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.food.errors.required"
-                >Food name is required</span
-              >
+            <div *ngIf="attempted && !!formControls.food.errors" class="text-danger">
+              <span *ngIf="!!formControls.food.errors.required">Food name is required</span>
             </div>
           </div>
         </div>
@@ -58,60 +34,27 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label>Quantity</label>
-            <input
-              type="text"
-              nbInput
-              fullWidth
-              formControlName="quantity"
-              placeholder="Quantity"
-            />
-            <div
-              *ngIf="attempted && !!formControls.quantity.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.quantity.errors.required"
-                >Quantity is required</span
-              >
+            <input type="text" nbInput fullWidth formControlName="quantity" placeholder="Quantity" />
+            <div *ngIf="attempted && !!formControls.quantity.errors" class="text-danger">
+              <span *ngIf="!!formControls.quantity.errors.required">Quantity is required</span>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <label>Quantity unit</label>
-            <input
-              type="text"
-              nbInput
-              fullWidth
-              formControlName="quantityUnit"
-              placeholder="Quantity Measure Unit"
-            />
-            <div
-              *ngIf="attempted && !!formControls.quantityUnit.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.quantityUnit.errors.required"
-                >Quantity unit is required</span
-              >
+            <input type="text" nbInput fullWidth formControlName="quantityUnit" placeholder="Quantity Measure Unit" />
+            <div *ngIf="attempted && !!formControls.quantityUnit.errors" class="text-danger">
+              <span *ngIf="!!formControls.quantityUnit.errors.required">Quantity unit is required</span>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <label>Price per unit</label>
-            <input
-              type="text"
-              nbInput
-              fullWidth
-              formControlName="pricePerUnit"
-              placeholder="Price Per Unit"
-            />
-            <div
-              *ngIf="attempted && !!formControls.pricePerUnit.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.pricePerUnit.errors.required"
-                >Price per unit is required</span
-              >
+            <input type="text" nbInput fullWidth formControlName="pricePerUnit" placeholder="Price Per Unit" />
+            <div *ngIf="attempted && !!formControls.pricePerUnit.errors" class="text-danger">
+              <span *ngIf="!!formControls.pricePerUnit.errors.required">Price per unit is required</span>
             </div>
           </div>
         </div>
@@ -120,21 +63,9 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Main image</label>
-            <input
-              type="file"
-              nbInput
-              fullWidth
-              accept=".jpeg,.jpg,.bmp,.png"
-              (change)="file1ChangeEvent($event)"
-            />
-            <image-cropper
-              [imageChangedEvent]="image1ChangedEvent"
-              [maintainAspectRatio]="true"
-              [aspectRatio]="4 / 3"
-              format="jpeg"
-              outputType="file"
-              (imageCropped)="image1Cropped($event)"
-            ></image-cropper>
+            <input type="file" nbInput fullWidth accept=".jpeg,.jpg,.bmp,.png" (change)="file1ChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="image1ChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+              format="jpeg" outputType="file" (imageCropped)="image1Cropped($event)"></image-cropper>
             <img class="imagePreview" [src]="image1LL" />
             <div *ngIf="attempted" class="text-danger">
               <span *ngIf="!supplyAdForm.value.image1">
@@ -146,21 +77,9 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Image2</label>
-            <input
-              type="file"
-              nbInput
-              fullWidth
-              accept=".jpeg,.jpg,.bmp,.png"
-              (change)="file2ChangeEvent($event)"
-            />
-            <image-cropper
-              [imageChangedEvent]="image2ChangedEvent"
-              [maintainAspectRatio]="true"
-              [aspectRatio]="4 / 3"
-              format="jpeg"
-              outputType="file"
-              (imageCropped)="image2Cropped($event)"
-            ></image-cropper>
+            <input type="file" nbInput fullWidth accept=".jpeg,.jpg,.bmp,.png" (change)="file2ChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="image2ChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+              format="jpeg" outputType="file" (imageCropped)="image2Cropped($event)"></image-cropper>
             <img class="imagePreview" [src]="image2LL" />
           </div>
         </div>
@@ -169,42 +88,18 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label>Image3</label>
-            <input
-              type="file"
-              nbInput
-              fullWidth
-              accept=".jpeg,.jpg,.bmp,.png"
-              (change)="file3ChangeEvent($event)"
-            />
-            <image-cropper
-              [imageChangedEvent]="image3ChangedEvent"
-              [maintainAspectRatio]="true"
-              [aspectRatio]="4 / 3"
-              format="jpeg"
-              outputType="file"
-              (imageCropped)="image3Cropped($event)"
-            ></image-cropper>
+            <input type="file" nbInput fullWidth accept=".jpeg,.jpg,.bmp,.png" (change)="file3ChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="image3ChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+              format="jpeg" outputType="file" (imageCropped)="image3Cropped($event)"></image-cropper>
             <img class="imagePreview" [src]="image3LL" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label>Image4</label>
-            <input
-              type="file"
-              nbInput
-              fullWidth
-              accept=".jpeg,.jpg,.bmp,.png"
-              (change)="file4ChangeEvent($event)"
-            />
-            <image-cropper
-              [imageChangedEvent]="image4ChangedEvent"
-              [maintainAspectRatio]="true"
-              [aspectRatio]="4 / 3"
-              format="jpeg"
-              outputType="file"
-              (imageCropped)="image4Cropped($event)"
-            ></image-cropper>
+            <input type="file" nbInput fullWidth accept=".jpeg,.jpg,.bmp,.png" (change)="file4ChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="image4ChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+              format="jpeg" outputType="file" (imageCropped)="image4Cropped($event)"></image-cropper>
             <img class="imagePreview" [src]="image4LL" />
           </div>
         </div>
@@ -213,20 +108,12 @@
         <div class="col-sm-12">
           <div class="form-group">
             <label>Short description</label>
-            <textarea
-              nbInput
-              fullWidth
-              formControlName="description"
-              placeholder="Short description about the harvest or agro product"
-            ></textarea>
-            <div
-              *ngIf="attempted && !!formControls.description.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.description.errors.required"
-                >A description about your harvest or agro product is
-                required</span
-              >
+            <textarea nbInput fullWidth formControlName="description"
+              placeholder="Short description about the harvest or agro product"></textarea>
+            <div *ngIf="attempted && !!formControls.description.errors" class="text-danger">
+              <span *ngIf="!!formControls.description.errors.required">A description about your harvest or agro product
+                is
+                required</span>
             </div>
           </div>
         </div>
@@ -235,41 +122,21 @@
         <div class="col-sm-6">
           <label>Organic or Inorganic</label>
           <div class="form-group">
-            <nb-select
-              fullWidth
-              placeholder="Organic or Inorganic"
-              formControlName="organic"
-            >
+            <nb-select fullWidth placeholder="Organic or Inorganic" formControlName="organic">
               <nb-option value="Organic">Organic</nb-option>
               <nb-option value="Inorganic">Inorganic</nb-option>
             </nb-select>
-            <div
-              *ngIf="attempted && !!formControls.organic.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.organic.errors.required"
-                >This field is required</span
-              >
+            <div *ngIf="attempted && !!formControls.organic.errors" class="text-danger">
+              <span *ngIf="!!formControls.organic.errors.required">This field is required</span>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label>Expire date</label>
-            <input
-              nbInput
-              fullWidth
-              type="date"
-              placeholder="Pick ad expire date"
-              formControlName="expireDate"
-            />
-            <div
-              *ngIf="attempted && !!formControls.expireDate.errors"
-              class="text-danger"
-            >
-              <span *ngIf="!!formControls.expireDate.errors.required"
-                >Expire date is required</span
-              >
+            <input nbInput fullWidth type="date" placeholder="Pick ad expire date" formControlName="expireDate" />
+            <div *ngIf="attempted && !!formControls.expireDate.errors" class="text-danger">
+              <span *ngIf="!!formControls.expireDate.errors.required">Expire date is required</span>
             </div>
           </div>
         </div>
