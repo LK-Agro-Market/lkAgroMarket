@@ -29,18 +29,26 @@
             <div class="card-body msg_card_body">
               <ul *ngFor="let msg of messages | async">
                 <li (click)="getPost(msg.id)">
-                  <div id="sid" *ngIf="msg.sid == this.currentId">
-                    {{ msg.content }}
-                    <img id="image" src="{{ msg.url }}" />
-                    <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf"> -->
+                  <div  *ngIf="msg.sid == this.currentId">
+                      <div id="sid" *ngIf="msg.type == 'text'" >
+                       {{ msg.content }}
+                       <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p>
+                    <img id="simage" src="{{ msg.url }}" style="max-width:350px"/>
                     <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p>
                   </div>
-                  <div id="rid" *ngIf="msg.sid != this.currentId">
+                    <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf"> -->
+                    <!-- <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p> -->
+                  </div><br><br>
+                  <div  *ngIf="msg.sid != this.currentId">
+                    <div id="rid" *ngIf="msg.type == 'text'">
                     {{ msg.content }}
-                    <img id="image" src="{{ msg.url }}" />
+                    <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p>
+                      <img id="rimage" src="{{ msg.url }}" style="max-width:350px" />
+                      <p id="stime">{{ msg.time | date: 'h:mm a ' }}</p>
+                    </div>
                     <!-- <embed  width="191" height="207" name="plugin" src="msg.url" type="application/pdf">  -->
-                    <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>
-                  </div>
+                    <!-- <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p> -->
+                  </div><br><br>
                 </li>
               </ul>
             </div>

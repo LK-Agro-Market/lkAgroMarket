@@ -3,7 +3,7 @@ nb-sidebar {
   // background-color: rgb(195, 241, 202);
 }
 nb-card {
-  width: 1200px;
+  width: 1100px;
   background-color: #9bb3b8;
 }
 nb-card nb-icon {
@@ -59,6 +59,8 @@ ul li {
   float: left;
   margin-bottom: 5px;
   padding: 10px 10px;
+  // border: 30px 30px;
+  // border-color: #05728f;
 }
 // #content {
 //   background-color: #94adf0;
@@ -66,13 +68,28 @@ ul li {
 //   color:#0b0c0e;
 // }
 #stime {
-  text-align: left;
+ // text-align: left;
+  float: right;
 }
 #rtime {
-  text-align: right;
+ // text-align: right;
+  float: left;
 }
-#image {
+#simage {
   border-radius: 5%;
+  height: 200px;
+  width: 400px;
+  float: right;
+  padding: 10px 10px;
+//  text-align: right; 
+}
+#rimage {
+  border-radius: 5%;
+  height: 200px;
+  width: 400px;
+  float: left;
+  padding: 10px 10px;
+ // text-align: left;
 }
 #avatar {
   float: left;
@@ -87,7 +104,7 @@ ul li {
   background-color: rgba(0, 0, 0, 0.4) !important;
 }
 .msg_card_body {
-  width: 1100px;
+  width: 1000px;
   height: 600px;
   overflow-y: auto;
 }
