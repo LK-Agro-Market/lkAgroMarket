@@ -1,19 +1,11 @@
 <div class="card-cantainer">
   <nb-accordion>
     <nb-accordion-item>
-      <nb-accordion-item-header
-        id="t-header"
-        (click)="viewButton = !viewButton"
-        *ngIf="item"
-      >
+      <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="item">
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
-              <img
-                class="pro-img"
-                src="{{ item.userImage }}"
-                alt="Profile image"
-              />
+              <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
                 <a href="#" class="pro-name" (click)="toggleMain()">
                   {{ item.userName }}
@@ -23,26 +15,14 @@
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
                 <div class="float-right like-container">
-                  <button
-                    nbButton
-                    ghost
-                    status="success"
-                    size="medium"
-                    class="float-right btn-like"
-                  >
+                  <button nbButton ghost status="success" size="medium" class="float-right btn-like">
                     <nb-icon icon="checkmark"></nb-icon>
                   </button>
                   <p class="count-like">7</p>
-                  <button
-                    nbButton
-                    ghost
-                    status="info"
-                    size="medium"
-                    class="float-right btn-com"
-                  >
+                  <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                     <nb-icon icon="email"></nb-icon>
                   </button>
-                  <p class="count-com">15</p>
+                  <p class="count-com" >{{count}}</p>
                 </div>
               </div>
             </div>
@@ -50,33 +30,17 @@
               <span id="postTitle"> {{ item.title }} </span>
               <hr />
               <div class="card-fotter-container">
-                <button
-                  nbButton
-                  status="primary"
-                  outline
-                  size="small"
-                  class="view-btn"
-                  (click)="toggleMain()"
-                >
+                <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
                   View {{ viewButton ? 'More' : 'Less' }}
                 </button>
-                <button
-                  nbButton
-                  *ngIf="true"
-                  status="primary"
-                  size="small"
-                  class="edit-btn"
-                >
+                <button nbButton *ngIf="true" status="primary" size="small" class="edit-btn" [hidden]="!showBtn">
                   Edit
                 </button>
-                <button
-                  *ngIf="true"
-                  nbButton
-                  status="danger"
-                  size="small"
-                  class="end-btn"
-                >
+                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn" (click)="endOrViewPost()">
                   End
+                </button>
+                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn" (click)="deletePost()">
+                  Delete
                 </button>
               </div>
             </div>
@@ -86,41 +50,21 @@
       <nb-accordion-item-body>
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
-        <form
-          [formGroup]="commentForm"
-          novalidate
-          (ngSubmit)="onCreate()"
-          #commform="ngForm"
-        >
+        <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
-            <textarea
-              class="form-control"
-              formControlName="comment"
-              nbInput
-              fullWidth
-              placeholder="Join the discussion..."
-              status="primary"
-              required
-              style="height: 40px;"
-            >
+            <textarea class="form-control" formControlName="comment" nbInput fullWidth
+              placeholder="Join the discussion..." status="primary" required style="height: 40px;" [disabled]="isEnd">
             </textarea>
-            <button
-              nbButton
-              status="primary"
-              outline
-              size="small"
-              class="float-right comment-btn"
-              size="small"
-            >
+            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small" [disabled]="isEnd" >
               Comment
             </button>
           </div>
         </form>
         <hr />
         <div class="comment-sec">
-          <p>Comments</p>
+          <p class="comment-title">Comments</p>
           <div *ngFor="let comment of comments">
-            <app-comment [comment]="comment"></app-comment>
+            <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>
         </div>
       </nb-accordion-item-body>

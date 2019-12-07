@@ -18,6 +18,15 @@ export class ForumComponent implements OnInit {
   showBuyer = true;
   showMyPost = false;
 
+  @ViewChild('item', { static: false }) accordion;
+
+  constructor(
+    private forumService: ForumService
+  ) {}
+
+  user: User = JSON.parse(localStorage.getItem('user'));
+  formControls = this.discussionForm.controls;
+
   get title() {
     return this.discussionForm.get('title');
   }
@@ -25,30 +34,19 @@ export class ForumComponent implements OnInit {
     return this.discussionForm.get('des');
   }
 
-  user: User = JSON.parse(localStorage.getItem('user'));
-  formControls = this.discussionForm.controls;
-
-  @ViewChild('item', { static: false }) accordion;
-
   toggle() {
     this.accordion.toggle();
   }
 
-  constructor(
-    private forumService: ForumService
-  ) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   changePostType(showMyPost: boolean) {
     this.showMyPost = showMyPost;
   }
 
-//   showToast(status) {
-// //
-//   }
-
   onCreate() {
+    // create  post
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
@@ -68,7 +66,8 @@ export class ForumComponent implements OnInit {
           userName,
           userImage,
           showFarmer,
-          showBuyer
+          showBuyer,
+          false,
         );
         // this.showToast('success');
         this.title.setValue('');
@@ -80,4 +79,5 @@ export class ForumComponent implements OnInit {
     } else {
     }
   }
+
 }
