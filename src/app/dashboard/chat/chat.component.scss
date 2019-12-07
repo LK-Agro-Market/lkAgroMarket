@@ -50,6 +50,7 @@ ul li {
   float: right;
   margin-bottom: 5px;
   padding: 10px 10px;
+//  position: 
 }
 #rid {
   text-align: left;
@@ -68,29 +69,27 @@ ul li {
 //   color:#0b0c0e;
 // }
 #stime {
- // text-align: left;
-  float: right;
+  text-align: left;
 }
 #rtime {
- // text-align: right;
-  float: left;
+  text-align: right;
 }
-#simage {
+#image {
   border-radius: 5%;
-  height: 200px;
-  width: 400px;
-  float: right;
-  padding: 10px 10px;
+  // height: 200px;
+  // width: 400px;
+  // float: right;
+  // padding: 10px 10px;
 //  text-align: right; 
 }
-#rimage {
-  border-radius: 5%;
-  height: 200px;
-  width: 400px;
-  float: left;
-  padding: 10px 10px;
- // text-align: left;
-}
+// #rimage {
+//   border-radius: 5%;
+//   height: 200px;
+//   width: 400px;
+//   float: left;
+//   padding: 10px 10px;
+//  // text-align: left;
+// }
 #avatar {
   float: left;
   max-width: 40px;
