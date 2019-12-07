@@ -34,7 +34,7 @@ export class ForumService {
       showFarmer: showFarmers,
       showBuyer: showBuyers,
       endThread: isEnd,
-      filePath: path,
+      images: path,
     });
   }
 

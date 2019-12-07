@@ -3,9 +3,9 @@ import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { finalize, first, tap } from 'rxjs/operators';
+import { mergeMap, map, finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum',
@@ -21,16 +21,14 @@ export class ForumComponent implements OnInit {
   showFarmer = true;
   showBuyer = true;
   showMyPost = false;
-
-  tasks: Observable<any>;
+  tasks: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
   fileRef: AngularFireStorageReference;
   isHovering: boolean;
-  path;
-  url;
-  isFileAdd = false;
-  fileSet: FileList;
+  downUrl;
+  urlList: any[];
+  fileSet: File[] = [];
 
   @ViewChild('item', { static: false }) accordion;
 
@@ -65,31 +63,20 @@ export class ForumComponent implements OnInit {
     this.isHovering = event;
   }
 
-  checkFiles(event: FileList) {
-    if (event.length === 0) {
-      this.isFileAdd = false;
-    } else {
-      console.log('file add');
-      this.isFileAdd = true;
-      this.fileSet = event;
+  getImg(files: FileList) {
+    for (let i = 0; i < files.length; i++) {
+      this.fileSet.push(files.item(i));
+      const path = `forum/post/${Date.now()}_${files.item(i).name}`;
+      const fileRef = this.storage.ref(path);
+      this.tasks = this.storage.upload(path, files.item(i));
+      this.percentage = this.tasks.percentageChanges();
+      this.tasks.snapshotChanges().pipe(
+        finalize( async () =>  {
+          this.downUrl = await fileRef.getDownloadURL().toPromise();
+          console.log(i + '=======' + this.downUrl);
+        }),
+      ).subscribe();
     }
-  }
-
-  uploadImage(event: FileList) {
-    const file = event.item(0);
-
-    if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type ');
-      return;
-    }
-    this.path = `forum/post/${new Date().getTime()}_${file.name}`;
-    this.fileRef = this.storage.ref(this.path);
-    const customMetadata = { app: 'My AngularFire-powered PWA!' };
-    const task = this.storage.upload(this.path, file, { customMetadata });
-
-    this.percentage = task.percentageChanges();
-    this.snapshot = task.snapshotChanges();
-    return task.snapshotChanges();
   }
 
   isActive(snapshot) {
@@ -97,27 +84,11 @@ export class ForumComponent implements OnInit {
   }
 
   onCreate() {
-    if (this.isFileAdd) {
-      this.uploadImage(this.fileSet).pipe(tap(c => console.log(c))).subscribe({
-        next: (p) => {},
-        error: (err) => {},
-        complete: () => {
-          const url = this.fileRef.getDownloadURL();
-          if (url) {
-            url.subscribe(downUrl => {
-              this.url = downUrl;
-              this.uploadPost();
-            });
-          }
-        }
-      });
-    } else {
-      this.uploadPost();
-    }
+    this.uploadPost();
   }
 
   uploadPost() {
-    // create  post
+  // create  post
 
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
@@ -127,14 +98,8 @@ export class ForumComponent implements OnInit {
     const userImage = this.user.photoURL;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
-    let imageURL;
-    if (this.isFileAdd) {
-      imageURL = this.ur;
-    } else {
-      imageURL = 'null';
-    }
+    const imageURL = 'asdadsadasdads';
 
-    console.log(imageURL);
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         this.forumService.createPost(

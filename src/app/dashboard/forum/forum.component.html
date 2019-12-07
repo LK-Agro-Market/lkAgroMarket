@@ -24,10 +24,10 @@
                   style="margin-left: 10px;">Show Buyers
                 </nb-checkbox>
 
-                <div class="dropzone" appFileUpload (hovered)="toggleHover($event)" (dropped)="checkFiles($event)" [class.hovering]="isHovering">
+                <div class="dropzone" appFileUpload (hovered)="toggleHover($event)" (dropped)="getImg($event)" [class.hovering]="isHovering">
                   <div class="file">
                     <label class="file-label">
-                      <input class="file-input" type="file" (change)="checkFiles($event.target.files)">
+                      <input class="file-input" type="file" (change)="getImg($event.target.files)">
                       <span class="file-cta"> 
                       </span>
                     </label>
@@ -38,6 +38,7 @@
                   style="margin-top: 5px;" [disabled]="!discussionForm.valid">
                   Submit
                 </button>
+
               </div>
             </form>
           </nb-accordion-item-body>
