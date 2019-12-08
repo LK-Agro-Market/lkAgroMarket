@@ -4,8 +4,7 @@
       <nb-list>
         <nb-list-item *ngFor="let u of users | async">
           <button
-            nbButton
-            fullwidth
+          class="btn btn-default"
             status="basic"
             (click)="UserClicked(u)"
             *ngIf="user.uid != u.uid"
@@ -22,6 +21,7 @@
           <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
         </nb-card-body>
       </nb-card>
+      <!--  -->
 
       <div class="container">
         <div class="row">
@@ -29,20 +29,33 @@
             <div class="card-body msg_card_body">
               <ul *ngFor="let msg of messages | async">
                 <li (click)="getPost(msg.id)">
-                  <div id= "sid" *ngIf="msg.sid == this.currentId">
-                    <div *ngIf = "msg.type == 'text'">
-                  {{msg.content}}
-                </div>
-                  <img id="image" src="{{msg.url}}" style="max-width:350px;">
-                  <p id="stime"> {{msg.time | date:'h:mm a '}}</p> 
-                </div> 
-                <div id= "rid" *ngIf="msg.sid != this.currentId">
+                    
+                  <div  id= "sid" *ngIf="msg.sid == this.currentId" class="d-flex justify-content-end mb-6">
+                      
+                      <div id="scontent" class="p-3 mb-2 bg-primary text-white">
+                          <div *ngIf = "msg.type == 'text'" >
+                              {{msg.content}}
+                            </div>
+                          <img id="image" src="{{msg.url}}" style="max-width:350px;">
+                          
+                          <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
+                        </div>
+                  </div>
+                
+                    
+                
+                <div  id= "rid" *ngIf="msg.sid != this.currentId" class="d-flex justify-content-start mb-6">
+                    <img src= "{{avatar}}" alt="Avatar" class="avatar">
+                    <div id="rcontent" class="p-3 mb-2 bg-light text-dark">
                     <div *ngIf = "msg.type == 'text'">
                         {{msg.content}}
                       </div>
                     <img id="image" src="{{msg.url}}" style="max-width:350px;">
+                   
                     <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
-                  </div> 
+                  </div>
+                    </div>
+                  
                 </li>
               </ul>
             </div>
@@ -71,15 +84,7 @@
           </div>
         </div>
       </div>
-      <!-- <nb-card>
-      <nb-card-body>
-        <input
-          type="file"
-          (change)="uploadFile($event)"
-          accept=".png,.jpg,.pdf,.mp4,.mp3,.docx,.pptx,.gif"
-        />
-      </nb-card-body>
-    </nb-card> -->
+      
     </nb-layout-column>
   </nb-layout>
 </div>

@@ -1,73 +1,64 @@
 nb-sidebar {
-  width: 400px;
-  // background-color: rgb(195, 241, 202);
+  width: 500px;
 }
 nb-card {
   width: 1100px;
-  background-color: #9bb3b8;
 }
 nb-card nb-icon {
   float: right;
   font-size: 2rem;
   margin-left: 50px;
-  // color: blue;
-}
-nb-chat-form {
-  // color: rgb(19, 231, 83);
-}
-nb-layout-column nb-card {
-  //  background-color: rgb(71, 211, 106);
 }
 nb-list {
-  width: 400px;
+  width: 600px;
 }
 button-filled-basic-background-color {
   background-color: #edf1f7;
 }
 nb-list nb-list-item {
-  width: 400px;
+  width: 600px;
 }
 ul {
   list-style-type: none;
   width: 100%;
   margin: 0;
   padding: 0;
+  align-items: baseline;
 }
 ul li {
-  //  background-color:#f8f9fc;
+  width: 100%;
   padding: 10px;
-  // margin-bottom:5px;
   color: #0b0c0e;
-  // list-style-type:none;
-  // width: 1000px;
-  // border-radius: 50%;
+  align-items: baseline;
 }
-#sid {
-  text-align: right;
-  background-color: #dedfe2;
-  border-radius: 20px;
-  width: 600px;
-  float: right;
-  margin-bottom: 5px;
-  padding: 10px 10px;
-//  position: 
-}
-#rid {
-  text-align: left;
-  background-color: #94adf0;
-  border-radius: 20px;
-  width: 600px;
-  float: left;
-  margin-bottom: 5px;
-  padding: 10px 10px;
-  // border: 30px 30px;
-  // border-color: #05728f;
-}
-// #content {
-//   background-color: #94adf0;
-//   padding:10px 10px;
-//   color:#0b0c0e;
-// }
+ #sid {
+  margin-top: auto;
+  margin-left: 10px;
+   text-align: right;
+   border-radius: 25px;
+   width: 500px;
+   float: right;
+   padding: 10px 10px;
+ }
+ #rid {
+  margin-top: auto;
+  margin-left: 10px;
+   border-radius: 25px;
+   width: 500px;
+   padding: 10px 10px;
+ }
+ #rcontent{
+  margin-top: auto;
+  margin-left: 10px;
+   border-radius: 25px;
+   padding: 10px 10px;
+ }
+ #scontent{
+  margin-top: auto;
+  margin-left: 10px;
+   border-radius: 25px;
+   padding: 10px 10px;
+ }
 #stime {
   text-align: left;
 }
@@ -76,20 +67,7 @@ ul li {
 }
 #image {
   border-radius: 5%;
-  // height: 200px;
-  // width: 400px;
-  // float: right;
-  // padding: 10px 10px;
-//  text-align: right; 
 }
-// #rimage {
-//   border-radius: 5%;
-//   height: 200px;
-//   width: 400px;
-//   float: left;
-//   padding: 10px 10px;
-//  // text-align: left;
-// }
 #avatar {
   float: left;
   max-width: 40px;
@@ -103,7 +81,7 @@ ul li {
   background-color: rgba(0, 0, 0, 0.4) !important;
 }
 .msg_card_body {
-  width: 1000px;
+  width: 1100px;
   height: 600px;
   overflow-y: auto;
 }
@@ -121,7 +99,6 @@ ul li {
   height: 33px;
   position: relative;
   right: 0;
-  //  top: 11px;
   width: 33px;
 }
 .input_msg_write input {
@@ -131,4 +108,10 @@ ul li {
 }
 #A {
   position: fixed;
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
