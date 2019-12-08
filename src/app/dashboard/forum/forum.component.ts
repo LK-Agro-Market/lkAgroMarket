@@ -21,14 +21,13 @@ export class ForumComponent implements OnInit {
   showFarmer = true;
   showBuyer = true;
   showMyPost = false;
+
   tasks: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
   fileRef: AngularFireStorageReference;
   isHovering: boolean;
   downUrl;
-  urlList: any[];
-  fileSet: File[] = [];
 
   @ViewChild('item', { static: false }) accordion;
 
@@ -65,7 +64,6 @@ export class ForumComponent implements OnInit {
 
   getImg(files: FileList) {
     for (let i = 0; i < files.length; i++) {
-      this.fileSet.push(files.item(i));
       const path = `forum/post/${Date.now()}_${files.item(i).name}`;
       const fileRef = this.storage.ref(path);
       this.tasks = this.storage.upload(path, files.item(i));
@@ -73,7 +71,6 @@ export class ForumComponent implements OnInit {
       this.tasks.snapshotChanges().pipe(
         finalize( async () =>  {
           this.downUrl = await fileRef.getDownloadURL().toPromise();
-          console.log(i + '=======' + this.downUrl);
         }),
       ).subscribe();
     }
@@ -98,7 +95,7 @@ export class ForumComponent implements OnInit {
     const userImage = this.user.photoURL;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
-    const imageURL = 'asdadsadasdads';
+    const imageURL = 'asdaasdads';
 
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
