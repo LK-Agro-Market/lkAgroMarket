@@ -13,7 +13,7 @@ export class CommentComponent implements OnInit {
   replies: any[];
   showBtn;
   isEnd;
-  count;
+  repCount;
 
   @Input() comment: any;
   @Input() postId: any;
@@ -98,7 +98,7 @@ export class CommentComponent implements OnInit {
 
   getReplyCount() {
     this.forumService.getCount('reply', 'commentID', this.comment.key).subscribe(count => {
-      this.count = count;
+      this.repCount = count;
     });
   }
 }

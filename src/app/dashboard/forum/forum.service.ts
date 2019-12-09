@@ -13,7 +13,7 @@ export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
   tasks: AngularFireUploadTask;
-  percentage: Observable<number>;
+  // percentage: Observable<number>;
   snapshot: Observable<any>;
   fileRef: AngularFireStorageReference;
   downUrl;
@@ -96,7 +96,7 @@ export class ForumService {
       const path = `forum/` + colName + `/${Date.now()}_${files.item(i).name}`;
       const fileRef = this.storage.ref(path);
       this.tasks = this.storage.upload(path, files.item(i));
-      this.percentage = this.tasks.percentageChanges();
+      // this.percentage = this.tasks.percentageChanges();
       this.tasks.snapshotChanges().pipe(
         finalize(async () => {
           this.downUrl = await fileRef.getDownloadURL().toPromise();

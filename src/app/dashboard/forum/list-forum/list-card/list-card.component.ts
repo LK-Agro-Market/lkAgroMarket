@@ -16,7 +16,7 @@ export class ListCardComponent implements OnInit {
   userImageURL;
   showBtn;
   isEnd;
-  count;
+  commCount;
   postId;
 
   @Input() item: any;
@@ -104,7 +104,7 @@ export class ListCardComponent implements OnInit {
 
   getCommentCount() { // get comment count
     this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
-      this.count = count;
+      this.commCount = count;
     });
   }
 
