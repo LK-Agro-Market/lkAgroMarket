@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireList, snapshotChanges } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { map, finalize } from 'rxjs/operators';
+import { AngularFireUploadTask, AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +12,22 @@ import { map } from 'rxjs/operators';
 export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
+  tasks: AngularFireUploadTask;
+  percentage: Observable<number>;
+  snapshot: Observable<any>;
+  fileRef: AngularFireStorageReference;
+  downUrl;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore,
+              private storage: AngularFireStorage,
+    ) { }
+
+  getPostId() {
+    return this.afs.createId();
+  }
 
   createPost(
+    key,
     postTitle,
     des,
     dateTime,
@@ -22,9 +37,8 @@ export class ForumService {
     showFarmers,
     showBuyers,
     isEnd,
-    path,
   ) {
-    return this.afs.collection('forum').add({
+    return this.afs.collection('post').doc(key).set({
       title: postTitle,
       description: des,
       date: dateTime,
@@ -34,7 +48,6 @@ export class ForumService {
       showFarmer: showFarmers,
       showBuyer: showBuyers,
       endThread: isEnd,
-      images: path,
     });
   }
 
@@ -76,12 +89,32 @@ export class ForumService {
       userName: replyUserName,
       userImage: replyUserImage
     });
-    console.log('done');
+  }
+
+  uploadImg(files: FileList, colName, key) {
+    for (let i = 0; i < files.length; i++) {
+      const path = `forum/` + colName + `/${Date.now()}_${files.item(i).name}`;
+      const fileRef = this.storage.ref(path);
+      this.tasks = this.storage.upload(path, files.item(i));
+      this.percentage = this.tasks.percentageChanges();
+      this.tasks.snapshotChanges().pipe(
+        finalize(async () => {
+          this.downUrl = await fileRef.getDownloadURL().toPromise();
+          console.log(this.downUrl);
+          await this.afs.collection(colName)
+            .doc(key)
+            .set(
+              { images: firestore.FieldValue.arrayUnion(this.downUrl) },
+              { merge : true }
+            );
+        }),
+      ).subscribe();
+    }
   }
 
   getPost() { // get all
     return this.afs
-      .collection('forum', ref => ref.orderBy('date', 'desc'))
+      .collection('post', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -96,7 +129,7 @@ export class ForumService {
 
   getPostByID(userId) { // get post by user id
     return this.afs
-      .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
+      .collection('post', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>

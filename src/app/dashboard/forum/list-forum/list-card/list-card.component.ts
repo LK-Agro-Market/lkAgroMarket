@@ -92,13 +92,13 @@ export class ListCardComponent implements OnInit {
   }
 
   endOrViewPost() { // change post (end or start)
-    this.forumService.changeEndProperty('forum', this.item.key, !this.item.endThread);
+    this.forumService.changeEndProperty('post', this.item.key, !this.item.endThread);
   }
 
   deletePost() {  // Delete post
     this.forumService.deleteReplyList('postID', this.item.key).subscribe();
     this.forumService.deleteCommentList('postID', this.item.key).subscribe();
-    this.forumService.deleteDocment('forum', this.item.key);
+    this.forumService.deleteDocment('post', this.item.key);
     this.getCommentCount();
   }
 
