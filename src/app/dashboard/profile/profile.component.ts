@@ -1,10 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
 import { Subscription } from 'rxjs';
 import { ProfileService } from './profile.service';
@@ -72,8 +68,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 .getFollowers(this.profileOwnerUser)
                 .subscribe(follows => {
                   this.numOfFollowers = follows.length;
-                  const viewerInFollowers = follows.filter((follow)=>{
-                    return follow.follower == this.viewer.uid
+                  const viewerInFollowers = follows.filter(follow => {
+                    return follow.follower == this.viewer.uid;
                   });
                   if (viewerInFollowers.length > 0) {
                     this.isViewerFollowThisProfile = true;
@@ -170,13 +166,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   followUser() {
     this.subscriptions.push(
-    this.profileService.followUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+      this.profileService
+        .followUser(this.profileOwnerUser, this.viewer.uid)
+        .subscribe()
     );
   }
 
   unfollowUser() {
     this.subscriptions.push(
-      this.profileService.unfollowUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+      this.profileService
+        .unfollowUser(this.profileOwnerUser, this.viewer.uid)
+        .subscribe()
     );
   }
 }

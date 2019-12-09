@@ -54,6 +54,8 @@ import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
+import { StatsComponent } from './supply-ad/stats/stats.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply
     CreateDemandAdComponent,
     ListDemandAdComponent,
     ReplyComponent,
-    UserProfileCardComponent
+    UserProfileCardComponent,
+    StatsComponent
   ],
   imports: [
     CommonModule,
@@ -104,7 +107,8 @@ import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply
     NbCheckboxModule,
     NbMenuModule,
     NbListModule,
-    AgmCoreModule.forRoot(environment.googleMap)
+    AgmCoreModule.forRoot(environment.googleMap),
+    ChartsModule
   ],
   providers: []
 })
