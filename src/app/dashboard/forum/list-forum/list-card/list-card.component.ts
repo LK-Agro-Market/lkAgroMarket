@@ -42,7 +42,7 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-    this.imageCount = this.item.images.length;
+
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }

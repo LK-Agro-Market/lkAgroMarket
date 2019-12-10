@@ -22,6 +22,8 @@ export class ForumComponent implements OnInit {
   urlList: FileList;
 
   @ViewChild('item', { static: false }) accordion;
+  @ViewChild('imageDrop', { static: false }) imageDrop;
+
 
   constructor(
     private forumService: ForumService,
@@ -63,6 +65,33 @@ export class ForumComponent implements OnInit {
   getFile(files: FileList) {
     if (files.length > 0) {
       this.urlList = files;
+    }
+  }
+
+  allowDrop(e) {
+    e.preventDefault();
+  }
+
+  drop(e) {
+    e.preventDefault();
+    this.checkfiles(e.dataTransfer.files);
+  }
+
+  checkfiles(files: FileList) {
+      this.readfiles(files);
+  }
+
+  readfiles(files: FileList) {
+    for ( let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+      reader.onload =  (event) => {
+        const image = new Image();
+        const fileReader = event.target as FileReader;
+        image.src = fileReader.result as string;
+        image.width = 100;
+        this.imageDrop.nativeElement.appendChild(image);
+      };
+      reader.readAsDataURL(files[i]);
     }
   }
 
