@@ -52,10 +52,10 @@
       <nb-accordion-item-body>
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
-        <div *ngFor="">
-          <img [src]="item.images[i]" style="width: 200px; height: auto;"><br>
+        <!-- <div *ngFor="let i of imageCount">
+          <img src="item.images[i]" style="width: 200px; height: auto; margin-left: 5px;"><br>
         </div>
-        <hr />
+        <hr /> -->
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
             <textarea class="form-control" formControlName="comment" nbInput fullWidth

@@ -95,7 +95,7 @@ export class ForumComponent implements OnInit {
         // this.showToast('success');
         this.title.setValue('');
         this.des.setValue('');
-        // this.toggle();
+        this.toggle();
         if (this.urlList != null) {
           this.forumService.uploadImg(this.urlList, 'post', id);
         }

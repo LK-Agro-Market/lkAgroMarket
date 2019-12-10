@@ -16,8 +16,9 @@ export class ListCardComponent implements OnInit {
   userImageURL;
   showBtn;
   isEnd;
-  commCount;
   postId;
+  commCount;
+  imageCount;
 
   @Input() item: any;
   @ViewChild('item', { static: false }) accordion;
@@ -41,7 +42,7 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-
+    this.imageCount = this.item.images.length;
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
