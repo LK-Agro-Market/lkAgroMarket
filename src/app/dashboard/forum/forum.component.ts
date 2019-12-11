@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
+import { Button } from 'protractor';
 
 @Component({
   selector: 'app-forum',
@@ -17,13 +18,13 @@ export class ForumComponent implements OnInit {
   showFarmer = true;
   showBuyer = true;
   showMyPost = false;
-
+  isShow = false;
   isHovering: boolean;
   urlList: FileList;
+  files: File[] = [];
 
   @ViewChild('item', { static: false }) accordion;
   @ViewChild('imageDrop', { static: false }) imageDrop;
-
 
   constructor(
     private forumService: ForumService,
@@ -58,42 +59,54 @@ export class ForumComponent implements OnInit {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
   onCreate() {
     this.uploadPost();
   }
 
-  getFile(files: FileList) {
-    if (files.length > 0) {
-      this.urlList = files;
-    }
-  }
+  // getFile(files: FileList) {
+  //   if (files.length > 0) {
+  //     this.urlList = files;
+  //     this.isShow = true;
+  //   }
+  // }
 
-  allowDrop(e) {
-    e.preventDefault();
-  }
+  // allowDrop(e) {
+  //   e.preventDefault();
+  // }
 
-  drop(e) {
-    e.preventDefault();
-    this.checkfiles(e.dataTransfer.files);
-  }
+  // drop(e) {
+  //   e.preventDefault();
+  //   this.readfiles(e.dataTransfer.files);
+  // }
 
-  checkfiles(files: FileList) {
-      this.readfiles(files);
-  }
+  // checkfiles(files: FileList) {
+  //   this.readfiles(files);
+  // }
 
-  readfiles(files: FileList) {
-    for ( let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.onload =  (event) => {
-        const image = new Image();
-        const fileReader = event.target as FileReader;
-        image.src = fileReader.result as string;
-        image.width = 100;
-        this.imageDrop.nativeElement.appendChild(image);
-      };
-      reader.readAsDataURL(files[i]);
-    }
-  }
+  // readfiles(files: FileList) {
+  //   for ( let i = 0; i < files.length; i++) {
+  //     const reader = new FileReader();
+  //     reader.onload =  (event) => {
+  //       const image = new Image();
+  //       // const btn =  new Button();
+  //       const fileReader = event.target as FileReader;
+  //       image.src = fileReader.result as string;
+  //       image.width = 100;
+  //       this.imageDrop.nativeElement.appendChild(image);
+  //     };
+  //     reader.readAsDataURL(files[i]);
+  //   }
+  // }
 
   uploadPost() {
     // create  post
@@ -122,12 +135,11 @@ export class ForumComponent implements OnInit {
           false,
         );
         // this.showToast('success');
-        this.title.setValue('');
-        this.des.setValue('');
+        this.discussionForm.reset();
         this.toggle();
-        if (this.urlList != null) {
-          this.forumService.uploadImg(this.urlList, 'post', id);
-        }
+        // if (this.urlList != null) {
+        //   this.forumService.uploadImg(this.urlList, 'post', id);
+        // }
 
       } else {
         // else of check farmers and buyers
