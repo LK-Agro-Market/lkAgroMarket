@@ -28,6 +28,8 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -54,7 +56,6 @@ import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
-import { FileUploadDirective } from './forum/file-upload.directive';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,6 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     ListDemandAdComponent,
     ReplyComponent,
     UserProfileCardComponent,
-    FileUploadDirective,
   ],
   imports: [
     CommonModule,
@@ -107,7 +107,8 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     NbCheckboxModule,
     NbMenuModule,
     NbListModule,
-    AgmCoreModule.forRoot(environment.googleMap)
+    AgmCoreModule.forRoot(environment.googleMap),
+    NgxDropzoneModule
   ],
   providers: []
 })

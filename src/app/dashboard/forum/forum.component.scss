@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: row
 }
-
 .header{
   display: flex;
   flex-direction: row;
@@ -49,25 +48,7 @@
 .side-bar{
   margin-top: 20px;
 }
-.dropzone { 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column; 
-  height: 150px;
-  border: 2px dashed #f16624;
-  border-radius: 5px;
-  background: white;
-  margin: 10px 0;
-
-  &.hovering {
-      border: 2px solid #f16624;
-      color: #dadada !important;
-  }
-}
-
-#imageDrop{
-  margin-left: 10px;
-  display: flex;
-  flex-direction: row;
+.dropzone{
+  margin-top: 20px;
+  height: 200px;
 }

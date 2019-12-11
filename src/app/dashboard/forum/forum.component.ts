@@ -20,8 +20,7 @@ export class ForumComponent implements OnInit {
   showMyPost = false;
   isShow = false;
   isHovering: boolean;
-  urlList: FileList;
-  files: File[] = [];
+  images: File[] = [];
 
   @ViewChild('item', { static: false }) accordion;
   @ViewChild('imageDrop', { static: false }) imageDrop;
@@ -55,58 +54,17 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
-  }
-
   onSelect(event) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
+    this.images.push(...event.addedFiles);
   }
 
   onRemove(event) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+    this.images.splice(this.images.indexOf(event), 1);
   }
 
   onCreate() {
     this.uploadPost();
   }
-
-  // getFile(files: FileList) {
-  //   if (files.length > 0) {
-  //     this.urlList = files;
-  //     this.isShow = true;
-  //   }
-  // }
-
-  // allowDrop(e) {
-  //   e.preventDefault();
-  // }
-
-  // drop(e) {
-  //   e.preventDefault();
-  //   this.readfiles(e.dataTransfer.files);
-  // }
-
-  // checkfiles(files: FileList) {
-  //   this.readfiles(files);
-  // }
-
-  // readfiles(files: FileList) {
-  //   for ( let i = 0; i < files.length; i++) {
-  //     const reader = new FileReader();
-  //     reader.onload =  (event) => {
-  //       const image = new Image();
-  //       // const btn =  new Button();
-  //       const fileReader = event.target as FileReader;
-  //       image.src = fileReader.result as string;
-  //       image.width = 100;
-  //       this.imageDrop.nativeElement.appendChild(image);
-  //     };
-  //     reader.readAsDataURL(files[i]);
-  //   }
-  // }
 
   uploadPost() {
     // create  post
@@ -137,9 +95,9 @@ export class ForumComponent implements OnInit {
         // this.showToast('success');
         this.discussionForm.reset();
         this.toggle();
-        // if (this.urlList != null) {
-        //   this.forumService.uploadImg(this.urlList, 'post', id);
-        // }
+        if (this.images != null) {
+        this.forumService.uploadImg(this.images, 'post', id);
+        }
 
       } else {
         // else of check farmers and buyers

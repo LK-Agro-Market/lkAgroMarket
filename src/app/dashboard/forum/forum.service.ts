@@ -90,25 +90,27 @@ export class ForumService {
     });
   }
 
-  // uploadImg(files: FileList, colName, key) {
-  //   for (let i = 0; i < files.length; i++) {
-  //     const path = `forum/` + colName + `/${Date.now()}_${files.item(i).name}`;
-  //     const fileRef = this.storage.ref(path);
-  //     this.tasks = this.storage.upload(path, files.item(i));
-  //     this.tasks.snapshotChanges().pipe(
-  //       finalize(async () => {
-  //         this.downUrl = await fileRef.getDownloadURL().toPromise();
-  //         console.log(this.downUrl);
-  //         await this.afs.collection(colName)
-  //           .doc(key)
-  //           .set(
-  //             { images: firestore.FieldValue.arrayUnion(this.downUrl) },
-  //             { merge : true }
-  //           );
-  //       }),
-  //     ).subscribe();
-  //   }
-  // }
+  uploadImg(files: File[], colName, key) {
+    for (let i = 0; i < files.length; i++) {
+      // console.log(files);
+      // console.log(files[i].name);
+      const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
+      const fileRef = this.storage.ref(path);
+      this.tasks = this.storage.upload(path, files[i]);
+      this.tasks.snapshotChanges().pipe(
+        finalize(async () => {
+          this.downUrl = await fileRef.getDownloadURL().toPromise();
+          console.log(this.downUrl);
+          await this.afs.collection(colName)
+            .doc(key)
+            .set(
+              { images: firestore.FieldValue.arrayUnion(this.downUrl) },
+              { merge : true }
+            );
+        }),
+      ).subscribe();
+    }
+  }
 
   getPost() { // get all
     return this.afs
