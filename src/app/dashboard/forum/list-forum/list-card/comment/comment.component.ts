@@ -14,6 +14,7 @@ export class CommentComponent implements OnInit {
   showBtn;
   isEnd;
   repCount;
+  count;
 
   @Input() comment: any;
   @Input() postId: any;
@@ -99,6 +100,7 @@ export class CommentComponent implements OnInit {
   getReplyCount() {
     this.forumService.getCount('reply', 'commentID', this.comment.key).subscribe(count => {
       this.repCount = count;
+      this.count = count;
     });
   }
 }

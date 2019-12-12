@@ -23,6 +23,7 @@
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-com">{{commCount}}</p>
+                  <p class="count-com" >{{count}}</p>
                 </div>
               </div>
             </div>
@@ -42,6 +43,10 @@
                 </button>
                 <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn"
                   [hidden]="!showBtn" (click)="deletePost()">
+                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn" (click)="endOrViewPost()">
+                  End
+                </button>
+                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn" (click)="deletePost()">
                   Delete
                 </button>
               </div>
@@ -59,6 +64,7 @@
             </textarea>
             <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
               [disabled]="isEnd">
+            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small" [disabled]="isEnd" >
               Comment
             </button>
           </div>

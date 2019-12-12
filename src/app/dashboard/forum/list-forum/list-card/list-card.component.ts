@@ -94,6 +94,7 @@ export class ListCardComponent implements OnInit {
 
   endOrViewPost() { // change post (end or start)
     this.forumService.changeEndProperty('post', this.item.key, !this.item.endThread);
+
   }
 
   deletePost() {  // Delete post
