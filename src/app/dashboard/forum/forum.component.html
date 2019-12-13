@@ -24,7 +24,7 @@
                   style="margin-left: 10px;">Show Buyers
                 </nb-checkbox>
 
-                <ngx-dropzone (change)="onSelect($event)" class="dropzone">
+                <ngx-dropzone (change)="onSelect($event)" class="dropzone" [expandable]="true">
                   <ngx-dropzone-label>Drop file hear </ngx-dropzone-label>
                   <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let image of images" [file]="image" [removable]="true" (removed)="onRemove(image)">
                     <ngx-dropzone-label>{{ image.name }} ({{ image.type }})</ngx-dropzone-label>
