@@ -50,24 +50,19 @@ export class ForumComponent implements OnInit {
     this.isHovering = event;
   }
 
-  changePostType(showMyPost: boolean) {
+  changePostType(showMyPost: boolean) { // set post type
     this.showMyPost = showMyPost;
   }
 
-  onSelect(event) {
+  onSelect(event) { // get upload file
     this.images.push(...event.addedFiles);
   }
 
-  onRemove(event) {
+  onRemove(event) { // remove upload file
     this.images.splice(this.images.indexOf(event), 1);
   }
 
-  onCreate() {
-    this.uploadPost();
-  }
-
-  uploadPost() {
-    // create  post
+  onCreate() { // crete post
     const id = this.forumService.getPostId();
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
@@ -96,7 +91,7 @@ export class ForumComponent implements OnInit {
         this.discussionForm.reset();
         this.toggle();
         if (this.images != null) {
-        this.forumService.uploadImg(this.images, 'post', id);
+          this.forumService.uploadImg(this.images, 'post', id);
         }
 
       } else {
@@ -107,6 +102,5 @@ export class ForumComponent implements OnInit {
       // else of form validation check
     }
   }
-
 
 }
