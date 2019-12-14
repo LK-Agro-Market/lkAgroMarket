@@ -66,7 +66,6 @@ export class ChatComponent {
     private location: Location
   ) {
     this.users = afs.collection('users').valueChanges();
-  //  this.file = afs.collection('files').valueChanges();
   }
   compFn = (a, b) => {
     if (a.time < b.time) {
@@ -134,7 +133,7 @@ export class ChatComponent {
       type: 'text'
     });
     this.resetForm();
-    this.location.replaceState('/chats');
+    this.location.replaceState('/chats', this.selectedUser);
   }
   resetForm() {
     this.content = '';
