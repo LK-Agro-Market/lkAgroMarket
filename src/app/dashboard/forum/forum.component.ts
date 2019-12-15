@@ -54,11 +54,9 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-  onSelect(event) { // get upload file
-    console.log(event.addedFiles.length);
+  onSelect(event) { // get inserted file
     for (let i = 0; i < event.addedFiles.length; i++) {
       if (event.addedFiles[i].type === 'image/jpeg' || event.addedFiles[i].type === 'image/png') {
-        console.log('asdsd' + i);
         this.images.push(event.addedFiles[i]);
       } else {
         // need to edit
