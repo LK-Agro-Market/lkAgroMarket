@@ -4,7 +4,7 @@
       <nb-list>
         <nb-list-item *ngFor="let u of users | async">
           <button
-          class="btn btn-default"
+            class="btn btn-default"
             status="basic"
             (click)="UserClicked(u)"
             *ngIf="user.uid != u.uid"
@@ -21,7 +21,6 @@
           <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
         </nb-card-body>
       </nb-card>
-     
 
       <div class="container">
         <div class="row">
@@ -29,64 +28,85 @@
             <div class="card-body msg_card_body">
               <ul *ngFor="let msg of messages | async">
                 <li (click)="getPost(msg.id)">
-                    
-                  <div  id= "sid" *ngIf="msg.sid == this.currentId" class="d-flex justify-content-end mb-6">
-                      
-                      <div *ngIf = "msg.type == 'text'" id="scontent" class="p-3 mb-2 bg-primary text-white">
-                          
-                              {{msg.content}}
-                            
-                          </div>
-                          <div *ngIf = "msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
-                          <img id="image" src="{{msg.url}}" style="max-width:350px;">
-                        </div>
-                          
-                        
-                        <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
+                  <div
+                    id="sid"
+                    *ngIf="msg.sid == this.currentId"
+                    class="d-flex justify-content-end mb-6"
+                  >
+                    <div
+                      *ngIf="msg.type == 'text'"
+                      id="scontent"
+                      class="p-3 mb-2 bg-primary text-white"
+                    >
+                      {{ msg.content }}
+                    </div>
+                    <div
+                      *ngIf="msg.type != 'text'"
+                      class="p-3 mb-2 bg-light text-white"
+                    >
+                      <img
+                        id="image"
+                        src="{{ msg.url }}"
+                        style="max-width:350px;"
+                      />
+                    </div>
+
+                    <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>
                   </div>
-                
-                    
-                
-                <div  id= "rid" *ngIf="msg.sid != this.currentId" class="d-flex justify-content-start mb-6">
-                    <img src= "{{avatar}}" alt="Avatar" class="avatar">
-                    <div *ngIf = "msg.type == 'text'" id="rcontent" class="p-3 mb-2 bg-light text-dark">
-              
-                        {{msg.content}}
-                     
+
+                  <div
+                    id="rid"
+                    *ngIf="msg.sid != this.currentId"
+                    class="d-flex justify-content-start mb-6"
+                  >
+                    <img src="{{ avatar }}" alt="Avatar" class="avatar" />
+                    <div
+                      *ngIf="msg.type == 'text'"
+                      id="rcontent"
+                      class="p-3 mb-2 bg-light text-dark"
+                    >
+                      {{ msg.content }}
                     </div>
-                    <div *ngIf = "msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
-                      <img id="image" src="{{msg.url}}" style="max-width:350px;">
+                    <div
+                      *ngIf="msg.type != 'text'"
+                      class="p-3 mb-2 bg-light text-white"
+                    >
+                      <img
+                        id="image"
+                        src="{{ msg.url }}"
+                        style="max-width:350px;"
+                      />
                     </div>
-                   
-                    
-                  
-                  <p id="rtime"> {{msg.time | date:'h:mm a '}}</p>
-                    </div>
-                  
+
+                    <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>
+                  </div>
                 </li>
               </ul>
             </div>
-                
-                <div class="input-group">
-                  <input id="messageArea"
-                  type="text"
-                  [(ngModel)]="content"
-                  class="form-control"
-                  placeholder="Type a message" 
-                />   
-                  <span class="msg_send_btn" class="input-group-addon btn btn-primary" (click)="sendMessage($event)"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
-              </div>
-                <input
-                  type="file"
-                  (change)="uploadFile($event)"
-                  accept=".png,.jpg"
-                />
-           
-         
+
+            <div class="input-group" style="width:900px;">
+              <input
+                type="text"
+                [(ngModel)]="content"
+                class="form-control"
+                placeholder="Type a message"
+              />
+              <span
+                class="msg_send_btn"
+                class="input-group-addon btn btn-primary"
+                (click)="sendMessage($event)"
+                ><i class="fa fa-paper-plane" aria-hidden="true"></i
+              ></span>
+            </div>
+
+            <input
+              type="file"
+              (change)="uploadFile($event)"
+              accept=".png,.jpg"
+            />
           </div>
         </div>
       </div>
-      
     </nb-layout-column>
   </nb-layout>
 </div>

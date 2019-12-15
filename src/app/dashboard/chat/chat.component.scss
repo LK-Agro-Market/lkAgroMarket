@@ -31,40 +31,40 @@ ul li {
   color: #0b0c0e;
   align-items: baseline;
 }
- #sid {
+#sid {
   margin-top: auto;
   margin-left: 10px;
-   text-align: right;
-   border-radius: 25px;
-   width: 600px;
-   float: right;
-   padding: 10px 10px;
- }
- #rid {
+  text-align: right;
+  border-radius: 25px;
+  width: 600px;
+  float: right;
+  padding: 10px 10px;
+}
+#rid {
   margin-top: auto;
   margin-left: 10px;
-   border-radius: 25px;
-   width: 600px;
-   padding: 10px 10px;
- }
- #rcontent{
+  border-radius: 25px;
+  width: 600px;
+  padding: 10px 10px;
+}
+#rcontent {
   margin-top: auto;
   margin-left: 10px;
-   border-radius: 25px;
-   padding: 10px 10px;
- max-width: 300px;
-  word-break: break-all;
-  text-align: left;
- }
- #scontent{
-  margin-top: auto;
-  margin-left: 10px;
-   border-radius: 25px;
-   padding: 10px 10px;
+  border-radius: 25px;
+  padding: 10px 10px;
   max-width: 300px;
   word-break: break-all;
   text-align: left;
- }
+}
+#scontent {
+  margin-top: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  padding: 10px 10px;
+  max-width: 300px;
+  word-break: break-all;
+  text-align: left;
+}
 #stime {
   text-align: left;
 }
@@ -81,11 +81,7 @@ ul li {
   margin-right: 20px;
   border-radius: 50%;
 }
-.card {
-  height: 500px;
-  border-radius: 15px !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
-}
+
 .msg_card_body {
   width: 1100px;
   height: 600px;
@@ -95,9 +91,7 @@ ul li {
   border-top: 1px solid #c4c4c4;
   position: relative;
 }
-#messageArea {
-  width: 1000px;
-}
+
 #A {
   position: fixed;
 }
