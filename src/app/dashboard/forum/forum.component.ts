@@ -55,7 +55,16 @@ export class ForumComponent implements OnInit {
   }
 
   onSelect(event) { // get upload file
-    this.images.push(...event.addedFiles);
+    console.log(event.addedFiles.length);
+    for (let i = 0; i < event.addedFiles.length; i++) {
+      if (event.addedFiles[i].type === 'image/jpeg' || event.addedFiles[i].type === 'image/png') {
+        console.log('asdsd' + i);
+        this.images.push(event.addedFiles[i]);
+      } else {
+        // need to edit
+        console.log('you can upload images only');
+      }
+    }
   }
 
   onRemove(event) { // remove upload file
