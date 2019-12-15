@@ -14,6 +14,8 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
   activeSupplyAdList: SupplyAd[];
+  soldSupplyAdList: SupplyAd[];
+  deletedSupplyAdList: SupplyAd[];
   processing = false;
 
   constructor(
@@ -25,6 +27,16 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.supplyAdService.getAds(this.user.uid, 'active').subscribe(res => {
         this.activeSupplyAdList = res;
+      })
+    );
+    this.subscriptions.push(
+      this.supplyAdService.getAds(this.user.uid, 'sold').subscribe(res => {
+        this.soldSupplyAdList = res;
+      })
+    );
+    this.subscriptions.push(
+      this.supplyAdService.getAds(this.user.uid, 'deleted').subscribe(res => {
+        this.deletedSupplyAdList = res;
       })
     );
   }

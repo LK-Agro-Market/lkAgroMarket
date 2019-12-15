@@ -187,7 +187,7 @@
             </div> -->
       </div>
       <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of activeSupplyAdList">
+        <div class="col-sm-4" *ngFor="let supplyAd of soldSupplyAdList">
           <div class="card">
             <img [src]="supplyAd.images[0]" class="card-img-top" />
             <nb-badge
@@ -294,7 +294,7 @@
             </div> -->
       </div>
       <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of activeSupplyAdList">
+        <div class="col-sm-4" *ngFor="let supplyAd of deletedSupplyAdList">
           <div class="card">
             <img [src]="supplyAd.images[0]" class="card-img-top" />
             <nb-badge
