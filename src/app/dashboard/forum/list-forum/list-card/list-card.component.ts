@@ -13,7 +13,7 @@ export class ListCardComponent implements OnInit {
   viewButton = true;
   comments: any[];
   cmntId: any;
-  userImageURL;
+  imageList: any[];
   showBtn;
   isEnd;
   postId;
@@ -42,7 +42,7 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-
+    this.imageList = this.item.images;
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }

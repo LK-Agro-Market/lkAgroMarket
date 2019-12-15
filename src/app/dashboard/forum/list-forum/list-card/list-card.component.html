@@ -52,6 +52,10 @@
       <nb-accordion-item-body>
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
+        <dir *ngFor="let image of imageList" style="display: flex; flex-direction: column;">
+          <img src="{{image}}" style="width: 300px; height: auto;">
+        </dir>
+        <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
             <textarea class="form-control" formControlName="comment" nbInput fullWidth
