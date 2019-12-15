@@ -35,15 +35,6 @@ export class ForumComponent implements OnInit {
   ngOnInit() {
   }
 
-  @ViewChild('item', { static: false }) accordion;
-
-  constructor(
-    private forumService: ForumService
-  ) {}
-
-  user: User = JSON.parse(localStorage.getItem('user'));
-  formControls = this.discussionForm.controls;
-
   get title() {
     return this.discussionForm.get('title');
   }
@@ -57,8 +48,6 @@ export class ForumComponent implements OnInit {
 
   toggleHover(event: boolean) {
     this.isHovering = event;
-
-  ngOnInit() {
   }
 
   changePostType(showMyPost: boolean) { // set post type
@@ -80,10 +69,9 @@ export class ForumComponent implements OnInit {
     this.images.splice(this.images.indexOf(event), 1);
   }
 
-  onCreate() { // crete post
-    const id = this.forumService.getPostId();
   onCreate() {
     // create  post
+    const id = this.forumService.getPostId();
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();

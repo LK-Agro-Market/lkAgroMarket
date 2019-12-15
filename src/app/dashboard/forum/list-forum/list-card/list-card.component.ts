@@ -10,15 +10,14 @@ import { ForumService } from '../../forum.service';
 })
 export class ListCardComponent implements OnInit {
 
-  viewButton = true;
+  viewMore = true;
   comments: any[];
   cmntId: any;
   imageList: any[];
-  showBtn;
+  isLogUser;
   isEnd;
   postId;
   commCount;
-  imageCount;
 
   @Input() item: any;
   @ViewChild('item', { static: false }) accordion;
@@ -48,9 +47,9 @@ export class ListCardComponent implements OnInit {
     }
     // show edit and end button
     if (this.item.userID === this.user.uid) {
-      this.showBtn = true;
+      this.isLogUser = true;
     } else {
-      this.showBtn = false;
+      this.isLogUser = false;
     }
     // load comments
     this.forumService

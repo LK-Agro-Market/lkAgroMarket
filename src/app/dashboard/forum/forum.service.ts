@@ -93,8 +93,6 @@ export class ForumService {
 
   uploadImg(files: File[], colName, key) {
     for (let i = 0; i < files.length; i++) {
-      // console.log(files);
-      // console.log(files[i].name);
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
       const fileRef = this.storage.ref(path);
       this.tasks = this.storage.upload(path, files[i]);
@@ -131,8 +129,6 @@ export class ForumService {
   getPostByID(userId) { // get post by user id
     return this.afs
       .collection('post', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
-    return this.db
-      .collection('forum', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -147,7 +143,6 @@ export class ForumService {
 
   getComment(postKey) { // get comments
     return this.afs
-    return this.db
       .collection('comment', ref => ref.where('postID', '==', postKey).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -163,7 +158,6 @@ export class ForumService {
 
   getReply(commentId) { // get replies
     return this.afs
-    return this.db
       .collection('reply', ref => ref.where('commentID', '==', commentId).orderBy('date', 'desc'))
       .snapshotChanges()
       .pipe(
@@ -179,7 +173,6 @@ export class ForumService {
 
   getCount(collection, field, key) {  // get counts(coments/replies)
     return this.afs.collection(collection, ref => ref.where(field, '==', key)).get().pipe(
-    return this.db.collection(collection, ref => ref.where(field, '==', key)).get().pipe(
       map(coll => coll.size)
     );
   }
@@ -194,15 +187,6 @@ export class ForumService {
 
   deleteReplyList(field, id) {  // delete replies by feild
     return this.afs
-    this.db.collection(collection).doc(key).update({ endThread: value });
-  }
-
-  deleteDocment(collection, key) { // delete document by key
-    this.db.collection(collection).doc(key).delete();
-  }
-
-  deleteReplyList(field, id) {  // delete replies by feild
-    return this.db
       .collection('reply', ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
@@ -210,7 +194,6 @@ export class ForumService {
           replies.map(reply => {
             const key = reply.payload.doc.id;
             this.afs.collection('reply').doc(key).delete();
-            this.db.collection('reply').doc(key).delete();
           })
         )
       );
@@ -218,7 +201,6 @@ export class ForumService {
 
   deleteCommentList(field, id) {  // delte comments by field
     return this.afs
-    return this.db
       .collection('comment', ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
@@ -226,7 +208,6 @@ export class ForumService {
           comments.map(comment => {
             const key = comment.payload.doc.id;
             this.afs.collection('comment').doc(key).delete();
-            this.db.collection('comment').doc(key).delete();
           })
         )
       );

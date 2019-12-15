@@ -23,7 +23,6 @@
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-com">{{commCount}}</p>
-                  <p class="count-com" >{{count}}</p>
                 </div>
               </div>
             </div>
@@ -32,21 +31,16 @@
               <hr />
               <div class="card-fotter-container">
                 <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
-                  View {{ viewButton ? 'More' : 'Less' }}
+                  View {{ viewMore ? 'More' : 'Less' }}
                 </button>
-                <button nbButton *ngIf="true" status="primary" size="small" class="edit-btn" [hidden]="!showBtn">
+                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser">
                   Edit
                 </button>
-                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn"
+                <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
                   (click)="endOrViewPost()">
-                  End
+                  {{ isEnd ? 'Restart' : 'End' }}
                 </button>
-                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn"
-                  [hidden]="!showBtn" (click)="deletePost()">
-                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn" (click)="endOrViewPost()">
-                  End
-                </button>
-                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn" (click)="deletePost()">
+                <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser" (click)="deletePost()">
                   Delete
                 </button>
               </div>
@@ -56,10 +50,6 @@
       </nb-accordion-item-header>
       <nb-accordion-item-body>
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
-        <hr />
-        <!-- <dir *ngFor="let image of imageList" style="display: flex; flex-direction: column;">
-          <img src="{{image}}" style="width: 300px; height: auto;">
-        </dir> -->
         <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
