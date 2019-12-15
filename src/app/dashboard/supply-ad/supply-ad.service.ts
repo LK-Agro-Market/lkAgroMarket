@@ -41,10 +41,21 @@ export class SupplyAdService {
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
   }
 
-  getAds(userId, status): Observable<SupplyAd[]> {
+  getAds(userId: string, status: string): Observable<SupplyAd[]> {
     return this.afs
-      .collection('supplyAd', ref => ref.where('owner', '==', userId).where('status', '==', status))
+      .collection('supplyAd', ref =>
+        ref.where('owner', '==', userId).where('status', '==', status)
+      )
       .valueChanges()
       .pipe(map(res => res as SupplyAd[]));
+  }
+
+  changeStatus(adId: string, status: string): Observable<void> {
+    return from(
+      this.afs
+        .collection('supplyAd')
+        .doc(adId)
+        .update({ status: status })
+    );
   }
 }
