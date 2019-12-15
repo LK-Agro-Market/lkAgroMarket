@@ -14,4 +14,6 @@ export interface SupplyAd {
   views: number;
   contactClicks: number;
   owner: string;
+  rating?: number;
+  status: string;
 }

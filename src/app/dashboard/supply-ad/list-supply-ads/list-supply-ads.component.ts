@@ -12,14 +12,14 @@ import { User } from 'src/app/shared/models/user';
 export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
-  supplyAdList: SupplyAd[];
+  activeSupplyAdList: SupplyAd[];
 
   constructor(private supplyAdService: SupplyAdService) {}
 
   ngOnInit() {
     this.subscriptions.push(
-      this.supplyAdService.getAds(this.user.uid).subscribe(res => {
-        this.supplyAdList = res;
+      this.supplyAdService.getAds(this.user.uid, 'active').subscribe(res => {
+        this.activeSupplyAdList = res;
       })
     );
   }

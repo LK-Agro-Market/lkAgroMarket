@@ -214,7 +214,8 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           createdAt: new Date(),
           views: 0,
           contactClicks: 0,
-          owner: this.user.uid
+          owner: this.user.uid,
+          status: 'active'
         };
         this.subscriptions.push(
           this.supplyAdService.createAd(supplyAd).subscribe(() => {
