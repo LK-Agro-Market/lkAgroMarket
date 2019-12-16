@@ -8,7 +8,7 @@ import { User } from 'firebase';
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
-  showBtn;
+  isLogUser;
 
   @Input() reply: any;
   @Output() changeReplyCount = new EventEmitter();
@@ -20,9 +20,9 @@ export class ReplyComponent implements OnInit {
   ngOnInit() {
 
     if (this.reply.userID === this.user.uid) {
-      this.showBtn = true;
+      this.isLogUser = true;
     } else {
-      this.showBtn = false;
+      this.isLogUser = false;
     }
   }
 

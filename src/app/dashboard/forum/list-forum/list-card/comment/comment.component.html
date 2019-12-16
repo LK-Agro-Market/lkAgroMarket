@@ -26,20 +26,19 @@
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-rep">{{repCount}}</p>
-                  <p class="count-rep">{{count}}</p>
                 </div>
               </div>
             </div>
             <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
             <div class="card-fotter-container">
-              <button nbButton *ngIf="true" status="primary" size="tiny" class="edit-btn" [hidden]="!showBtn">
+              <button nbButton *ngIf="true" status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser">
                 Edit
               </button>
-              <button nbButton *ngIf="true" status="danger" size="tiny" class="end-btn" [hidden]="!showBtn"
+              <button nbButton *ngIf="true" status="danger" size="tiny" class="end-btn" [hidden]="!isLogUser"
                 (click)="endOrViewComment()">
-                End
+                {{ isEnd ? 'Restart' : 'End' }}
               </button>
-              <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn"
+              <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
                 (click)="deleteComments()">
                 Delete
               </button>

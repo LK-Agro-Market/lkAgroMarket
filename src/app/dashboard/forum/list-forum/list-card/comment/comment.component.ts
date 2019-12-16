@@ -11,10 +11,9 @@ import { ForumService } from '../../../forum.service';
 export class CommentComponent implements OnInit {
 
   replies: any[];
-  showBtn;
+  isLogUser;
   isEnd;
   repCount;
-  count;
 
   @Input() comment: any;
   @Input() postId: any;
@@ -44,9 +43,9 @@ export class CommentComponent implements OnInit {
     }
     // show edit and end button
     if (this.comment.userID === this.user.uid) {
-      this.showBtn = true;
+      this.isLogUser = true;
     } else {
-      this.showBtn = false;
+      this.isLogUser = false;
     }
 
     // load replies
@@ -100,7 +99,6 @@ export class CommentComponent implements OnInit {
   getReplyCount() {
     this.forumService.getCount('reply', 'commentID', this.comment.key).subscribe(count => {
       this.repCount = count;
-      this.count = count;
     });
   }
 }
