@@ -31,6 +31,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
+import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
 
 //components
 import { LayoutComponent } from './layout/layout.component';
@@ -75,7 +76,8 @@ import { ChartsModule } from 'ng2-charts';
     ListDemandAdComponent,
     ReplyComponent,
     UserProfileCardComponent,
-    StatsComponent
+    StatsComponent,
+    ConfirmButtonDirective
   ],
   imports: [
     CommonModule,

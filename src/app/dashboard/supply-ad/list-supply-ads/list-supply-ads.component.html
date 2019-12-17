@@ -99,11 +99,11 @@
               </li>
             </ul>
             <div class="card-body">
-              <button class="btn btn-success" (click)="markAsSold(supplyAd.id)">
+              <button class="btn btn-success btn-sm" (click)="markAsSold(supplyAd.id)">
                 Mark As Sold
               </button>
-              <button class="btn btn-primary">Update</button>
-              <button class="btn btn-danger" (click)="markAsSold(supplyAd.id)">
+              <button class="btn btn-primary btn-sm">Update</button>
+              <button type="button" class="btn btn-danger btn-sm" appConfirmButton (confirmed)="deleteAd(supplyAd.id)">
                 Delete
               </button>
             </div>
