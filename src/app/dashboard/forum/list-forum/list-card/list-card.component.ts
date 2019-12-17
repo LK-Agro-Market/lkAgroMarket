@@ -13,11 +13,12 @@ export class ListCardComponent implements OnInit {
   viewButton = true;
   comments: any[];
   cmntId: any;
-  userImageURL;
+  imageList: any[];
   showBtn;
   isEnd;
-  count;
   postId;
+  commCount;
+  imageCount;
 
   @Input() item: any;
   @ViewChild('item', { static: false }) accordion;
@@ -41,7 +42,7 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-
+    this.imageList = this.item.images;
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
@@ -92,19 +93,20 @@ export class ListCardComponent implements OnInit {
   }
 
   endOrViewPost() { // change post (end or start)
-    this.forumService.changeEndProperty('forum', this.item.key, !this.item.endThread);
+    this.forumService.changeEndProperty('post', this.item.key, !this.item.endThread);
+
   }
 
   deletePost() {  // Delete post
     this.forumService.deleteReplyList('postID', this.item.key).subscribe();
     this.forumService.deleteCommentList('postID', this.item.key).subscribe();
-    this.forumService.deleteDocment('forum', this.item.key);
+    this.forumService.deleteDocment('post', this.item.key);
     this.getCommentCount();
   }
 
   getCommentCount() { // get comment count
     this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
-      this.count = count;
+      this.commCount = count;
     });
   }
 

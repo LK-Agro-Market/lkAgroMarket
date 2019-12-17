@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
+import { Button } from 'protractor';
 
 @Component({
   selector: 'app-forum',
@@ -17,6 +18,22 @@ export class ForumComponent implements OnInit {
   showFarmer = true;
   showBuyer = true;
   showMyPost = false;
+  isShow = false;
+  isHovering: boolean;
+  images: File[] = [];
+
+  @ViewChild('item', { static: false }) accordion;
+  @ViewChild('imageDrop', { static: false }) imageDrop;
+
+  constructor(
+    private forumService: ForumService,
+  ) { }
+
+  user: User = JSON.parse(localStorage.getItem('user'));
+  formControls = this.discussionForm.controls;
+
+  ngOnInit() {
+  }
 
   @ViewChild('item', { static: false }) accordion;
 
@@ -38,13 +55,33 @@ export class ForumComponent implements OnInit {
     this.accordion.toggle();
   }
 
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+
   ngOnInit() {
   }
 
-  changePostType(showMyPost: boolean) {
+  changePostType(showMyPost: boolean) { // set post type
     this.showMyPost = showMyPost;
   }
 
+  onSelect(event) { // get inserted file
+    for (let i = 0; i < event.addedFiles.length; i++) {
+      if (event.addedFiles[i].type === 'image/jpeg' || event.addedFiles[i].type === 'image/png') {
+        this.images.push(event.addedFiles[i]);
+      } else {
+        // need to edit
+        console.log('you can upload images only');
+      }
+    }
+  }
+
+  onRemove(event) { // remove upload file
+    this.images.splice(this.images.indexOf(event), 1);
+  }
+
+  onCreate() { // crete post
+    const id = this.forumService.getPostId();
   onCreate() {
     // create  post
     const title = this.discussionForm.controls.title.value as string;
@@ -59,6 +96,7 @@ export class ForumComponent implements OnInit {
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         this.forumService.createPost(
+          id,
           title,
           des,
           dateTime,
@@ -70,13 +108,18 @@ export class ForumComponent implements OnInit {
           false,
         );
         // this.showToast('success');
-        this.title.setValue('');
-        this.des.setValue('');
+        this.discussionForm.reset();
         this.toggle();
+        if (this.images != null) {
+          this.forumService.uploadImg(this.images, 'post', id);
+        }
+
       } else {
-        // this.showToast('danger');
+        // else of check farmers and buyers
       }
+
     } else {
+      // else of form validation check
     }
   }
 

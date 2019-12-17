@@ -5,24 +5,12 @@
         <img class="logo" src="../../../assets/logo2.jpg" />
       </div>
       <div class="col-auto text-right align-middle">
-        <nb-user
-          size="large"
-          [name]="user.displayName"
-          title="Farmer"
-          [picture]="user.photoURL"
-          [routerLink]="['/profile', user.uid]"
-        >
+        <nb-user size="large" [name]="user.displayName" title="Farmer" [picture]="user.photoURL"
+          [routerLink]="['/profile', user.uid]">
         </nb-user>
       </div>
       <div class="col-auto text-right align-middle">
-        <button
-          class="logout-btn"
-          nbButton
-          hero
-          status="success"
-          size="small"
-          (click)="logout()"
-        >
+        <button class="logout-btn" nbButton hero status="success" size="small" (click)="logout()">
           <nb-icon icon="unlock-outline"></nb-icon>Sign out
         </button>
       </div>
@@ -30,17 +18,8 @@
   </nb-layout-header>
 
   <nb-sidebar state="compacted">
-    <span
-      class="sidebar-btn"
-      routerLink="/farmer-dashboard"
-      routerLinkActive="green"
-    >
-      <nb-icon
-        icon="home"
-        class="sidebar-icon"
-        nbTooltip="Farmer Dashboard"
-        nbTooltipPlacement="right"
-      ></nb-icon>
+    <span class="sidebar-btn" routerLink="/farmer-dashboard" routerLinkActive="green">
+      <nb-icon icon="home" class="sidebar-icon" nbTooltip="Farmer Dashboard" nbTooltipPlacement="right"></nb-icon>
     </span>
   </nb-sidebar>
 

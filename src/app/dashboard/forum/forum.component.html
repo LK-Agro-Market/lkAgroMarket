@@ -18,26 +18,25 @@
               </label>
               <textarea formControlName="des" nbInput fullWidth status="primary" placeholder="Description"></textarea>
               <div class="check-container">
-                <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked]="showFarmer">Show Farmers
+                <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked]="showFarmer">
+                  For farmers
                 </nb-checkbox>
-                <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked]="showBuyer"
-                  style="margin-left: 10px;">Show Buyers
+                <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked]="showBuyer" style="margin-left: 10px;">
+                  For buyers
                 </nb-checkbox>
 
-                <div class="dropzone" dropZone>
-                  <div class="file">
-                    <label class="file-label">
-                      <input class="file-input" type="file" >
-                      <span class="file-cta">
-                      </span>
-                    </label>
-                  </div>
-                </div>
+                <ngx-dropzone (change)="onSelect($event)" class="dropzone" [expandable]="true">
+                  <ngx-dropzone-label>drop files </ngx-dropzone-label>
+                  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let image of images" [file]="image" [removable]="true" (removed)="onRemove(image)">
+                    <ngx-dropzone-label>{{ image.name }} ({{ image.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-image-preview>
+                </ngx-dropzone>
 
-                <button nbButton shape="round" size="small" status="success" class="float-right"
-                  style="margin-top: 5px;" [disabled]="!discussionForm.valid">
+                <button nbButton shape="round" size="small" status="success" class="float-right "
+                  style="margin-top: 10px;" [disabled]="!discussionForm.valid">
                   Submit
                 </button>
+
               </div>
             </form>
           </nb-accordion-item-body>

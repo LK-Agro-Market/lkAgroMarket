@@ -28,6 +28,8 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -76,7 +78,6 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     ListDemandAdComponent,
     ReplyComponent,
     UserProfileCardComponent,
-    FileUploadDirective
   ],
   imports: [
     CommonModule,
@@ -109,7 +110,8 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     NbCheckboxModule,
     NbMenuModule,
     NbListModule,
-    AgmCoreModule.forRoot(environment.googleMap)
+    AgmCoreModule.forRoot(environment.googleMap),
+    NgxDropzoneModule
   ],
   providers: []
 })

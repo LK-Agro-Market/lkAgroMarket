@@ -18,6 +18,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -106,7 +107,8 @@ const customNotifierOptions: NotifierOptions = {
     NbMenuModule.forRoot(),
     NbActionsModule,
     ToastrModule.forRoot(),
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    NgxDropzoneModule
   ],
   providers: [
     AuthGuard,
