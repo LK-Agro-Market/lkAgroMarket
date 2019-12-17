@@ -7,9 +7,12 @@
             <div class="pro-img-container">
               <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
-                <a href="#" class="pro-name" (click)="toggleMain()">
-                  {{ item.userName }}
-                </a>
+                <div class="user-detail">
+                  <a href="#" class="pro-name" (click)="toggleMain()">
+                    {{ item.userName }}
+                  </a>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
+                </div>
                 <span class="text-info" id="postDate">
                   <b>Posted on</b>
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
@@ -40,7 +43,8 @@
                   (click)="endOrViewPost()">
                   {{ isEnd ? 'Restart' : 'End' }}
                 </button>
-                <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser" (click)="deletePost()">
+                <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
+                  (click)="deletePost()">
                   Delete
                 </button>
               </div>
@@ -58,14 +62,13 @@
             </textarea>
             <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
               [disabled]="isEnd">
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small" [disabled]="isEnd" >
               Comment
             </button>
           </div>
         </form>
         <hr />
         <div class="comment-sec">
-          <p class="comment-title">Comments</p>
+          <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
             <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>

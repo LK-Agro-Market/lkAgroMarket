@@ -8,14 +8,15 @@
             <div class="pro-img-container">
               <img class="pro-img" src="{{ comment.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
-                <a href="#" class="pro-name">
-                  {{ comment.userName }}
-                </a>
+                <div class="user-detail">
+                  <a href="#" class="pro-name">
+                    {{ comment.userName }}
+                  </a>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success">This comment was end</span>
+                </div>
                 <span class="text-info" id="postDate">
                   <b>Commented on</b>
-                  <i>
-                    {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }}
-                  </i>
+                  <i> {{ comment.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
                 <div class="float-right like-container">
                   <button nbButton ghost status="success" size="medium" class="float-right btn-like">
@@ -48,7 +49,7 @@
         <nb-accordion-item-body class="reply-container">
           <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
             <div class="add-reply">
-              <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Add reply..."
+              <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Leave a reply"
                 status="primary" required style="height: 40px;" [disabled]="isEnd">
             </textarea>
               <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small"
@@ -59,7 +60,7 @@
           </form>
           <hr />
           <div>
-            <p class="reply-title">Replies</p>
+            <p class="reply-title" *ngIf="repCount != 0">Replies</p>
             <div *ngFor="let reply of replies">
               <app-reply [reply]="reply" (changeReplyCount)="getReplyCount()"></app-reply>
             </div>
