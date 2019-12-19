@@ -15,12 +15,13 @@ export class ListCardComponent implements OnInit {
   cmntId: any;
   imageList: any[];
   isLogUser;
+  isEdit = false;
   isEnd;
   postId;
   commCount;
 
   @Input() item: any;
-  @ViewChild('item', { static: false }) accordion;
+  @ViewChild('itm', { static: false }) accordion;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -107,6 +108,11 @@ export class ListCardComponent implements OnInit {
     this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
       this.commCount = count;
     });
+  }
+
+  updateForm() {
+    this.accordion.toggle();
+    this.isEdit = !this.isEdit;
   }
 
 }

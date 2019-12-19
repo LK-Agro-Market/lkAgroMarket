@@ -1,14 +1,15 @@
 <div class="card-cantainer">
+
   <nb-accordion>
     <nb-accordion-item>
-      <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="item">
+      <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="item" #itm>
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
               <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
                 <div class="user-detail">
-                  <a href="#" class="pro-name" (click)="toggleMain()">
+                  <a href="#" class="pro-name">
                     {{ item.userName }}
                   </a>
                   <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
@@ -36,8 +37,8 @@
                 <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
                   View {{ viewMore ? 'More' : 'Less' }}
                 </button>
-                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser">
-                  Edit
+                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser" (click)="updateForm()" >
+                  {{ !isEdit ? 'Edit' : 'Discard' }}
                 </button>
                 <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
                   (click)="endOrViewPost()">
@@ -76,4 +77,5 @@
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>
+  <app-update-form *ngIf="isEdit" ></app-update-form>
 </div>

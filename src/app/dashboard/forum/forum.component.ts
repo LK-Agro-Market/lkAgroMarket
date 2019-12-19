@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from './forum.service';
-import { Button } from 'protractor';
 
 @Component({
   selector: 'app-forum',
@@ -18,7 +17,7 @@ export class ForumComponent implements OnInit {
   showFarmer = true;
   showBuyer = true;
   showMyPost = false;
-  isShow = false;
+  // isShow = false;
   isHovering: boolean;
   images: File[] = [];
 
@@ -52,21 +51,6 @@ export class ForumComponent implements OnInit {
 
   changePostType(showMyPost: boolean) { // set post type
     this.showMyPost = showMyPost;
-  }
-
-  onSelect(event) { // get inserted file
-    for (let i = 0; i < event.addedFiles.length; i++) {
-      if (event.addedFiles[i].type === 'image/jpeg' || event.addedFiles[i].type === 'image/png') {
-        this.images.push(event.addedFiles[i]);
-      } else {
-        // need to edit
-        console.log('you can upload images only');
-      }
-    }
-  }
-
-  onRemove(event) { // remove upload file
-    this.images.splice(this.images.indexOf(event), 1);
   }
 
   onCreate() {

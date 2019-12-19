@@ -9,7 +9,7 @@
       <nb-accordion>
         <nb-accordion-item #item>
           <nb-accordion-item-body>
-            <form [formGroup]="discussionForm" novalidate (ngSubmit)="onCreate()" #discform="ngForm">
+            <form [formGroup]="discussionForm" novalidate (ngSubmit)="onCreate()" >
               <label for="title" id="form-title"> Title </label>
               <input type="text" class="form-control" formControlName="title" nbInput fullWidth fieldSize="small"
                 status="primary" placeholder="Title" required />
@@ -17,7 +17,7 @@
                 Description
               </label>
               <textarea formControlName="des" nbInput fullWidth status="primary" placeholder="Description"></textarea>
-              <div class="check-container">
+              <div class="form-bottom-container">
                 <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked]="showFarmer">
                   For farmers
                 </nb-checkbox>
