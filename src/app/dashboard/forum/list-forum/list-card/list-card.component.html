@@ -37,12 +37,13 @@
                 <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
                   View {{ viewMore ? 'More' : 'Less' }}
                 </button>
-                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser" (click)="updateForm()" >
-                  {{ !isEdit ? 'Edit' : 'Discard' }}
+                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser"
+                  (click)="updateForm()" >
+                  {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
                 <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
                   (click)="endOrViewPost()">
-                  {{ isEnd ? 'Restart' : 'End' }}
+                  {{ !isEnd ? 'End' : 'Restart' }}
                 </button>
                 <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
                   (click)="deletePost()">
@@ -77,5 +78,7 @@
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>
-  <app-update-form *ngIf="isEdit" ></app-update-form>
+
+  <app-update-form *ngIf="isEdit" [postId]="postId" [createOrUpdate]="createOrUpdate"></app-update-form>
+
 </div>

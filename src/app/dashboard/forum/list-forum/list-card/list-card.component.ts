@@ -16,11 +16,13 @@ export class ListCardComponent implements OnInit {
   imageList: any[];
   isLogUser;
   isEdit = false;
+  createOrUpdate;
   isEnd;
   postId;
   commCount;
 
   @Input() item: any;
+
   @ViewChild('itm', { static: false }) accordion;
 
   commentForm = new FormGroup({
@@ -43,6 +45,7 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
     this.imageList = this.item.images;
+
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
@@ -54,7 +57,7 @@ export class ListCardComponent implements OnInit {
     }
     // load comments
     this.forumService
-      .getComment(this.item.key)
+      .getComment(this.postId)
       .pipe()
       .subscribe(comments => {
         this.comments = comments;
@@ -65,8 +68,8 @@ export class ListCardComponent implements OnInit {
   onCreate() {  // create comment
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
-    const postID = this.item.key;
-    const userId = this.user.uid;
+    const postID = this.postId;
+    const userId = this.postId;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 
@@ -88,19 +91,15 @@ export class ListCardComponent implements OnInit {
     }
   }
 
-  toggleMain() {
-    this.accordion.toggle();
-  }
-
   endOrViewPost() { // change post (end or start)
-    this.forumService.changeEndProperty('post', this.item.key, !this.item.endThread);
+    this.forumService.changeEndProperty('post', this.postId, !this.item.endThread);
 
   }
 
   deletePost() {  // Delete post
-    this.forumService.deleteReplyList('postID', this.item.key).subscribe();
-    this.forumService.deleteCommentList('postID', this.item.key).subscribe();
-    this.forumService.deleteDocment('post', this.item.key);
+    this.forumService.deleteReplyList('postID', this.postId).subscribe();
+    this.forumService.deleteCommentList('postID', this.postId).subscribe();
+    this.forumService.deleteDocment('post', this.postId);
     this.getCommentCount();
   }
 
@@ -110,8 +109,9 @@ export class ListCardComponent implements OnInit {
     });
   }
 
-  updateForm() {
+  updateForm() { // update form
     this.accordion.toggle();
+    this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }
 
