@@ -46,8 +46,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   onCreate() { // create  post
-
-    const id = this.forumService.getPostId();
+    let id;
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
@@ -59,25 +58,42 @@ export class CreateFormComponent implements OnInit {
 
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
-        this.forumService.createPost(
-          id,
-          title,
-          des,
-          dateTime,
-          userId,
-          userName,
-          userImage,
-          showFarmer,
-          showBuyer,
-          false,
-        );
-        // this.showToast('success');
-        this.hideForm.emit(false);
-        this.discussionForm.reset();
+        if (this.createOrUpdate === 'create') {
+          id = this.forumService.getPostId();
+          this.forumService.createPost(
+            id,
+            title,
+            des,
+            dateTime,
+            userId,
+            userName,
+            userImage,
+            showFarmer,
+            showBuyer,
+            false,
+          );
+
+        } else {
+          id = this.postId;
+          this.forumService.updatePost(
+            id,
+            title,
+            des,
+            dateTime,
+            userId,
+            userName,
+            userImage,
+            showFarmer,
+            showBuyer,
+            false,
+          );
+
+        }
         if (this.images != null) {
           this.forumService.uploadImg(this.images, 'post', id);
         }
-
+        this.discussionForm.reset();
+        this.hideForm.emit(false);
       } else {
         // else of check farmers and buyers
       }

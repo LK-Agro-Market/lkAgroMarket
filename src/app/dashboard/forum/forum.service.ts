@@ -18,8 +18,8 @@ export class ForumService {
   downUrl;
 
   constructor(private afs: AngularFirestore,
-              private storage: AngularFireStorage,
-    ) { }
+    private storage: AngularFireStorage,
+  ) { }
 
   getPostId() {
     return this.afs.createId();
@@ -88,7 +88,6 @@ export class ForumService {
       userName: replyUserName,
       userImage: replyUserImage
     });
-    console.log('done');
   }
 
   uploadImg(files: File[], colName, key) {
@@ -104,11 +103,36 @@ export class ForumService {
             .doc(key)
             .set(
               { images: firestore.FieldValue.arrayUnion(this.downUrl) },
-              { merge : true }
+              { merge: true }
             );
         }),
       ).subscribe();
     }
+  }
+
+  updatePost(
+    key,
+    postTitle,
+    des,
+    dateTime,
+    postUserId,
+    postUserName,
+    postUserImage,
+    showFarmers,
+    showBuyers,
+    isEnd,
+  ) {
+    this.afs.collection('post').doc(key).update({
+      title: postTitle,
+      description: des,
+      date: dateTime,
+      userID: postUserId,
+      userName: postUserName,
+      userImage: postUserImage,
+      showFarmer: showFarmers,
+      showBuyer: showBuyers,
+      endThread: isEnd,
+    });
   }
 
   getPost() { // get all
