@@ -2,7 +2,6 @@
     <nb-card-body>
         <div class="list-container" >
             <div class="form-container">
-
                 <form [formGroup]="discussionForm" novalidate (ngSubmit)="onCreate()">
                     <label for="title" id="form-title"> Title </label>
                     <input type="text" class="form-control" formControlName="title" nbInput fullWidth fieldSize="small"
@@ -11,15 +10,17 @@
                         Description
                     </label>
                     <textarea formControlName="des" nbInput fullWidth status="primary"
-                        placeholder="Description"></textarea>
+                        placeholder="Description">
+                    </textarea>
                     <div class="form-bottom-container">
+                        
                         <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked]="showFarmer">
                             For farmers
                         </nb-checkbox>
-                        <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked]="showBuyer"
-                            style="margin-left: 10px;">
+                        <nb-checkbox status="info" (change)="showBuyer = !showBuyer" [checked]="showBuyer" style="margin-left: 10px;">
                             For buyers
                         </nb-checkbox>
+
                         <ngx-dropzone (change)="onSelect($event)" class="dropzone" [expandable]="true">
                             <ngx-dropzone-label>drop files </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let image of images"
@@ -32,9 +33,9 @@
                             [disabled]="!discussionForm.valid" style="margin-top: 10px;">
                             Submit
                         </button>
+                    
                     </div>
                 </form>
-
             </div>
         </div>
     </nb-card-body>

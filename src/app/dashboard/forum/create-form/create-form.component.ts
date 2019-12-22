@@ -9,7 +9,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-form.component.scss']
 })
 export class CreateFormComponent implements OnInit {
-
   showFarmer = true;
   showBuyer = true;
   isHovering: boolean;
@@ -43,6 +42,27 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.createOrUpdate === 'update') { // set form value for update
+      this.forumService.getPostForUpdate(this.postId)
+        .pipe()
+        .subscribe(dataSet => {
+          this.discussionForm.controls.title.setValue(dataSet.data().title);
+          this.discussionForm.controls.des.setValue(dataSet.data().description);
+          this.showBuyer = dataSet.data().showBuyer;
+          this.showFarmer = dataSet.data().showFarmer;
+          // this.images = dataSet.data().images;
+          this.onSelect(dataSet.data().images);
+        });
+    }
+  }
+
+  onSelect(event) { // select images
+    console.log(event);
+    this.images.push(...event.addedFiles);
+  }
+
+  onRemove(event) { // remove selected images
+    this.images.splice(this.images.indexOf(event), 1);
   }
 
   onCreate() { // create  post
@@ -59,8 +79,8 @@ export class CreateFormComponent implements OnInit {
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
-          id = this.forumService.getPostId();
-          this.forumService.createPost(
+          id = this.forumService.getPostId(); // get new ID for post
+          this.forumService.createPost( // create new post
             id,
             title,
             des,
@@ -75,7 +95,7 @@ export class CreateFormComponent implements OnInit {
 
         } else {
           id = this.postId;
-          this.forumService.updatePost(
+          this.forumService.updatePost( // update selected post
             id,
             title,
             des,
@@ -89,11 +109,11 @@ export class CreateFormComponent implements OnInit {
           );
 
         }
-        if (this.images != null) {
+        if (this.images != null) { // check and upload images
           this.forumService.uploadImg(this.images, 'post', id);
         }
         this.discussionForm.reset();
-        this.hideForm.emit(false);
+        this.hideForm.emit(false); // toggle form after submit
       } else {
         // else of check farmers and buyers
       }

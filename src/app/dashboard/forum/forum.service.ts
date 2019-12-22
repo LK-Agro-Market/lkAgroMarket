@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireList, snapshotChanges } from '@angular/fire/database';
 import { map, finalize } from 'rxjs/operators';
 import { AngularFireUploadTask, AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { firestore } from 'firebase';
 
 @Injectable({
@@ -17,7 +17,8 @@ export class ForumService {
   fileRef: AngularFireStorageReference;
   downUrl;
 
-  constructor(private afs: AngularFirestore,
+  constructor(
+    private afs: AngularFirestore,
     private storage: AngularFireStorage,
   ) { }
 
@@ -98,7 +99,6 @@ export class ForumService {
       this.tasks.snapshotChanges().pipe(
         finalize(async () => {
           this.downUrl = await fileRef.getDownloadURL().toPromise();
-          console.log(this.downUrl);
           await this.afs.collection(colName)
             .doc(key)
             .set(
@@ -163,6 +163,14 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getPostForUpdate(postId) {
+    return this.afs
+      .collection('post')
+      .doc(postId)
+      .get()
+      .pipe();
   }
 
   getComment(postKey) { // get comments
@@ -236,4 +244,6 @@ export class ForumService {
         )
       );
   }
+
+
 }
