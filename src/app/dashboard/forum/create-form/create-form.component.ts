@@ -51,13 +51,12 @@ export class CreateFormComponent implements OnInit {
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
           // this.images = dataSet.data().images;
-          this.onSelect(dataSet.data().images);
+          // this.onSelect(this.images);
         });
     }
   }
 
   onSelect(event) { // select images
-    console.log(event);
     this.images.push(...event.addedFiles);
   }
 

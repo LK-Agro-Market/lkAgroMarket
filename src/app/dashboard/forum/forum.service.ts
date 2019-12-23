@@ -245,5 +245,11 @@ export class ForumService {
       );
   }
 
-
+  deleteImage(urlList: any[]) {
+    // not delete mulitple images
+    for (let i = 0; i < urlList.length; i++) {
+      console.log(urlList[i]);
+      return this.storage.storage.refFromURL(urlList[i]).delete();
+    }
+  }
 }

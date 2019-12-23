@@ -97,6 +97,7 @@ export class ListCardComponent implements OnInit {
   }
 
   deletePost() {  // Delete post
+    this.forumService.deleteImage(this.item.images);
     this.forumService.deleteReplyList('postID', this.postId).subscribe();
     this.forumService.deleteCommentList('postID', this.postId).subscribe();
     this.forumService.deleteDocment('post', this.postId);
