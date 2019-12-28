@@ -1,19 +1,16 @@
-import { Directive, ElementRef,
+import {
+  Directive,
+  ElementRef,
   HostListener,
   Output,
   EventEmitter,
   OnInit,
   Input,
   OnDestroy
- } from '@angular/core';
+} from '@angular/core';
 
- import { Subject, timer, Subscription, of } from 'rxjs';
-import {
-  debounceTime,
-  tap,
-  switchMap
-} from 'rxjs/operators';
-
+import { Subject, timer, Subscription, of } from 'rxjs';
+import { debounceTime, tap, switchMap } from 'rxjs/operators';
 
 @Directive({
   selector: '[appConfirmButton]'

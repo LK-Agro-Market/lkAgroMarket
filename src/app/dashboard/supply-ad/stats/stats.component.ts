@@ -13,9 +13,9 @@ import { User } from 'src/app/shared/models/user';
 export class StatsComponent implements OnInit {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
-  
+
   doughnutChartLabels: Label[] = ['Sold', 'Currently Active', 'Deleted'];
-  doughnutChartData: MultiDataSet = [[0,0,0]];
+  doughnutChartData: MultiDataSet = [[0, 0, 0]];
   doughnutChartType: ChartType = 'doughnut';
   doughnutChartColors: Color[] = [
     {
@@ -23,14 +23,14 @@ export class StatsComponent implements OnInit {
     }
   ];
 
-  constructor(private supplyAdService:SupplyAdService) {}
+  constructor(private supplyAdService: SupplyAdService) {}
 
   ngOnInit() {
     this.supplyAdService.getAds(this.user.uid).subscribe(res => {
       const soldAdCount = res.filter(res => res.status === 'sold').length;
       const activeAdCount = res.filter(res => res.status === 'active').length;
       const deletedAdCount = res.filter(res => res.status === 'deleted').length;
-      this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]]
+      this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]];
     });
   }
 }

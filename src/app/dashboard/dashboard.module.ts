@@ -28,6 +28,8 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
+import { NgbCarousel, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -56,7 +58,6 @@ import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-dem
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
 import { StatsComponent } from './supply-ad/stats/stats.component';
-import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { ChartsModule } from 'ng2-charts';
     NbMenuModule,
     NbListModule,
     AgmCoreModule.forRoot(environment.googleMap),
-    ChartsModule
+    ChartsModule,
+    NgbModule
   ],
   providers: []
 })

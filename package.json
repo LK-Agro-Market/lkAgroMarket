@@ -25,6 +25,7 @@
     "@angular/router": "^8.2.14",
     "@nebular/eva-icons": "^4.2.1",
     "@nebular/theme": "^4.2.1",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "@nrwl/workspace": "^8.8.2",
     "@types/events": "^3.0.0",
     "bootstrap": "^4.3.1",

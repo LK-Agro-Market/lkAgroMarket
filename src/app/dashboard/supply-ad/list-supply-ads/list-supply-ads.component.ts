@@ -26,8 +26,8 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.push(
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
-        this.activeSupplyAdList = res.filter(res => res.status === 'sold');
-        this.soldSupplyAdList = res.filter(res => res.status === 'active');
+        this.activeSupplyAdList = res.filter(res => res.status === 'active');
+        this.soldSupplyAdList = res.filter(res => res.status === 'sold');
         this.deletedSupplyAdList = res.filter(res => res.status === 'deleted');
       })
     );

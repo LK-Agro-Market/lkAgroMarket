@@ -73,13 +73,20 @@
       <div class="row">
         <div class="col-sm-4" *ngFor="let supplyAd of activeSupplyAdList">
           <div class="card">
-            <img [src]="supplyAd.images[0]" class="card-img-top" />
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
             <nb-badge
               text="Organic"
               status="success"
               position="top right"
               *ngIf="supplyAd.organic == 'Organic'"
-            ></nb-badge>
+            >
+            </nb-badge>
             <div class="card-body">
               <h5 class="card-title">
                 {{ supplyAd.food }}
@@ -99,11 +106,19 @@
               </li>
             </ul>
             <div class="card-body">
-              <button class="btn btn-success btn-sm" (click)="markAsSold(supplyAd.id)">
+              <button
+                class="btn btn-success btn-sm"
+                (click)="markAsSold(supplyAd.id)"
+              >
                 Mark As Sold
               </button>
               <button class="btn btn-primary btn-sm">Update</button>
-              <button type="button" class="btn btn-danger btn-sm" appConfirmButton (confirmed)="deleteAd(supplyAd.id)">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                appConfirmButton
+                (confirmed)="deleteAd(supplyAd.id)"
+              >
                 Delete
               </button>
             </div>
@@ -189,13 +204,20 @@
       <div class="row">
         <div class="col-sm-4" *ngFor="let supplyAd of soldSupplyAdList">
           <div class="card">
-            <img [src]="supplyAd.images[0]" class="card-img-top" />
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
             <nb-badge
               text="Organic"
               status="success"
               position="top right"
               *ngIf="supplyAd.organic == 'Organic'"
-            ></nb-badge>
+            >
+            </nb-badge>
             <div class="card-body">
               <h5 class="card-title">
                 {{ supplyAd.food }}
@@ -296,13 +318,20 @@
       <div class="row">
         <div class="col-sm-4" *ngFor="let supplyAd of deletedSupplyAdList">
           <div class="card">
-            <img [src]="supplyAd.images[0]" class="card-img-top" />
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
             <nb-badge
               text="Organic"
               status="success"
               position="top right"
               *ngIf="supplyAd.organic == 'Organic'"
-            ></nb-badge>
+            >
+            </nb-badge>
             <div class="card-body">
               <h5 class="card-title">
                 {{ supplyAd.food }}
