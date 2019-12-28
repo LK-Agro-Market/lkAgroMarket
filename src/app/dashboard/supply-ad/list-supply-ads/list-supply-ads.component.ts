@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
+  farmersAdCategories: Array<string>;
   activeSupplyAdList: SupplyAd[];
   soldSupplyAdList: SupplyAd[];
   deletedSupplyAdList: SupplyAd[];
@@ -26,6 +27,7 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.push(
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
+        this.farmersAdCategories = [...new Set(res.map(ad => ad.type))];
         this.activeSupplyAdList = res.filter(res => res.status === 'active');
         this.soldSupplyAdList = res.filter(res => res.status === 'sold');
         this.deletedSupplyAdList = res.filter(res => res.status === 'deleted');
