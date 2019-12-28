@@ -46,19 +46,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     ]
   };
   types = Object.keys(this.foods);
-  relatedFoods = [
-    'Apple',
-    'Avocado',
-    'Banana',
-    'Grape',
-    'Lemon',
-    'Mango',
-    'Orange',
-    'Papaya',
-    'Pineapple',
-    'Strawberry',
-    'Watermelon'
-  ];
+  relatedFoods: Array<string>;
 
   image1ChangedEvent: any = '';
   image2ChangedEvent: any = '';
@@ -81,8 +69,8 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
-      type: ['Vegitable', Validators.required],
-      food: ['Carrot', Validators.required],
+      type: ['', Validators.required],
+      food: ['', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
@@ -94,7 +82,6 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
       organic: ['', Validators.required],
       expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
-    this.retriveFoods();
   }
 
   ngOnDestroy() {

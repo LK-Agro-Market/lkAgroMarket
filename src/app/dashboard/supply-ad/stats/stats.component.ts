@@ -39,12 +39,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  barChartData: ChartDataSets[] = [
-    { data: [0], label: 'No. Of Ads' }
-  ];
-  public barChartColors: Color[] = [
-    { backgroundColor: 'lime' },
-  ]
+  barChartData: ChartDataSets[] = [{ data: [0], label: 'No. Of Ads' }];
+  public barChartColors: Color[] = [{ backgroundColor: 'chartreuse' }];
 
   constructor(private supplyAdService: SupplyAdService) {}
 
@@ -53,13 +49,14 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
         const soldAdCount = res.filter(res => res.status === 'sold').length;
         const activeAdCount = res.filter(res => res.status === 'active').length;
-        const deletedAdCount = res.filter(res => res.status === 'deleted').length;
+        const deletedAdCount = res.filter(res => res.status === 'deleted')
+          .length;
         this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]];
 
         const dic: Object = {};
         res.forEach(ad => {
           if (ad.food in dic) {
-            dic[ad.food] = dic[ad.food] + 1
+            dic[ad.food] = dic[ad.food] + 1;
           } else {
             dic[ad.food] = 1;
           }
