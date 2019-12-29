@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -29,11 +29,13 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
-import { NgbCarousel, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
+import { FileUploadDirective } from './forum/file-upload.directive';
 
 //components
 import { LayoutComponent } from './layout/layout.component';
@@ -78,7 +80,8 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     ReplyComponent,
     UserProfileCardComponent,
     StatsComponent,
-    ConfirmButtonDirective
+    ConfirmButtonDirective,
+    FileUploadDirective
   ],
   imports: [
     CommonModule,
@@ -104,7 +107,11 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     NbSpinnerModule,
     NbSelectModule,
     NbInputModule,
+
+    FormsModule,
+
     NbAccordionModule,
+    NbUserModule,
     NbAlertModule,
     NbBadgeModule,
     NbCheckboxModule,
@@ -112,7 +119,8 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     NbListModule,
     AgmCoreModule.forRoot(environment.googleMap),
     ChartsModule,
-    NgbModule
+    NgbModule,
+    NgxDropzoneModule
   ],
   providers: []
 })

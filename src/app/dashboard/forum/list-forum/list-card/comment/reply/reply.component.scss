@@ -1,9 +1,18 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
 .reply-card {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  width: 700px;
 }
-
+.vl {
+  margin-left: 20px;
+  border-left: 1px solid blueviolet;
+}
 .pro-img-container {
   display: flex;
   flex-direction: row;
@@ -39,7 +48,7 @@
   display: flex;
   flex-direction: row;
   position: absolute;
-  padding-left: 400px;
+  padding-left: 500px;
 }
 .btn-like {
   margin-left: 10px;
@@ -51,16 +60,22 @@
   font-weight: 300;
   color: orangered;
 }
-.btn-com {
-  margin-left: 30px;
-}
-.count-com {
-  margin-top: 15px;
-  margin-right: 5px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 300;
-  color: blueviolet;
-}
 .reply-body {
   margin-top: 10px;
+}
+#commReply {
+  margin-left: 10px;
+  font-size: 13px;
+}
+.card-fotter-container {
+  display: flex;
+  flex-direction: row;
+}
+.edit-btn,
+.end-btn,
+.delete-btn {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+  height: 25px;
 }

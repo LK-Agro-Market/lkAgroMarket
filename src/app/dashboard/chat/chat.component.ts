@@ -17,6 +17,16 @@ import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import { finalize, tap } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Location } from '@angular/common';
+
+interface Post {
+  content: string;
+}
+interface PostId extends Post {
+  id: string;
+}
 
 @Component({
   selector: 'app-chat',
@@ -41,13 +51,21 @@ export class ChatComponent {
   content: string;
   file: Observable<any>;
   isHovering: boolean;
-  /////
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
+  task: AngularFireUploadTask;
+  percentage: Observable<number>;
+  snapshot: Observable<any>;
+  ref: AngularFireStorageReference;
+
+  chatDoc: AngularFirestoreDocument<Post>;
+  chat: Observable<Post>;
   constructor(
     private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private location: Location
   ) {
     this.users = afs.collection('users').valueChanges();
-    this.file = afs.collection('files').valueChanges();
   }
   compFn = (a, b) => {
     if (a.time < b.time) {
@@ -65,15 +83,13 @@ export class ChatComponent {
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
     this.currentId = currentuser.uid;
-    //////////////////
+    this.location.replaceState('/chats/', this.selectedUser);
     this.chatCollection = this.afs.collection('chats', ref =>
       ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
     );
-    ///////////////////
     this.repsCollection = this.afs.collection('chats', ref =>
       ref.where('rid', '==', this.currentId).where('sid', '==', this.selectedId)
     );
-    //////////////
     this.messages = Observable.combineLatest(
       this.chatCollection.valueChanges().pipe(
         map(res => {
@@ -102,10 +118,10 @@ export class ChatComponent {
       .pipe(map(combined => combined.sort(this.compFn)));
   }
 
-  sendMessage(event: any, reply: boolean) {
+  sendMessage(content) {
     const user = JSON.parse(localStorage.getItem('user'));
     this.afs.collection('chats').add({
-      content: event.message,
+      content: this.content,
       time: Date.now(),
       avatar: user.photoURL,
       sender: user.displayName,
@@ -113,7 +129,47 @@ export class ChatComponent {
       date: new Date(),
       sid: user.uid,
       rid: this.selectedId,
-      reply: true
+      reply: true,
+      type: 'text'
     });
+    this.resetForm();
+    this.location.replaceState('/chats', this.selectedUser);
+  }
+  resetForm() {
+    this.content = '';
+  }
+  getPost(chatId) {
+    this.chatDoc = this.afs.doc('chats/' + chatId);
+    this.chat = this.chatDoc.valueChanges();
+  }
+  uploadFile(event) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const file = event.target.files[0];
+    const filePath = '/chats/' + Date.now() + '-' + this.files[0];
+    const fileRef = this.afStorage.ref(filePath);
+    const task = this.afStorage.upload(filePath, file);
+    this.ref = this.afStorage.ref(filePath);
+    this.uploadPercent = task.percentageChanges();
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(async () => {
+          this.downloadURL = await this.ref.getDownloadURL().toPromise();
+          this.afs.collection('chats').add({
+            content: '',
+            avatar: user.photoURL,
+            type: 'file',
+            time: Date.now(),
+            date: new Date(),
+            sender: user.displayName,
+            reciever: this.selectedUser,
+            sid: user.uid,
+            rid: this.selectedId,
+            reply: true,
+            url: this.downloadURL
+          });
+        })
+      )
+      .subscribe();
   }
 }

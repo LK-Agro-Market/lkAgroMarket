@@ -17,6 +17,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,7 +64,8 @@ import { ConfirmButtonDirective } from './shared/directives/confirm-button.direc
     NbEvaIconsModule,
     NbMenuModule.forRoot(),
     NbActionsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxDropzoneModule
   ],
   providers: [
     AuthGuard,

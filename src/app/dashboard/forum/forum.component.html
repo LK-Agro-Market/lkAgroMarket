@@ -5,9 +5,9 @@
     ></app-user-profile-card>
   </div>
 
-  <div class="forum-post-container">
-    <div class="list-container">
-      <nb-accordion style="margin-top: 20px; margin-bottom: 20px;">
+  <div class="list-container">
+    <div class="form-container">
+      <nb-accordion>
         <nb-accordion-item #item>
           <nb-accordion-item-body>
             <form
@@ -47,22 +47,44 @@
                   status="info"
                   (change)="showFarmer = !showFarmer"
                   [checked]="showFarmer"
-                  >Show Farmers
+                >
+                  For farmers
                 </nb-checkbox>
                 <nb-checkbox
                   status="info"
                   (change)="showBuyer = !showBuyer"
                   [checked]="showBuyer"
                   style="margin-left: 10px;"
-                  >Show Buyers
+                >
+                  For buyers
                 </nb-checkbox>
+
+                <ngx-dropzone
+                  (change)="onSelect($event)"
+                  class="dropzone"
+                  [expandable]="true"
+                >
+                  <ngx-dropzone-label>drop files </ngx-dropzone-label>
+                  <ngx-dropzone-image-preview
+                    ngProjectAs="ngx-dropzone-preview"
+                    *ngFor="let image of images"
+                    [file]="image"
+                    [removable]="true"
+                    (removed)="onRemove(image)"
+                  >
+                    <ngx-dropzone-label
+                      >{{ image.name }} ({{ image.type }})</ngx-dropzone-label
+                    >
+                  </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+
                 <button
                   nbButton
                   shape="round"
                   size="small"
                   status="success"
-                  class="float-right"
-                  style="margin-top: 5px;"
+                  class="float-right "
+                  style="margin-top: 10px;"
                   [disabled]="!discussionForm.valid"
                 >
                   Submit
@@ -72,6 +94,9 @@
           </nb-accordion-item-body>
         </nb-accordion-item>
       </nb-accordion>
+      <hr />
+    </div>
+    <div class="post-contaner" style="margin-top: -2%;">
       <app-list-forum [showMyPost]="showMyPost"></app-list-forum>
     </div>
   </div>
@@ -80,5 +105,6 @@
     <button nbButton status="primary" (click)="toggle()" id="add-btn">
       Create New
     </button>
+    <nb-card size="medium" class="side-bar"> </nb-card>
   </div>
 </div>

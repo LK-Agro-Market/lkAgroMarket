@@ -1,12 +1,20 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+.vl {
+  margin-left: 20px;
+  border-left: 1px solid blueviolet;
+}
 nb-accordion {
-  max-height: 600px;
+  width: 750px;
+  max-height: inherit;
 }
 .comnt-container {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
 }
-
 .pro-img-container {
   display: flex;
   flex-direction: row;
@@ -57,7 +65,7 @@ nb-accordion {
 .btn-com {
   margin-left: 30px;
 }
-.count-com {
+.count-rep {
   margin-top: 15px;
   margin-right: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -67,6 +75,7 @@ nb-accordion {
 #postCommnt {
   margin-top: 10px;
   margin-right: 25px;
+  margin-left: 10px;
   font-size: 13px;
 }
 .add-reply {
@@ -89,4 +98,21 @@ nb-accordion {
 .reply-container {
   max-height: 700px;
   overflow-y: scroll;
+}
+.card-fotter-container {
+  display: flex;
+  flex-direction: row;
+}
+.edit-btn,
+.end-btn,
+.delete-btn {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+  height: 25px;
+}
+.reply-title {
+  margin-left: 25px;
+  font-weight: 600;
+  color: #aa7070;
 }

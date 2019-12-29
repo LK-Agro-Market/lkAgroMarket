@@ -27,7 +27,7 @@ const routes: Routes = [
         component: SupplyAdComponent
       },
       {
-        path: 'chat-dashboard',
+        path: 'chats',
         component: ChatComponent
       },
       {
