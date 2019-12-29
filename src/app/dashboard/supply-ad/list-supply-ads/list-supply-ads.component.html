@@ -4,74 +4,30 @@
       <span class="text-left">
         Your Current Advertisments
       </span>
+      <span class="text-right">
+        <div class="col">
+          <nb-select
+            multiple
+            (selectedChange)="onFilterActiveAds($event)"
+            placeholder="Filter By Foods"
+          >
+            <nb-option
+              *ngFor="let category of farmersAdCategories"
+              [value]="category"
+              >{{ category }}</nb-option
+            >
+          </nb-select>
+        </div>
+      </span>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <!-- <div class="col">
-              <nb-select
-                #typeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #foodFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #districtFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #unitPriceRangeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-      </div>
-      <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of activeSupplyAdList">
+        <div
+          class="col-sm-4"
+          *ngFor="let supplyAd of filteredActiveSupplyAdList"
+        >
           <div class="card">
             <ngb-carousel>
               <ng-template ngbSlide *ngFor="let image of supplyAd.images">
@@ -135,74 +91,27 @@
       <span class="text-left">
         Your Sold Products' Advertisments
       </span>
+      <span class="text-right">
+        <div class="col">
+          <nb-select
+            multiple
+            (selectedChange)="onFilterSoldAds($event)"
+            placeholder="Filter By Foods"
+          >
+            <nb-option
+              *ngFor="let category of farmersAdCategories"
+              [value]="category"
+              >{{ category }}</nb-option
+            >
+          </nb-select>
+        </div>
+      </span>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <!-- <div class="col">
-              <nb-select
-                #typeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #foodFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #districtFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #unitPriceRangeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-      </div>
-      <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of soldSupplyAdList">
+        <div class="col-sm-4" *ngFor="let supplyAd of filteredSoldSupplyAdList">
           <div class="card">
             <ngb-carousel>
               <ng-template ngbSlide *ngFor="let image of supplyAd.images">
@@ -249,74 +158,30 @@
       <span class="text-left">
         Your Deleted Advertisments
       </span>
+      <span class="text-right">
+        <div class="col">
+          <nb-select
+            multiple
+            (selectedChange)="onFilterDeletedAds($event)"
+            placeholder="Filter By Foods"
+          >
+            <nb-option
+              *ngFor="let category of farmersAdCategories"
+              [value]="category"
+              >{{ category }}</nb-option
+            >
+          </nb-select>
+        </div>
+      </span>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <!-- <div class="col">
-              <nb-select
-                #typeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #foodFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #districtFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-        <!-- <div class="col">
-              <nb-select
-                #unitPriceRangeFilter
-                multiple
-                fullWidth
-                (selectedChange)="onFilterCompanies()"
-                placeholder="Filter Companies"
-              >
-                <nb-option
-                  *ngFor="let company of allCompanies"
-                  [value]="company.companyId"
-                  >{{ company.name }}</nb-option
-                >
-              </nb-select>
-            </div> -->
-      </div>
-      <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of deletedSupplyAdList">
+        <div
+          class="col-sm-4"
+          *ngFor="let supplyAd of filteredDeletedSupplyAdList"
+        >
           <div class="card">
             <ngb-carousel>
               <ng-template ngbSlide *ngFor="let image of supplyAd.images">

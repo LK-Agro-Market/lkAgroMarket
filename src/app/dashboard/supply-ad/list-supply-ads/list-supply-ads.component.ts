@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SupplyAdService } from '../supply-ad.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-supply-ads',
@@ -13,10 +14,15 @@ import { ToastrService } from 'ngx-toastr';
 export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
+
   farmersAdCategories: Array<string>;
-  activeSupplyAdList: SupplyAd[];
-  soldSupplyAdList: SupplyAd[];
-  deletedSupplyAdList: SupplyAd[];
+  allActiveSupplyAdList: SupplyAd[];
+  allSoldSupplyAdList: SupplyAd[];
+  allDeletedSupplyAdList: SupplyAd[];
+  filteredActiveSupplyAdList: SupplyAd[];
+  filteredSoldSupplyAdList: SupplyAd[];
+  filteredDeletedSupplyAdList: SupplyAd[];
+
   processing = false;
 
   constructor(
@@ -27,10 +33,17 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.push(
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
-        this.farmersAdCategories = [...new Set(res.map(ad => ad.type))];
-        this.activeSupplyAdList = res.filter(res => res.status === 'active');
-        this.soldSupplyAdList = res.filter(res => res.status === 'sold');
-        this.deletedSupplyAdList = res.filter(res => res.status === 'deleted');
+        this.farmersAdCategories = [...new Set(res.map(ad => ad.food))];
+
+        this.allActiveSupplyAdList = res.filter(res => res.status === 'active');
+        this.allSoldSupplyAdList = res.filter(res => res.status === 'sold');
+        this.allDeletedSupplyAdList = res.filter(
+          res => res.status === 'deleted'
+        );
+
+        this.filteredActiveSupplyAdList = this.allActiveSupplyAdList;
+        this.filteredSoldSupplyAdList = this.allSoldSupplyAdList;
+        this.filteredDeletedSupplyAdList = this.allDeletedSupplyAdList;
       })
     );
   }
@@ -59,5 +72,35 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
         this.toastr.success('Advertisment is deleted');
       })
     );
+  }
+
+  onFilterActiveAds($event: string[]) {
+    if ($event.length) {
+      this.filteredActiveSupplyAdList = this.allActiveSupplyAdList.filter(ad =>
+        $event.includes(ad.food)
+      );
+    } else {
+      this.filteredActiveSupplyAdList = this.allActiveSupplyAdList;
+    }
+  }
+
+  onFilterSoldAds($event: string[]) {
+    if ($event.length) {
+      this.filteredSoldSupplyAdList = this.allSoldSupplyAdList.filter(ad =>
+        $event.includes(ad.food)
+      );
+    } else {
+      this.filteredSoldSupplyAdList = this.allSoldSupplyAdList;
+    }
+  }
+
+  onFilterDeletedAds($event: string[]) {
+    if ($event.length) {
+      this.filteredDeletedSupplyAdList = this.allDeletedSupplyAdList.filter(
+        ad => $event.includes(ad.food)
+      );
+    } else {
+      this.filteredDeletedSupplyAdList = this.allDeletedSupplyAdList;
+    }
   }
 }

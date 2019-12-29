@@ -27,7 +27,6 @@ export class ConfirmButtonDirective implements OnInit, OnDestroy {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    console.log('fuck');
     this.subscriptions.push(
       this.clicks$
         .pipe(
