@@ -57,6 +57,7 @@ export class ForumComponent implements OnInit {
 
   toggleHover(event: boolean) {
     this.isHovering = event;
+  }
 
   ngOnInit() {
   }

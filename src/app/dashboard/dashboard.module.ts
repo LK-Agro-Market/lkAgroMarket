@@ -41,6 +41,9 @@ import { ChatComponent } from './chat/chat.component';
 //supply ad
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
+
+import { FormsModule } from '@angular/forms';
+
 import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
 import { UpdateAdComponent } from './supply-ad/update-ad/update-ad.component';
 //profile
@@ -103,6 +106,9 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     NbSpinnerModule,
     NbSelectModule,
     NbInputModule,
+
+    FormsModule,
+
     NbAccordionModule,
     NbUserModule,
     NbAlertModule,
