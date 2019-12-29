@@ -6,7 +6,6 @@ import { SupplyAdService } from '../supply-ad.service';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { User } from 'src/app/shared/models/user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -75,14 +74,13 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private supplyAdService: SupplyAdService,
-    private readonly notifier: NotifierService
+    private supplyAdService: SupplyAdService
   ) {}
 
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
       type: ['Vegitable', Validators.required],
-      food: ['Onion', Validators.required],
+      food: ['Carrot', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
@@ -94,6 +92,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
       organic: ['', Validators.required],
       expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
+    this.retriveFoods();
   }
 
   ngOnDestroy() {
@@ -228,10 +227,6 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
             this.image2LL = '';
             this.image3LL = '';
             this.image4LL = '';
-            this.notifier.notify(
-              'success',
-              'New supply advertisement is created'
-            );
           })
         );
       })

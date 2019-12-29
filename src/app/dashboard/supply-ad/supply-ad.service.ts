@@ -17,7 +17,7 @@ export class SupplyAdService {
   constructor(
     private afStorage: AngularFireStorage,
     private afs: AngularFirestore
-  ) {}
+  ) { }
 
   getAdId() {
     return this.afs.createId();
@@ -35,9 +35,7 @@ export class SupplyAdService {
   }
 
   createAd(supplyAd: SupplyAd) {
-    const supplyAdCollection: AngularFirestoreCollection<
-      SupplyAd
-    > = this.afs.collection('supplyAd');
+    const supplyAdCollection: AngularFirestoreCollection<SupplyAd> = this.afs.collection('supplyAd');
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
   }
 
