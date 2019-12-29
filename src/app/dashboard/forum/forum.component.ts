@@ -25,21 +25,7 @@ export class ForumComponent implements OnInit {
   @ViewChild('item', { static: false }) accordion;
   @ViewChild('imageDrop', { static: false }) imageDrop;
 
-  constructor(
-    private forumService: ForumService,
-  ) { }
-
-  user: User = JSON.parse(localStorage.getItem('user'));
-  formControls = this.discussionForm.controls;
-
-  ngOnInit() {
-  }
-
-  @ViewChild('item', { static: false }) accordion;
-
-  constructor(
-    private forumService: ForumService
-  ) {}
+  constructor(private forumService: ForumService) {}
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.discussionForm.controls;
@@ -59,16 +45,20 @@ export class ForumComponent implements OnInit {
     this.isHovering = event;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  changePostType(showMyPost: boolean) { // set post type
+  changePostType(showMyPost: boolean) {
+    // set post type
     this.showMyPost = showMyPost;
   }
 
-  onSelect(event) { // get inserted file
+  onSelect(event) {
+    // get inserted file
     for (let i = 0; i < event.addedFiles.length; i++) {
-      if (event.addedFiles[i].type === 'image/jpeg' || event.addedFiles[i].type === 'image/png') {
+      if (
+        event.addedFiles[i].type === 'image/jpeg' ||
+        event.addedFiles[i].type === 'image/png'
+      ) {
         this.images.push(event.addedFiles[i]);
       } else {
         // need to edit
@@ -77,14 +67,14 @@ export class ForumComponent implements OnInit {
     }
   }
 
-  onRemove(event) { // remove upload file
+  onRemove(event) {
+    // remove upload file
     this.images.splice(this.images.indexOf(event), 1);
   }
 
-  onCreate() { // crete post
-    const id = this.forumService.getPostId();
   onCreate() {
     // create  post
+    const id = this.forumService.getPostId();
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
     const dateTime = new Date();
@@ -106,7 +96,7 @@ export class ForumComponent implements OnInit {
           userImage,
           showFarmer,
           showBuyer,
-          false,
+          false
         );
         // this.showToast('success');
         this.discussionForm.reset();
@@ -114,14 +104,11 @@ export class ForumComponent implements OnInit {
         if (this.images != null) {
           this.forumService.uploadImg(this.images, 'post', id);
         }
-
       } else {
         // else of check farmers and buyers
       }
-
     } else {
       // else of form validation check
     }
   }
-
 }

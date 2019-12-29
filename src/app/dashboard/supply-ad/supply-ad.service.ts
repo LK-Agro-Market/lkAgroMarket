@@ -17,7 +17,7 @@ export class SupplyAdService {
   constructor(
     private afStorage: AngularFireStorage,
     private afs: AngularFirestore
-  ) { }
+  ) {}
 
   getAdId() {
     return this.afs.createId();
@@ -35,14 +35,25 @@ export class SupplyAdService {
   }
 
   createAd(supplyAd: SupplyAd) {
-    const supplyAdCollection: AngularFirestoreCollection<SupplyAd> = this.afs.collection('supplyAd');
+    const supplyAdCollection: AngularFirestoreCollection<
+      SupplyAd
+    > = this.afs.collection('supplyAd');
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
   }
 
-  getAds(userId): Observable<SupplyAd[]> {
+  getAds(userId: string): Observable<SupplyAd[]> {
     return this.afs
       .collection('supplyAd', ref => ref.where('owner', '==', userId))
       .valueChanges()
       .pipe(map(res => res as SupplyAd[]));
+  }
+
+  changeStatus(adId: string, status: string): Observable<void> {
+    return from(
+      this.afs
+        .collection('supplyAd')
+        .doc(adId)
+        .update({ status: status })
+    );
   }
 }

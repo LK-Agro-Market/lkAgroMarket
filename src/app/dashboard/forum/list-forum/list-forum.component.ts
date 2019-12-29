@@ -22,7 +22,7 @@ export class ListForumComponent implements OnInit {
   }
 
   ngOnChanges() {
-  // change post view
+    // change post view
     if (this.showMyPost) {
       this.myPost();
     } else {
@@ -30,7 +30,8 @@ export class ListForumComponent implements OnInit {
     }
   }
 
-  myPost() { // get my post only
+  myPost() {
+    // get my post only
     this.forumService
       .getPostByID(this.user.uid)
       .pipe()
@@ -39,7 +40,8 @@ export class ListForumComponent implements OnInit {
       });
   }
 
-  allPosts() {  // get all post
+  allPosts() {
+    // get all post
     this.forumService
       .getPost()
       .pipe()

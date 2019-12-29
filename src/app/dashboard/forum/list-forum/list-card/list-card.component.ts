@@ -9,7 +9,6 @@ import { ForumService } from '../../forum.service';
   styleUrls: ['./list-card.component.scss']
 })
 export class ListCardComponent implements OnInit {
-
   viewButton = true;
   comments: any[];
   cmntId: any;
@@ -30,9 +29,7 @@ export class ListCardComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
-  constructor(
-    private forumService: ForumService
-  ) { }
+  constructor(private forumService: ForumService) {}
 
   get comm() {
     return this.commentForm.get('comment');
@@ -59,10 +56,10 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
-
   }
 
-  onCreate() {  // create comment
+  onCreate() {
+    // create comment
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.item.key;
@@ -78,7 +75,7 @@ export class ListCardComponent implements OnInit {
         userId,
         userName,
         userImage,
-        false,
+        false
       );
       this.comm.setValue('');
       this.getCommentCount();
@@ -92,22 +89,29 @@ export class ListCardComponent implements OnInit {
     this.accordion.toggle();
   }
 
-  endOrViewPost() { // change post (end or start)
-    this.forumService.changeEndProperty('post', this.item.key, !this.item.endThread);
-
+  endOrViewPost() {
+    // change post (end or start)
+    this.forumService.changeEndProperty(
+      'post',
+      this.item.key,
+      !this.item.endThread
+    );
   }
 
-  deletePost() {  // Delete post
+  deletePost() {
+    // Delete post
     this.forumService.deleteReplyList('postID', this.item.key).subscribe();
     this.forumService.deleteCommentList('postID', this.item.key).subscribe();
     this.forumService.deleteDocment('post', this.item.key);
     this.getCommentCount();
   }
 
-  getCommentCount() { // get comment count
-    this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
-      this.commCount = count;
-    });
+  getCommentCount() {
+    // get comment count
+    this.forumService
+      .getCount('comment', 'postID', this.item.key)
+      .subscribe(count => {
+        this.commCount = count;
+      });
   }
-
 }

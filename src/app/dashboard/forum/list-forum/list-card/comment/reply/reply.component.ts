@@ -18,7 +18,6 @@ export class ReplyComponent implements OnInit {
   constructor(private forumService: ForumService) {}
 
   ngOnInit() {
-
     if (this.reply.userID === this.user.uid) {
       this.showBtn = true;
     } else {
@@ -30,6 +29,4 @@ export class ReplyComponent implements OnInit {
     this.forumService.deleteDocment('reply', this.reply.key);
     this.changeReplyCount.emit();
   }
-
-
 }

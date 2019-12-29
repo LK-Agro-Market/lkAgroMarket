@@ -11,7 +11,13 @@
             <i> {{ reply.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
           </span>
           <div class="float-right like-container">
-            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
+            <button
+              nbButton
+              ghost
+              status="success"
+              size="medium"
+              class="float-right btn-like"
+            >
               <nb-icon icon="checkmark"></nb-icon>
             </button>
             <p class="count-like">3</p>
@@ -19,16 +25,31 @@
         </div>
       </div>
       <div class="reply-body">
-        <p class="text-dark" id="commReply">
+        <p class="text-dark" id="commReply"></p>
         <p class="text-dark" style="font-size: 13px;">
           {{ reply.reply }}
         </p>
         <div class="card-fotter-container">
-          <button nbButton *ngIf="true" status="primary" size="tiny" class="edit-btn" [hidden]="!showBtn">
+          <button
+            nbButton
+            *ngIf="true"
+            status="primary"
+            size="tiny"
+            class="edit-btn"
+            [hidden]="!showBtn"
+          >
             Edit
           </button>
-          <button nbButton outline *ngIf="true" status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn"
-            (click)="deleteReply()">
+          <button
+            nbButton
+            outline
+            *ngIf="true"
+            status="danger"
+            size="tiny"
+            class="delete-btn"
+            [hidden]="!showBtn"
+            (click)="deleteReply()"
+          >
             Delete
           </button>
         </div>

@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -28,11 +28,14 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
+import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
+import { FileUploadDirective } from './forum/file-upload.directive';
 
 //components
 import { LayoutComponent } from './layout/layout.component';
@@ -41,9 +44,6 @@ import { ChatComponent } from './chat/chat.component';
 //supply ad
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
-
-import { FormsModule } from '@angular/forms';
-
 import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
 import { UpdateAdComponent } from './supply-ad/update-ad/update-ad.component';
 //profile
@@ -53,15 +53,13 @@ import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
-import { UpdateAdComponent } from './supply-ad/update-ad/update-ad.component';
 import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
 //demand ad
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
-import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
-import { FileUploadDirective } from './forum/file-upload.directive';
+import { StatsComponent } from './supply-ad/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +79,9 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     ListDemandAdComponent,
     ReplyComponent,
     UserProfileCardComponent,
+    StatsComponent,
+    ConfirmButtonDirective,
+    FileUploadDirective
   ],
   imports: [
     CommonModule,
@@ -117,6 +118,8 @@ import { FileUploadDirective } from './forum/file-upload.directive';
     NbMenuModule,
     NbListModule,
     AgmCoreModule.forRoot(environment.googleMap),
+    ChartsModule,
+    NgbModule,
     NgxDropzoneModule
   ],
   providers: []

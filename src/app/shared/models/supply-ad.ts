@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface SupplyAd {
   id: string;
   type: string;
@@ -14,4 +16,7 @@ export interface SupplyAd {
   views: number;
   contactClicks: number;
   owner: string;
+  rating?: number;
+  buyer?: User;
+  status: string;
 }

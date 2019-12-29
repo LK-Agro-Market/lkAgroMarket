@@ -1,4 +1,4 @@
-.main-container{
+.main-container {
   display: flex;
   flex-direction: row;
 }
@@ -19,7 +19,7 @@ nb-accordion {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
-  margin-top: -3%;;
+  margin-top: -3%;
 }
 .pro-img {
   width: 45px;
@@ -103,13 +103,15 @@ nb-accordion {
   display: flex;
   flex-direction: row;
 }
-.edit-btn, .end-btn, .delete-btn{
+.edit-btn,
+.end-btn,
+.delete-btn {
   margin-top: 5px;
   font-size: 15px;
   margin-left: 20px;
   height: 25px;
 }
-.reply-title{
+.reply-title {
   margin-left: 25px;
   font-weight: 600;
   color: #aa7070;
