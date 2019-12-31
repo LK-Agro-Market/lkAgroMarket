@@ -147,8 +147,8 @@ export class ForumService {
       .update({ isBest: !current });
   }
 
-  changeVoteState(key, increment, user) {
-    if (increment === 1) {
+  changeVoteState(key, increment, user) { // vote for comments
+    if (increment === 1) { // if currently vote-up, change to vote-down
       this.afs
         .collection('comment')
         .doc(key)
@@ -156,7 +156,7 @@ export class ForumService {
           voteCount: firestore.FieldValue.increment(1),
           voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'up' })
         });
-    } else {
+    } else { // if currently vote-down, change to vote-up
       this.afs
         .collection('comment')
         .doc(key)
@@ -167,8 +167,8 @@ export class ForumService {
     }
   }
 
-  updateVote(key, user, current) {
-    if (current === 'up') {
+  updateVote(key, user, current) { // update votes(remove votes)
+    if (current === 'up') { // currently vote-up
       this.afs
         .collection('comment')
         .doc(key)
@@ -176,7 +176,7 @@ export class ForumService {
           voteCount: firestore.FieldValue.increment(-1),
           voteList: firestore.FieldValue.arrayRemove({ userId: user, state: 'up' })
         });
-    } else {
+    } else { // currently vote-down
       this.afs
       .collection('comment')
       .doc(key)
@@ -187,7 +187,7 @@ export class ForumService {
     }
   }
 
-  uploadImg(files: File[], colName, key) {
+  uploadImg(files: File[], colName, key) { // upload images to fireastore storage
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
@@ -211,7 +211,7 @@ export class ForumService {
     }
   }
 
-  updatePost(
+  updatePost( // update post
     key,
     postTitle,
     des,
@@ -231,7 +231,7 @@ export class ForumService {
       });
   }
 
-  updateComment(
+  updateComment( // update comment
     key,
     comm
   ) {
@@ -243,7 +243,7 @@ export class ForumService {
       });
   }
 
-  updateReply(
+  updateReply( // update replies
     key,
     rep
   ) {
@@ -255,7 +255,7 @@ export class ForumService {
       });
   }
 
-  getPost() {
+  getPost() { 
     // get all
     return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
@@ -289,7 +289,7 @@ export class ForumService {
       );
   }
 
-  getPostForUpdate(postId) {
+  getPostForUpdate(postId) { // get post data for update
     return this.afs
       .collection('post')
       .doc(postId)
@@ -297,7 +297,7 @@ export class ForumService {
       .pipe();
   }
 
-  getCommentForUpdate(commentId) {
+  getCommentForUpdate(commentId) { // get comment data for update
     return this.afs
       .collection('comment')
       .doc(commentId)
@@ -305,7 +305,7 @@ export class ForumService {
       .pipe();
   }
 
-  getReplyForUpdate(replyId) {
+  getReplyForUpdate(replyId) { // get reply data for update
     return this.afs
       .collection('reply')
       .doc(replyId)
