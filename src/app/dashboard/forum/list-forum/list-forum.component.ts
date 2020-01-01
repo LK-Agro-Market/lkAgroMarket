@@ -21,6 +21,7 @@ export class ListForumComponent implements OnInit {
     this.allPosts();
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges() {
     // change post view
     if (this.showMyPost) {

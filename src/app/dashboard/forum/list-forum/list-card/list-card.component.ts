@@ -4,13 +4,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
 import { ToastrService } from 'ngx-toastr';
 import { NbPopoverDirective } from '@nebular/theme';
-
+import { ForumComponent } from '../../forum.component';
 
 @Component({
   selector: 'app-list-card',
   templateUrl: './list-card.component.html',
   styleUrls: ['./list-card.component.scss']
 })
+
 export class ListCardComponent implements OnInit {
   viewMore = true;
   comments: any[];
