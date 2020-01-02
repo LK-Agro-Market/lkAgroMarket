@@ -22,6 +22,7 @@ export class ForumService {
     private storage: AngularFireStorage,
   ) { }
 
+
   getPostId() {
     return this.afs.createId();
   }
@@ -36,19 +37,22 @@ export class ForumService {
     postUserImage,
     showFarmers,
     showBuyers,
-    isEnd,
+    isEnd
   ) {
-    return this.afs.collection('post').doc(key).set({
-      title: postTitle,
-      description: des,
-      date: dateTime,
-      userID: postUserId,
-      userName: postUserName,
-      userImage: postUserImage,
-      showFarmer: showFarmers,
-      showBuyer: showBuyers,
-      endThread: isEnd,
-    });
+    return this.afs
+      .collection('post')
+      .doc(key)
+      .set({
+        title: postTitle,
+        description: des,
+        date: dateTime,
+        userID: postUserId,
+        userName: postUserName,
+        userImage: postUserImage,
+        showFarmer: showFarmers,
+        showBuyer: showBuyers,
+        endThread: isEnd
+      });
   }
 
   createComment(
@@ -58,7 +62,7 @@ export class ForumService {
     commentUserId,
     commentUserName,
     commentUserImage,
-    isEnd,
+    isEnd
   ) {
     return this.afs.collection('comment').add({
       comment: comm,
@@ -67,7 +71,7 @@ export class ForumService {
       userID: commentUserId,
       userName: commentUserName,
       userImage: commentUserImage,
-      endThread: isEnd,
+      endThread: isEnd
     });
   }
 
@@ -136,6 +140,7 @@ export class ForumService {
   }
 
   getPost() { // get all
+
     return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
@@ -150,7 +155,8 @@ export class ForumService {
       );
   }
 
-  getPostByID(userId) { // get post by user id
+  getPostByID(userId) {
+    // get post by user id
     return this.afs
       .collection('post', ref => ref.where('userID', '==', userId).orderBy('date', 'desc'))
       .snapshotChanges()
@@ -188,7 +194,8 @@ export class ForumService {
       );
   }
 
-  getReply(commentId) { // get replies
+  getReply(commentId) {
+    // get replies
     return this.afs
       .collection('reply', ref => ref.where('commentID', '==', commentId).orderBy('date', 'desc'))
       .snapshotChanges()
@@ -209,15 +216,24 @@ export class ForumService {
     );
   }
 
-  changeEndProperty(collection, key, value) { // change end or start thread
-    this.afs.collection(collection).doc(key).update({ endThread: value });
+  changeEndProperty(collection, key, value) {
+    // change end or start thread
+    this.afs
+      .collection(collection)
+      .doc(key)
+      .update({ endThread: value });
   }
 
-  deleteDocment(collection, key) { // delete document by key
-    this.afs.collection(collection).doc(key).delete();
+  deleteDocment(collection, key) {
+    // delete document by key
+    this.afs
+      .collection(collection)
+      .doc(key)
+      .delete();
   }
 
-  deleteReplyList(field, id) {  // delete replies by feild
+  deleteReplyList(field, id) {
+    // delete replies by feild
     return this.afs
       .collection('reply', ref => ref.where(field, '==', id))
       .snapshotChanges()
@@ -231,7 +247,8 @@ export class ForumService {
       );
   }
 
-  deleteCommentList(field, id) {  // delte comments by field
+  deleteCommentList(field, id) {
+    // delte comments by field
     return this.afs
       .collection('comment', ref => ref.where(field, '==', id))
       .snapshotChanges()

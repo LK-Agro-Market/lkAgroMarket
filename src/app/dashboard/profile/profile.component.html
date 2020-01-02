@@ -14,14 +14,18 @@
         <div class="card-body">
           <button
             class="btn btn-success"
-            *ngIf="profileOwnerId != viewer.uid && isViewerFollowThisProfile == false"
+            *ngIf="
+              profileOwnerId != viewer.uid && isViewerFollowThisProfile == false
+            "
             (click)="followUser()"
           >
             Follow
           </button>
           <button
             class="btn btn-warning"
-            *ngIf="profileOwnerId != viewer.uid && isViewerFollowThisProfile == true"
+            *ngIf="
+              profileOwnerId != viewer.uid && isViewerFollowThisProfile == true
+            "
             (click)="unfollowUser()"
           >
             Unfollow

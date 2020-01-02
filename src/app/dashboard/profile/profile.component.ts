@@ -1,16 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  FormGroup,
-  Validators,
-  FormControl,
-  FormBuilder
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
 import { Subscription } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { UserDetails } from 'src/app/shared/models/user-details';
-import { NotifierService } from 'angular-notifier';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +36,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
-    private readonly notifier: NotifierService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -73,8 +68,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 .getFollowers(this.profileOwnerUser)
                 .subscribe(follows => {
                   this.numOfFollowers = follows.length;
-                  const viewerInFollowers = follows.filter((follow)=>{
-                    return follow.follower == this.viewer.uid
+                  const viewerInFollowers = follows.filter(follow => {
+                    return follow.follower == this.viewer.uid;
                   });
                   if (viewerInFollowers.length > 0) {
                     this.isViewerFollowThisProfile = true;
@@ -164,20 +159,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.processing = false;
           this.attempted = false;
-          this.notifier.notify('success', 'Updated your profile info');
+          this.toastr.success('Updated your profile info');
         })
     );
   }
 
   followUser() {
     this.subscriptions.push(
-    this.profileService.followUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+      this.profileService
+        .followUser(this.profileOwnerUser, this.viewer.uid)
+        .subscribe()
     );
   }
 
   unfollowUser() {
     this.subscriptions.push(
-      this.profileService.unfollowUser(this.profileOwnerUser, this.viewer.uid).subscribe()
+      this.profileService
+        .unfollowUser(this.profileOwnerUser, this.viewer.uid)
+        .subscribe()
     );
   }
 }

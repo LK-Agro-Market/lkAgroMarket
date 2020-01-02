@@ -19,14 +19,15 @@
         </div>
       </div>
       <div class="reply-body">
-        <p class="text-dark" id="commReply">
+        <p class="text-dark" id="commReply"></p>
+        <p class="text-dark" style="font-size: 13px;">
           {{ reply.reply }}
         </p>
         <div class="card-fotter-container">
-          <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser">
+          <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!showBtn">
             Edit
           </button>
-          <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
+          <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!showBtn"
             (click)="deleteReply()">
             Delete
           </button>

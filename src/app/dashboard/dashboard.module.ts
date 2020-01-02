@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -28,11 +28,14 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AgmCoreModule } from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
+import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
+import { FileUploadDirective } from './forum/file-upload.directive';
 
 // components
 import { LayoutComponent } from './layout/layout.component';
@@ -57,6 +60,7 @@ import { CreateFormComponent } from './forum/create-form/create-form.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
+import { StatsComponent } from './supply-ad/stats/stats.component';
 
 
 @NgModule({
@@ -78,6 +82,9 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     ReplyComponent,
     UserProfileCardComponent,
     CreateFormComponent,
+    StatsComponent,
+    ConfirmButtonDirective,
+    FileUploadDirective
   ],
   imports: [
     CommonModule,
@@ -103,6 +110,7 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     NbSpinnerModule,
     NbSelectModule,
     NbInputModule,
+    FormsModule,
     NbAccordionModule,
     NbUserModule,
     NbAlertModule,
@@ -111,6 +119,8 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     NbMenuModule,
     NbListModule,
     AgmCoreModule.forRoot(environment.googleMap),
+    ChartsModule,
+    NgbModule,
     NgxDropzoneModule
   ],
   providers: []

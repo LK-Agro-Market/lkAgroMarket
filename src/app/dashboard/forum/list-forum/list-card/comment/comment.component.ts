@@ -9,7 +9,6 @@ import { ForumService } from '../../../forum.service';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-
   replies: any[];
   isLogUser;
   isEnd;
@@ -26,9 +25,7 @@ export class CommentComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
-  constructor(
-    private forumService: ForumService
-  ) { }
+  constructor(private forumService: ForumService) {}
 
   get rply() {
     return this.replyForm.get('reply');
@@ -55,7 +52,6 @@ export class CommentComponent implements OnInit {
       .subscribe(replies => {
         this.replies = replies;
       });
-
   }
 
   onCreate() {
@@ -87,11 +83,17 @@ export class CommentComponent implements OnInit {
   }
 
   endOrViewComment() {
-    this.forumService.changeEndProperty('comment', this.comment.key, !this.comment.endThread);
+    this.forumService.changeEndProperty(
+      'comment',
+      this.comment.key,
+      !this.comment.endThread
+    );
   }
 
   deleteComments() {
-    this.forumService.deleteReplyList('commentID', this.comment.key).subscribe();
+    this.forumService
+      .deleteReplyList('commentID', this.comment.key)
+      .subscribe();
     this.forumService.deleteDocment('comment', this.comment.key);
     this.changeCommentCount.emit();
   }

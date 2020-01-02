@@ -6,6 +6,7 @@ import { SupplyAdService } from '../supply-ad.service';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { User } from 'src/app/shared/models/user';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-supply-ad',
@@ -45,19 +46,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
     ]
   };
   types = Object.keys(this.foods);
-  relatedFoods = [
-    'Apple',
-    'Avocado',
-    'Banana',
-    'Grape',
-    'Lemon',
-    'Mango',
-    'Orange',
-    'Papaya',
-    'Pineapple',
-    'Strawberry',
-    'Watermelon'
-  ];
+  relatedFoods: Array<string>;
 
   image1ChangedEvent: any = '';
   image2ChangedEvent: any = '';
@@ -74,13 +63,14 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private supplyAdService: SupplyAdService
+    private supplyAdService: SupplyAdService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.supplyAdForm = this.formBuilder.group({
-      type: ['Vegitable', Validators.required],
-      food: ['Carrot', Validators.required],
+      type: ['', Validators.required],
+      food: ['', Validators.required],
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
@@ -92,7 +82,6 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
       organic: ['', Validators.required],
       expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
-    this.retriveFoods();
   }
 
   ngOnDestroy() {
@@ -212,7 +201,8 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           createdAt: new Date(),
           views: 0,
           contactClicks: 0,
-          owner: this.user.uid
+          owner: this.user.uid,
+          status: 'active'
         };
         this.subscriptions.push(
           this.supplyAdService.createAd(supplyAd).subscribe(() => {
@@ -227,6 +217,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
             this.image2LL = '';
             this.image3LL = '';
             this.image4LL = '';
+            this.toastr.success('New supply advertisement is created');
           })
         );
       })

@@ -52,9 +52,7 @@ export class ProfileService {
     const followerRef = this.afs
       .collection('followers')
       .doc(viewerId + profileOwnerUser.uid);
-    return from(
-      followerRef.delete()
-    );
+    return from(followerRef.delete());
   }
 
   getFollowers(profileOwnerUser: User): Observable<Follower[]> {
@@ -63,8 +61,6 @@ export class ProfileService {
         ref.where('following', '==', profileOwnerUser)
       )
       .valueChanges()
-      .pipe(
-        map(follower => follower as Follower[])
-      );
+      .pipe(map(follower => follower as Follower[]));
   }
 }

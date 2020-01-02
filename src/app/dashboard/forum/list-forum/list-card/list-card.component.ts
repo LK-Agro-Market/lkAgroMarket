@@ -32,9 +32,7 @@ export class ListCardComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
-  constructor(
-    private forumService: ForumService
-  ) { }
+  constructor(private forumService: ForumService) {}
 
   get comm() {
     return this.commentForm.get('comment');
@@ -62,10 +60,10 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
-
   }
 
-  onCreate() {  // create comment
+  onCreate() {
+    // create comment
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.postId;
@@ -81,7 +79,7 @@ export class ListCardComponent implements OnInit {
         userId,
         userName,
         userImage,
-        false,
+        false
       );
       this.comm.setValue('');
       this.getCommentCount();
@@ -104,10 +102,13 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
   }
 
-  getCommentCount() { // get comment count
-    this.forumService.getCount('comment', 'postID', this.item.key).subscribe(count => {
-      this.commCount = count;
-    });
+  getCommentCount() {
+    // get comment count
+    this.forumService
+      .getCount('comment', 'postID', this.item.key)
+      .subscribe(count => {
+        this.commCount = count;
+      });
   }
 
   updateForm() { // update form

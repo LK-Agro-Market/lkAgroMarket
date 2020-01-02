@@ -4,7 +4,5 @@ import { Directive } from '@angular/core';
   selector: '[appFileUpload]'
 })
 export class FileUploadDirective {
-
-  constructor() { }
-
+  constructor() {}
 }

@@ -17,10 +17,10 @@ export class ForumComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  changePostType(showMyPost: boolean) { // set post type
+  changePostType(showMyPost: boolean) {
+    // set post type
     this.showMyPost = showMyPost;
   }
 
