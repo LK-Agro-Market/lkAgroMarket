@@ -35,8 +35,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
-import { FileUploadDirective } from './forum/file-upload.directive';
-
 // components
 import { LayoutComponent } from './layout/layout.component';
 // chat
@@ -84,7 +82,6 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     CreateFormComponent,
     StatsComponent,
     ConfirmButtonDirective,
-    FileUploadDirective
   ],
   imports: [
     CommonModule,

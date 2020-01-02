@@ -50,8 +50,6 @@ export class CreateFormComponent implements OnInit {
           this.discussionForm.controls.des.setValue(dataSet.data().description);
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
-          // this.images = dataSet.data().images;
-          // this.onSelect(this.images);
         });
     }
   }
