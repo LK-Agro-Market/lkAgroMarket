@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { ForumService } from '../forum.service';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -27,9 +34,7 @@ export class CreateFormComponent implements OnInit {
     des: new FormControl('')
   });
 
-  constructor(
-    private forumService: ForumService,
-  ) { }
+  constructor(private forumService: ForumService) {}
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.discussionForm.controls;
@@ -42,8 +47,10 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.createOrUpdate === 'update') { // set form value for update
-      this.forumService.getPostForUpdate(this.postId)
+    if (this.createOrUpdate === 'update') {
+      // set form value for update
+      this.forumService
+        .getPostForUpdate(this.postId)
         .pipe()
         .subscribe(dataSet => {
           this.discussionForm.controls.title.setValue(dataSet.data().title);
@@ -54,15 +61,18 @@ export class CreateFormComponent implements OnInit {
     }
   }
 
-  onSelect(event) { // select images
+  onSelect(event) {
+    // select images
     this.images.push(...event.addedFiles);
   }
 
-  onRemove(event) { // remove selected images
+  onRemove(event) {
+    // remove selected images
     this.images.splice(this.images.indexOf(event), 1);
   }
 
-  onCreate() { // create  post
+  onCreate() {
+    // create  post
     let id;
     const title = this.discussionForm.controls.title.value as string;
     const des = this.discussionForm.controls.des.value as string;
@@ -77,7 +87,8 @@ export class CreateFormComponent implements OnInit {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
           id = this.forumService.getPostId(); // get new ID for post
-          this.forumService.createPost( // create new post
+          this.forumService.createPost(
+            // create new post
             id,
             title,
             des,
@@ -87,12 +98,12 @@ export class CreateFormComponent implements OnInit {
             userImage,
             showFarmer,
             showBuyer,
-            false,
+            false
           );
-
         } else {
           id = this.postId;
-          this.forumService.updatePost( // update selected post
+          this.forumService.updatePost(
+            // update selected post
             id,
             title,
             des,
@@ -102,11 +113,11 @@ export class CreateFormComponent implements OnInit {
             userImage,
             showFarmer,
             showBuyer,
-            false,
+            false
           );
-
         }
-        if (this.images != null) { // check and upload images
+        if (this.images != null) {
+          // check and upload images
           this.forumService.uploadImg(this.images, 'post', id);
         }
         this.discussionForm.reset();
@@ -114,7 +125,6 @@ export class CreateFormComponent implements OnInit {
       } else {
         // else of check farmers and buyers
       }
-
     } else {
       // else of form validation check
     }

@@ -1,6 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-
 
 @Component({
   selector: 'app-forum',
@@ -8,14 +7,13 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit {
-
   showMyPost = false;
   isCreate = false;
   createOrUpdate;
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
@@ -24,11 +22,13 @@ export class ForumComponent implements OnInit {
     this.showMyPost = showMyPost;
   }
 
-  toggleForm(event) { // hide form when submit
+  toggleForm(event) {
+    // hide form when submit
     this.isCreate = event;
   }
 
-  createPost() { // create post
+  createPost() {
+    // create post
     this.createOrUpdate = 'create';
     this.isCreate = !this.isCreate;
   }

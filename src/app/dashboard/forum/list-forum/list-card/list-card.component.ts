@@ -9,7 +9,6 @@ import { ForumService } from '../../forum.service';
   styleUrls: ['./list-card.component.scss']
 })
 export class ListCardComponent implements OnInit {
-
   viewMore = true;
   comments: any[];
   cmntId: any;
@@ -89,12 +88,17 @@ export class ListCardComponent implements OnInit {
     }
   }
 
-  endOrViewPost() { // change post (end or start)
-    this.forumService.changeEndProperty('post', this.postId, !this.item.endThread);
-
+  endOrViewPost() {
+    // change post (end or start)
+    this.forumService.changeEndProperty(
+      'post',
+      this.postId,
+      !this.item.endThread
+    );
   }
 
-  deletePost() {  // Delete post
+  deletePost() {
+    // Delete post
     this.forumService.deleteImage(this.item.images);
     this.forumService.deleteReplyList('postID', this.postId).subscribe();
     this.forumService.deleteCommentList('postID', this.postId).subscribe();
@@ -111,10 +115,10 @@ export class ListCardComponent implements OnInit {
       });
   }
 
-  updateForm() { // update form
+  updateForm() {
+    // update form
     this.accordion.toggle();
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }
-
 }

@@ -99,8 +99,10 @@ export class CommentComponent implements OnInit {
   }
 
   getReplyCount() {
-    this.forumService.getCount('reply', 'commentID', this.comment.key).subscribe(count => {
-      this.repCount = count;
-    });
+    this.forumService
+      .getCount('reply', 'commentID', this.comment.key)
+      .subscribe(count => {
+        this.repCount = count;
+      });
   }
 }

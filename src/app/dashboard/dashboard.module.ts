@@ -60,7 +60,6 @@ import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-dem
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { StatsComponent } from './supply-ad/stats/stats.component';
 
-
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -81,7 +80,7 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     UserProfileCardComponent,
     CreateFormComponent,
     StatsComponent,
-    ConfirmButtonDirective,
+    ConfirmButtonDirective
   ],
   imports: [
     CommonModule,
