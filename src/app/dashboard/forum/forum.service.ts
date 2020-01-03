@@ -109,7 +109,7 @@ export class ForumService {
     });
   }
 
-  changeReact(
+  changeReact( // change current reacts (react -> not react, not react -> react)
     current: boolean,
     userId,
     postId
@@ -126,21 +126,21 @@ export class ForumService {
     }
   }
 
-  checkReact(userId, postId) {
+  checkReact(userId, postId) { // check if user react or not
     return this.afs
       .collection('react', ref => ref.where('userID', '==', userId).where('postID', '==', postId))
       .get()
       .pipe(map(coll => coll.size));
   }
 
-  countReacts(postId) {
+  countReacts(postId) { // get react count
     return this.afs
       .collection('react', ref => ref.where('postID', '==', postId))
       .get()
       .pipe(map(coll => coll.size));
   }
 
-  markAsBest(current: boolean, key) {
+  markAsBest(current: boolean, key) { // mark as best (if alredy marked chahge to unmark)
     this.afs
       .collection('comment')
       .doc(key)
@@ -167,7 +167,7 @@ export class ForumService {
     }
   }
 
-  updateVote(key, user, current, cou) {
+  updateVote(key, user, current) {
     if (current === 'up') {
       this.afs
         .collection('comment')
@@ -188,6 +188,7 @@ export class ForumService {
   }
 
   uploadImg(files: File[], colName, key) {
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
       const fileRef = this.storage.ref(path);
