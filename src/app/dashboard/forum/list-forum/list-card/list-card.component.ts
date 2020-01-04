@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
@@ -22,7 +22,8 @@ export class ListCardComponent implements OnInit {
 
   @Input() item: any;
 
-  @ViewChild('itm', { static: false }) accordion;
+  @ViewChild('it', { static: false }) accordion;
+  // @ViewChild('it', { static: false }) body;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -88,6 +89,11 @@ export class ListCardComponent implements OnInit {
     }
   }
 
+  toggleCard() {
+    // this.accordion.toggle();
+    this.viewMore = !this.viewMore;
+  }
+
   endOrViewPost() {
     // change post (end or start)
     this.forumService.changeEndProperty(
@@ -117,7 +123,7 @@ export class ListCardComponent implements OnInit {
 
   updateForm() {
     // update form
-    this.accordion.toggle();
+    // this.accordion.toggle();
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }

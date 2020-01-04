@@ -11,7 +11,7 @@ import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-update-form',
+  selector: 'app-create-form',
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.scss']
 })
