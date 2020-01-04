@@ -90,7 +90,7 @@ export class ListCardComponent implements OnInit {
   }
 
   toggleCard() {
-    // this.accordion.toggle();
+    this.accordion.toggle();
     this.viewMore = !this.viewMore;
   }
 
