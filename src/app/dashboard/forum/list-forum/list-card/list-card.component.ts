@@ -22,9 +22,6 @@ export class ListCardComponent implements OnInit {
 
   @Input() item: any;
 
-  @ViewChild('it', { static: false }) accordion;
-  // @ViewChild('it', { static: false }) body;
-
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
   });
@@ -42,8 +39,10 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-    this.imageList = this.item.images;
 
+    if(this.item.images != null) {
+      this.imageList = this.item.images;
+    }
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
@@ -89,11 +88,6 @@ export class ListCardComponent implements OnInit {
     }
   }
 
-  toggleCard() {
-    this.accordion.toggle();
-    this.viewMore = !this.viewMore;
-  }
-
   endOrViewPost() {
     // change post (end or start)
     this.forumService.changeEndProperty(
@@ -105,7 +99,9 @@ export class ListCardComponent implements OnInit {
 
   deletePost() {
     // Delete post
-    this.forumService.deleteImage(this.item.images);
+    if(this.imageList !=  null) {
+      this.forumService.deleteImage(this.item.images);
+    }
     this.forumService.deleteReplyList('postID', this.postId).subscribe();
     this.forumService.deleteCommentList('postID', this.postId).subscribe();
     this.forumService.deleteDocment('post', this.postId);
@@ -123,7 +119,6 @@ export class ListCardComponent implements OnInit {
 
   updateForm() {
     // update form
-    // this.accordion.toggle();
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }

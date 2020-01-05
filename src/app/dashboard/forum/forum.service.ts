@@ -36,6 +36,7 @@ export class ForumService {
     des,
     dateTime,
     postUserId,
+    imageList,
     postUserName,
     postUserImage,
     showFarmers,
@@ -50,6 +51,7 @@ export class ForumService {
         description: des,
         date: dateTime,
         userID: postUserId,
+        images: imageList,
         userName: postUserName,
         userImage: postUserImage,
         showFarmer: showFarmers,
@@ -127,6 +129,7 @@ export class ForumService {
     des,
     dateTime,
     postUserId,
+    imageList,
     postUserName,
     postUserImage,
     showFarmers,
@@ -141,6 +144,7 @@ export class ForumService {
         description: des,
         date: dateTime,
         userID: postUserId,
+        images: imageList,
         userName: postUserName,
         userImage: postUserImage,
         showFarmer: showFarmers,
@@ -291,8 +295,8 @@ export class ForumService {
   deleteImage(urlList: any[]) {
     // not delete mulitple images
     for (let i = 0; i < urlList.length; i++) {
-      console.log(urlList[i]);
-      return this.storage.storage.refFromURL(urlList[i]).delete();
+      console.log( i + '.....' + urlList[i] );
+      this.storage.storage.refFromURL(urlList[i]).delete();
     }
   }
 }

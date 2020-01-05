@@ -20,6 +20,7 @@ export class CreateFormComponent implements OnInit {
   showBuyer = true;
   isHovering: boolean;
   images: File[] = [];
+  imageList: any[];
 
   @Input() postId: any; // get postID for update
   @Input() createOrUpdate: any;
@@ -57,17 +58,20 @@ export class CreateFormComponent implements OnInit {
           this.discussionForm.controls.des.setValue(dataSet.data().description);
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
+          this.imageList = dataSet.data().images;
+          if(this.imageList !=  null) { // delelte images from firebase storage for upload newly
+            this.forumService.deleteImage(this.imageList);
+          }
         });
+        
     }
   }
 
-  onSelect(event) {
-    // select images
+  onSelect(event) {  // select images
     this.images.push(...event.addedFiles);
   }
 
-  onRemove(event) {
-    // remove selected images
+  onRemove(event) {  // remove selected images
     this.images.splice(this.images.indexOf(event), 1);
   }
 
@@ -94,6 +98,7 @@ export class CreateFormComponent implements OnInit {
             des,
             dateTime,
             userId,
+            null,
             userName,
             userImage,
             showFarmer,
@@ -101,7 +106,8 @@ export class CreateFormComponent implements OnInit {
             false
           );
         } else {
-          id = this.postId;
+          ///////// shuld udate new image list
+          id = this.postId;    
           this.forumService.updatePost(
             // update selected post
             id,
@@ -109,6 +115,7 @@ export class CreateFormComponent implements OnInit {
             des,
             dateTime,
             userId,
+            null,
             userName,
             userImage,
             showFarmer,
@@ -116,8 +123,7 @@ export class CreateFormComponent implements OnInit {
             false
           );
         }
-        if (this.images != null) {
-          // check and upload images
+        if (this.images != null) { // upload images
           this.forumService.uploadImg(this.images, 'post', id);
         }
         this.discussionForm.reset();
