@@ -59,9 +59,7 @@ export class CreateFormComponent implements OnInit {
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
           this.imageList = dataSet.data().images;
-          if(this.imageList !=  null) { // delelte images from firebase storage for upload newly
-            this.forumService.deleteImage(this.imageList);
-          }
+          
         });
         
     }
@@ -125,6 +123,9 @@ export class CreateFormComponent implements OnInit {
         }
         if (this.images != null) { // upload images
           this.forumService.uploadImg(this.images, 'post', id);
+        }
+        if(this.imageList !=  null) { // delelte images from firebase storage for upload newly
+          this.forumService.deleteImage(this.imageList);
         }
         this.discussionForm.reset();
         this.hideForm.emit(false); // toggle form after submit

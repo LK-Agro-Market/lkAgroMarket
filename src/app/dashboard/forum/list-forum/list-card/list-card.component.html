@@ -54,6 +54,11 @@
         </div>
       </nb-accordion-item-header>
       <nb-accordion-item-body >
+       
+        <div *ngFor="let image of imageList">
+          <img src="{{image}}" style="max-width: 700px;">
+        </div>
+       
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">

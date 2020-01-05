@@ -295,7 +295,6 @@ export class ForumService {
   deleteImage(urlList: any[]) {
     // not delete mulitple images
     for (let i = 0; i < urlList.length; i++) {
-      console.log( i + '.....' + urlList[i] );
       this.storage.storage.refFromURL(urlList[i]).delete();
     }
   }

@@ -66,7 +66,7 @@ export class ListCardComponent implements OnInit {
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.postId;
-    const userId = this.postId;
+    const userId = this.user.uid;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 

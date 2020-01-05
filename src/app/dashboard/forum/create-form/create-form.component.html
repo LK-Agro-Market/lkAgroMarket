@@ -22,7 +22,7 @@
             </nb-checkbox>
 
             <ngx-dropzone (change)="onSelect($event)" class="dropzone" [expandable]="true">
-              <ngx-dropzone-label>drop files </ngx-dropzone-label>
+              <ngx-dropzone-label>drop files... </ngx-dropzone-label>
               <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let image of images" [file]="image"
                 [removable]="true" (removed)="onRemove(image)">
                 <ngx-dropzone-label>{{ image.name }} ({{ image.type }})</ngx-dropzone-label>
