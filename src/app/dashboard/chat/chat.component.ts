@@ -20,10 +20,6 @@ import { finalize, tap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Location } from '@angular/common';
-
-import { ChatService } from './chat.service';
-import { User } from 'src/app/shared/models/user';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 interface Post {
   content: string;
 }
@@ -63,17 +59,10 @@ export class ChatComponent {
 
   chatDoc: AngularFirestoreDocument<Post>;
   chat: Observable<Post>;
-  //////////
-  viewer: User = JSON.parse(localStorage.getItem('user'));
-  profileOwnerId: string = '';
-  profileOwnerUser: User;
-  selectedUserType: string = '';
-  userDetailsForm: FormGroup;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
-    private location: Location,
-    private chatService: ChatService
+    private location: Location
   ) {
     this.users = afs.collection('users').valueChanges();
   }
@@ -85,26 +74,6 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  };
-
-  ngOnInit() {
-    this.chatService
-          .getUserDetails(this.profileOwnerId)
-          .subscribe(userDetails => {
-            this.userDetailsForm.patchValue({
-              nic: userDetails.nic,
-              contact: userDetails.contact,
-              district: userDetails.district,
-              homeAddress: userDetails.homeAddress,
-              businessAddress: userDetails.businessAddress,
-              organization: userDetails.organization,
-              designation: userDetails.designation,
-              organizationAddress: userDetails.organizationAddress
-            });
-            this.selectedUserType = userDetails.userLevel;
-          //  this.longitude = userDetails.longitude;
-          //  this.latitude = userDetails.latitude;
-          });
   }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;

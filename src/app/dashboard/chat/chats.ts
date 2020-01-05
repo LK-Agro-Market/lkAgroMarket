@@ -1,5 +1,5 @@
 export interface Chats {
-  uid: string;
+  id: string;
   content: string;
   sender: string;
   reciever: string;
