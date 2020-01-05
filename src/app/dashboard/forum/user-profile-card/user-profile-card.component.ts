@@ -16,6 +16,7 @@ export class UserProfileCardComponent implements OnInit {
   userName;
   userEmail;
   userImg;
+  myPostOnly = false;
 
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: User = JSON.parse(localStorage.getItem('userDetails'));
@@ -25,7 +26,7 @@ export class UserProfileCardComponent implements OnInit {
   @ViewChild('all', { static: true }) all;
 
   constructor() {}
-
+  
   ngOnInit() {
     this.userName = this.user.displayName;
     this.userEmail = this.user.email;
@@ -37,15 +38,9 @@ export class UserProfileCardComponent implements OnInit {
     // change post view my posts/all posts
     this.showMypostOnly.emit(showMyPost);
     if (showMyPost) {
-      this.my.nativeElement.classList.remove('btn');
-      this.all.nativeElement.classList.remove('btnSelect');
-      this.my.nativeElement.classList.add('btnSelect');
-      this.all.nativeElement.classList.add('btn');
+      this.myPostOnly = true;
     } else {
-      this.my.nativeElement.classList.remove('btnSelect');
-      this.all.nativeElement.classList.remove('btn');
-      this.my.nativeElement.classList.add('btn');
-      this.all.nativeElement.classList.add('btnSelect');
+      this.myPostOnly = false;
     }
   }
 }

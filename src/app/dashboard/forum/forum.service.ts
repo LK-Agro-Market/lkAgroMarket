@@ -7,7 +7,7 @@ import {
   AngularFireStorageReference,
   AngularFireStorage
 } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { firestore } from 'firebase';
 
 @Injectable({
@@ -96,13 +96,10 @@ export class ForumService {
       userName: replyUserName,
       userImage: replyUserImage
     });
-    console.log('done');
   }
 
   uploadImg(files: File[], colName, key) {
     for (let i = 0; i < files.length; i++) {
-      // console.log(files);
-      // console.log(files[i].name);
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
       const fileRef = this.storage.ref(path);
       this.tasks = this.storage.upload(path, files[i]);
@@ -111,7 +108,6 @@ export class ForumService {
         .pipe(
           finalize(async () => {
             this.downUrl = await fileRef.getDownloadURL().toPromise();
-            console.log(this.downUrl);
             await this.afs
               .collection(colName)
               .doc(key)
@@ -125,8 +121,37 @@ export class ForumService {
     }
   }
 
+  updatePost(
+    key,
+    postTitle,
+    des,
+    dateTime,
+    postUserId,
+    postUserName,
+    postUserImage,
+    showFarmers,
+    showBuyers,
+    isEnd
+  ) {
+    this.afs
+      .collection('post')
+      .doc(key)
+      .update({
+        title: postTitle,
+        description: des,
+        date: dateTime,
+        userID: postUserId,
+        userName: postUserName,
+        userImage: postUserImage,
+        showFarmer: showFarmers,
+        showBuyer: showBuyers,
+        endThread: isEnd
+      });
+  }
+
   getPost() {
     // get all
+
     return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
@@ -144,7 +169,7 @@ export class ForumService {
   getPostByID(userId) {
     // get post by user id
     return this.afs
-      .collection('forum', ref =>
+      .collection('post', ref =>
         ref.where('userID', '==', userId).orderBy('date', 'desc')
       )
       .snapshotChanges()
@@ -157,6 +182,14 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getPostForUpdate(postId) {
+    return this.afs
+      .collection('post')
+      .doc(postId)
+      .get()
+      .pipe();
   }
 
   getComment(postKey) {
@@ -253,5 +286,13 @@ export class ForumService {
           })
         )
       );
+  }
+
+  deleteImage(urlList: any[]) {
+    // not delete mulitple images
+    for (let i = 0; i < urlList.length; i++) {
+      console.log(urlList[i]);
+      return this.storage.storage.refFromURL(urlList[i]).delete();
+    }
   }
 }
