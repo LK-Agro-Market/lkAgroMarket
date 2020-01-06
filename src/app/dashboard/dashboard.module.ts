@@ -31,6 +31,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgpCarouselModule } from '@kinect-pro/ngp-carousel';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
@@ -80,7 +81,7 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     UserProfileCardComponent,
     CreateFormComponent,
     StatsComponent,
-    ConfirmButtonDirective
+    ConfirmButtonDirective,
   ],
   imports: [
     CommonModule,
@@ -117,7 +118,8 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     AgmCoreModule.forRoot(environment.googleMap),
     ChartsModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgpCarouselModule
   ],
   providers: []
 })

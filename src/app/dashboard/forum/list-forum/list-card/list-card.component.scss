@@ -1,3 +1,6 @@
+@import '~slider-carousel/slider-carousel.scss';
+@include slider-carousel(white, black);
+
 .card-cantainer {
   overflow: hidden;
   height: auto;
@@ -116,13 +119,9 @@
   font-weight: 600;
   color: #aa7070;
 }
-.imageSet{
-  display: flex;
-  flex-direction: row;
-}
-.img{
-  max-width: 360px;
-  height: auto;
-  margin-left: 15px;
-  margin-top: 10px;
+.img-thumbnail{
+  width: auto;
+  max-width: 760px;
+  height: auto; 
+  max-height: 600px;
 }

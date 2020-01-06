@@ -55,11 +55,11 @@
       </nb-accordion-item-header>
       <nb-accordion-item-body>
 
-        <div class="imageSet" >
-          <div *ngFor="let image of imageList">
-            <img src="{{image}}" class="img">
-          </div>
-        </div>
+        <ngp-carousel  [fullSizeItems]="true" [loop]="true" [innerButtons]="true"  style="margin-top: -3%;">
+          <ng-template *ngFor="let img of imageList" ngpCarouselItem>
+            <img alt="img" src="{{img}}" class="img-thumbnail" >
+          </ng-template>
+        </ngp-carousel>
 
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />

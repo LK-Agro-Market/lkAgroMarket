@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
+import { NgpCarouselComponent} from '@kinect-pro/ngp-carousel';
+
 
 @Component({
   selector: 'app-list-card',
@@ -19,6 +21,9 @@ export class ListCardComponent implements OnInit {
   isEnd;
   postId;
   commCount;
+  isFullScreen = false;
+  // imageArray: any[];
+
 
   @Input() item: any;
 
@@ -59,6 +64,11 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
+
+        
+//     for (let i = 0; i < this.imageList.length; i++) {
+// this.imageArray.push({CaptionText: '', imageUrl: this.imageList[i] })
+//     }
   }
 
   onCreate() {
@@ -121,5 +131,10 @@ export class ListCardComponent implements OnInit {
     // update form
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
+  }
+
+  changeImageSize() {
+    this.isFullScreen = !this.isFullScreen;
+    console.log(this.isFullScreen);
   }
 }
