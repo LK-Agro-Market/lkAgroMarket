@@ -116,3 +116,13 @@
   font-weight: 600;
   color: #aa7070;
 }
+.imageSet{
+  display: flex;
+  flex-direction: row;
+}
+.img{
+  max-width: 360px;
+  height: auto;
+  margin-left: 15px;
+  margin-top: 10px;
+}

@@ -1,7 +1,7 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item >
-      <nb-accordion-item-header id="t-header" (click)="viewMore= !viewMore" *ngIf="item" >
+    <nb-accordion-item>
+      <nb-accordion-item-header id="t-header" (click)="viewMore= !viewMore" *ngIf="item">
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
@@ -33,10 +33,10 @@
               <span id="postTitle"> {{ item.title }} </span>
               <hr />
               <div class="card-fotter-container">
-                <button nbButton status="primary" outline size="small" class="view-btn" >
+                <button nbButton status="primary" outline size="small" class="view-btn">
                   {{ viewMore ? 'More' : 'Less' }}
                 </button>
-                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser" 
+                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser"
                   (click)="updateForm()">
                   {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
@@ -53,12 +53,14 @@
           </div>
         </div>
       </nb-accordion-item-header>
-      <nb-accordion-item-body >
-       
-        <div *ngFor="let image of imageList">
-          <img src="{{image}}" style="max-width: 700px;">
+      <nb-accordion-item-body>
+
+        <div class="imageSet" >
+          <div *ngFor="let image of imageList">
+            <img src="{{image}}" class="img">
+          </div>
         </div>
-       
+
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
