@@ -8,10 +8,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 
-import { User } from '../shared/models/user';
-
-const user: User = JSON.parse(localStorage.getItem('user'));
-
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: `profile/${user.uid}`,
+        redirectTo: `profile/myProfile`,
         pathMatch: 'full'
       },
       {

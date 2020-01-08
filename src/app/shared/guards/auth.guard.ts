@@ -6,11 +6,9 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
-import { UserDetailsService } from '../services/user-details.service';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,6 @@ import { switchMap } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(
     public authService: AuthService,
-    public userDetailsService: UserDetailsService,
     public router: Router
   ) {}
   canActivate(
