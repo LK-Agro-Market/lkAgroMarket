@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
-import { NgpCarouselComponent} from '@kinect-pro/ngp-carousel';
 
 
 @Component({
@@ -21,9 +20,6 @@ export class ListCardComponent implements OnInit {
   isEnd;
   postId;
   commCount;
-  isFullScreen = false;
-  // imageArray: any[];
-
 
   @Input() item: any;
 
@@ -34,7 +30,7 @@ export class ListCardComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
-  constructor(private forumService: ForumService) {}
+  constructor(private forumService: ForumService) { }
 
   get comm() {
     return this.commentForm.get('comment');
@@ -45,7 +41,7 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
 
-    if(this.item.images != null) {
+    if (this.item.images != null) {
       this.imageList = this.item.images;
     }
     if (this.isEnd) {
@@ -65,10 +61,6 @@ export class ListCardComponent implements OnInit {
         this.comments = comments;
       });
 
-        
-//     for (let i = 0; i < this.imageList.length; i++) {
-// this.imageArray.push({CaptionText: '', imageUrl: this.imageList[i] })
-//     }
   }
 
   onCreate() {
@@ -109,7 +101,7 @@ export class ListCardComponent implements OnInit {
 
   deletePost() {
     // Delete post
-    if(this.imageList !=  null) {
+    if (this.imageList != null) {
       this.forumService.deleteImage(this.item.images);
     }
     this.forumService.deleteReplyList('postID', this.postId).subscribe();
@@ -133,8 +125,4 @@ export class ListCardComponent implements OnInit {
     this.isEdit = !this.isEdit;
   }
 
-  changeImageSize() {
-    this.isFullScreen = !this.isFullScreen;
-    console.log(this.isFullScreen);
-  }
 }
