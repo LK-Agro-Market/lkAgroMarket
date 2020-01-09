@@ -3,7 +3,6 @@ import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
 
-
 @Component({
   selector: 'app-list-card',
   templateUrl: './list-card.component.html',
