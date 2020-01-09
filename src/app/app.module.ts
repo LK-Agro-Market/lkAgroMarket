@@ -41,7 +41,7 @@ import { ConfirmButtonDirective } from './shared/directives/confirm-button.direc
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

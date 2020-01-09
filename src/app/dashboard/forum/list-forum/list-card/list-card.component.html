@@ -55,6 +55,10 @@
       </nb-accordion-item-header>
       <nb-accordion-item-body>
 
+        <div *ngIf="item.images != null">
+          <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+          <hr>
+        </div>
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">

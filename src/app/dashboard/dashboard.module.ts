@@ -36,6 +36,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
 
+import { NgImageSliderModule } from 'ng-image-slider';
 // components
 import { LayoutComponent } from './layout/layout.component';
 // chat
@@ -81,7 +82,7 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     CreateFormComponent,
     StatsComponent,
     ConfirmButtonDirective,
-    ViewSupplyAdComponent
+    ViewSupplyAdComponent,
   ],
   imports: [
     CommonModule,
@@ -119,7 +120,7 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     ChartsModule,
     NgbModule,
     NgxDropzoneModule,
-    
+    NgImageSliderModule
   ],
   providers: []
 })

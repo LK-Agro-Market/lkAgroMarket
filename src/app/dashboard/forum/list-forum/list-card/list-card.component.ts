@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
@@ -13,6 +13,7 @@ export class ListCardComponent implements OnInit {
   comments: any[];
   cmntId: any;
   imageList: any[];
+  imageObject: Array<object>; 
   isLogUser;
   isEdit = false;
   createOrUpdate;
@@ -40,8 +41,14 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
 
-    if (this.item.images != null) {
+    if (this.item.images != null) { //get images from database 
       this.imageList = this.item.images;
+      this.imageObject = this.imageList.map(url => { // set images to forum card
+        return {
+          image: url,
+          thumbImage: url
+        }
+      });
     }
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
@@ -59,7 +66,6 @@ export class ListCardComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments;
       });
-
   }
 
   onCreate() {
@@ -123,5 +129,5 @@ export class ListCardComponent implements OnInit {
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }
-
+    
 }
