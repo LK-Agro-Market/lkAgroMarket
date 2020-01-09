@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'firebase';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../../forum.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comment',
@@ -25,7 +26,10 @@ export class CommentComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastr: ToastrService
+  ) { }
 
   get rply() {
     return this.replyForm.get('reply');
@@ -76,10 +80,9 @@ export class CommentComponent implements OnInit {
       );
       this.rply.setValue('');
       this.getReplyCount();
-      // this.showToast('success');
+      this.toastr.success('Replied successfully...');
     } else {
-      // this.showToast('danger');
-    }
+    this.toastr.error('Please check and fill correctly' , 'Can`t reply')    }
   }
 
   endOrViewComment() {
@@ -96,6 +99,7 @@ export class CommentComponent implements OnInit {
       .subscribe();
     this.forumService.deleteDocment('comment', this.comment.key);
     this.changeCommentCount.emit();
+    this.toastr.success('Comment deleted...');
   }
 
   getReplyCount() {

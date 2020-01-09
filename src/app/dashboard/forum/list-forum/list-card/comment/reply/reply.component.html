@@ -11,13 +11,7 @@
             <i> {{ reply.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
           </span>
           <div class="float-right like-container">
-            <button
-              nbButton
-              ghost
-              status="success"
-              size="medium"
-              class="float-right btn-like"
-            >
+            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
               <nb-icon icon="checkmark"></nb-icon>
             </button>
             <p class="count-like">3</p>
@@ -30,24 +24,11 @@
           {{ reply.reply }}
         </p>
         <div class="card-fotter-container">
-          <button
-            nbButton
-            status="primary"
-            size="tiny"
-            class="edit-btn"
-            [hidden]="!showBtn"
-          >
+          <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser">
             Edit
           </button>
-          <button
-            nbButton
-            outline
-            status="danger"
-            size="tiny"
-            class="delete-btn"
-            [hidden]="!showBtn"
-            (click)="deleteReply()"
-          >
+          <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
+            (click)="deleteReply()">
             Delete
           </button>
         </div>

@@ -63,7 +63,10 @@ import { ConfirmButtonDirective } from './shared/directives/confirm-button.direc
     NbEvaIconsModule,
     NbMenuModule.forRoot(),
     NbActionsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+      closeButton: true
+    }),
     NgxDropzoneModule,
   ],
   providers: [

@@ -9,6 +9,8 @@ import {
 import { ForumService } from '../forum.service';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-create-form',
@@ -21,6 +23,7 @@ export class CreateFormComponent implements OnInit {
   isHovering: boolean;
   images: File[] = [];
   imageList: any[];
+  toastrStatus;
 
   @Input() postId: any; // get postID for update
   @Input() createOrUpdate: any;
@@ -35,7 +38,10 @@ export class CreateFormComponent implements OnInit {
     des: new FormControl('')
   });
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastr: ToastrService
+  ) { }
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.discussionForm.controls;
@@ -59,9 +65,9 @@ export class CreateFormComponent implements OnInit {
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
           this.imageList = dataSet.data().images;
-          
+
         });
-        
+
     }
   }
 
@@ -89,8 +95,8 @@ export class CreateFormComponent implements OnInit {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
           id = this.forumService.getPostId(); // get new ID for post
-          this.forumService.createPost(
-            // create new post
+          this.toastrStatus = 'Your post is created...';
+          this.forumService.createPost( // create new post
             id,
             title,
             des,
@@ -103,11 +109,12 @@ export class CreateFormComponent implements OnInit {
             showBuyer,
             false
           );
+
         } else {
           ///////// shuld udate new image list
-          id = this.postId;    
-          this.forumService.updatePost(
-            // update selected post
+          this.toastrStatus = 'Your post is updated...';
+          id = this.postId;
+          this.forumService.updatePost( // update selected post
             id,
             title,
             des,
@@ -120,20 +127,23 @@ export class CreateFormComponent implements OnInit {
             showBuyer,
             false
           );
+          
         }
         if (this.images != null) { // upload images
           this.forumService.uploadImg(this.images, 'post', id);
         }
-        if(this.imageList !=  null) { // delelte images from firebase storage for upload newly
+        if (this.imageList != null) { // delelte images from firebase storage for upload newly
           this.forumService.deleteImage(this.imageList);
         }
         this.discussionForm.reset();
-        this.hideForm.emit(false); // toggle form after submit
+        this.hideForm.emit(false);
+        this.toastr.success(this.toastrStatus);
+
       } else {
-        // else of check farmers and buyers
+        this.toastr.error('Please check the visibility on farmers or buyers or both' , 'Can`t create post' );
       }
     } else {
-      // else of form validation check
+      this.toastr.error('Please check and fill the form correctly' , 'Can`t create post');
     }
   }
 }

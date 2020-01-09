@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-card',
@@ -30,7 +31,9 @@ export class ListCardComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
-  constructor(private forumService: ForumService) { }
+  constructor(
+    private forumService: ForumService,
+    private toastr: ToastrService) { }
 
   get comm() {
     return this.commentForm.get('comment');
@@ -89,9 +92,9 @@ export class ListCardComponent implements OnInit {
       );
       this.comm.setValue('');
       this.getCommentCount();
-      // this.showToast('success');
+      this.toastr.success('Commented successfully...');
     } else {
-      // this.showToast('danger');
+      this.toastr.error('Please check and fill correctly' , 'Can`t comment');    
     }
   }
 
@@ -105,7 +108,7 @@ export class ListCardComponent implements OnInit {
   }
 
   deletePost() {
-    // Delete post
+    // Delete post  
     if (this.imageList != null) {
       this.forumService.deleteImage(this.item.images);
     }
@@ -113,6 +116,7 @@ export class ListCardComponent implements OnInit {
     this.forumService.deleteCommentList('postID', this.postId).subscribe();
     this.forumService.deleteDocment('post', this.postId);
     this.getCommentCount();
+    this.toastr.success('Post deleted...');
   }
 
   getCommentCount() {

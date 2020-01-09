@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ForumService } from 'src/app/dashboard/forum/forum.service';
 import { User } from 'firebase';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reply',
@@ -15,7 +16,9 @@ export class ReplyComponent implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastr: ToastrService) {}
 
   ngOnInit() {
     if (this.reply.userID === this.user.uid) {
@@ -28,5 +31,6 @@ export class ReplyComponent implements OnInit {
   deleteReply() {
     this.forumService.deleteDocment('reply', this.reply.key);
     this.changeReplyCount.emit();
+    this.toastr.success('Reply deleted...');
   }
 }
