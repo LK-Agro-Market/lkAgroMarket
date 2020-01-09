@@ -1,7 +1,7 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item>
-      <nb-accordion-item-header id="t-header" (click)="viewMore= !viewMore" *ngIf="item">
+    <nb-accordion-item #it>
+      <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #itm>
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
@@ -54,7 +54,6 @@
         </div>
       </nb-accordion-item-header>
       <nb-accordion-item-body>
-        
 
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />

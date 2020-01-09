@@ -11,7 +11,7 @@ export interface SupplyAd {
   video?: File;
   description: string;
   organic: string;
-  expireDate: Date;
+  expireDate: string;
   createdAt: Date;
   views: number;
   contactClicks: number;

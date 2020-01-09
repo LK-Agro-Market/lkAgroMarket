@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 import { User } from '../models/user';
-import { Observable, from } from 'rxjs';
+import { UserDetails } from '../models/user-details';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -23,5 +24,13 @@ export class UserDetailsService {
       .doc(this.user.uid)
       .get()
       .pipe(map(doc => doc.exists));
+  }
+
+  getUserDetails(userId): Observable<UserDetails> {
+    return this.afs
+      .collection('userDetails')
+      .doc(userId)
+      .valueChanges()
+      .pipe(map(res => res as UserDetails));
   }
 }

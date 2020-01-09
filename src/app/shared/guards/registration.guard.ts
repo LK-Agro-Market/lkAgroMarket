@@ -16,8 +16,8 @@ import { switchMap, first } from 'rxjs/operators';
 })
 export class RegistrationGuard implements CanActivate {
   constructor(
-    public userDetailsService: UserDetailsService,
-    public router: Router
+    private userDetailsService: UserDetailsService,
+    private router: Router
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
