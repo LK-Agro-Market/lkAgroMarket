@@ -35,6 +35,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
+
 // components
 import { LayoutComponent } from './layout/layout.component';
 // chat
@@ -43,7 +44,8 @@ import { ChatComponent } from './chat/chat.component';
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
-import { UpdateAdComponent } from './supply-ad/update-ad/update-ad.component';
+import { StatsComponent } from './supply-ad/stats/stats.component';
+import { ViewSupplyAdComponent } from './supply-ad/view-supply-ad/view-supply-ad.component';
 // profile
 import { ProfileComponent } from './profile/profile.component';
 // forum
@@ -58,7 +60,6 @@ import { CreateFormComponent } from './forum/create-form/create-form.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
-import { StatsComponent } from './supply-ad/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,6 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     ListForumComponent,
     ListCardComponent,
     CommentComponent,
-    UpdateAdComponent,
     DemandAdComponent,
     CreateDemandAdComponent,
     ListDemandAdComponent,
@@ -80,7 +80,8 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     UserProfileCardComponent,
     CreateFormComponent,
     StatsComponent,
-    ConfirmButtonDirective
+    ConfirmButtonDirective,
+    ViewSupplyAdComponent
   ],
   imports: [
     CommonModule,
