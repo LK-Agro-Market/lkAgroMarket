@@ -1,0 +1,57 @@
+<div class="main-container">
+  <div class="vl"></div>
+  <div class="reply-card">
+    <div class="reply">
+      <div class="pro-img-container">
+        <img class="pro-img" src="{{ reply.userImage }}" alt="Profile image" />
+        <div class="pro-header-container">
+          <a href="#" class="pro-name"> {{ reply.userName }} </a>
+          <span class="text-info" id="postDate">
+            <b>Replied on</b>
+            <i> {{ reply.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
+          </span>
+          <div class="float-right like-container">
+            <button
+              nbButton
+              ghost
+              status="success"
+              size="medium"
+              class="float-right btn-like"
+            >
+              <nb-icon icon="checkmark"></nb-icon>
+            </button>
+            <p class="count-like">3</p>
+          </div>
+        </div>
+      </div>
+      <div class="reply-body">
+        <p class="text-dark" id="commReply"></p>
+        <p class="text-dark" style="font-size: 13px;">
+          {{ reply.reply }}
+        </p>
+        <div class="card-fotter-container">
+          <button
+            nbButton
+            status="primary"
+            size="tiny"
+            class="edit-btn"
+            [hidden]="!showBtn"
+          >
+            Edit
+          </button>
+          <button
+            nbButton
+            outline
+            status="danger"
+            size="tiny"
+            class="delete-btn"
+            [hidden]="!showBtn"
+            (click)="deleteReply()"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

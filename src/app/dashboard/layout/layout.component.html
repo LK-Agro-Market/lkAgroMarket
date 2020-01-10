@@ -2,11 +2,21 @@
   <nb-layout-header subheader>
     <div class="row header-row">
       <div class="col title">
-        <img class="logo" src="../../../assets/logo.png" />
+        <img class="logo" src="../../../assets/logo2.jpg" />
       </div>
-      <div class="col text-right allign-middle">
+      <div class="col-auto text-right align-middle">
+        <nb-user
+          size="large"
+          [name]="user.displayName"
+          title="Farmer"
+          [picture]="user.photoURL"
+          [routerLink]="['/profile', user.uid]"
+        >
+        </nb-user>
+      </div>
+      <div class="col-auto text-right align-middle">
         <button
-          class="logout"
+          class="logout-btn"
           nbButton
           hero
           status="success"
@@ -24,11 +34,28 @@
       class="sidebar-btn"
       routerLink="/farmer-dashboard"
       routerLinkActive="green"
+      *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
     >
       <nb-icon
         icon="home"
         class="sidebar-icon"
         nbTooltip="Farmer Dashboard"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
+    <span class="sidebar-btn" routerLink="/chats" routerLinkActive="green">
+      <nb-icon
+        icon="message-circle-outline"
+        class="sidebar-icon"
+        nbTooltip="Chat"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
+    <span class="sidebar-btn" routerLink="/forum" routerLinkActive="green">
+      <nb-icon
+        icon="people-outline"
+        class="sidebar-icon"
+        nbTooltip="Forum"
         nbTooltipPlacement="right"
       ></nb-icon>
     </span>

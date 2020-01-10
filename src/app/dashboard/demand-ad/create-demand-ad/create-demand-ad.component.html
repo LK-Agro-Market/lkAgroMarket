@@ -1,0 +1,175 @@
+<nb-card
+  accent="info"
+  [nbSpinner]="processing"
+  nbSpinnerStatus="primary"
+  nbSpinnerSize="large"
+>
+  <nb-card-header class="card-header-content"
+    >Look for something to buy!</nb-card-header
+  >
+  <nb-card-body>
+    <form [formGroup]="buyerAdform" (ngSubmit)="createBuyerAd()">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Select a food category...</label>
+          <div class="form-group">
+            <nb-select
+              fullWidth
+              placeholder="Select Category"
+              formControlName="foodtype"
+              (selectedChange)="retriveFoods()"
+            >
+              <nb-option *ngFor="let tfoods of Foodtypes" [value]="tfoods"
+                >{{ tfoods }}
+              </nb-option>
+            </nb-select>
+            <div
+              *ngIf="attempted && !!formControls.foodtype.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.foodtype.errors.required"
+                >Food category is required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Select what are you looking for...</label>
+            <nb-select
+              fullWidth
+              placeholder="Harvest/ Agro Product"
+              formControlName="food"
+            >
+              <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
+                f
+              }}</nb-option>
+            </nb-select>
+            <div
+              *ngIf="attempted && !!formControls.food.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.food.errors.required"
+                >Food name is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <label>expected amount</label>
+          <div class="form-group">
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              placeholder="Quntity"
+              formControlName="expectedamount"
+            />
+            <div
+              *ngIf="attempted && !!formControls.expectedamount.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.expectedamount.errors.required"
+                >Quantity is required</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>expected price per unit<strong>(Rs)</strong></label>
+            <input
+              type="text"
+              nbInput
+              fullWidth
+              placeholder="Expeted price"
+              formControlName="priceperunit"
+            />
+            <div
+              *ngIf="attempted && !!formControls.priceperunit.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.priceperunit.errors.required"
+                >Price is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              nbInput
+              fullWidth
+              placeholder="Short description about what are you looking for..."
+              formControlName="description"
+            ></textarea>
+            <div
+              *ngIf="attempted && !!formControls.description.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.description.errors.required"
+                >The short description is required
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Organic or Inoganic</label>
+            <nb-select
+              fullWidth
+              placeholder="Choose one..."
+              formControlName="organic"
+            >
+              <nb-option value="Organic">Oraganic</nb-option>
+              <nb-option value="Inorganic">Inoraganic</nb-option>
+            </nb-select>
+            <div
+              *ngIf="attempted && !!formControls.organic.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.organic.errors.required"
+                >This field is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Deadline</label>
+            <input
+              nbInput
+              fullWidth
+              type="date"
+              placeholder="Pick a date"
+              formControlName="deadline"
+            />
+            <div
+              *ngIf="attempted && !!formControls.deadline.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.deadline.errors.required">
+                Date is required</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <button type="submit" nbButton>Create Ad</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

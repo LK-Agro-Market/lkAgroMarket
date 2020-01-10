@@ -1,0 +1,20 @@
+<div class="user-container">
+  <nb-card size="medium">
+    <div class="pro-container">
+      <img class="pro-img" src="{{ userImg }}" alt="Profile image" />
+      <a href="#" class="pro-name"> {{ userName }} </a>
+      <span class="mb-2 user-level">Administrator</span>
+    </div>
+
+    <div *ngIf="!myPostOnly" >
+      <button nbButton size="small" status="success" (click)="showMy(false)" id="card-btn" #all>Public</button>
+      <br>
+      <button nbButton outline size="small" status="success" (click)="showMy(true)" id="card-btn" #my>My Posts</button>
+    </div>
+    <div *ngIf="myPostOnly">
+      <button nbButton outline size="small" status="success" (click)="showMy(false)" id="card-btn" #all>Public</button>
+      <br>
+      <button nbButton size="small" status="success" (click)="showMy(true)" id="card-btn" #my>My Posts</button>
+    </div>
+  </nb-card>
+</div>

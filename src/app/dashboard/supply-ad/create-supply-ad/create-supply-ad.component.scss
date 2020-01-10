@@ -4,3 +4,17 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.card-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0;
+}

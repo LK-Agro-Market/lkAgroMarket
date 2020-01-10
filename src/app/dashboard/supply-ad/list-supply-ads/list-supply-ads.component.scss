@@ -1,0 +1,23 @@
+.card-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+
+  #keyword-search-input {
+    margin-right: 1em;
+  }
+}
+
+.food-type {
+  font-size: 12px;
+}
+
+nb-badge {
+  font-size: 1rem;
+}
+
+.btn {
+  margin-right: 5px;
+}

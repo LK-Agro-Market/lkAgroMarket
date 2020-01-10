@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface SupplyAd {
   id: string;
   type: string;
@@ -5,12 +7,16 @@ export interface SupplyAd {
   quantity: number;
   quantityUnit: string;
   pricePerUnit: number;
-  images: File[];
+  images: string[];
   video?: File;
   description: string;
-  organic: boolean;
-  expireDate: Date;
+  organic: string;
+  expireDate: string;
   createdAt: Date;
   views: number;
   contactClicks: number;
+  owner: string;
+  rating?: number;
+  buyer?: User;
+  status: string;
 }
