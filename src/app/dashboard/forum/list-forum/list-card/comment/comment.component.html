@@ -42,9 +42,26 @@
                 {{ isEnd ? 'Restart' : 'End' }}
               </button>
               <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
-                (click)="deleteComments()">
+                [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom">
                 Delete
               </button>
+
+              <ng-template #confirmDeleteSecton>
+                <nb-card style="margin-bottom: -10%;">
+                  <nb-card-body>
+                    Are you sure you wish to delete this post?
+                    <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
+                      (click)="deleteComments()" style="margin-left: 10px;">
+                      yes
+                    </button>
+                    <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
+                      style="margin-left: 10px;" (click)="hidePopover()">
+                      No
+                    </button>
+                  </nb-card-body>
+                </nb-card>
+              </ng-template>
+
             </div>
           </div>
         </nb-accordion-item-header>

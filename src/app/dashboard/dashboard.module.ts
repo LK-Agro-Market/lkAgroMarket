@@ -23,7 +23,8 @@ import {
   NbBadgeModule,
   NbCheckboxModule,
   NbMenuModule,
-  NbListModule
+  NbListModule,
+  NbPopoverModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -120,7 +121,8 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     ChartsModule,
     NgbModule,
     NgxDropzoneModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    NbPopoverModule,
   ],
   providers: []
 })

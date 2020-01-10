@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from 'firebase';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../../forum.service';
 import { ToastrService } from 'ngx-toastr';
+import { NbPopoverDirective } from '@nebular/theme';
 
 @Component({
   selector: 'app-comment',
@@ -18,6 +19,7 @@ export class CommentComponent implements OnInit {
   @Input() comment: any;
   @Input() postId: any;
   @Output() changeCommentCount = new EventEmitter();
+  @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
 
   replyForm = new FormGroup({
     reply: new FormControl('', Validators.required)
@@ -109,4 +111,9 @@ export class CommentComponent implements OnInit {
         this.repCount = count;
       });
   }
+
+  hidePopover() {
+    this.ConfirmDelete.hide();
+  }
+
 }

@@ -1,7 +1,7 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item #it>
-      <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #itm>
+    <nb-accordion-item >
+      <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #postSection>
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
@@ -37,17 +37,34 @@
                   {{ viewMore ? 'More' : 'Less' }}
                 </button>
                 <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser"
-                  (click)="updateForm()">
+                  (click)="updateForm()" (click)="toggelSection()">
                   {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
                 <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
-                  (click)="endOrViewPost()">
+                  (click)="endOrViewPost()" (click)="toggelSection()">
                   {{ !isEnd ? 'End' : 'Restart' }}
                 </button>
                 <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
-                  (click)="deletePost()">
+                  [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom" (click)="toggelSection()">
                   Delete
                 </button>
+
+                <ng-template #confirmDeleteSecton>
+                  <nb-card style="margin-bottom: -10%;">
+                    <nb-card-body>
+                      Are you sure you wish to delete this post? 
+                    <button nbButton shape="round" status="danger" size="tiny"  [hidden]="!isLogUser"
+                      (click)="deletePost()" style="margin-left: 10px;" >
+                      yes
+                    </button>
+                    <button nbButton shape="round" status="danger" size="tiny"  [hidden]="!isLogUser"
+                      style="margin-left: 10px;" (click)="hidePopover()" >
+                      No
+                    </button>
+                  </nb-card-body>
+                  </nb-card>
+                </ng-template>
+
               </div>
             </div>
           </div>

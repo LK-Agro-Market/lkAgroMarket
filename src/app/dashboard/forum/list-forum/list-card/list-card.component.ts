@@ -3,6 +3,8 @@ import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
 import { ToastrService } from 'ngx-toastr';
+import { NbPopoverDirective } from '@nebular/theme';
+
 
 @Component({
   selector: 'app-list-card',
@@ -14,7 +16,7 @@ export class ListCardComponent implements OnInit {
   comments: any[];
   cmntId: any;
   imageList: any[];
-  imageObject: Array<object>; 
+  imageObject: Array<object>;
   isLogUser;
   isEdit = false;
   createOrUpdate;
@@ -23,6 +25,8 @@ export class ListCardComponent implements OnInit {
   commCount;
 
   @Input() item: any;
+  @ViewChild('postSection', { static: false }) section ;
+  @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -44,13 +48,13 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
 
-    if (this.item.images != null) { //get images from database 
+    if (this.item.images != null) { // get images from database
       this.imageList = this.item.images;
       this.imageObject = this.imageList.map(url => { // set images to forum card
         return {
           image: url,
           thumbImage: url
-        }
+        };
       });
     }
     if (this.isEnd) {
@@ -94,7 +98,7 @@ export class ListCardComponent implements OnInit {
       this.getCommentCount();
       this.toastr.success('Commented successfully...');
     } else {
-      this.toastr.error('Please check and fill correctly' , 'Can`t comment');    
+      this.toastr.error('Please check and fill correctly' , 'Can`t comment');
     }
   }
 
@@ -108,7 +112,8 @@ export class ListCardComponent implements OnInit {
   }
 
   deletePost() {
-    // Delete post  
+    // Delete post
+    console.log('delete');
     if (this.imageList != null) {
       this.forumService.deleteImage(this.item.images);
     }
@@ -133,5 +138,12 @@ export class ListCardComponent implements OnInit {
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }
-    
+
+  toggelSection() {
+    this.section.toggle();
+  }
+
+  hidePopover() {
+    this.ConfirmDelete.hide();
+  }
 }
