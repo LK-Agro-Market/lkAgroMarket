@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DemandAdService } from '../demand-ad.service';
 import { User } from 'src/app/shared/models/user';
-import { DemandAd } from 'src/app/shared/models/demand-ad';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
@@ -14,17 +13,16 @@ import { ToastrService } from 'ngx-toastr';
 export class ListDemandAdComponent implements OnInit {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
-  demandAdList: DemandAd[];
-
+  demandAdList=[];
   constructor(
     private demandAdsevice: DemandAdService,
     private afs: AngularFirestore,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+ ) {}
 
   ngOnInit() {
     this.demandAdsevice.getdemandAds(this.user.uid).subscribe(res => {
-      this.demandAdList = res;
+    this.demandAdList = res
     });
   }
   deleteAd(id: string) {
@@ -34,3 +32,4 @@ export class ListDemandAdComponent implements OnInit {
     }
   }
 }
+ 

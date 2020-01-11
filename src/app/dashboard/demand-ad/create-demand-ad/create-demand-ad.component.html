@@ -5,10 +5,11 @@
   nbSpinnerSize="large"
 >
   <nb-card-header class="card-header-content"
-    >Look for something to buy!</nb-card-header
+    >Look for something to buy!</nb-card-header 
   >
   <nb-card-body>
-    <form [formGroup]="buyerAdform" (ngSubmit)="createBuyerAd()">
+    <form [formGroup]="this.demandadservice.buyerAdform" (ngSubmit)="createBuyerAd()">
+      <input type="hidden" formControlName="id" >
       <div class="row">
         <div class="col-sm-6">
           <label>Select a food category...</label>
@@ -122,14 +123,14 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Organic or Inoganic</label>
+            <label>Organic or Inorganic</label>
             <nb-select
               fullWidth
               placeholder="Choose one..."
               formControlName="organic"
             >
-              <nb-option value="Organic">Oraganic</nb-option>
-              <nb-option value="Inorganic">Inoraganic</nb-option>
+              <nb-option value="Organic">Organic</nb-option>
+              <nb-option value="Inorganic">Inorganic</nb-option>
             </nb-select>
             <div
               *ngIf="attempted && !!formControls.organic.errors"
@@ -168,8 +169,9 @@
       <div class="row">
         <div class="col-sm-12 text-center">
           <button type="submit" nbButton>Create Ad</button>
+          <button class="btn btn-primary" status="warning" [disabled]="demandadservice.buyerAdform.pristine" (click)="resetAd()" nbButton>cancel Ad</button>
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
   </nb-card-body>
 </nb-card>

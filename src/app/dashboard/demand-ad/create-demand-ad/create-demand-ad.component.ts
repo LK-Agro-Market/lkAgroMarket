@@ -17,6 +17,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
   user: User = JSON.parse(localStorage.getItem('user'));
   attempted = false;
   processing = false;
+
   foods = {
     Fruits: [
       'Apple',
@@ -49,23 +50,14 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
     private demandadservice: DemandAdService,
     private toastr: ToastrService
   ) {}
-  get formControls() {
-    return this.buyerAdform.controls;
-  }
+  submited:boolean;
+  formControls=this.demandadservice.buyerAdform.controls;
+  
+ ngOnInit() {
+ 
+}
 
-  ngOnInit() {
-    this.buyerAdform = this.formbuilder.group({
-      foodtype: ['', Validators.required],
-      food: ['', Validators.required],
-      expectedamount: ['1Kg', Validators.required],
-      priceperunit: ['50', Validators.required],
-      description: ['', Validators.required],
-      organic: ['', Validators.required],
-      deadline: [new Date().toISOString().split('T')[0], Validators.required]
-    });
-  }
-
-  relatedFoods = [
+relatedFoods = [  
     'Apple',
     'Avocado',
     'Banana',
@@ -81,10 +73,12 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
   retriveFoods() {
     this.relatedFoods = this.foods[this.formControls.foodtype.value];
-    this.buyerAdform.controls.food.reset();
+    this.demandadservice.buyerAdform.controls.food.reset();
   }
 
   createBuyerAd() {
+    
+    if(this.demandadservice.buyerAdform.get('id').value==null){
     const adID = this.demandadservice.getdemandAdid();
     const demandAD: DemandAd = {
       id: adID,
@@ -98,18 +92,49 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
       timestamps: new Date(),
       views: 0,
       contactClicks: 0,
-      owner: this.user.uid
+      owner: this.user.uid 
     };
-
     this.attempted = true;
-    if (this.buyerAdform.invalid) {
+    if (this.demandadservice.buyerAdform.invalid) {
       return;
     }
     this.processing = false;
 
     this.demandadservice.createBuyerad(demandAD);
+    }
+    else{
+      const demandAD: DemandAd = {
+        id: this.demandadservice.buyerAdform.get('id').value,
+        foodtype: this.formControls.foodtype.value,
+        food: this.formControls.food.value,
+        expectedamount: this.formControls.expectedamount.value,
+        priceperunit: this.formControls.priceperunit.value,
+        description: this.formControls.description.value,
+        organic: this.formControls.organic.value,
+        deadline: this.formControls.deadline.value,
+        timestamps: new Date(),
+        views: 0,
+        contactClicks: 0,
+        owner: this.user.uid 
+      };
+
+      this.attempted = true;
+      if (this.demandadservice.buyerAdform.invalid) {
+        return;
+      }
+      this.processing = false;
+  
+      this.demandadservice.createBuyerad(demandAD);
+
+    }
+ 
     this.toastr.success('Submitted successfully');
-    this.buyerAdform.reset();
+    this.demandadservice.buyerAdform.reset();
     this.attempted = false;
   }
+
+  resetAd(){
+    this.demandadservice.buyerAdform.reset();
+    this.demandadservice.defaultAd();
+     }
 }
