@@ -2,8 +2,8 @@
   <div class="vl"></div>
   <div class="card-cantainer">
     <nb-accordion>
-      <nb-accordion-item autoCollapse="true">
-        <nb-accordion-item-header>
+      <nb-accordion-item autoCollapse="true"> 
+        <nb-accordion-item-header #commentSection>
           <div class="comnt-container">
             <div class="pro-img-container">
               <img class="pro-img" src="{{ comment.userImage }}" alt="Profile image" />
@@ -33,16 +33,18 @@
               </div>
             </div>
             <p class="text-dark" id="postCommnt">{{ comment.comment }}</p>
+
             <div class="card-fotter-container">
-              <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser">
-                Edit
+              <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser"
+                (click)="updateComment()" (click)="toggelSection()">
+                {{ isEdit ? 'Cancel' : 'edit' }}
               </button>
               <button nbButton status="danger" size="tiny" class="end-btn" [hidden]="!isLogUser"
-                (click)="endOrViewComment()">
+                (click)="endOrViewComment()" (click)="toggelSection()">
                 {{ isEnd ? 'Restart' : 'End' }}
               </button>
               <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
-                [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom">
+                [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom" (click)="toggelSection()">
                 Delete
               </button>
 
@@ -61,14 +63,27 @@
                   </nb-card-body>
                 </nb-card>
               </ng-template>
-
             </div>
+
+            <form *ngIf="isEdit" [formGroup]="updateCommentForm" novalidate (ngSubmit)="onUpdate()" #updateCommform="ngForm">
+              <hr>
+              <div class="update-comment">
+                <textarea class="form-control" formControlName="upComment" nbInput fullWidth status="primary" required
+                  style="height: 80px; font-size: 13px;">
+                </textarea>
+                <button nbButton status="primary" outline size="small" class="float-right update-btn" size="small">
+                  Update
+                </button>
+              </div>
+              <hr>
+            </form>
           </div>
+
         </nb-accordion-item-header>
-        <nb-accordion-item-body class="reply-container">
-          <form [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
+        <nb-accordion-item-body *ngIf="!isEdit" class="reply-container">
+          <form *ngIf="!isReply" [formGroup]="replyForm" novalidate (ngSubmit)="onCreate()" #replyform="ngForm">
             <div class="add-reply">
-              <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Leave a reply"
+              <textarea class="form-control" formControlName="reply" nbInput fullWidth placeholder="Leave a reply..."
                 status="primary" required style="height: 40px;" [disabled]="isEnd">
               </textarea>
               <button nbButton status="primary" outline size="small" class="float-right reply-btn" size="small"
@@ -80,8 +95,8 @@
           <hr />
           <div>
             <p class="reply-title" *ngIf="repCount != 0">Replies</p>
-            <div *ngFor="let reply of replies">
-              <app-reply [reply]="reply" (changeReplyCount)="getReplyCount()"></app-reply>
+            <div *ngFor="let replyItem of replies">
+              <app-reply *ngIf="!isEdit" [replyItem]="replyItem" (isReply)="isReply=$event" (changeReplyCount)="getReplyCount()"></app-reply>
             </div>
           </div>
         </nb-accordion-item-body>

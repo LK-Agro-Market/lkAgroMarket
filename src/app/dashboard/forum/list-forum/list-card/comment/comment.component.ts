@@ -14,12 +14,22 @@ export class CommentComponent implements OnInit {
   replies: any[];
   isLogUser;
   isEnd;
+  isEdit = false;
+  isReply = false;
   repCount;
 
   @Input() comment: any;
   @Input() postId: any;
+
   @Output() changeCommentCount = new EventEmitter();
+  @Output() isComment = new EventEmitter();
+
   @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
+  @ViewChild('commentSection', { static: false }) section;
+
+  updateCommentForm = new FormGroup({
+    upComment: new FormControl('', Validators.required)
+  });
 
   replyForm = new FormGroup({
     reply: new FormControl('', Validators.required)
@@ -32,6 +42,10 @@ export class CommentComponent implements OnInit {
     private forumService: ForumService,
     private toastr: ToastrService
   ) { }
+
+  get upComment() {
+    return this.updateCommentForm.get('upComment');
+  }
 
   get rply() {
     return this.replyForm.get('reply');
@@ -50,7 +64,6 @@ export class CommentComponent implements OnInit {
     } else {
       this.isLogUser = false;
     }
-
     // load replies
     this.forumService
       .getReply(this.comment.key)
@@ -58,6 +71,7 @@ export class CommentComponent implements OnInit {
       .subscribe(replies => {
         this.replies = replies;
       });
+
   }
 
   onCreate() {
@@ -84,7 +98,20 @@ export class CommentComponent implements OnInit {
       this.getReplyCount();
       this.toastr.success('Replied successfully...');
     } else {
-    this.toastr.error('Please check and fill correctly' , 'Can`t reply')    }
+      this.toastr.error('Please check and fill correctly', 'Can`t reply');
+    }
+  }
+
+  onUpdate() {
+    if (this.updateCommentForm.valid) {
+      this.forumService.updateComment(
+        this.comment.key,
+        this.updateCommentForm.controls.upComment.value as string
+      );
+    }
+    this.updateCommentForm.reset();
+    this.isEdit = false;
+    this.toastr.success('Your changes are saved...');
   }
 
   endOrViewComment() {
@@ -93,6 +120,19 @@ export class CommentComponent implements OnInit {
       this.comment.key,
       !this.comment.endThread
     );
+  }
+
+  updateComment() {
+    this.isEdit = !this.isEdit;
+    this.isComment.emit(false);
+    if (this.isEdit === true) {
+      this.isComment.emit(true);
+      this.forumService.getCommentForUpdate(this.comment.key)
+        .pipe()
+        .subscribe(dataSet => {
+          this.updateCommentForm.controls.upComment.setValue(dataSet.data().comment);
+        });
+    }
   }
 
   deleteComments() {
@@ -110,6 +150,10 @@ export class CommentComponent implements OnInit {
       .subscribe(count => {
         this.repCount = count;
       });
+  }
+
+  toggelSection() {
+    this.section.toggle();
   }
 
   hidePopover() {

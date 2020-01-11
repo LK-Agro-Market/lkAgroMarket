@@ -24,7 +24,7 @@ export class ForumService {
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage
-  ) {}
+  ) { }
 
   getPostId() {
     return this.afs.createId();
@@ -127,14 +127,9 @@ export class ForumService {
     key,
     postTitle,
     des,
-    dateTime,
-    postUserId,
     imageList,
-    postUserName,
-    postUserImage,
     showFarmers,
     showBuyers,
-    isEnd
   ) {
     this.afs
       .collection('post')
@@ -142,20 +137,38 @@ export class ForumService {
       .update({
         title: postTitle,
         description: des,
-        date: dateTime,
-        userID: postUserId,
         images: imageList,
-        userName: postUserName,
-        userImage: postUserImage,
         showFarmer: showFarmers,
         showBuyer: showBuyers,
-        endThread: isEnd
       });
+  }
+
+  updateComment(
+    key,
+    comm
+  ) {
+    this.afs
+    .collection('comment')
+    .doc(key)
+    .update({
+      comment: comm
+    });
+  }
+
+  updateReply(
+    key,
+    rep
+  ) {
+    this.afs
+    .collection('reply')
+    .doc(key)
+    .update({
+      reply: rep
+    });
   }
 
   getPost() {
     // get all
-
     return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
@@ -192,6 +205,22 @@ export class ForumService {
     return this.afs
       .collection('post')
       .doc(postId)
+      .get()
+      .pipe();
+  }
+
+  getCommentForUpdate(commentId) {
+    return this.afs
+      .collection('comment')
+      .doc(commentId)
+      .get()
+      .pipe();
+  }
+
+  getReplyForUpdate(replyId) {
+    return this.afs
+      .collection('reply')
+      .doc(replyId)
       .get()
       .pipe();
   }
