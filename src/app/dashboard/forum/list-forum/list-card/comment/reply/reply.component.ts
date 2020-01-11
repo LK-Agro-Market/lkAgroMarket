@@ -27,7 +27,8 @@ export class ReplyComponent implements OnInit {
 
   constructor(
     private forumService: ForumService,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService
+  ) { }
 
   get upReply() {
     return this.updateReplyForm.get('upReply');
