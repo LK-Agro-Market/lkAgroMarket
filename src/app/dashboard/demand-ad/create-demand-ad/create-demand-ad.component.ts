@@ -50,14 +50,12 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
     private demandadservice: DemandAdService,
     private toastr: ToastrService
   ) {}
-  submited:boolean;
-  formControls=this.demandadservice.buyerAdform.controls;
-  
- ngOnInit() {
- 
-}
+  submited: boolean;
+  formControls = this.demandadservice.buyerAdform.controls;
 
-relatedFoods = [  
+  ngOnInit() {}
+
+  relatedFoods = [
     'Apple',
     'Avocado',
     'Banana',
@@ -77,32 +75,30 @@ relatedFoods = [
   }
 
   createBuyerAd() {
-    
-    if(this.demandadservice.buyerAdform.get('id').value==null){
-    const adID = this.demandadservice.getdemandAdid();
-    const demandAD: DemandAd = {
-      id: adID,
-      foodtype: this.formControls.foodtype.value,
-      food: this.formControls.food.value,
-      expectedamount: this.formControls.expectedamount.value,
-      priceperunit: this.formControls.priceperunit.value,
-      description: this.formControls.description.value,
-      organic: this.formControls.organic.value,
-      deadline: this.formControls.deadline.value,
-      timestamps: new Date(),
-      views: 0,
-      contactClicks: 0,
-      owner: this.user.uid 
-    };
-    this.attempted = true;
-    if (this.demandadservice.buyerAdform.invalid) {
-      return;
-    }
-    this.processing = false;
+    if (this.demandadservice.buyerAdform.get('id').value == null) {
+      const adID = this.demandadservice.getdemandAdid();
+      const demandAD: DemandAd = {
+        id: adID,
+        foodtype: this.formControls.foodtype.value,
+        food: this.formControls.food.value,
+        expectedamount: this.formControls.expectedamount.value,
+        priceperunit: this.formControls.priceperunit.value,
+        description: this.formControls.description.value,
+        organic: this.formControls.organic.value,
+        deadline: this.formControls.deadline.value,
+        timestamps: new Date(),
+        views: 0,
+        contactClicks: 0,
+        owner: this.user.uid
+      };
+      this.attempted = true;
+      if (this.demandadservice.buyerAdform.invalid) {
+        return;
+      }
+      this.processing = false;
 
-    this.demandadservice.createBuyerad(demandAD);
-    }
-    else{
+      this.demandadservice.createBuyerad(demandAD);
+    } else {
       const demandAD: DemandAd = {
         id: this.demandadservice.buyerAdform.get('id').value,
         foodtype: this.formControls.foodtype.value,
@@ -115,7 +111,7 @@ relatedFoods = [
         timestamps: new Date(),
         views: 0,
         contactClicks: 0,
-        owner: this.user.uid 
+        owner: this.user.uid
       };
 
       this.attempted = true;
@@ -123,18 +119,17 @@ relatedFoods = [
         return;
       }
       this.processing = false;
-  
-      this.demandadservice.createBuyerad(demandAD);
 
+      this.demandadservice.createBuyerad(demandAD);
     }
- 
+
     this.toastr.success('Submitted successfully');
     this.demandadservice.buyerAdform.reset();
     this.attempted = false;
   }
 
-  resetAd(){
+  resetAd() {
     this.demandadservice.buyerAdform.reset();
     this.demandadservice.defaultAd();
-     }
+  }
 }

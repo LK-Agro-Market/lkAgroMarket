@@ -5,11 +5,14 @@
   nbSpinnerSize="large"
 >
   <nb-card-header class="card-header-content"
-    >Look for something to buy!</nb-card-header 
+    >Look for something to buy!</nb-card-header
   >
   <nb-card-body>
-    <form [formGroup]="this.demandadservice.buyerAdform" (ngSubmit)="createBuyerAd()">
-      <input type="hidden" formControlName="id" >
+    <form
+      [formGroup]="this.demandadservice.buyerAdform"
+      (ngSubmit)="createBuyerAd()"
+    >
+      <input type="hidden" formControlName="id" />
       <div class="row">
         <div class="col-sm-6">
           <label>Select a food category...</label>
@@ -169,9 +172,17 @@
       <div class="row">
         <div class="col-sm-12 text-center">
           <button type="submit" nbButton>Create Ad</button>
-          <button class="btn btn-primary" status="warning" [disabled]="demandadservice.buyerAdform.pristine" (click)="resetAd()" nbButton>cancel Ad</button>
+          <button
+            class="btn btn-primary"
+            status="warning"
+            [disabled]="demandadservice.buyerAdform.pristine"
+            (click)="resetAd()"
+            nbButton
+          >
+            cancel Ad
+          </button>
         </div>
-        </div>
-      </form>
+      </div>
+    </form>
   </nb-card-body>
 </nb-card>

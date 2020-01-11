@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         if (routeParams.profileOwner === 'myProfile') {
           this.profileOwnerId = this.viewer.uid;
         } else {
-          this.profileOwnerId = routeParams.profileOwner; 
+          this.profileOwnerId = routeParams.profileOwner;
         }
         this.profileService
           .getProfileOwner(this.profileOwnerId)

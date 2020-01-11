@@ -13,14 +13,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class DemandAdService {
- 
   constructor(
     private afStorage: AngularFireStorage,
-    private afs: AngularFirestore,
-              ){}
+    private afs: AngularFirestore
+  ) {}
 
-  
-    buyerAdform = new FormGroup({
+  buyerAdform = new FormGroup({
     id: new FormControl(null),
     foodtype: new FormControl('', Validators.required),
     food: new FormControl('', Validators.required),
@@ -28,9 +26,11 @@ export class DemandAdService {
     priceperunit: new FormControl('50', Validators.required),
     description: new FormControl('', Validators.required),
     organic: new FormControl('', Validators.required),
-    deadline: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
+    deadline: new FormControl(
+      new Date().toISOString().split('T')[0],
+      Validators.required
+    )
   });
-  
 
   getdemandAdid() {
     return this.afs.createId();
@@ -48,35 +48,29 @@ export class DemandAdService {
       .pipe(map(res => res as DemandAd[]));
   }
 
-
-  editAd(property){
-      this.buyerAdform.setValue({
-        id:property.id,
-        foodtype: property.foodtype,
-        food: property.food,
-        expectedamount: property.expectedamount,
-        priceperunit: property.priceperunit,
-        description: property.description,
-        organic: property.organic,
-        deadline: property.deadline
-      });
+  editAd(property) {
+    this.buyerAdform.setValue({
+      id: property.id,
+      foodtype: property.foodtype,
+      food: property.food,
+      expectedamount: property.expectedamount,
+      priceperunit: property.priceperunit,
+      description: property.description,
+      organic: property.organic,
+      deadline: property.deadline
+    });
   }
 
-defaultAd(){
-  this.buyerAdform.setValue({ 
-  id: null,
-  foodtype:'',
-  food: '',
-  expectedamount: '50Kg',
-  priceperunit: 50,
-  description: '',
-  organic: '',
-  deadline: ''
-   });
+  defaultAd() {
+    this.buyerAdform.setValue({
+      id: null,
+      foodtype: '',
+      food: '',
+      expectedamount: '50Kg',
+      priceperunit: 50,
+      description: '',
+      organic: '',
+      deadline: ''
+    });
   }
 }
-
-  
-
-
-

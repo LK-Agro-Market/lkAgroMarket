@@ -13,16 +13,16 @@ import { ToastrService } from 'ngx-toastr';
 export class ListDemandAdComponent implements OnInit {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
-  demandAdList=[];
+  demandAdList = [];
   constructor(
     private demandAdsevice: DemandAdService,
     private afs: AngularFirestore,
-    private toastr: ToastrService,
- ) {}
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.demandAdsevice.getdemandAds(this.user.uid).subscribe(res => {
-    this.demandAdList = res
+      this.demandAdList = res;
     });
   }
   deleteAd(id: string) {
@@ -32,4 +32,3 @@ export class ListDemandAdComponent implements OnInit {
     }
   }
 }
- 
