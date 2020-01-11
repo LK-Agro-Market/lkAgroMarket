@@ -12,8 +12,8 @@ nb-accordion {
 }
 .vote-container{
   width: 30px;
-  margin-top: -5%;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -66,9 +66,19 @@ nb-accordion {
 .btn-like {
   margin-left: 10px;
 }
+// .btn-react{
+  // margin-left: -20%;
+// }
 .count-like {
   margin-top: 15px;
   margin-left: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: orangered;
+}
+.count-react{
+  margin-left: 5px;
+  margin-top: 8px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
   color: orangered;

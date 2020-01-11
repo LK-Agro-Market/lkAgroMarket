@@ -6,22 +6,20 @@
         <nb-accordion-item-header #commentSection>
           <div class="vote-container">
             <nb-icon icon="arrow-ios-upward-outline" status="primary"></nb-icon>
-            <nb-icon icon="arrow-ios-downward-outline" status="primary" style="margin-top: 15px;"> </nb-icon>
+            <p class="count-react">{{reactCount}}</p>
+            <nb-icon icon="arrow-ios-downward-outline" status="primary"> </nb-icon>
             <div *ngIf="!isPostOwner">
-              <nb-icon *ngIf="isBest" icon="star" status="primary" style="margin-top: 15px;"
-                nbTooltip="The post owner accepted this as the best answer" nbTooltipPlacement="bottom" nbTooltipStatus="info">
+              <nb-icon *ngIf="isBest" icon="done-all-outline" status="primary"
+                nbTooltip="The post owner accepted this as the best answer" nbTooltipPlacement="bottom"
+                nbTooltipStatus="info">
               </nb-icon>
             </div>
-            <div *ngIf="isPostOwner" >
-              <button *ngIf="isBest" (click)="toggelSection" (click)="changeState(true)" nbButton ghost status="success"
-                size="medium" class="float-right btn-like">
-                <nb-icon icon="star" status="primary" style="margin-top: 15px;" nbTooltip="You marked this as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
-              </button>
-              <button *ngIf="!isBest" (click)="toggelSection" (click)="changeState(false)" nbButton ghost
-                status="success" size="medium" class="float-right btn-like">
-                <nb-icon icon="star-outline" status="primary" style="margin-top: 15px;"
-                  nbTooltip="Click to mark as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
-              </button>
+            <div *ngIf="isPostOwner">
+              <nb-icon *ngIf="isBest" (click)="changeState(true)" icon="done-all-outline" status="primary"
+                nbTooltip="You marked this as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info">
+              </nb-icon>
+              <nb-icon *ngIf="!isBest" (click)="changeState(false)" icon="done-all-outline" status="basic"
+                nbTooltip="Click to mark as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
             </div>
           </div>
           <div class="comnt-container">

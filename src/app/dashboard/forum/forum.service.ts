@@ -7,7 +7,7 @@ import {
   AngularFireStorageReference,
   AngularFireStorage
 } from '@angular/fire/storage';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { firestore } from 'firebase';
 
 @Injectable({
@@ -71,6 +71,7 @@ export class ForumService {
     commentUserImage,
     isEnd,
     bestOrNot,
+    votes
   ) {
     return this.afs.collection('comment').add({
       comment: comm,
@@ -81,7 +82,8 @@ export class ForumService {
       userName: commentUserName,
       userImage: commentUserImage,
       endThread: isEnd,
-      isBest: bestOrNot
+      isBest: bestOrNot,
+      voteList: votes
     });
   }
 

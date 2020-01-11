@@ -21,6 +21,7 @@ export class CommentComponent implements OnInit {
   isReact;
   repCount;
   reactCount;
+  voteCount;
 
   @Input() comment: any;
   @Input() postId: any;
