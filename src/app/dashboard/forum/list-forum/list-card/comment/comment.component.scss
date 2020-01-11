@@ -38,6 +38,10 @@ nb-accordion {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
 }
+.badge {
+  margin-left: 5px;
+  height: 18px;
+}
 #postDate {
   margin-top: -2%;
   font-size: 12px;
@@ -50,7 +54,7 @@ nb-accordion {
   display: flex;
   flex-direction: row;
   position: absolute;
-  padding-left: 400px;
+  padding-left: 480px;
 }
 .btn-like {
   margin-left: 10px;

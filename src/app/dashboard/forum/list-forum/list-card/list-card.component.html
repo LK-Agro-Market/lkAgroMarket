@@ -1,15 +1,18 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item>
-      <nb-accordion-item-header id="t-header" (click)="viewButton = !viewButton" *ngIf="item">
+    <nb-accordion-item #it>
+      <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #itm>
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
               <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
-                <a href="#" class="pro-name" (click)="toggleMain()">
-                  {{ item.userName }}
-                </a>
+                <div class="user-detail">
+                  <a href="#" class="pro-name">
+                    {{ item.userName }}
+                  </a>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
+                </div>
                 <span class="text-info" id="postDate">
                   <b>Posted on</b>
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
@@ -22,7 +25,7 @@
                   <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                     <nb-icon icon="email"></nb-icon>
                   </button>
-                  <p class="count-com">{{commCount}}</p>
+                  <p class="count-com">{{ commCount }}</p>
                 </div>
               </div>
             </div>
@@ -30,23 +33,19 @@
               <span id="postTitle"> {{ item.title }} </span>
               <hr />
               <div class="card-fotter-container">
-                <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleMain()">
-                  View {{ viewButton ? 'More' : 'Less' }}
+                <button nbButton status="primary" outline size="small" class="view-btn" (click)="toggleCard()">
+                  {{ viewMore ? 'More' : 'Less' }}
                 </button>
-                <button nbButton *ngIf="true" status="primary" size="small" class="edit-btn" [hidden]="!showBtn">
-                  Edit
+                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser"
+                  (click)="updateForm()">
+                  {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
-                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn"
+                <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
                   (click)="endOrViewPost()">
-                  End
+                  {{ !isEnd ? 'End' : 'Restart' }}
                 </button>
-                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn"
-                  [hidden]="!showBtn" (click)="deletePost()">
-                </button>
-                <button nbButton *ngIf="true" status="danger" size="small" class="end-btn" [hidden]="!showBtn" (click)="endOrViewPost()">
-                  End
-                </button>
-                <button nbButton outline *ngIf="true" status="danger" size="small" class="delete-btn" [hidden]="!showBtn" (click)="deletePost()">
+                <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
+                  (click)="deletePost()">
                   Delete
                 </button>
               </div>
@@ -54,12 +53,8 @@
           </div>
         </div>
       </nb-accordion-item-header>
-      <nb-accordion-item-body>
+      <nb-accordion-item-body >
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
-        <hr />
-        <!-- <dir *ngFor="let image of imageList" style="display: flex; flex-direction: column;">
-          <img src="{{image}}" style="width: 300px; height: auto;">
-        </dir> -->
         <hr />
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
@@ -68,15 +63,13 @@
             </textarea>
             <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
               [disabled]="isEnd">
-            </button>
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small" [disabled]="isEnd" >
               Comment
             </button>
           </div>
         </form>
         <hr />
         <div class="comment-sec">
-          <p class="comment-title">Comments</p>
+          <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
             <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>
@@ -84,4 +77,5 @@
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>
+  <app-create-form *ngIf="isEdit" [postId]="postId" [createOrUpdate]="createOrUpdate"></app-create-form>
 </div>

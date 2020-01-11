@@ -35,31 +35,31 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
-import { FileUploadDirective } from './forum/file-upload.directive';
 
-//components
+// components
 import { LayoutComponent } from './layout/layout.component';
-//chat
+// chat
 import { ChatComponent } from './chat/chat.component';
-//supply ad
+// supply ad
 import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { CreateSupplyAdComponent } from './supply-ad/create-supply-ad/create-supply-ad.component';
 import { ListSupplyAdsComponent } from './supply-ad/list-supply-ads/list-supply-ads.component';
-import { UpdateAdComponent } from './supply-ad/update-ad/update-ad.component';
-//profile
+import { StatsComponent } from './supply-ad/stats/stats.component';
+import { ViewSupplyAdComponent } from './supply-ad/view-supply-ad/view-supply-ad.component';
+// profile
 import { ProfileComponent } from './profile/profile.component';
-//forum
+// forum
 import { ForumComponent } from './forum/forum.component';
 import { ListForumComponent } from './forum/list-forum/list-forum.component';
 import { ListCardComponent } from './forum/list-forum/list-card/list-card.component';
 import { CommentComponent } from './forum/list-forum/list-card/comment/comment.component';
 import { UserProfileCardComponent } from './forum/user-profile-card/user-profile-card.component';
-//demand ad
+import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
+import { CreateFormComponent } from './forum/create-form/create-form.component';
+// demand ad
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
-import { ReplyComponent } from './forum/list-forum/list-card/comment/reply/reply.component';
-import { StatsComponent } from './supply-ad/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -73,15 +73,15 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     ListForumComponent,
     ListCardComponent,
     CommentComponent,
-    UpdateAdComponent,
     DemandAdComponent,
     CreateDemandAdComponent,
     ListDemandAdComponent,
     ReplyComponent,
     UserProfileCardComponent,
+    CreateFormComponent,
     StatsComponent,
     ConfirmButtonDirective,
-    FileUploadDirective
+    ViewSupplyAdComponent
   ],
   imports: [
     CommonModule,
@@ -107,9 +107,7 @@ import { StatsComponent } from './supply-ad/stats/stats.component';
     NbSpinnerModule,
     NbSelectModule,
     NbInputModule,
-
     FormsModule,
-
     NbAccordionModule,
     NbUserModule,
     NbAlertModule,

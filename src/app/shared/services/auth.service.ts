@@ -54,10 +54,11 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithPopup(provider)
       .then(result => {
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
+        this.SetUserData(result.user).then(() => {
+          this.ngZone.run(() => {
+            this.router.navigate(['']);
+          });
         });
-        this.SetUserData(result.user);
       })
       .catch(error => {
         window.alert(error);

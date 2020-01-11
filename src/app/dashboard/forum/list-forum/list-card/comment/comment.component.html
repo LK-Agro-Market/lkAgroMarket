@@ -12,9 +12,14 @@
                 alt="Profile image"
               />
               <div class="pro-header-container">
-                <a href="#" class="pro-name">
-                  {{ comment.userName }}
-                </a>
+                <div class="user-detail">
+                  <a href="#" class="pro-name">
+                    {{ comment.userName }}
+                  </a>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success"
+                    >This comment was end</span
+                  >
+                </div>
                 <span class="text-info" id="postDate">
                   <b>Commented on</b>
                   <i>
@@ -42,7 +47,6 @@
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-rep">{{ repCount }}</p>
-                  <p class="count-rep">{{ count }}</p>
                 </div>
               </div>
             </div>
@@ -54,7 +58,7 @@
                 status="primary"
                 size="tiny"
                 class="edit-btn"
-                [hidden]="!showBtn"
+                [hidden]="!isLogUser"
               >
                 Edit
               </button>
@@ -64,10 +68,10 @@
                 status="danger"
                 size="tiny"
                 class="end-btn"
-                [hidden]="!showBtn"
+                [hidden]="!isLogUser"
                 (click)="endOrViewComment()"
               >
-                End
+                {{ isEnd ? 'Restart' : 'End' }}
               </button>
               <button
                 nbButton
@@ -76,7 +80,7 @@
                 status="danger"
                 size="tiny"
                 class="delete-btn"
-                [hidden]="!showBtn"
+                [hidden]="!isLogUser"
                 (click)="deleteComments()"
               >
                 Delete
@@ -97,7 +101,7 @@
                 formControlName="reply"
                 nbInput
                 fullWidth
-                placeholder="Add reply..."
+                placeholder="Leave a reply"
                 status="primary"
                 required
                 style="height: 40px;"
@@ -119,7 +123,7 @@
           </form>
           <hr />
           <div>
-            <p class="reply-title">Replies</p>
+            <p class="reply-title" *ngIf="repCount != 0">Replies</p>
             <div *ngFor="let reply of replies">
               <app-reply
                 [reply]="reply"

@@ -32,6 +32,10 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
 }
+.badge {
+  margin-left: 5px;
+  height: 18px;
+}
 #postDate {
   margin-top: -2%;
   font-size: 12px;
@@ -81,7 +85,7 @@
 .view-btn {
   margin-top: 5px;
   font-size: 15px;
-  width: 100px;
+  width: 80px;
 }
 .edit-btn,
 .end-btn,

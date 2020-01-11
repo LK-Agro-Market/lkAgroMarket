@@ -15,8 +15,8 @@ import { UserDetailsService } from '../services/user-details.service';
 })
 export class RegiReverseGuard implements CanActivate {
   constructor(
-    public userDetailsService: UserDetailsService,
-    public router: Router
+    private userDetailsService: UserDetailsService,
+    private router: Router
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,

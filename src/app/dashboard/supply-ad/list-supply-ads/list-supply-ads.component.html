@@ -43,6 +43,13 @@
               *ngIf="supplyAd.organic == 'Organic'"
             >
             </nb-badge>
+            <nb-badge
+              text="Expired"
+              status="danger"
+              position="top left"
+              *ngIf="supplyAd.expireDate < currentTime"
+            >
+            </nb-badge>
             <div class="card-body">
               <h5 class="card-title">
                 {{ supplyAd.food }}
@@ -68,7 +75,12 @@
               >
                 Mark As Sold
               </button>
-              <button class="btn btn-primary btn-sm">Update</button>
+              <button
+                class="btn btn-primary btn-sm"
+                [routerLink]="['/view-supply-ad', supplyAd.id]"
+              >
+                Comment
+              </button>
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
