@@ -19,10 +19,12 @@ export class ListCardComponent implements OnInit {
   imageObject: Array<object>;
   isLogUser;
   isEdit = false;
+  isComment = false;
   createOrUpdate;
   isEnd;
   postId;
   commCount;
+  createDate;
 
   @Input() item: any;
   @ViewChild('postSection', { static: false }) section ;
@@ -47,7 +49,7 @@ export class ListCardComponent implements OnInit {
     this.getCommentCount();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-
+    this.createDate = this.item.date;
     if (this.item.images != null) { // get images from database
       this.imageList = this.item.images;
       this.imageObject = this.imageList.map(url => { // set images to forum card

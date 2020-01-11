@@ -1,6 +1,6 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item >
+    <nb-accordion-item>
       <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #postSection>
         <div class="gold-members p-4">
           <div class="media">
@@ -52,16 +52,16 @@
                 <ng-template #confirmDeleteSecton>
                   <nb-card style="margin-bottom: -10%;">
                     <nb-card-body>
-                      Are you sure you wish to delete this post? 
-                    <button nbButton shape="round" status="danger" size="tiny"  [hidden]="!isLogUser"
-                      (click)="deletePost()" style="margin-left: 10px;" >
-                      yes
-                    </button>
-                    <button nbButton shape="round" status="danger" size="tiny"  [hidden]="!isLogUser"
-                      style="margin-left: 10px;" (click)="hidePopover()" >
-                      No
-                    </button>
-                  </nb-card-body>
+                      Are you sure you wish to delete this post?
+                      <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
+                        (click)="deletePost()" style="margin-left: 10px;">
+                        yes
+                      </button>
+                      <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
+                        style="margin-left: 10px;" (click)="hidePopover()">
+                        No
+                      </button>
+                    </nb-card-body>
                   </nb-card>
                 </ng-template>
 
@@ -76,12 +76,14 @@
           <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
           <hr>
         </div>
+
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
-        <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
+
+        <form *ngIf="!isComment" [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
-            <textarea class="form-control" formControlName="comment" nbInput fullWidth
-              placeholder="Join the discussion..." status="primary" required style="height: 40px;" [disabled]="isEnd">
+            <textarea class="form-control" formControlName="comment" nbInput fullWidth required
+              placeholder="Join the discussion..." status="primary" style="height: 40px;" [disabled]="isEnd">
             </textarea>
             <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
               [disabled]="isEnd">
@@ -89,15 +91,18 @@
             </button>
           </div>
         </form>
+
         <hr />
-        <div class="comment-sec">
+        <div class="comment-sec" *ngIf="!isEdit">
           <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
-            <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
+            <app-comment [comment]="comment" [postId]="postId" (isComment)="isComment=$event" (changeCommentCount)="getCommentCount()"></app-comment>
           </div>
         </div>
+
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>
-  <app-create-form *ngIf="isEdit" [postId]="postId" [createOrUpdate]="createOrUpdate"></app-create-form>
+  <app-create-form *ngIf="isEdit" [postId]="postId" [createOrUpdate]="createOrUpdate" [createDate]="createDate">
+  </app-create-form>
 </div>

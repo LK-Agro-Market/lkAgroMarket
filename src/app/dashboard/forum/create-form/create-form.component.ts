@@ -27,6 +27,7 @@ export class CreateFormComponent implements OnInit {
 
   @Input() postId: any; // get postID for update
   @Input() createOrUpdate: any;
+  @Input() createDate: any; // get create date for update post
 
   @Output() hideForm = new EventEmitter(); // hidden form when submit (emiiter)
 
@@ -54,6 +55,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
     if (this.createOrUpdate === 'update') {
       // set form value for update
       this.forumService
@@ -67,7 +69,6 @@ export class CreateFormComponent implements OnInit {
           this.imageList = dataSet.data().images;
 
         });
-
     }
   }
 
@@ -112,22 +113,16 @@ export class CreateFormComponent implements OnInit {
 
         } else {
           ///////// shuld udate new image list
-          this.toastrStatus = 'Your post is updated...';
+          this.toastrStatus = 'Your changes are saved...';
           id = this.postId;
           this.forumService.updatePost( // update selected post
             id,
             title,
             des,
-            dateTime,
-            userId,
             null,
-            userName,
-            userImage,
             showFarmer,
             showBuyer,
-            false
           );
-          
         }
         if (this.images != null) { // upload images
           this.forumService.uploadImg(this.images, 'post', id);
@@ -140,10 +135,10 @@ export class CreateFormComponent implements OnInit {
         this.toastr.success(this.toastrStatus);
 
       } else {
-        this.toastr.error('Please check the visibility on farmers or buyers or both' , 'Can`t create post' );
+        this.toastr.error('Please check the visibility on farmers or buyers or both' , 'Can`t create the post' );
       }
     } else {
-      this.toastr.error('Please check and fill the form correctly' , 'Can`t create post');
+      this.toastr.error('Please check and fill the form correctly' , 'Can`t create the post');
     }
   }
 }
