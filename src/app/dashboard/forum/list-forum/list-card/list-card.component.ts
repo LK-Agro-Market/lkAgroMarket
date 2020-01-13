@@ -20,6 +20,7 @@ export class ListCardComponent implements OnInit {
   isLogUser;
   isEdit = false;
   isComment = false;
+  isReact;
   createOrUpdate;
   isEnd;
   postId;
@@ -50,6 +51,9 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
     this.createDate = this.item.date;
+
+    this.forumService.checkReact();
+
     if (this.item.images != null) { // get images from database
       this.imageList = this.item.images;
       this.imageObject = this.imageList.map(url => { // set images to forum card
@@ -115,7 +119,6 @@ export class ListCardComponent implements OnInit {
 
   deletePost() {
     // Delete post
-    console.log('delete');
     if (this.imageList != null) {
       this.forumService.deleteImage(this.item.images);
     }
@@ -140,6 +143,12 @@ export class ListCardComponent implements OnInit {
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
   }
+
+  reactChanges() {
+    console.log('button click');
+    this.forumService.changeReact(false, this.user.uid, this.item.key);
+  }
+
 
   toggelSection() {
     this.section.toggle();

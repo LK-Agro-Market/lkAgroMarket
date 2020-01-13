@@ -37,6 +37,7 @@ export class ForumService {
     dateTime,
     postUserId,
     imageList,
+    reacts,
     postUserName,
     postUserImage,
     showFarmers,
@@ -52,6 +53,7 @@ export class ForumService {
         date: dateTime,
         userID: postUserId,
         images: imageList,
+        reactList: reacts,
         userName: postUserName,
         userImage: postUserImage,
         showFarmer: showFarmers,
@@ -148,11 +150,11 @@ export class ForumService {
     comm
   ) {
     this.afs
-    .collection('comment')
-    .doc(key)
-    .update({
-      comment: comm
-    });
+      .collection('comment')
+      .doc(key)
+      .update({
+        comment: comm
+      });
   }
 
   updateReply(
@@ -160,11 +162,11 @@ export class ForumService {
     rep
   ) {
     this.afs
-    .collection('reply')
-    .doc(key)
-    .update({
-      reply: rep
-    });
+      .collection('reply')
+      .doc(key)
+      .update({
+        reply: rep
+      });
   }
 
   getPost() {
@@ -327,4 +329,28 @@ export class ForumService {
       this.storage.storage.refFromURL(urlList[i]).delete();
     }
   }
+
+  checkReact() {
+
+  }
+
+  changeReact(change: boolean, userId, key) {
+    if (change) {
+      this.afs.collection('post')
+        .doc(key)
+        .set(
+          { reacts: firestore.FieldValue.arrayUnion(userId) },
+          { merge: true }
+        );
+    } else {
+      this.afs.collection('post')
+        .doc(key)
+        .set(
+          { reacts: firestore.FieldValue.arrayRemove(userId) },
+          { merge: true }
+        );
+    }
+  }
+
+
 }
