@@ -28,7 +28,7 @@ export class ListCardComponent implements OnInit {
   createDate;
 
   @Input() item: any;
-  @ViewChild('postSection', { static: false }) section ;
+  @ViewChild('postSection', { static: false }) section;
   @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({
@@ -48,11 +48,10 @@ export class ListCardComponent implements OnInit {
 
   ngOnInit() {
     this.getCommentCount();
+    this.checkCurrentReact();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
     this.createDate = this.item.date;
-
-    this.forumService.checkReact();
 
     if (this.item.images != null) { // get images from database
       this.imageList = this.item.images;
@@ -104,7 +103,7 @@ export class ListCardComponent implements OnInit {
       this.getCommentCount();
       this.toastr.success('Commented successfully...');
     } else {
-      this.toastr.error('Please check and fill correctly' , 'Can`t comment');
+      this.toastr.error('Please check and fill correctly', 'Can`t comment');
     }
   }
 
@@ -144,11 +143,24 @@ export class ListCardComponent implements OnInit {
     this.isEdit = !this.isEdit;
   }
 
-  reactChanges() {
-    console.log('button click');
-    this.forumService.changeReact(false, this.user.uid, this.item.key);
+  changeCurrentReact() {
+    this.forumService.changeReact(this.isReact, this.user.uid, this.item.key).then(_ => {
+      this.checkCurrentReact();
+    });
+    // this.checkCurrentReact();
   }
 
+  checkCurrentReact() {
+    this.forumService
+      .checkReact(this.user.uid, this.item.key)
+      .subscribe(count => {
+        if (count > 0) {
+          this.isReact = true;
+        } else {
+          this.isReact = false;
+        }
+      });
+  }
 
   toggelSection() {
     this.section.toggle();

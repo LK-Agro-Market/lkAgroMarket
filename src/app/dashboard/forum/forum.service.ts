@@ -13,6 +13,7 @@ import { firestore } from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
@@ -37,7 +38,6 @@ export class ForumService {
     dateTime,
     postUserId,
     imageList,
-    reacts,
     postUserName,
     postUserImage,
     showFarmers,
@@ -53,7 +53,6 @@ export class ForumService {
         date: dateTime,
         userID: postUserId,
         images: imageList,
-        reactList: reacts,
         userName: postUserName,
         userImage: postUserImage,
         showFarmer: showFarmers,
@@ -100,6 +99,30 @@ export class ForumService {
       userName: replyUserName,
       userImage: replyUserImage
     });
+  }
+
+  changeReact(
+    isReact: boolean,
+    userId,
+    postId
+  ) {
+    if (isReact) {
+      return this.afs.collection('react').ref.where('userID', '==', userId).where('postID', '==', postId).get().then(r => {
+        return r.docs[0].ref.delete().then(_ => true);
+      });
+    } else {
+      return this.afs.collection('react').add({
+        userID: userId,
+        postID: postId,
+      }).then(_ => true);
+    }
+  }
+
+  checkReact(userId, postId) {
+    return this.afs
+      .collection('react', ref => ref.where('userID', '==', userId).where('postID', '==', postId))
+      .get()
+      .pipe(map(coll => coll.size));
   }
 
   uploadImg(files: File[], colName, key) {
@@ -330,27 +353,6 @@ export class ForumService {
     }
   }
 
-  checkReact() {
-
-  }
-
-  changeReact(change: boolean, userId, key) {
-    if (change) {
-      this.afs.collection('post')
-        .doc(key)
-        .set(
-          { reacts: firestore.FieldValue.arrayUnion(userId) },
-          { merge: true }
-        );
-    } else {
-      this.afs.collection('post')
-        .doc(key)
-        .set(
-          { reacts: firestore.FieldValue.arrayRemove(userId) },
-          { merge: true }
-        );
-    }
-  }
 
 
 }
