@@ -48,7 +48,7 @@ export class ListCardComponent implements OnInit {
 
   ngOnInit() {
     this.getCommentCount();
-    this.checkCurrentReact();
+    this.checkReactState();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
     this.createDate = this.item.date;
@@ -95,8 +95,10 @@ export class ListCardComponent implements OnInit {
         dateTime,
         postID,
         userId,
+        this.item.userID,
         userName,
         userImage,
+        false,
         false
       );
       this.comm.setValue('');
@@ -143,14 +145,13 @@ export class ListCardComponent implements OnInit {
     this.isEdit = !this.isEdit;
   }
 
-  changeCurrentReact() {
-    this.forumService.changeReact(this.isReact, this.user.uid, this.item.key).then(_ => {
-      this.checkCurrentReact();
+  changeReactState(current: boolean) {
+    this.forumService.changeReact(current, this.user.uid, this.item.key).then(_ => {
+      this.checkReactState();
     });
-    // this.checkCurrentReact();
   }
 
-  checkCurrentReact() {
+  checkReactState() {
     this.forumService
       .checkReact(this.user.uid, this.item.key)
       .subscribe(count => {

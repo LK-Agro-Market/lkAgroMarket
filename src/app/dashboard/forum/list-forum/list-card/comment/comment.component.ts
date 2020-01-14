@@ -13,9 +13,11 @@ import { NbPopoverDirective } from '@nebular/theme';
 export class CommentComponent implements OnInit {
   replies: any[];
   isLogUser;
+  isPostOwner;
   isEnd;
   isEdit = false;
   isReply = false;
+  isBest;
   repCount;
 
   @Input() comment: any;
@@ -53,16 +55,21 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.getReplyCount();
-
+    this.isBest = this.comment.isBest;
     this.isEnd = this.comment.endThread;
     if (this.isEnd) {
       this.replyForm.get('reply').disable();
     }
     // show edit and end button
-    if (this.comment.userID === this.user.uid) {
+    if (this.comment.commentUserID === this.user.uid) {
       this.isLogUser = true;
     } else {
       this.isLogUser = false;
+    }
+    if (this.comment.postUserID === this.user.uid) {
+      this.isPostOwner = true;
+    } else {
+      this.isPostOwner = false;
     }
     // load replies
     this.forumService
@@ -150,6 +157,10 @@ export class CommentComponent implements OnInit {
       .subscribe(count => {
         this.repCount = count;
       });
+  }
+
+  changeState(current: boolean) {
+    this.forumService.changeCommentState(current, this.comment.key);
   }
 
   toggelSection() {

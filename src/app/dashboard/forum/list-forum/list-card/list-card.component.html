@@ -2,11 +2,6 @@
   <nb-accordion>
     <nb-accordion-item>
       <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #postSection>
-        <div class="vote-container">
-          <nb-icon icon="arrow-ios-upward-outline" status="primary"></nb-icon>
-          <nb-icon icon="arrow-ios-downward-outline" status="primary" style="margin-top: 15px;"> </nb-icon>
-          <nb-icon icon="star-outline" status="primary" style="margin-top: 15px;"></nb-icon>
-        </div>
         <div class="gold-members p-4 card-container">
           <div class="media">
             <div class="pro-img-container">
@@ -23,21 +18,12 @@
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
                 <div class="float-right like-container">
-                  <!-- <button (click)="changeCurrentReact()" (click)="toggelSection()" nbButton ghost status="success" size="medium" class="float-right btn-like">
-                    <div *ngIf="isReact; then thenBlock else elseBlock"></div>
-                    <ng-template #thenBlock>
-                      <nb-icon icon="heart" status="primary"></nb-icon>
-                    </ng-template>
-                    <ng-template #elseBlock>
-                      <nb-icon icon="heart-outline" status="primary"></nb-icon>
-                    </ng-template>
-                  </button> -->
-                  <button (click)="changeCurrentReact()" (click)="toggelSection()"
-                    *ngIf="isReact" nbButton ghost status=" success" size="medium" class="float-right btn-like">
+                  <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
+                    status=" success" size="medium" class="float-right btn-like">
                     <nb-icon icon="heart" status="primary"></nb-icon>
                   </button>
-                  <button (click)="changeCurrentReact()" (click)="toggelSection()"
-                    *ngIf="!isReact" nbButton ghost status=" success" size="medium" class="float-right btn-like">
+                  <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
+                    status=" success" size="medium" class="float-right btn-like">
                     <nb-icon icon="heart-outline" status="primary"></nb-icon>
                   </button>
 

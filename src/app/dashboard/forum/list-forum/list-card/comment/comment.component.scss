@@ -10,6 +10,13 @@ nb-accordion {
   width: 750px;
   max-height: inherit;
 }
+.vote-container{
+  width: 30px;
+  margin-top: -5%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
 .comnt-container {
   display: flex;
   flex-direction: column;

@@ -2,8 +2,26 @@
   <div class="vl"></div>
   <div class="card-cantainer">
     <nb-accordion>
-      <nb-accordion-item autoCollapse="true"> 
+      <nb-accordion-item autoCollapse="true">
         <nb-accordion-item-header #commentSection>
+          <div class="vote-container">
+            <nb-icon icon="arrow-ios-upward-outline" status="primary"></nb-icon>
+            <nb-icon icon="arrow-ios-downward-outline" status="primary" style="margin-top: 15px;"> </nb-icon>
+            <div *ngIf="!isPostOwner">
+              <nb-icon *ngIf="isBest" icon="star" status="primary" style="margin-top: 15px;"></nb-icon>
+              <nb-icon *ngIf="!isBest" icon="star-outline" status="primary" style="margin-top: 15px;"></nb-icon>
+            </div>
+            <div *ngIf="isPostOwner">
+              <button *ngIf="isBest" (click)="toggelSection" (click)="changeState(true)" nbButton ghost status="success"
+                size="medium" class="float-right btn-like">
+                <nb-icon icon="star" status="primary" style="margin-top: 15px;"></nb-icon>
+              </button>
+              <button *ngIf="!isBest" (click)="toggelSection" (click)="changeState(false)" nbButton ghost status="success" size="medium"
+                class="float-right btn-like">
+                <nb-icon icon="star-outline" status="primary" style="margin-top: 15px;"></nb-icon>
+              </button>
+            </div>
+          </div>
           <div class="comnt-container">
             <div class="pro-img-container">
               <img class="pro-img" src="{{ comment.userImage }}" alt="Profile image" />
@@ -65,7 +83,8 @@
               </ng-template>
             </div>
 
-            <form *ngIf="isEdit" [formGroup]="updateCommentForm" novalidate (ngSubmit)="onUpdate()" #updateCommform="ngForm">
+            <form *ngIf="isEdit" [formGroup]="updateCommentForm" novalidate (ngSubmit)="onUpdate()"
+              #updateCommform="ngForm">
               <hr>
               <div class="update-comment">
                 <textarea class="form-control" formControlName="upComment" nbInput fullWidth status="primary" required
@@ -96,7 +115,8 @@
           <div>
             <p class="reply-title" *ngIf="repCount != 0">Replies</p>
             <div *ngFor="let replyItem of replies">
-              <app-reply *ngIf="!isEdit" [replyItem]="replyItem" (isReply)="isReply=$event" (changeReplyCount)="getReplyCount()"></app-reply>
+              <app-reply *ngIf="!isEdit" [replyItem]="replyItem" (isReply)="isReply=$event"
+                (changeReplyCount)="getReplyCount()"></app-reply>
             </div>
           </div>
         </nb-accordion-item-body>

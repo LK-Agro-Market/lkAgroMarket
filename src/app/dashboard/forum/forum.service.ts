@@ -65,19 +65,23 @@ export class ForumService {
     comm,
     dateTime,
     postId,
-    commentUserId,
+    commentUser,
+    postUser,
     commentUserName,
     commentUserImage,
-    isEnd
+    isEnd,
+    bestOrNot,
   ) {
     return this.afs.collection('comment').add({
       comment: comm,
       date: dateTime,
       postID: postId,
-      userID: commentUserId,
+      commentUserID: commentUser,
+      postUserID: postUser,
       userName: commentUserName,
       userImage: commentUserImage,
-      endThread: isEnd
+      endThread: isEnd,
+      isBest: bestOrNot
     });
   }
 
@@ -102,15 +106,15 @@ export class ForumService {
   }
 
   changeReact(
-    isReact: boolean,
+    current: boolean,
     userId,
     postId
   ) {
-    if (isReact) {
+    if (current) { // if true (currently true)
       return this.afs.collection('react').ref.where('userID', '==', userId).where('postID', '==', postId).get().then(r => {
         return r.docs[0].ref.delete().then(_ => true);
       });
-    } else {
+    } else { // if false (currently false)
       return this.afs.collection('react').add({
         userID: userId,
         postID: postId,
@@ -123,6 +127,13 @@ export class ForumService {
       .collection('react', ref => ref.where('userID', '==', userId).where('postID', '==', postId))
       .get()
       .pipe(map(coll => coll.size));
+  }
+
+  changeCommentState(current: boolean, key) {
+    this.afs
+      .collection('comment')
+      .doc(key)
+      .update({ isBest: !current });
   }
 
   uploadImg(files: File[], colName, key) {
