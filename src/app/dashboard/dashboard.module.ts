@@ -123,6 +123,7 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     NgxDropzoneModule,
     NgImageSliderModule,
     NbPopoverModule,
+    NbTooltipModule
   ],
   providers: []
 })

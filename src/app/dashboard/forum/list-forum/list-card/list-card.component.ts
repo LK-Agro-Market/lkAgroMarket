@@ -25,6 +25,7 @@ export class ListCardComponent implements OnInit {
   isEnd;
   postId;
   commCount;
+  reactCount;
   createDate;
 
   @Input() item: any;
@@ -161,6 +162,11 @@ export class ListCardComponent implements OnInit {
           this.isReact = false;
         }
       });
+
+    this.forumService.countReacts(this.item.key)
+    .subscribe(count => {
+      this.reactCount = count;
+    });
   }
 
   toggelSection() {

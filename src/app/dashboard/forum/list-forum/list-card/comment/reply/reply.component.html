@@ -11,10 +11,15 @@
             <i> {{ replyItem.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
           </span>
           <div class="float-right like-container">
-            <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-              <nb-icon icon="checkmark"></nb-icon>
+            <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
+              status=" success" size="medium" class="float-right btn-like">
+              <nb-icon icon="heart" status="primary"></nb-icon>
             </button>
-            <p class="count-like">3</p>
+            <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
+              status=" success" size="medium" class="float-right btn-like">
+              <nb-icon icon="heart-outline" status="primary"></nb-icon>
+            </button>
+            <p class="count-like">{{reactCount}}</p>
           </div>
         </div>
       </div>

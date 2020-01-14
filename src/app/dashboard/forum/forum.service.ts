@@ -129,6 +129,13 @@ export class ForumService {
       .pipe(map(coll => coll.size));
   }
 
+  countReacts(postId) {
+    return this.afs
+      .collection('react', ref => ref.where('postID', '==', postId))
+      .get()
+      .pipe(map(coll => coll.size));
+  }
+
   changeCommentState(current: boolean, key) {
     this.afs
       .collection('comment')

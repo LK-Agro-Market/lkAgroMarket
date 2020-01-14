@@ -13,6 +13,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ReplyComponent implements OnInit {
   isLogUser;
   isEdit = false;
+  isReact;
+  reactCount;
 
   @Input() replyItem: any;
   @Output() changeReplyCount = new EventEmitter();
@@ -35,6 +37,7 @@ export class ReplyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkReactState();
     if (this.replyItem.userID === this.user.uid) {
       this.isLogUser = true;
     } else {
@@ -71,6 +74,29 @@ export class ReplyComponent implements OnInit {
     this.forumService.deleteDocment('reply', this.replyItem.key);
     this.changeReplyCount.emit();
     this.toastr.success('Reply deleted...');
+  }
+
+  changeReactState(current: boolean) {
+    this.forumService.changeReact(current, this.user.uid, this.replyItem.key).then(_ => {
+      this.checkReactState();
+    });
+  }
+
+  checkReactState() {
+    this.forumService
+      .checkReact(this.user.uid, this.replyItem.key)
+      .subscribe(count => {
+        if (count > 0) {
+          this.isReact = true;
+        } else {
+          this.isReact = false;
+        }
+      });
+
+    this.forumService.countReacts(this.replyItem.key)
+      .subscribe(count => {
+        this.reactCount = count;
+      });
   }
 
   hidePopover() {

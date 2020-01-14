@@ -8,17 +8,19 @@
             <nb-icon icon="arrow-ios-upward-outline" status="primary"></nb-icon>
             <nb-icon icon="arrow-ios-downward-outline" status="primary" style="margin-top: 15px;"> </nb-icon>
             <div *ngIf="!isPostOwner">
-              <nb-icon *ngIf="isBest" icon="star" status="primary" style="margin-top: 15px;"></nb-icon>
-              <nb-icon *ngIf="!isBest" icon="star-outline" status="primary" style="margin-top: 15px;"></nb-icon>
+              <nb-icon *ngIf="isBest" icon="star" status="primary" style="margin-top: 15px;"
+                nbTooltip="The post owner accepted this as the best answer" nbTooltipPlacement="bottom" nbTooltipStatus="info">
+              </nb-icon>
             </div>
-            <div *ngIf="isPostOwner">
+            <div *ngIf="isPostOwner" >
               <button *ngIf="isBest" (click)="toggelSection" (click)="changeState(true)" nbButton ghost status="success"
                 size="medium" class="float-right btn-like">
-                <nb-icon icon="star" status="primary" style="margin-top: 15px;"></nb-icon>
+                <nb-icon icon="star" status="primary" style="margin-top: 15px;" nbTooltip="You marked this as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
               </button>
-              <button *ngIf="!isBest" (click)="toggelSection" (click)="changeState(false)" nbButton ghost status="success" size="medium"
-                class="float-right btn-like">
-                <nb-icon icon="star-outline" status="primary" style="margin-top: 15px;"></nb-icon>
+              <button *ngIf="!isBest" (click)="toggelSection" (click)="changeState(false)" nbButton ghost
+                status="success" size="medium" class="float-right btn-like">
+                <nb-icon icon="star-outline" status="primary" style="margin-top: 15px;"
+                  nbTooltip="Click to mark as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
               </button>
             </div>
           </div>
@@ -39,10 +41,15 @@
                   </i>
                 </span>
                 <div class="float-right like-container">
-                  <button nbButton ghost status="success" size="medium" class="float-right btn-like">
-                    <nb-icon icon="checkmark"></nb-icon>
+                  <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
+                    status=" success" size="medium" class="float-right btn-like">
+                    <nb-icon icon="heart" status="primary"></nb-icon>
                   </button>
-                  <p class="count-like">6</p>
+                  <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
+                    status=" success" size="medium" class="float-right btn-like">
+                    <nb-icon icon="heart-outline" status="primary"></nb-icon>
+                  </button>
+                  <p class="count-like">{{reactCount}}</p>
                   <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                     <nb-icon icon="email"></nb-icon>
                   </button>

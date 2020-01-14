@@ -18,7 +18,9 @@ export class CommentComponent implements OnInit {
   isEdit = false;
   isReply = false;
   isBest;
+  isReact;
   repCount;
+  reactCount;
 
   @Input() comment: any;
   @Input() postId: any;
@@ -55,6 +57,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.getReplyCount();
+    this.checkReactState();
     this.isBest = this.comment.isBest;
     this.isEnd = this.comment.endThread;
     if (this.isEnd) {
@@ -157,6 +160,29 @@ export class CommentComponent implements OnInit {
       .subscribe(count => {
         this.repCount = count;
       });
+  }
+
+  changeReactState(current: boolean) {
+    this.forumService.changeReact(current, this.user.uid, this.comment.key).then(_ => {
+      this.checkReactState();
+    });
+  }
+
+  checkReactState() {
+    this.forumService
+      .checkReact(this.user.uid, this.comment.key)
+      .subscribe(count => {
+        if (count > 0) {
+          this.isReact = true;
+        } else {
+          this.isReact = false;
+        }
+      });
+
+    this.forumService.countReacts(this.comment.key)
+    .subscribe(count => {
+      this.reactCount = count;
+    });
   }
 
   changeState(current: boolean) {
