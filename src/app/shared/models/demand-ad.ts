@@ -1,4 +1,4 @@
-export class DemandAd {
+export  interface DemandAd {
   id: string;
   foodtype: string;
   food: string;
