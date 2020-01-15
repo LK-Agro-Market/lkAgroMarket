@@ -101,7 +101,8 @@ export class ListCardComponent implements OnInit {
         userImage,
         false,
         false,
-        null
+        null,
+        0
       );
       this.comm.setValue('');
       this.getCommentCount();

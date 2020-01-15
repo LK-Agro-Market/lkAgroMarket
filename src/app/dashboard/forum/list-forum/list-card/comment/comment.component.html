@@ -5,16 +5,18 @@
       <nb-accordion-item autoCollapse="true">
         <nb-accordion-item-header #commentSection>
           <div class="vote-container">
-            <nb-icon icon="arrow-ios-upward-outline" status="primary"></nb-icon>
-            <p class="count-react">{{reactCount}}</p>
-            <nb-icon icon="arrow-ios-downward-outline" status="primary"> </nb-icon>
-            <div *ngIf="!isPostOwner">
+            <nb-icon icon="arrow-ios-upward-outline" status="basic" (click)="changeVote(1)" ></nb-icon>
+            <nb-icon icon="arrow-ios-upward-outline" status="primary" (click)="changeVote(1)" ></nb-icon>
+            <p class="count-react">{{voteCount}}</p>
+            <nb-icon icon="arrow-ios-downward-outline" status="basic" (click)="changeVote(-1)" style="margin-top: -30%;"> </nb-icon>
+            <nb-icon icon="arrow-ios-downward-outline" status="primary" (click)="changeVote(-1)" style="margin-top: -30%;"> </nb-icon>
+            <div *ngIf="!isPostOwner" style="margin-top: 10px;">
               <nb-icon *ngIf="isBest" icon="done-all-outline" status="primary"
                 nbTooltip="The post owner accepted this as the best answer" nbTooltipPlacement="bottom"
                 nbTooltipStatus="info">
               </nb-icon>
             </div>
-            <div *ngIf="isPostOwner">
+            <div *ngIf="isPostOwner" style="margin-top: 10px;">
               <nb-icon *ngIf="isBest" (click)="changeState(true)" icon="done-all-outline" status="primary"
                 nbTooltip="You marked this as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info">
               </nb-icon>

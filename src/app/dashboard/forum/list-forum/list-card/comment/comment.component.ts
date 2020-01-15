@@ -22,6 +22,7 @@ export class CommentComponent implements OnInit {
   repCount;
   reactCount;
   voteCount;
+  voteList: any[];
 
   @Input() comment: any;
   @Input() postId: any;
@@ -60,6 +61,8 @@ export class CommentComponent implements OnInit {
     this.getReplyCount();
     this.checkReactState();
     this.isBest = this.comment.isBest;
+    this.voteCount = this.comment.voteCount;
+    this.voteList = this.comment.voteList;
     this.isEnd = this.comment.endThread;
     if (this.isEnd) {
       this.replyForm.get('reply').disable();
@@ -188,6 +191,18 @@ export class CommentComponent implements OnInit {
 
   changeState(current: boolean) {
     this.forumService.changeCommentState(current, this.comment.key);
+  }
+
+  changeVote(increment) {
+    if (this.voteList != null) {
+      for (let i = 0; i < this.voteList.length; i++) {
+        if (this.voteList[i] === this.user.uid) {
+
+        } else {
+        }
+      }
+    }
+    this.forumService.changeVoteState(this.comment.key, increment, this.user.uid);
   }
 
   toggelSection() {

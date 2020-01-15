@@ -71,7 +71,8 @@ export class ForumService {
     commentUserImage,
     isEnd,
     bestOrNot,
-    votes
+    votes,
+    count
   ) {
     return this.afs.collection('comment').add({
       comment: comm,
@@ -83,7 +84,8 @@ export class ForumService {
       userImage: commentUserImage,
       endThread: isEnd,
       isBest: bestOrNot,
-      voteList: votes
+      voteList: votes,
+      voteCount: count
     });
   }
 
@@ -145,6 +147,26 @@ export class ForumService {
       .update({ isBest: !current });
   }
 
+  changeVoteState(key, increment, user) {
+    if (increment === 1) {
+      this.afs
+        .collection('comment')
+        .doc(key)
+        .update({
+          voteCount: firestore.FieldValue.increment(1),
+          voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'up' })
+        });
+
+    } else {
+      this.afs
+        .collection('comment')
+        .doc(key)
+        .update({
+          voteCount: firestore.FieldValue.increment(-1),
+          voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'down' })
+        });
+    }
+  }
   uploadImg(files: File[], colName, key) {
     for (let i = 0; i < files.length; i++) {
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
