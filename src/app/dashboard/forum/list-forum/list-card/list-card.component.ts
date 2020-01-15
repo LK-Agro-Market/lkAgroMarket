@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
@@ -9,18 +9,21 @@ import { ForumService } from '../../forum.service';
   styleUrls: ['./list-card.component.scss']
 })
 export class ListCardComponent implements OnInit {
-  viewButton = true;
+  viewMore = true;
   comments: any[];
   cmntId: any;
   imageList: any[];
-  showBtn;
+  isLogUser;
+  isEdit = false;
+  createOrUpdate;
   isEnd;
   postId;
   commCount;
-  imageCount;
 
   @Input() item: any;
-  @ViewChild('item', { static: false }) accordion;
+
+  @ViewChild('it', { static: false }) accordion;
+  // @ViewChild('it', { static: false }) body;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -40,18 +43,19 @@ export class ListCardComponent implements OnInit {
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
     this.imageList = this.item.images;
+
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
     // show edit and end button
     if (this.item.userID === this.user.uid) {
-      this.showBtn = true;
+      this.isLogUser = true;
     } else {
-      this.showBtn = false;
+      this.isLogUser = false;
     }
     // load comments
     this.forumService
-      .getComment(this.item.key)
+      .getComment(this.postId)
       .pipe()
       .subscribe(comments => {
         this.comments = comments;
@@ -62,8 +66,8 @@ export class ListCardComponent implements OnInit {
     // create comment
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
-    const postID = this.item.key;
-    const userId = this.user.uid;
+    const postID = this.postId;
+    const userId = this.postId;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 
@@ -85,24 +89,26 @@ export class ListCardComponent implements OnInit {
     }
   }
 
-  toggleMain() {
-    this.accordion.toggle();
+  toggleCard() {
+    // this.accordion.toggle();
+    this.viewMore = !this.viewMore;
   }
 
   endOrViewPost() {
     // change post (end or start)
     this.forumService.changeEndProperty(
       'post',
-      this.item.key,
+      this.postId,
       !this.item.endThread
     );
   }
 
   deletePost() {
     // Delete post
-    this.forumService.deleteReplyList('postID', this.item.key).subscribe();
-    this.forumService.deleteCommentList('postID', this.item.key).subscribe();
-    this.forumService.deleteDocment('post', this.item.key);
+    this.forumService.deleteImage(this.item.images);
+    this.forumService.deleteReplyList('postID', this.postId).subscribe();
+    this.forumService.deleteCommentList('postID', this.postId).subscribe();
+    this.forumService.deleteDocment('post', this.postId);
     this.getCommentCount();
   }
 
@@ -113,5 +119,12 @@ export class ListCardComponent implements OnInit {
       .subscribe(count => {
         this.commCount = count;
       });
+  }
+
+  updateForm() {
+    // update form
+    // this.accordion.toggle();
+    this.createOrUpdate = 'update';
+    this.isEdit = !this.isEdit;
   }
 }

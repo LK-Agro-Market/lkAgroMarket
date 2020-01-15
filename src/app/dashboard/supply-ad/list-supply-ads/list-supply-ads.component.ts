@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SupplyAdService } from '../supply-ad.service';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { User } from 'src/app/shared/models/user';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-supply-ads',
@@ -14,6 +13,7 @@ import { map } from 'rxjs/operators';
 export class ListSupplyAdsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
+  currentTime = new Date().toISOString().split('T')[0];
 
   farmersAdCategories: Array<string>;
   allActiveSupplyAdList: SupplyAd[];

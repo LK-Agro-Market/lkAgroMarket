@@ -58,7 +58,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push(
       this.route.params.subscribe(routeParams => {
-        this.profileOwnerId = routeParams.profileOwner;
+        if (routeParams.profileOwner === 'myProfile') {
+          this.profileOwnerId = this.viewer.uid;
+        } else {
+          this.profileOwnerId = routeParams.profileOwner; 
+        }
         this.profileService
           .getProfileOwner(this.profileOwnerId)
           .subscribe(user => {

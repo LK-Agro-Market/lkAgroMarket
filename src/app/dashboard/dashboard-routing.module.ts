@@ -7,10 +7,7 @@ import { SupplyAdComponent } from './supply-ad/supply-ad.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
-
-import { User } from '../shared/models/user';
-
-const user: User = JSON.parse(localStorage.getItem('user'));
+import { ViewSupplyAdComponent } from './supply-ad/view-supply-ad/view-supply-ad.component';
 
 const routes: Routes = [
   {
@@ -19,12 +16,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: `profile/${user.uid}`,
+        redirectTo: `profile/myProfile`,
         pathMatch: 'full'
       },
       {
         path: 'farmer-dashboard',
         component: SupplyAdComponent
+      },
+      {
+        path: 'view-supply-ad/:supplyAdId',
+        component: ViewSupplyAdComponent
       },
       {
         path: 'chats',
