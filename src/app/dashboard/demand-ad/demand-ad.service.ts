@@ -48,6 +48,13 @@ export class DemandAdService {
       .pipe(map(res => res as DemandAd[]));
   }
 
+  getdemandad(adId): Observable<DemandAd> {
+    return this.afs
+      .collection('demandAd')
+      .doc<DemandAd>(adId)
+      .valueChanges();}
+
+
   editAd(property) {
     this.buyerAdform.setValue({
       id: property.id,
