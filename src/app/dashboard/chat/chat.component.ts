@@ -65,7 +65,7 @@ export class ChatComponent {
     private afStorage: AngularFireStorage,
     private location: Location
   ) {
-    this.users = afs.collection('users').valueChanges();
+    this.users = afs.collection('users',ref => ref.orderBy('displayName')).valueChanges();
   }
   compFn = (a, b) => {
     if (a.time < b.time) {
