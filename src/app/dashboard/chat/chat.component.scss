@@ -1,9 +1,10 @@
-nb-sidebar {
-  width: 500px;
+nb-layout nb-sidebar {
+  width: 400px;
 }
-nb-card {
-  width: 1100px;
+nb-layout-column nb-card {
+  width: 900px;
 }
+
 nb-card nb-icon {
   float: right;
   font-size: 2rem;
@@ -17,7 +18,14 @@ button-filled-basic-background-color {
 }
 nb-list nb-list-item {
   width: 600px;
+  margin: -0.5rem -0.5rem;
 }
+nb-list nb-list-item button{
+  width: 600px;
+}
+// button {
+//   width: 600px;
+// }
 ul {
   list-style-type: none;
   width: 100%;
@@ -36,7 +44,7 @@ ul li {
   margin-left: 10px;
   text-align: right;
   border-radius: 25px;
-  width: 600px;
+  width: 400px;
   float: right;
   padding: 10px 10px;
 }
@@ -44,7 +52,7 @@ ul li {
   margin-top: auto;
   margin-left: 10px;
   border-radius: 25px;
-  width: 600px;
+  width: 400px;
   padding: 10px 10px;
 }
 #rcontent {
@@ -83,13 +91,14 @@ ul li {
 }
 
 .msg_card_body {
-  width: 1100px;
-  height: 600px;
+  width: 800px;
+  height: 400px;
   overflow-y: auto;
 }
 .type_msg {
   border-top: 1px solid #c4c4c4;
   position: relative;
+  width: 800px;
 }
 
 #A {
@@ -97,7 +106,29 @@ ul li {
 }
 .avatar {
   vertical-align: middle;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+}
+.alert {
+  margin-left: 80px;
+  padding: 20px;
+  background-color: #faf9f3;
+  color: rgb(8, 2, 2);
+  width: 200px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: rgb(14, 1, 1);
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }

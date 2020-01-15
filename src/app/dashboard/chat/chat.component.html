@@ -38,7 +38,16 @@
                       id="scontent"
                       class="p-3 mb-2 bg-primary text-white"
                     >
-                      {{ msg.content }}
+                      {{ msg.content }}<button
+                      nbButton
+                      outline
+                      status="danger"
+                      size="tiny"
+                      class="delete-btn"
+                      (click)="deleteChat()"
+                    >
+                      Delete
+                    </button>
                     </div>
                     <div
                       *ngIf="msg.type != 'text'"
@@ -48,7 +57,16 @@
                         id="image"
                         src="{{ msg.url }}"
                         style="max-width:350px;"
-                      />
+                      /><button
+                      nbButton
+                      outline
+                      status="danger"
+                      size="tiny"
+                      class="delete-btn"
+                      (click)="deleteChat()"
+                    >
+                      Delete
+                    </button>
                     </div>
 
                     <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>

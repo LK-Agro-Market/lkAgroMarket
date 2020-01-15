@@ -91,24 +91,8 @@ export class ChatComponent {
       ref.where('rid', '==', this.currentId).where('sid', '==', this.selectedId)
     );
     this.messages = Observable.combineLatest(
-      this.chatCollection.valueChanges().pipe(
-        map(res => {
-          res.forEach(r => {
-            r.reply = true;
-            return r;
-          });
-          return res;
-        })
-      ),
-      this.repsCollection.valueChanges().pipe(
-        map(res => {
-          res.forEach(r => {
-            r.reply = false;
-            return r;
-          });
-          return res;
-        })
-      )
+      this.chatCollection.valueChanges({idField:'id'}),
+      this.repsCollection.valueChanges()
     )
       .switchMap(chats => {
         const [chatCollection, repsCollection] = chats;
@@ -141,6 +125,9 @@ export class ChatComponent {
   getPost(chatId) {
     this.chatDoc = this.afs.doc('chats/' + chatId);
     this.chat = this.chatDoc.valueChanges();
+  }
+  deleteChat(chatId) {
+    this.afs.doc('chats/'+chatId).delete();
   }
   uploadFile(event) {
     const user = JSON.parse(localStorage.getItem('user'));
