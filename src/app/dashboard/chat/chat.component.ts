@@ -60,6 +60,8 @@ export class ChatComponent {
 
   chatDoc: AngularFirestoreDocument<Post>;
   chat: Observable<Post>;
+
+  editState: boolean = false;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
@@ -129,6 +131,12 @@ export class ChatComponent {
   deleteChat(chatId) {
     this.afs.doc('chats/'+chatId).delete();
   }
+  // EditChat(chatId){
+  //   this.editState = true;
+  // }
+  // UpdateChat(messages){
+  //   return this.afs.doc('chats/' + messages.chatId).update(messages.content);
+  // }
   uploadFile(event) {
     const user = JSON.parse(localStorage.getItem('user'));
     const file = event.target.files[0];
