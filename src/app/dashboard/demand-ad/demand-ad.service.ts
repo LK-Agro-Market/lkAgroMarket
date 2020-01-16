@@ -36,9 +36,9 @@ export class DemandAdService {
     return this.afs.createId();
   }
   createBuyerad(demandAd: DemandAd) {
-    const demandAdCollection: AngularFirestoreCollection<
-      DemandAd
-    > = this.afs.collection('demandAd');
+    const demandAdCollection: AngularFirestoreCollection<DemandAd> = this.afs.collection(
+      'demandAd'
+    );
     return from(demandAdCollection.doc(demandAd.id).set(demandAd));
   }
   getdemandAds(userID: string): Observable<DemandAd[]> {
@@ -52,8 +52,8 @@ export class DemandAdService {
     return this.afs
       .collection('demandAd')
       .doc<DemandAd>(adId)
-      .valueChanges();}
-
+      .valueChanges();
+  }
 
   editAd(property) {
     this.buyerAdform.setValue({

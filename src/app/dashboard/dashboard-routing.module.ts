@@ -45,8 +45,8 @@ const routes: Routes = [
         component: DemandAdComponent
       },
       {
-        path:'view-demand-ad/:demandAdid',
-        component : ViewDemandAdComponent
+        path: 'view-demand-ad/:demandAdid',
+        component: ViewDemandAdComponent
       }
     ]
   }
