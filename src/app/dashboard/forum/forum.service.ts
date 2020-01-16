@@ -140,7 +140,7 @@ export class ForumService {
       .pipe(map(coll => coll.size));
   }
 
-  changeCommentState(current: boolean, key) {
+  markAsBest(current: boolean, key) {
     this.afs
       .collection('comment')
       .doc(key)
@@ -156,7 +156,6 @@ export class ForumService {
           voteCount: firestore.FieldValue.increment(1),
           voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'up' })
         });
-
     } else {
       this.afs
         .collection('comment')
@@ -167,6 +166,27 @@ export class ForumService {
         });
     }
   }
+
+  updateVote(key, user, current, cou) {
+    if (current === 'up') {
+      this.afs
+        .collection('comment')
+        .doc(key)
+        .update({
+          voteCount: firestore.FieldValue.increment(-1),
+          voteList: firestore.FieldValue.arrayRemove({ userId: user, state: 'up' })
+        });
+    } else {
+      this.afs
+      .collection('comment')
+      .doc(key)
+      .update({
+        voteCount: firestore.FieldValue.increment(1),
+        voteList: firestore.FieldValue.arrayRemove({ userId: user, state: 'down' })
+      });
+    }
+  }
+
   uploadImg(files: File[], colName, key) {
     for (let i = 0; i < files.length; i++) {
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;

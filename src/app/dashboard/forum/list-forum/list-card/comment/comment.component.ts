@@ -23,6 +23,8 @@ export class CommentComponent implements OnInit {
   reactCount;
   voteCount;
   voteList: any[];
+  isVote = false;
+  voteAs;
 
   @Input() comment: any;
   @Input() postId: any;
@@ -78,6 +80,16 @@ export class CommentComponent implements OnInit {
     } else {
       this.isPostOwner = false;
     }
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.voteList.length; i++) {
+      if (this.voteList[i].userId === this.user.uid) {
+        this.voteAs = this.voteList[i].state;
+        this.isVote = true;
+      } else {
+      }
+    }
+
     // load replies
     this.forumService
       .getReply(this.comment.key)
@@ -184,25 +196,24 @@ export class CommentComponent implements OnInit {
       });
 
     this.forumService.countReacts(this.comment.key)
-    .subscribe(count => {
-      this.reactCount = count;
-    });
+      .subscribe(count => {
+        this.reactCount = count;
+      });
   }
 
-  changeState(current: boolean) {
-    this.forumService.changeCommentState(current, this.comment.key);
+  mark(current: boolean) {
+    this.forumService.markAsBest(current, this.comment.key);
   }
 
-  changeVote(increment) {
-    if (this.voteList != null) {
-      for (let i = 0; i < this.voteList.length; i++) {
-        if (this.voteList[i] === this.user.uid) {
-
-        } else {
-        }
-      }
+  vote(increment) {
+    if (this.isVote) {
+      if (this.voteAs === 'up') {
+        this.forumService.updateVote(this.comment.key, this.user.uid, 'up', this.voteCount);
+      } else {
+        this.forumService.updateVote(this.comment.key, this.user.uid, 'down', this.voteCount);      }
+    } else {
+      this.forumService.changeVoteState(this.comment.key, increment, this.user.uid);
     }
-    this.forumService.changeVoteState(this.comment.key, increment, this.user.uid);
   }
 
   toggelSection() {
