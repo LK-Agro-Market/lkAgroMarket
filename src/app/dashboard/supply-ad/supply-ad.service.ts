@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { forkJoin, Observable, from } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
@@ -47,11 +48,19 @@ export class SupplyAdService {
     .valueChanges();
   }
 
-  getAd(adId): Observable<SupplyAd> {
+  getAd(adId: string): Observable<SupplyAd> {
     return this.afs
       .collection('supplyAd')
       .doc<SupplyAd>(adId)
       .valueChanges();
+  }
+
+  getAdOwner(ownerId: string): Observable<User> {
+    return this.afs.collection('users').doc<User>(ownerId).valueChanges();
+  }
+
+  viewAd(adId: string, currentViews:number): Observable<void> {
+    return from(this.afs.collection('supplyAd').doc(adId).update({views: currentViews+1}));
   }
 
   changeStatus(adId: string, status: string): Observable<void> {
@@ -61,5 +70,12 @@ export class SupplyAdService {
         .doc(adId)
         .update({ status: status })
     );
+  }
+
+  updateAd(adId: string, supplyAd: Partial<SupplyAd>): Observable<void> {
+    const docRef: AngularFirestoreDocument<
+      SupplyAd
+    > = this.afs.collection('supplyAd').doc(adId);
+    return from(docRef.update(supplyAd));
   }
 }

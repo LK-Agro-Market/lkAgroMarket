@@ -8,11 +8,10 @@ export interface SupplyAd {
   quantityUnit: string;
   pricePerUnit: number;
   images: string[];
-  video?: File;
   description: string;
   organic: string;
   expireDate: string;
-  createdAt: Date;
+  createdAt: string;
   views: number;
   contactClicks: number;
   owner: string;
