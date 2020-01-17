@@ -81,12 +81,13 @@ export class CommentComponent implements OnInit {
       this.isPostOwner = false;
     }
 
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.voteList.length; i++) {
-      if (this.voteList[i].userId === this.user.uid) {
-        this.voteAs = this.voteList[i].state;
-        this.isVote = true;
-      } else {
+    if (this.voteList != null) {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < this.voteList.length; i++) {
+        if (this.voteList[i].userId === this.user.uid) {
+          this.voteAs = this.voteList[i].state;
+          this.isVote = true;
+        }
       }
     }
 

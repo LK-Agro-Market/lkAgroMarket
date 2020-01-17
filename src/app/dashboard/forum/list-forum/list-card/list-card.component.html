@@ -80,7 +80,7 @@
 
         <div *ngIf="item.images != null">
           <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
-          <hr>
+          <hr *ngIf="item.description != '' ">
         </div>
 
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
