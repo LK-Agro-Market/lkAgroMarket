@@ -42,12 +42,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
       quantity: [1, Validators.required],
       quantityUnit: ['kg', Validators.required],
       pricePerUnit: [50, Validators.required],
-      image1: ['', Validators.required],
-      image2: [''],
-      image3: [''],
-      image4: [''],
       description: ['', Validators.required],
-      organic: ['', Validators.required],
       expireDate: [new Date().toISOString().split('T')[0], Validators.required]
     });
 
@@ -93,16 +88,6 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     );
   }
 
-  markAsSold(adId: string) {
-    this.processing = true;
-    this.subscriptions.push(
-      this.supplyAdService.changeStatus(adId, 'sold').subscribe(() => {
-        this.processing = false;
-        this.toastr.success('Advertisment is marked as "sold"');
-      })
-    );
-  }
-
   updateSupplyAd() {
     this.attempted = true;
     if (this.supplyAdForm.invalid) {
@@ -112,6 +97,17 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.supplyAdService.updateAd(this.supplyAdId, this.supplyAdForm.value).subscribe(() => {
       this.processing = false;
       this.attempted = false;
+      this.toastr.success('Updated Ad Successfully');
     }));
+  }
+
+  markAsSold(adId: string) {
+    this.processing = true;
+    this.subscriptions.push(
+      this.supplyAdService.changeStatus(adId, 'sold').subscribe(() => {
+        this.processing = false;
+        this.toastr.success('Advertisment is marked as "sold"');
+      })
+    );
   }
 }

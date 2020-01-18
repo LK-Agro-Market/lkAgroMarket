@@ -1,7 +1,9 @@
 <div class="container-fluid" *ngIf="adOwnerUser && viewer">
   <div class="row">
     <div class="col-sm-6">
-      <nb-card accent="warning" *ngIf="supplyAd">
+      <nb-card accent="warning" *ngIf="supplyAd" [nbSpinner]="processing"
+      nbSpinnerStatus="primary"
+      nbSpinnerSize="large">
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left" *ngIf="adOwnerUser.uid == viewer.uid">
