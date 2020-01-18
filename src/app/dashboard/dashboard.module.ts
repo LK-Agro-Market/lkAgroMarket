@@ -23,7 +23,8 @@ import {
   NbBadgeModule,
   NbCheckboxModule,
   NbMenuModule,
-  NbListModule
+  NbListModule,
+  NbPopoverModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -36,6 +37,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
 
+import { NgImageSliderModule } from 'ng-image-slider';
 // components
 import { LayoutComponent } from './layout/layout.component';
 // chat
@@ -60,6 +62,8 @@ import { CreateFormComponent } from './forum/create-form/create-form.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
+import { ViewDemandAdComponent } from './demand-ad/view-demand-ad/view-demand-ad.component';
+import { CommentBuyerAdComponent } from './demand-ad/view-demand-ad/comment-buyer-ad/comment-buyer-ad.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +85,9 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     CreateFormComponent,
     StatsComponent,
     ConfirmButtonDirective,
-    ViewSupplyAdComponent
+    ViewSupplyAdComponent,
+    ViewDemandAdComponent,
+    CommentBuyerAdComponent
   ],
   imports: [
     CommonModule,
@@ -118,7 +124,10 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     AgmCoreModule.forRoot(environment.googleMap),
     ChartsModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgImageSliderModule,
+    NbPopoverModule,
+    NbTooltipModule
   ],
   providers: []
 })
