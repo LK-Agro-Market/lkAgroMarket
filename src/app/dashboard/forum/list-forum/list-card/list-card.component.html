@@ -1,11 +1,16 @@
 <div class="card-cantainer">
   <nb-accordion>
+
     <nb-accordion-item #it>
       <nb-accordion-item-header id="t-header" (click)="viewMore = !viewMore" *ngIf="item" #itm>
         <div class="gold-members p-4">
           <div class="media">
             <div class="pro-img-container">
-              <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
+              <img
+                class="pro-img"
+                src="{{ item.userImage }}"
+                alt="Profile image"
+              />
               <div class="pro-header-container">
                 <div class="user-detail">
                   <a href="#" class="pro-name">
@@ -18,11 +23,23 @@
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
                 <div class="float-right like-container">
-                  <button nbButton ghost status="success" size="medium" class="float-right btn-like">
+                  <button
+                    nbButton
+                    ghost
+                    status="success"
+                    size="medium"
+                    class="float-right btn-like"
+                  >
                     <nb-icon icon="checkmark"></nb-icon>
                   </button>
                   <p class="count-like">7</p>
-                  <button nbButton ghost status="info" size="medium" class="float-right btn-com">
+                  <button
+                    nbButton
+                    ghost
+                    status="info"
+                    size="medium"
+                    class="float-right btn-com"
+                  >
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-com">{{ commCount }}</p>
@@ -56,10 +73,20 @@
       <nb-accordion-item-body >
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
+
         <form [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
           <div class="add-comment-container">
-            <textarea class="form-control" formControlName="comment" nbInput fullWidth
-              placeholder="Join the discussion..." status="primary" required style="height: 40px;" [disabled]="isEnd">
+            <textarea
+              class="form-control"
+              formControlName="comment"
+              nbInput
+              fullWidth
+              placeholder="Join the discussion..."
+              status="primary"
+              required
+              style="height: 40px;"
+              [disabled]="isEnd"
+            >
             </textarea>
             <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
               [disabled]="isEnd">
@@ -71,7 +98,11 @@
         <div class="comment-sec">
           <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
-            <app-comment [comment]="comment" [postId]="postId" (changeCommentCount)="getCommentCount()"></app-comment>
+            <app-comment
+              [comment]="comment"
+              [postId]="postId"
+              (changeCommentCount)="getCommentCount()"
+            ></app-comment>
           </div>
         </div>
       </nb-accordion-item-body>
