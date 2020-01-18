@@ -62,6 +62,8 @@ import { CreateFormComponent } from './forum/create-form/create-form.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
+import { ViewDemandAdComponent } from './demand-ad/view-demand-ad/view-demand-ad.component';
+import { CommentBuyerAdComponent } from './demand-ad/view-demand-ad/comment-buyer-ad/comment-buyer-ad.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad
     StatsComponent,
     ConfirmButtonDirective,
     ViewSupplyAdComponent,
+    ViewDemandAdComponent,
+    CommentBuyerAdComponent
   ],
   imports: [
     CommonModule,

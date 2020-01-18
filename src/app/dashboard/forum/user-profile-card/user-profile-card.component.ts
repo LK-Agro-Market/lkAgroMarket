@@ -26,7 +26,7 @@ export class UserProfileCardComponent implements OnInit {
   @ViewChild('all', { static: true }) all;
 
   constructor() {}
-  
+
   ngOnInit() {
     this.userName = this.user.displayName;
     this.userEmail = this.user.email;

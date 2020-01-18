@@ -5,13 +5,19 @@
         <div class="gold-members p-4 card-container">
           <div class="media">
             <div class="pro-img-container">
-              <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
+              <img
+                class="pro-img"
+                src="{{ item.userImage }}"
+                alt="Profile image"
+              />
               <div class="pro-header-container">
                 <div class="user-detail">
                   <a href="#" class="pro-name">
                     {{ item.userName }}
                   </a>
-                  <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success"
+                    >This post was end</span
+                  >
                 </div>
                 <span class="text-info" id="postDate">
                   <b>Posted on</b>
@@ -91,8 +97,15 @@
             <textarea class="form-control" formControlName="comment" nbInput fullWidth required
               placeholder="Join the discussion..." status="primary" style="height: 40px;" [disabled]="isEnd">
             </textarea>
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
-              [disabled]="isEnd">
+            <button
+              nbButton
+              status="primary"
+              outline
+              size="small"
+              class="float-right comment-btn"
+              size="small"
+              [disabled]="isEnd"
+            >
               Comment
             </button>
           </div>

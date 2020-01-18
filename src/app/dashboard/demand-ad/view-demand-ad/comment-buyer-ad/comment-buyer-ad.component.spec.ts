@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewSupplyAdComponent } from './view-supply-ad.component';
+import { CommentBuyerAdComponent } from './comment-buyer-ad.component';
 
-describe('ViewSupplyAdComponent', () => {
-  let component: ViewSupplyAdComponent;
-  let fixture: ComponentFixture<ViewSupplyAdComponent>;
+describe('CommentBuyerAdComponent', () => {
+  let component: CommentBuyerAdComponent;
+  let fixture: ComponentFixture<CommentBuyerAdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ViewSupplyAdComponent]
+      declarations: [CommentBuyerAdComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewSupplyAdComponent);
+    fixture = TestBed.createComponent(CommentBuyerAdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

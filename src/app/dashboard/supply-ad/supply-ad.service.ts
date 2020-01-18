@@ -35,16 +35,16 @@ export class SupplyAdService {
   }
 
   createAd(supplyAd: SupplyAd) {
-    const supplyAdCollection: AngularFirestoreCollection<
-      SupplyAd
-    > = this.afs.collection('supplyAd');
+    const supplyAdCollection: AngularFirestoreCollection<SupplyAd> = this.afs.collection(
+      'supplyAd'
+    );
     return from(supplyAdCollection.doc(supplyAd.id).set(supplyAd));
   }
 
   getAds(userId: string): Observable<SupplyAd[]> {
     return this.afs
-    .collection<SupplyAd>('supplyAd', ref => ref.where('owner', '==', userId))
-    .valueChanges();
+      .collection<SupplyAd>('supplyAd', ref => ref.where('owner', '==', userId))
+      .valueChanges();
   }
 
   getAd(adId): Observable<SupplyAd> {
