@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  SimpleChanges
+} from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';

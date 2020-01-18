@@ -11,10 +11,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserDetailsService {
-  constructor(
-    public afs: AngularFirestore,
-    public router: Router
-  ) {}
+  constructor(public afs: AngularFirestore, public router: Router) {}
 
   get haveUserDetails(): Observable<boolean> {
     const user: User = JSON.parse(localStorage.getItem('user'));
