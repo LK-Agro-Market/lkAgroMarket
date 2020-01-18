@@ -8,9 +8,8 @@ describe('ViewSupplyAdComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewSupplyAdComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewSupplyAdComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -71,15 +71,15 @@
             <div class="card-body">
               <button
                 class="btn btn-success btn-sm"
-                (click)="markAsSold(supplyAd.id)"
+                [routerLink]="['/view-supply-ad', supplyAd.id]"
               >
-                Mark As Sold
+                Comment/ Sell
               </button>
               <button
                 class="btn btn-primary btn-sm"
                 [routerLink]="['/view-supply-ad', supplyAd.id]"
               >
-                Comment
+                Update
               </button>
               <button
                 type="button"

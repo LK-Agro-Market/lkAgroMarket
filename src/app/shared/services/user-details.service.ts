@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -11,17 +11,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserDetailsService {
-  user: User = JSON.parse(localStorage.getItem('user'));
-  constructor(
-    public afs: AngularFirestore,
-    public router: Router,
-    public ngZone: NgZone
-  ) {}
+  constructor(public afs: AngularFirestore, public router: Router) {}
 
   get haveUserDetails(): Observable<boolean> {
+    const user: User = JSON.parse(localStorage.getItem('user'));
     return this.afs
       .collection('userDetails')
-      .doc(this.user.uid)
+      .doc(user.uid)
       .get()
       .pipe(map(doc => doc.exists));
   }

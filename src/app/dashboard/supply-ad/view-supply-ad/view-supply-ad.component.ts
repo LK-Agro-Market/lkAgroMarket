@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { SupplyAdService } from '../supply-ad.service';
+import { CommentService } from '../comment.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SupplyAdComment } from 'src/app/shared/models/supply-ad-comment';
 
 @Component({
   selector: 'app-view-supply-ad',
@@ -19,26 +22,69 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   adOwnerUser: User;
   supplyAdId: string;
   supplyAd: SupplyAd;
-
+  supplyAdForm: FormGroup;
   attempted = false;
   processing = false;
+
+  get formControls() {
+    return this.supplyAdForm.controls;
+  }
+
+  adComments: SupplyAdComment[];
+  newComment: string = '';
+  attemptedComment = false;
+  processingComment = false;
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
+    private formBuilder: FormBuilder,
     private supplyAdService: SupplyAdService,
+    private commentService: CommentService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
+    this.supplyAdForm = this.formBuilder.group({
+      quantity: [1, Validators.required],
+      quantityUnit: ['kg', Validators.required],
+      pricePerUnit: [50, Validators.required],
+      description: ['', Validators.required],
+      expireDate: [new Date().toISOString().split('T')[0], Validators.required]
+    });
+
     this.subscriptions.push(
       this.route.params.subscribe(routeParams => {
         this.supplyAdId = routeParams.supplyAdId;
-        this.supplyAdService.getAd(this.supplyAdId).subscribe(supplyAd => {
-          this.supplyAd = supplyAd;
-          console.log(supplyAd.expireDate);
-          console.log(this.currentTime);
-        });
+        this.subscriptions.push(
+          this.supplyAdService.getAd(this.supplyAdId).subscribe(supplyAd => {
+            this.supplyAd = supplyAd;
+
+            this.supplyAdForm.patchValue({
+              quantity: supplyAd.quantity,
+              quantityUnit: supplyAd.quantityUnit,
+              pricePerUnit: supplyAd.pricePerUnit,
+              description: supplyAd.description,
+              expireDate: supplyAd.expireDate
+            });
+
+            this.subscriptions.push(
+              this.supplyAdService
+                .getAdOwner(supplyAd.owner)
+                .subscribe(owner => {
+                  this.adOwnerUser = owner;
+                })
+            );
+
+            this.subscriptions.push(
+              this.commentService
+                .getComments(supplyAd.id)
+                .subscribe(comments => {
+                  this.adComments = comments;
+                })
+            );
+          })
+        );
       })
     );
   }
@@ -60,6 +106,23 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     );
   }
 
+  updateSupplyAd() {
+    this.attempted = true;
+    if (this.supplyAdForm.invalid) {
+      return;
+    }
+    this.processing = true;
+    this.subscriptions.push(
+      this.supplyAdService
+        .updateAd(this.supplyAdId, this.supplyAdForm.value)
+        .subscribe(() => {
+          this.processing = false;
+          this.attempted = false;
+          this.toastr.success('Updated Ad Successfully');
+        })
+    );
+  }
+
   markAsSold(adId: string) {
     this.processing = true;
     this.subscriptions.push(
@@ -68,5 +131,21 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
         this.toastr.success('Advertisment is marked as "sold"');
       })
     );
+  }
+
+  publishComment() {
+    this.attemptedComment = true;
+    if (this.newComment === '') {
+      return;
+    }
+    this.processingComment = true;
+    this.commentService
+      .createComment(this.newComment, this.supplyAdId, this.viewer)
+      .subscribe(() => {
+        this.newComment = '';
+        this.attemptedComment = false;
+        this.processingComment = false;
+        this.toastr.success('Published your comment');
+      });
   }
 }

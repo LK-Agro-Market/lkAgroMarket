@@ -54,16 +54,6 @@ export class ListSupplyAdsComponent implements OnInit, OnDestroy {
     }
   }
 
-  markAsSold(adId: string) {
-    this.processing = true;
-    this.subscriptions.push(
-      this.supplyAdService.changeStatus(adId, 'sold').subscribe(() => {
-        this.processing = false;
-        this.toastr.success('Advertisment is marked as "sold"');
-      })
-    );
-  }
-
   deleteAd(adId: string) {
     this.processing = true;
     this.subscriptions.push(

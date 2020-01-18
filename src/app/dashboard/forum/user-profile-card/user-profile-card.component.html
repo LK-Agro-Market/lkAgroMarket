@@ -6,15 +6,53 @@
       <span class="mb-2 user-level">Administrator</span>
     </div>
 
-    <div *ngIf="!myPostOnly" >
-      <button nbButton size="small" status="success" (click)="showMy(false)" id="card-btn" #all>Public</button>
-      <br>
-      <button nbButton outline size="small" status="success" (click)="showMy(true)" id="card-btn" #my>My Posts</button>
+    <div *ngIf="!myPostOnly">
+      <button
+        nbButton
+        size="small"
+        status="success"
+        (click)="showMy(false)"
+        id="card-btn"
+        #all
+      >
+        Public
+      </button>
+      <br />
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="showMy(true)"
+        id="card-btn"
+        #my
+      >
+        My Posts
+      </button>
     </div>
     <div *ngIf="myPostOnly">
-      <button nbButton outline size="small" status="success" (click)="showMy(false)" id="card-btn" #all>Public</button>
-      <br>
-      <button nbButton size="small" status="success" (click)="showMy(true)" id="card-btn" #my>My Posts</button>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="showMy(false)"
+        id="card-btn"
+        #all
+      >
+        Public
+      </button>
+      <br />
+      <button
+        nbButton
+        size="small"
+        status="success"
+        (click)="showMy(true)"
+        id="card-btn"
+        #my
+      >
+        My Posts
+      </button>
     </div>
   </nb-card>
 </div>
