@@ -13,7 +13,10 @@ export class LayoutComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: UserDetails;
 
-  constructor(private authService: AuthService, private userDetailsService: UserDetailsService) {}
+  constructor(
+    private authService: AuthService,
+    private userDetailsService: UserDetailsService
+  ) {}
 
   ngOnInit() {
     this.userDetailsService
