@@ -23,7 +23,8 @@ import {
   NbBadgeModule,
   NbCheckboxModule,
   NbMenuModule,
-  NbListModule
+  NbListModule,
+  NbPopoverModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -36,6 +37,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { ConfirmButtonDirective } from '../shared/directives/confirm-button.directive';
 
+import { NgImageSliderModule } from 'ng-image-slider';
 // components
 import { LayoutComponent } from './layout/layout.component';
 // chat
@@ -122,7 +124,10 @@ import { CommentBuyerAdComponent } from './demand-ad/view-demand-ad/comment-buye
     AgmCoreModule.forRoot(environment.googleMap),
     ChartsModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgImageSliderModule,
+    NbPopoverModule,
+    NbTooltipModule
   ],
   providers: []
 })
