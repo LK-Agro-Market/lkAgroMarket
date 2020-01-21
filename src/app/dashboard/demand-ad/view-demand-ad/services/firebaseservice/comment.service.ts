@@ -15,48 +15,49 @@ import { ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class CommentService {
+  constructor(private afs: AngularFirestore, private route: ActivatedRoute) {}
 
-  constructor(private afs: AngularFirestore,
-    private route: ActivatedRoute) { }
-
-  getadId(){
+  getadId() {
     let id = this.route.snapshot.paramMap.get('demandAdid');
     return id;
   }
 
-  add<T>(data):Promise<void>{
+  add<T>(data): Promise<void> {
     const docid = this.afs.createId();
-    const commentData= {
-      adId : data.adId,
-      userName : data.userName,
-      date: data.date, 
+    const commentData = {
+      adId: data.adId,
+      userName: data.userName,
+      date: data.date,
       content: data.content,
       docId: docid,
       docPath: data.docPath,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      createdAt:  firebase.firestore.FieldValue.serverTimestamp()
-    }
-    return this.afs.doc('bcomments/'+ docid).set(commentData)
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    return this.afs.doc('bcomments/' + docid).set(commentData);
   }
 
-  update(ref: any, data: any){
-    return this.afs.doc('bcomments/'+ref).update({
+  update(ref: any, data: any) {
+    return this.afs.doc('bcomments/' + ref).update({
       ...data,
-      updatedAt: this.timestamp,
+      updatedAt: this.timestamp
     });
   }
- 
-  delete(ref: any){
-    this.afs.doc('bcomments/'+ ref).delete();
+
+  delete(ref: any) {
+    this.afs.doc('bcomments/' + ref).delete();
   }
 
- getadds(adId:string){
-    return this.afs.collection('bcomments', ref=>ref.where('adId','==',adId).orderBy('date','asc'))
-    .valueChanges()
-    .pipe(map(ref=>ref as Comment[]))
-}
+  getadds(adId: string) {
+    return this.afs
+      .collection('bcomments', ref =>
+        ref.where('adId', '==', adId).orderBy('date', 'asc')
+      )
+      .valueChanges()
+      .pipe(map(ref => ref as Comment[]));
+  }
 
- get timestamp() {
+  get timestamp() {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 }
