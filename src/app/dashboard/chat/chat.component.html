@@ -39,33 +39,18 @@
                       class="p-3 mb-2 bg-primary text-white"
                     >
                       {{ msg.content }} <br>
-                      <button style="float:right"
+                      
+                      <button id = "delete" style="float:right"
                       nbButton
-                      outline
                       status="danger"
                       size="tiny"
                       class="delete-btn"
                       (click)="deleteChat(msg.id)"
                     >
-                      Delete
+                    <i class="fa fa-trash"></i>
                     </button>
-                    <!-- <button
-                      nbButton
-                      outline
-                      status="danger"
-                      size="tiny"
-                      class="delete-btn"
-                      (click)="EditChat(msg.id)"
-                    >
-                      Edit
-                    </button>
-                    <div *ngIf = "editState">
-                      <form (ngSubmit) = "UpdateChat(msg)">
-                        <input type="text" placeholder = "msg.content" [(ngModel)]="msg.content" name ="content">
-                        <input type="submit" value="Submit" class="btn">
-                      </form>
-                    </div> -->
                     </div>
+                    
                     <div
                       *ngIf="msg.type != 'text'"
                       class="p-3 mb-2 bg-light text-white"
@@ -74,19 +59,22 @@
                         id="image"
                         src="{{ msg.url }}"
                         style="max-width:350px;"
-                      /><button
+                      />
+                      <button id = "delete" style="float:right"
                       nbButton
-                      outline
                       status="danger"
                       size="tiny"
                       class="delete-btn"
-                      (click)="deleteChat()"
+                      (click)="deleteChat(msg.id)"
                     >
-                      Delete
+                    <i class="fa fa-trash"></i>
                     </button>
                     </div>
+                    
 
                     <p id="rtime">{{ msg.time | date: 'h:mm a ' }}</p>
+                    
+                    
                   </div>
 
                   <div

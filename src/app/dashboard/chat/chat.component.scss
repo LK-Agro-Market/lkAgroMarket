@@ -23,9 +23,7 @@ nb-list nb-list-item {
 nb-list nb-list-item button{
   width: 600px;
 }
-// button {
-//   width: 600px;
-// }
+
 ul {
   list-style-type: none;
   width: 100%;
@@ -117,18 +115,10 @@ ul li {
   color: rgb(8, 2, 2);
   width: 200px;
 }
-
-.closebtn {
-  margin-left: 15px;
-  color: rgb(14, 1, 1);
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+#delete i {
+  height: 5px;
+  padding:0px; 
 }
-
-.closebtn:hover {
-  color: black;
+#delete  {
+  height: 30px;
 }

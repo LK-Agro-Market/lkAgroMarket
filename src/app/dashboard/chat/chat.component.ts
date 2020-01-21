@@ -77,7 +77,7 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  };
+  }
   UserClicked(users: any) {
     this.selectedUser = users.displayName;
     this.selectedId = users.uid;
@@ -131,12 +131,6 @@ export class ChatComponent {
   deleteChat(chatId) {
     this.afs.doc('chats/'+chatId).delete();
   }
-  // EditChat(chatId){
-  //   this.editState = true;
-  // }
-  // UpdateChat(messages){
-  //   return this.afs.doc('chats/' + messages.chatId).update(messages.content);
-  // }
   uploadFile(event) {
     const user = JSON.parse(localStorage.getItem('user'));
     const file = event.target.files[0];
