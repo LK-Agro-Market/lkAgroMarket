@@ -62,7 +62,6 @@ import { CreateDemandAdComponent } from './demand-ad/create-demand-ad/create-dem
 import { ListDemandAdComponent } from './demand-ad/list-demand-ad/list-demand-ad.component';
 import { ViewDemandAdComponent } from './demand-ad/view-demand-ad/view-demand-ad.component';
 import { CommentBuyerAdComponent } from './demand-ad/view-demand-ad/comment-buyer-ad/comment-buyer-ad.component';
-
 @NgModule({
   declarations: [
     LayoutComponent,
