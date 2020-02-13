@@ -14,15 +14,20 @@ const routes: Routes = [
       },
       {
         path: 'profile/:profileOwner',
-        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+        loadChildren: () =>
+          import('./profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'farmer-dashboard',
-        loadChildren: () => import('./supply-ad/supply-ad.module').then(m => m.SupplyAdModule)
+        loadChildren: () =>
+          import('./supply-ad/supply-ad.module').then(m => m.SupplyAdModule)
       },
       {
         path: 'view-supply-ad/:supplyAdId',
-        loadChildren: () => import('./view-supply-ad/view-supply-ad.module').then(m => m.ViewSupplyAdModule)
+        loadChildren: () =>
+          import('./view-supply-ad/view-supply-ad.module').then(
+            m => m.ViewSupplyAdModule
+          )
       },
       {
         path: 'chat',
@@ -30,15 +35,20 @@ const routes: Routes = [
       },
       {
         path: 'forum',
-        loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
+        loadChildren: () =>
+          import('./forum/forum.module').then(m => m.ForumModule)
       },
       {
         path: 'buyer-dashboard',
-        loadChildren: () => import('./demand-ad/demand-ad.module').then(m => m.DemandAdModule)
+        loadChildren: () =>
+          import('./demand-ad/demand-ad.module').then(m => m.DemandAdModule)
       },
       {
         path: 'view-demand-ad/:demandAdid',
-        loadChildren: () => import('./view-demand-ad/view-demand-ad.module').then(m => m.ViewDemandAdModule)
+        loadChildren: () =>
+          import('./view-demand-ad/view-demand-ad.module').then(
+            m => m.ViewDemandAdModule
+          )
       }
     ]
   }

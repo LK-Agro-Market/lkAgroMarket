@@ -4,7 +4,19 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NbLayoutModule, NbIconModule, NbTooltipModule, NbChatModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbSelectModule, NbInputModule } from '@nebular/theme';
+import {
+  NbLayoutModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbChatModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbSelectModule,
+  NbInputModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
@@ -31,4 +43,4 @@ import { environment } from 'src/environments/environment';
     AgmCoreModule.forRoot(environment.googleMap)
   ]
 })
-export class ProfileModule { }
+export class ProfileModule {}

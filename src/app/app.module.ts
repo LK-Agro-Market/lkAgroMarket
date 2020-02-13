@@ -41,7 +41,7 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

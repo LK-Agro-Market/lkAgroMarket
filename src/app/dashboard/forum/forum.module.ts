@@ -12,11 +12,27 @@ import { UserProfileCardComponent } from './user-profile-card/user-profile-card.
 import { CreateFormComponent } from './create-form/create-form.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbIconModule, NbTooltipModule, NbChatModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbInputModule, NbAccordionModule, NbAlertModule, NbPopoverModule, NbCheckboxModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbChatModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbInputModule,
+  NbAccordionModule,
+  NbAlertModule,
+  NbPopoverModule,
+  NbCheckboxModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgImageSliderModule } from 'ng-image-slider';
-
 
 @NgModule({
   declarations: [
@@ -50,7 +66,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     NgxDropzoneModule,
     NgImageSliderModule,
     NbPopoverModule,
-    NbCheckboxModule,
+    NbCheckboxModule
   ]
 })
-export class ForumModule { }
+export class ForumModule {}

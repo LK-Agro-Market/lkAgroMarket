@@ -19,9 +19,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
+  declarations: [LayoutComponent],
   imports: [
     CommonModule,
     RouterModule,

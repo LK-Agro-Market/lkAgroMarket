@@ -4,9 +4,23 @@ import { CommonModule } from '@angular/common';
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbIconModule, NbTooltipModule, NbChatModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbInputModule, NbAccordionModule, NbAlertModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbChatModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbInputModule,
+  NbAccordionModule,
+  NbAlertModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-
 
 @NgModule({
   declarations: [ChatComponent],
@@ -28,7 +42,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbInputModule,
     NbAccordionModule,
     NbUserModule,
-    NbAlertModule,
+    NbAlertModule
   ]
 })
-export class ChatModule { }
+export class ChatModule {}

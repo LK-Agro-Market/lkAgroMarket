@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument
+} from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { SupplyAdComment } from 'src/app/shared/models/supply-ad-comment';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
@@ -59,9 +62,9 @@ export class ViewSupplyAdService {
       content: content,
       createdAt: new Date().toISOString()
     };
-    const docRef: AngularFirestoreDocument<
-      SupplyAdComment
-    > = this.afs.collection('supplyAdComment').doc(commentId);
+    const docRef: AngularFirestoreDocument<SupplyAdComment> = this.afs
+      .collection('supplyAdComment')
+      .doc(commentId);
     return from(docRef.set(comment));
   }
 

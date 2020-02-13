@@ -10,11 +10,24 @@ import { StatsComponent } from './stats/stats.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NbLayoutModule, NbIconModule, NbTooltipModule, NbChatModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbSelectModule, NbInputModule, NbBadgeModule, NbMenuModule } from '@nebular/theme';
+import {
+  NbLayoutModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbChatModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbSelectModule,
+  NbInputModule,
+  NbBadgeModule,
+  NbMenuModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 @NgModule({
   declarations: [
@@ -49,4 +62,4 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbTooltipModule
   ]
 })
-export class SupplyAdModule { }
+export class SupplyAdModule {}

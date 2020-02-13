@@ -55,33 +55,35 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
       this.route.params.subscribe(routeParams => {
         this.supplyAdId = routeParams.supplyAdId;
         this.subscriptions.push(
-          this.viewSupplyAdService.getAd(this.supplyAdId).subscribe(supplyAd => {
-            this.supplyAd = supplyAd;
+          this.viewSupplyAdService
+            .getAd(this.supplyAdId)
+            .subscribe(supplyAd => {
+              this.supplyAd = supplyAd;
 
-            this.supplyAdForm.patchValue({
-              quantity: supplyAd.quantity,
-              quantityUnit: supplyAd.quantityUnit,
-              pricePerUnit: supplyAd.pricePerUnit,
-              description: supplyAd.description,
-              expireDate: supplyAd.expireDate
-            });
+              this.supplyAdForm.patchValue({
+                quantity: supplyAd.quantity,
+                quantityUnit: supplyAd.quantityUnit,
+                pricePerUnit: supplyAd.pricePerUnit,
+                description: supplyAd.description,
+                expireDate: supplyAd.expireDate
+              });
 
-            this.subscriptions.push(
-              this.viewSupplyAdService
-                .getAdOwner(supplyAd.owner)
-                .subscribe(owner => {
-                  this.adOwnerUser = owner;
-                })
-            );
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getAdOwner(supplyAd.owner)
+                  .subscribe(owner => {
+                    this.adOwnerUser = owner;
+                  })
+              );
 
-            this.subscriptions.push(
-              this.viewSupplyAdService
-                .getComments(supplyAd.id)
-                .subscribe(comments => {
-                  this.adComments = comments;
-                })
-            );
-          })
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getComments(supplyAd.id)
+                  .subscribe(comments => {
+                    this.adComments = comments;
+                  })
+              );
+            })
         );
       })
     );

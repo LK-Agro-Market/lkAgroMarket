@@ -6,17 +6,25 @@ import { ViewDemandAdComponent } from './view-demand-ad.component';
 import { CommentBuyerAdComponent } from './comment-buyer-ad/comment-buyer-ad.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbLayoutModule, NbIconModule, NbTooltipModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbSelectModule, NbInputModule, NbBadgeModule } from '@nebular/theme';
+import {
+  NbLayoutModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbSelectModule,
+  NbInputModule,
+  NbBadgeModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
-  declarations: [
-    ViewDemandAdComponent,
-    CommentBuyerAdComponent
-  ],
+  declarations: [ViewDemandAdComponent, CommentBuyerAdComponent],
   imports: [
     CommonModule,
     ViewDemandAdRoutingModule,
@@ -41,4 +49,4 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbTooltipModule
   ]
 })
-export class ViewDemandAdModule { }
+export class ViewDemandAdModule {}

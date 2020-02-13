@@ -4,7 +4,20 @@ import { CommonModule } from '@angular/common';
 import { DemandAdRoutingModule } from './demand-ad-routing.module';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbLayoutModule, NbIconModule, NbTooltipModule, NbListModule, NbUserModule, NbCardModule, NbButtonModule, NbSpinnerModule, NbSelectModule, NbInputModule, NbBadgeModule, NbMenuModule } from '@nebular/theme';
+import {
+  NbLayoutModule,
+  NbIconModule,
+  NbTooltipModule,
+  NbListModule,
+  NbUserModule,
+  NbCardModule,
+  NbButtonModule,
+  NbSpinnerModule,
+  NbSelectModule,
+  NbInputModule,
+  NbBadgeModule,
+  NbMenuModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,4 +58,4 @@ import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button
     NbTooltipModule
   ]
 })
-export class DemandAdModule { }
+export class DemandAdModule {}

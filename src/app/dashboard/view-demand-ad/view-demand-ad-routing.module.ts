@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewDemandAdComponent } from './view-demand-ad.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -14,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ViewDemandAdRoutingModule { }
+export class ViewDemandAdRoutingModule {}
