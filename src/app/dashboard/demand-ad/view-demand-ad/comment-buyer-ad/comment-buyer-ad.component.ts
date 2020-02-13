@@ -32,7 +32,7 @@ export class CommentBuyerAdComponent implements OnInit {
 
   adId = this.getadId();
   ngOnInit() {
-    this.cmt = this.commentservice.getadds(this.adId);
+    this.cmt = this.commentservice.getcomments(this.adId);
   }
 
   onComment(comment) {
@@ -58,23 +58,19 @@ export class CommentBuyerAdComponent implements OnInit {
 
   comment: Comment = {
     adId: this.getadId(),
-    updatedAt: '',
     userName: this.user.displayName,
     date: new Date(),
     content: '',
-    docId: '',
-    docPath: ''
+    docId: ''
   };
 
   on(comm) {
     const comment: Comment = {
       adId: this.getadId(),
-      updatedAt: '',
       userName: this.user.displayName,
       date: new Date(),
       content: comm.content,
-      docId: '',
-      docPath: ''
+      docId: ''
     };
     this.onComment(comment);
   }

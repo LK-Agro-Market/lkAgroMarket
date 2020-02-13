@@ -6,7 +6,7 @@
     <br />
     <div>
       <b>{{ comment.userName }}</b> -
-      <small>{{ comment.updatedAt.toDate() | date: 'MMM d, h:mm:ss a' }}</small>
+      <small>{{ comment.date | date: 'MMM d, h:mm:ss a' }}</small>
     </div>
     <div><b> Comment:</b> {{ comment.content }}</div>
     <!-- Section to edit a comment -->
