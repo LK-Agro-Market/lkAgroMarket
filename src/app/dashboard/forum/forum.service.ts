@@ -13,7 +13,6 @@ import { firestore } from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
-
 export class ForumService {
   forumList: AngularFireList<any>;
   commentList: AngularFireList<any>;
@@ -25,7 +24,7 @@ export class ForumService {
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage
-  ) { }
+  ) {}
 
   getPostId() {
     return this.afs.createId();
@@ -109,85 +108,120 @@ export class ForumService {
     });
   }
 
-  changeReact( // change current reacts (react -> not react, not react -> react)
+  changeReact(
+    // change current reacts (react -> not react, not react -> react)
     current: boolean,
     userId,
     postId
   ) {
-    if (current) { // if true (currently true)
-      return this.afs.collection('react').ref.where('userID', '==', userId).where('postID', '==', postId).get().then(r => {
-        return r.docs[0].ref.delete().then(_ => true);
-      });
-    } else { // if false (currently false)
-      return this.afs.collection('react').add({
-        userID: userId,
-        postID: postId,
-      }).then(_ => true);
+    if (current) {
+      // if true (currently true)
+      return this.afs
+        .collection('react')
+        .ref.where('userID', '==', userId)
+        .where('postID', '==', postId)
+        .get()
+        .then(r => {
+          return r.docs[0].ref.delete().then(_ => true);
+        });
+    } else {
+      // if false (currently false)
+      return this.afs
+        .collection('react')
+        .add({
+          userID: userId,
+          postID: postId
+        })
+        .then(_ => true);
     }
   }
 
-  checkReact(userId, postId) { // check if user react or not
+  checkReact(userId, postId) {
+    // check if user react or not
     return this.afs
-      .collection('react', ref => ref.where('userID', '==', userId).where('postID', '==', postId))
+      .collection('react', ref =>
+        ref.where('userID', '==', userId).where('postID', '==', postId)
+      )
       .get()
       .pipe(map(coll => coll.size));
   }
 
-  countReacts(postId) { // get react count
+  countReacts(postId) {
+    // get react count
     return this.afs
       .collection('react', ref => ref.where('postID', '==', postId))
       .get()
       .pipe(map(coll => coll.size));
   }
 
-  markAsBest(current: boolean, key) { // mark as best (if alredy marked chahge to unmark)
+  markAsBest(current: boolean, key) {
+    // mark as best (if alredy marked chahge to unmark)
     this.afs
       .collection('comment')
       .doc(key)
       .update({ isBest: !current });
   }
 
-  changeVoteState(key, increment, user) { // vote for comments
-    if (increment === 1) { // if currently vote-up, change to vote-down
+  changeVoteState(key, increment, user) {
+    // vote for comments
+    if (increment === 1) {
+      // if currently vote-up, change to vote-down
       this.afs
         .collection('comment')
         .doc(key)
         .update({
           voteCount: firestore.FieldValue.increment(1),
-          voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'up' })
+          voteList: firestore.FieldValue.arrayUnion({
+            userId: user,
+            state: 'up'
+          })
         });
-    } else { // if currently vote-down, change to vote-up
+    } else {
+      // if currently vote-down, change to vote-up
       this.afs
         .collection('comment')
         .doc(key)
         .update({
           voteCount: firestore.FieldValue.increment(-1),
-          voteList: firestore.FieldValue.arrayUnion({ userId: user, state: 'down' })
+          voteList: firestore.FieldValue.arrayUnion({
+            userId: user,
+            state: 'down'
+          })
         });
     }
   }
 
-  updateVote(key, user, current) { // update votes(remove votes)
-    if (current === 'up') { // currently vote-up
+  updateVote(key, user, current) {
+    // update votes(remove votes)
+    if (current === 'up') {
+      // currently vote-up
       this.afs
         .collection('comment')
         .doc(key)
         .update({
           voteCount: firestore.FieldValue.increment(-1),
-          voteList: firestore.FieldValue.arrayRemove({ userId: user, state: 'up' })
+          voteList: firestore.FieldValue.arrayRemove({
+            userId: user,
+            state: 'up'
+          })
         });
-    } else { // currently vote-down
+    } else {
+      // currently vote-down
       this.afs
-      .collection('comment')
-      .doc(key)
-      .update({
-        voteCount: firestore.FieldValue.increment(1),
-        voteList: firestore.FieldValue.arrayRemove({ userId: user, state: 'down' })
-      });
+        .collection('comment')
+        .doc(key)
+        .update({
+          voteCount: firestore.FieldValue.increment(1),
+          voteList: firestore.FieldValue.arrayRemove({
+            userId: user,
+            state: 'down'
+          })
+        });
     }
   }
 
-  uploadImg(files: File[], colName, key) { // upload images to fireastore storage
+  uploadImg(files: File[], colName, key) {
+    // upload images to fireastore storage
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
       const path = `forum/` + colName + `/${Date.now()}_${files[i].name}`;
@@ -211,13 +245,14 @@ export class ForumService {
     }
   }
 
-  updatePost( // update post
+  updatePost(
+    // update post
     key,
     postTitle,
     des,
     imageList,
     showFarmers,
-    showBuyers,
+    showBuyers
   ) {
     this.afs
       .collection('post')
@@ -227,11 +262,12 @@ export class ForumService {
         description: des,
         images: imageList,
         showFarmer: showFarmers,
-        showBuyer: showBuyers,
+        showBuyer: showBuyers
       });
   }
 
-  updateComment( // update comment
+  updateComment(
+    // update comment
     key,
     comm
   ) {
@@ -243,7 +279,8 @@ export class ForumService {
       });
   }
 
-  updateReply( // update replies
+  updateReply(
+    // update replies
     key,
     rep
   ) {
@@ -255,7 +292,7 @@ export class ForumService {
       });
   }
 
-  getPost() { 
+  getPost() {
     // get all
     return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
@@ -289,7 +326,8 @@ export class ForumService {
       );
   }
 
-  getPostForUpdate(postId) { // get post data for update
+  getPostForUpdate(postId) {
+    // get post data for update
     return this.afs
       .collection('post')
       .doc(postId)
@@ -297,7 +335,8 @@ export class ForumService {
       .pipe();
   }
 
-  getCommentForUpdate(commentId) { // get comment data for update
+  getCommentForUpdate(commentId) {
+    // get comment data for update
     return this.afs
       .collection('comment')
       .doc(commentId)
@@ -305,7 +344,8 @@ export class ForumService {
       .pipe();
   }
 
-  getReplyForUpdate(replyId) { // get reply data for update
+  getReplyForUpdate(replyId) {
+    // get reply data for update
     return this.afs
       .collection('reply')
       .doc(replyId)
@@ -415,7 +455,4 @@ export class ForumService {
       this.storage.storage.refFromURL(urlList[i]).delete();
     }
   }
-
-
-
 }

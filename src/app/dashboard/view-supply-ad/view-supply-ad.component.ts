@@ -4,10 +4,9 @@ import { User } from 'src/app/shared/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
-import { SupplyAdService } from '../supply-ad.service';
-import { CommentService } from '../comment.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SupplyAdComment } from 'src/app/shared/models/supply-ad-comment';
+import { ViewSupplyAdService } from './view-supply-ad.service';
 
 @Component({
   selector: 'app-view-supply-ad',
@@ -39,8 +38,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder,
-    private supplyAdService: SupplyAdService,
-    private commentService: CommentService,
+    private viewSupplyAdService: ViewSupplyAdService,
     private toastr: ToastrService
   ) {}
 
@@ -57,33 +55,35 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
       this.route.params.subscribe(routeParams => {
         this.supplyAdId = routeParams.supplyAdId;
         this.subscriptions.push(
-          this.supplyAdService.getAd(this.supplyAdId).subscribe(supplyAd => {
-            this.supplyAd = supplyAd;
+          this.viewSupplyAdService
+            .getAd(this.supplyAdId)
+            .subscribe(supplyAd => {
+              this.supplyAd = supplyAd;
 
-            this.supplyAdForm.patchValue({
-              quantity: supplyAd.quantity,
-              quantityUnit: supplyAd.quantityUnit,
-              pricePerUnit: supplyAd.pricePerUnit,
-              description: supplyAd.description,
-              expireDate: supplyAd.expireDate
-            });
+              this.supplyAdForm.patchValue({
+                quantity: supplyAd.quantity,
+                quantityUnit: supplyAd.quantityUnit,
+                pricePerUnit: supplyAd.pricePerUnit,
+                description: supplyAd.description,
+                expireDate: supplyAd.expireDate
+              });
 
-            this.subscriptions.push(
-              this.supplyAdService
-                .getAdOwner(supplyAd.owner)
-                .subscribe(owner => {
-                  this.adOwnerUser = owner;
-                })
-            );
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getAdOwner(supplyAd.owner)
+                  .subscribe(owner => {
+                    this.adOwnerUser = owner;
+                  })
+              );
 
-            this.subscriptions.push(
-              this.commentService
-                .getComments(supplyAd.id)
-                .subscribe(comments => {
-                  this.adComments = comments;
-                })
-            );
-          })
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getComments(supplyAd.id)
+                  .subscribe(comments => {
+                    this.adComments = comments;
+                  })
+              );
+            })
         );
       })
     );
@@ -98,7 +98,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   deleteAd(adId: string) {
     this.processing = true;
     this.subscriptions.push(
-      this.supplyAdService.changeStatus(adId, 'deleted').subscribe(() => {
+      this.viewSupplyAdService.changeStatus(adId, 'deleted').subscribe(() => {
         this.processing = false;
         this.toastr.success('Advertisment is deleted');
         this.router.navigate(['farmer-dashboard']);
@@ -113,7 +113,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     }
     this.processing = true;
     this.subscriptions.push(
-      this.supplyAdService
+      this.viewSupplyAdService
         .updateAd(this.supplyAdId, this.supplyAdForm.value)
         .subscribe(() => {
           this.processing = false;
@@ -126,7 +126,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   markAsSold(adId: string) {
     this.processing = true;
     this.subscriptions.push(
-      this.supplyAdService.changeStatus(adId, 'sold').subscribe(() => {
+      this.viewSupplyAdService.changeStatus(adId, 'sold').subscribe(() => {
         this.processing = false;
         this.toastr.success('Advertisment is marked as "sold"');
       })
@@ -139,7 +139,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
       return;
     }
     this.processingComment = true;
-    this.commentService
+    this.viewSupplyAdService
       .createComment(this.newComment, this.supplyAdId, this.viewer)
       .subscribe(() => {
         this.newComment = '';
