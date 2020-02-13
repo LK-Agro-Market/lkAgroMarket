@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { User } from 'firebase';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../../forum.service';
@@ -32,7 +39,8 @@ export class CommentComponent implements OnInit {
   @Output() changeCommentCount = new EventEmitter();
   @Output() isComment = new EventEmitter();
 
-  @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
+  @ViewChild(NbPopoverDirective, { static: false })
+  ConfirmDelete: NbPopoverDirective;
   @ViewChild('commentSection', { static: false }) section;
 
   updateCommentForm = new FormGroup({
@@ -49,7 +57,7 @@ export class CommentComponent implements OnInit {
   constructor(
     private forumService: ForumService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   get upComment() {
     return this.updateCommentForm.get('upComment');
@@ -98,7 +106,6 @@ export class CommentComponent implements OnInit {
       .subscribe(replies => {
         this.replies = replies;
       });
-
   }
 
   onCreate() {
@@ -154,10 +161,13 @@ export class CommentComponent implements OnInit {
     this.isComment.emit(false);
     if (this.isEdit === true) {
       this.isComment.emit(true);
-      this.forumService.getCommentForUpdate(this.comment.key)
+      this.forumService
+        .getCommentForUpdate(this.comment.key)
         .pipe()
         .subscribe(dataSet => {
-          this.updateCommentForm.controls.upComment.setValue(dataSet.data().comment);
+          this.updateCommentForm.controls.upComment.setValue(
+            dataSet.data().comment
+          );
         });
     }
   }
@@ -180,9 +190,11 @@ export class CommentComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
-    this.forumService.changeReact(current, this.user.uid, this.comment.key).then(_ => {
-      this.checkReactState();
-    });
+    this.forumService
+      .changeReact(current, this.user.uid, this.comment.key)
+      .then(_ => {
+        this.checkReactState();
+      });
   }
 
   checkReactState() {
@@ -196,10 +208,9 @@ export class CommentComponent implements OnInit {
         }
       });
 
-    this.forumService.countReacts(this.comment.key)
-      .subscribe(count => {
-        this.reactCount = count;
-      });
+    this.forumService.countReacts(this.comment.key).subscribe(count => {
+      this.reactCount = count;
+    });
   }
 
   mark(current: boolean) {
@@ -211,9 +222,14 @@ export class CommentComponent implements OnInit {
       if (this.voteAs === 'up') {
         this.forumService.updateVote(this.comment.key, this.user.uid, 'up');
       } else {
-        this.forumService.updateVote(this.comment.key, this.user.uid, 'down');      }
+        this.forumService.updateVote(this.comment.key, this.user.uid, 'down');
+      }
     } else {
-      this.forumService.changeVoteState(this.comment.key, increment, this.user.uid);
+      this.forumService.changeVoteState(
+        this.comment.key,
+        increment,
+        this.user.uid
+      );
     }
   }
 
@@ -224,5 +240,4 @@ export class CommentComponent implements OnInit {
   hidePopover() {
     this.ConfirmDelete.hide();
   }
-
 }

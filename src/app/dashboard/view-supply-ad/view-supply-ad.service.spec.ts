@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CommentService } from './comment.service';
+import { ViewSupplyAdService } from './view-supply-ad.service';
 
-describe('CommentService', () => {
+describe('ViewSupplyAdService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CommentService = TestBed.get(CommentService);
+    const service: ViewSupplyAdService = TestBed.get(ViewSupplyAdService);
     expect(service).toBeTruthy();
   });
 });

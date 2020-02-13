@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userDetailsForm = this.formBuilder.group({

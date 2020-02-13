@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { ForumService } from 'src/app/dashboard/forum/forum.service';
 import { User } from 'firebase';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +26,8 @@ export class ReplyComponent implements OnInit {
   @Input() replyItem: any;
   @Output() changeReplyCount = new EventEmitter();
   @Output() isReply = new EventEmitter();
-  @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
+  @ViewChild(NbPopoverDirective, { static: false })
+  ConfirmDelete: NbPopoverDirective;
 
   updateReplyForm = new FormGroup({
     upReply: new FormControl('', Validators.required)
@@ -30,7 +38,7 @@ export class ReplyComponent implements OnInit {
   constructor(
     private forumService: ForumService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   get upReply() {
     return this.updateReplyForm.get('upReply');
@@ -50,7 +58,8 @@ export class ReplyComponent implements OnInit {
     this.isEdit = !this.isEdit;
     if (this.isEdit === true) {
       this.isReply.emit(true);
-      this.forumService.getReplyForUpdate(this.replyItem.key)
+      this.forumService
+        .getReplyForUpdate(this.replyItem.key)
         .pipe()
         .subscribe(dataSet => {
           this.updateReplyForm.controls.upReply.setValue(dataSet.data().reply);
@@ -77,9 +86,11 @@ export class ReplyComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
-    this.forumService.changeReact(current, this.user.uid, this.replyItem.key).then(_ => {
-      this.checkReactState();
-    });
+    this.forumService
+      .changeReact(current, this.user.uid, this.replyItem.key)
+      .then(_ => {
+        this.checkReactState();
+      });
   }
 
   checkReactState() {
@@ -93,15 +104,12 @@ export class ReplyComponent implements OnInit {
         }
       });
 
-    this.forumService.countReacts(this.replyItem.key)
-      .subscribe(count => {
-        this.reactCount = count;
-      });
+    this.forumService.countReacts(this.replyItem.key).subscribe(count => {
+      this.reactCount = count;
+    });
   }
 
   hidePopover() {
     this.ConfirmDelete.hide();
   }
-
-
 }
