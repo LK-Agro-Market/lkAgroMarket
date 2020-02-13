@@ -27,12 +27,11 @@ export class CommentService {
     const commentData = {
       adId: data.adId,
       userName: data.userName,
-      date: data.date,
+      date: new Date().toISOString(),
       content: data.content,
       docId: docid,
-      docPath: data.docPath,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+     // createdAt: new Date().toISOString
     };
     return this.afs.doc('bcomments/' + docid).set(commentData);
   }
@@ -48,7 +47,7 @@ export class CommentService {
     this.afs.doc('bcomments/' + ref).delete();
   }
 
-  getadds(adId: string) {
+  getcomments(adId: string) {
     return this.afs
       .collection('bcomments', ref =>
         ref.where('adId', '==', adId).orderBy('date', 'asc')

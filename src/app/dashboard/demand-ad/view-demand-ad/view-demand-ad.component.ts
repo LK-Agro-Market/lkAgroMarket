@@ -16,7 +16,7 @@ export class ViewDemandAdComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
   demandAd: DemandAd;
-  user: User = JSON.parse(localStorage.getItem('user'));
+  viewer: User = JSON.parse(localStorage.getItem('user'));
   subscriptions: Subscription[] = [];
   demandAdid: string;
   currentTime = new Date().toISOString().split('T')[0];

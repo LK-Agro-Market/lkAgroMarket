@@ -16,7 +16,9 @@ export class DemandAdService {
   constructor(
     private afStorage: AngularFireStorage,
     private afs: AngularFirestore
-  ) {}
+  ) {
+  }
+  
 
   buyerAdform = new FormGroup({
     id: new FormControl(null),
@@ -80,4 +82,9 @@ export class DemandAdService {
       deadline: ''
     });
   }
+  getalldemandAds(): Observable<DemandAd[]>{
+    return this.afs.collection<DemandAd>('demandAd')
+    .valueChanges();
+    }
+
 }
