@@ -29,9 +29,9 @@ export class CommentService {
       userName: data.userName,
       date: new Date().toISOString(),
       content: data.content,
-      docId: docid,
+      docId: docid
       //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-     // createdAt: new Date().toISOString
+      // createdAt: new Date().toISOString
     };
     return this.afs.doc('bcomments/' + docid).set(commentData);
   }

@@ -14,18 +14,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DemandAdService {
   constructor(
-   // private afStorage: AngularFireStorage,
+    // private afStorage: AngularFireStorage,
     private afs: AngularFirestore
-  ) {
-  }
-  
+  ) {}
 
   buyerAdform = new FormGroup({
     id: new FormControl(null),
     foodtype: new FormControl('', Validators.required),
     food: new FormControl('', Validators.required),
     expectedamount: new FormControl('1', Validators.required),
-    unit:new FormControl('',Validators.required),
+    unit: new FormControl('', Validators.required),
     priceperunit: new FormControl('50', Validators.required),
     description: new FormControl('', Validators.required),
     organic: new FormControl('', Validators.required),
@@ -78,16 +76,14 @@ export class DemandAdService {
       foodtype: '',
       food: '',
       expectedamount: '50',
-      unit:'',
+      unit: '',
       priceperunit: 50,
       description: '',
       organic: '',
       deadline: ''
     });
   }
-  getalldemandAds(): Observable<DemandAd[]>{
-    return this.afs.collection<DemandAd>('demandAd')
-    .valueChanges();
-    }
-
+  getalldemandAds(): Observable<DemandAd[]> {
+    return this.afs.collection<DemandAd>('demandAd').valueChanges();
+  }
 }

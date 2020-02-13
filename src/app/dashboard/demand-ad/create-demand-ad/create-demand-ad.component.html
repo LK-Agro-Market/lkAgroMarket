@@ -92,13 +92,13 @@
               formControlName="unit"
             />
             <div
-            *ngIf="attempted && !!formControls.unit.errors"
-            class="text-danger"
-          >
-            <span *ngIf="!!formControls.unit.errors.required"
-              >Unit is required</span>
-          </div>
-
+              *ngIf="attempted && !!formControls.unit.errors"
+              class="text-danger"
+            >
+              <span *ngIf="!!formControls.unit.errors.required"
+                >Unit is required</span
+              >
+            </div>
           </div>
         </div>
         <div class="col-sm-4">
