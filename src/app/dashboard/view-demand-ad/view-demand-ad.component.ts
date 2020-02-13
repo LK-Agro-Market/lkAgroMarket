@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DemandAdService } from '../demand-ad.service';
+import { DemandAdService } from '../demand-ad/demand-ad.service';
 import { User } from 'src/app/shared/models/user';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

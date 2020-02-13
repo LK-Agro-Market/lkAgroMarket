@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommentService } from 'src/app/dashboard/demand-ad/view-demand-ad/services/firebaseservice/comment.service';
 import { Comment } from 'src/app/shared/models/comment-ad';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/shared/models/user';
+import { CommentService } from '../comment.service';
 
 @Component({
   selector: 'app-comment-buyer-ad',
