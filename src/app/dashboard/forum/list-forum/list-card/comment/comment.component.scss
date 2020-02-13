@@ -10,6 +10,13 @@ nb-accordion {
   width: 750px;
   max-height: inherit;
 }
+.vote-container {
+  width: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+}
 .comnt-container {
   display: flex;
   flex-direction: column;
@@ -25,7 +32,6 @@ nb-accordion {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  margin-top: 10px;
 }
 .pro-header-container {
   display: flex;
@@ -54,7 +60,7 @@ nb-accordion {
   display: flex;
   flex-direction: row;
   position: absolute;
-  padding-left: 480px;
+  padding-left: 450px;
 }
 .btn-like {
   margin-left: 10px;
@@ -62,6 +68,13 @@ nb-accordion {
 .count-like {
   margin-top: 15px;
   margin-left: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: orangered;
+}
+.count-react {
+  margin-left: 5px;
+  margin-top: 8px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
   color: orangered;
@@ -119,4 +132,16 @@ nb-accordion {
   margin-left: 25px;
   font-weight: 600;
   color: #aa7070;
+}
+
+.update-comment {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: 30px;
+}
+.update-btn {
+  height: 30px;
+  margin-top: 50px;
+  margin-left: 30px;
 }

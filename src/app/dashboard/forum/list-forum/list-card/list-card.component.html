@@ -1,13 +1,13 @@
 <div class="card-cantainer">
   <nb-accordion>
-    <nb-accordion-item #it>
+    <nb-accordion-item>
       <nb-accordion-item-header
         id="t-header"
         (click)="viewMore = !viewMore"
         *ngIf="item"
-        #itm
+        #postSection
       >
-        <div class="gold-members p-4">
+        <div class="gold-members p-4 card-container">
           <div class="media">
             <div class="pro-img-container">
               <img
@@ -30,15 +30,31 @@
                 </span>
                 <div class="float-right like-container">
                   <button
+                    (click)="changeReactState(true)"
+                    (click)="toggelSection()"
+                    *ngIf="isReact"
                     nbButton
                     ghost
-                    status="success"
+                    status=" success"
                     size="medium"
                     class="float-right btn-like"
                   >
-                    <nb-icon icon="checkmark"></nb-icon>
+                    <nb-icon icon="heart" status="primary"></nb-icon>
                   </button>
-                  <p class="count-like">7</p>
+                  <button
+                    (click)="changeReactState(false)"
+                    (click)="toggelSection()"
+                    *ngIf="!isReact"
+                    nbButton
+                    ghost
+                    status=" success"
+                    size="medium"
+                    class="float-right btn-like"
+                  >
+                    <nb-icon icon="heart-outline" status="primary"></nb-icon>
+                  </button>
+
+                  <p class="count-like">{{ reactCount }}</p>
                   <button
                     nbButton
                     ghost
@@ -62,7 +78,6 @@
                   outline
                   size="small"
                   class="view-btn"
-                  (click)="toggleCard()"
                 >
                   {{ viewMore ? 'More' : 'Less' }}
                 </button>
@@ -73,6 +88,7 @@
                   class="edit-btn"
                   [hidden]="!isLogUser"
                   (click)="updateForm()"
+                  (click)="toggelSection()"
                 >
                   {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
@@ -83,6 +99,7 @@
                   class="end-btn"
                   [hidden]="!isLogUser"
                   (click)="endOrViewPost()"
+                  (click)="toggelSection()"
                 >
                   {{ !isEnd ? 'End' : 'Restart' }}
                 </button>
@@ -93,19 +110,58 @@
                   size="small"
                   class="delete-btn"
                   [hidden]="!isLogUser"
-                  (click)="deletePost()"
+                  [nbPopover]="confirmDeleteSecton"
+                  nbPopoverPlacement="bottom"
+                  (click)="toggelSection()"
                 >
                   Delete
                 </button>
+
+                <ng-template #confirmDeleteSecton>
+                  <nb-card style="margin-bottom: -10%;">
+                    <nb-card-body>
+                      Are you sure you wish to delete this post?
+                      <button
+                        nbButton
+                        shape="round"
+                        status="danger"
+                        size="tiny"
+                        [hidden]="!isLogUser"
+                        (click)="deletePost()"
+                        style="margin-left: 10px;"
+                      >
+                        yes
+                      </button>
+                      <button
+                        nbButton
+                        shape="round"
+                        status="danger"
+                        size="tiny"
+                        [hidden]="!isLogUser"
+                        style="margin-left: 10px;"
+                        (click)="hidePopover()"
+                      >
+                        No
+                      </button>
+                    </nb-card-body>
+                  </nb-card>
+                </ng-template>
               </div>
             </div>
           </div>
         </div>
       </nb-accordion-item-header>
       <nb-accordion-item-body>
+        <div *ngIf="item.images != null">
+          <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+          <hr *ngIf="item.description != ''" />
+        </div>
+
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
+
         <form
+          *ngIf="!isComment"
           [formGroup]="commentForm"
           novalidate
           (ngSubmit)="onCreate()"
@@ -117,9 +173,9 @@
               formControlName="comment"
               nbInput
               fullWidth
+              required
               placeholder="Join the discussion..."
               status="primary"
-              required
               style="height: 40px;"
               [disabled]="isEnd"
             >
@@ -137,13 +193,15 @@
             </button>
           </div>
         </form>
+
         <hr />
-        <div class="comment-sec">
+        <div class="comment-sec" *ngIf="!isEdit">
           <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
             <app-comment
               [comment]="comment"
               [postId]="postId"
+              (isComment)="isComment = $event"
               (changeCommentCount)="getCommentCount()"
             ></app-comment>
           </div>
@@ -155,5 +213,7 @@
     *ngIf="isEdit"
     [postId]="postId"
     [createOrUpdate]="createOrUpdate"
-  ></app-create-form>
+    [createDate]="createDate"
+  >
+  </app-create-form>
 </div>

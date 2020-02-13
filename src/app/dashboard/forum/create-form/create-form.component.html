@@ -22,7 +22,7 @@
             nbInput
             fullWidth
             status="primary"
-            style="font-size: 13px;"
+            style="font-size: 13px; height: 100px;"
             placeholder="Description"
           >
           </textarea>
@@ -48,7 +48,7 @@
               class="dropzone"
               [expandable]="true"
             >
-              <ngx-dropzone-label>drop files </ngx-dropzone-label>
+              <ngx-dropzone-label>drop files... </ngx-dropzone-label>
               <ngx-dropzone-image-preview
                 ngProjectAs="ngx-dropzone-preview"
                 *ngFor="let image of images"

@@ -1,13 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Input,
-  SimpleChanges
-} from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ForumService } from '../../forum.service';
+import { ToastrService } from 'ngx-toastr';
+import { NbPopoverDirective } from '@nebular/theme';
 
 @Component({
   selector: 'app-list-card',
@@ -19,17 +15,22 @@ export class ListCardComponent implements OnInit {
   comments: any[];
   cmntId: any;
   imageList: any[];
+  imageObject: Array<object>;
   isLogUser;
   isEdit = false;
+  isComment = false;
+  isReact;
   createOrUpdate;
   isEnd;
   postId;
   commCount;
+  reactCount;
+  createDate;
 
   @Input() item: any;
-
-  @ViewChild('it', { static: false }) accordion;
-  // @ViewChild('it', { static: false }) body;
+  @ViewChild('postSection', { static: false }) section;
+  @ViewChild(NbPopoverDirective, { static: false })
+  ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -38,7 +39,10 @@ export class ListCardComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastr: ToastrService
+  ) {}
 
   get comm() {
     return this.commentForm.get('comment');
@@ -46,10 +50,22 @@ export class ListCardComponent implements OnInit {
 
   ngOnInit() {
     this.getCommentCount();
+    this.checkReactState();
     this.postId = this.item.key;
     this.isEnd = this.item.endThread;
-    this.imageList = this.item.images;
+    this.createDate = this.item.date;
 
+    if (this.item.images != null) {
+      // get images from database
+      this.imageList = this.item.images;
+      this.imageObject = this.imageList.map(url => {
+        // set images to forum card
+        return {
+          image: url,
+          thumbImage: url
+        };
+      });
+    }
     if (this.isEnd) {
       this.commentForm.get('comment').disable();
     }
@@ -73,7 +89,7 @@ export class ListCardComponent implements OnInit {
     const comm = this.commentForm.controls.comment.value as string;
     const dateTime = new Date();
     const postID = this.postId;
-    const userId = this.postId;
+    const userId = this.user.uid;
     const userName = this.user.displayName;
     const userImage = this.user.photoURL;
 
@@ -83,21 +99,20 @@ export class ListCardComponent implements OnInit {
         dateTime,
         postID,
         userId,
+        this.item.userID,
         userName,
         userImage,
-        false
+        false,
+        false,
+        null,
+        0
       );
       this.comm.setValue('');
       this.getCommentCount();
-      // this.showToast('success');
+      this.toastr.success('Commented successfully...');
     } else {
-      // this.showToast('danger');
+      this.toastr.error('Please check and fill correctly', 'Can`t comment');
     }
-  }
-
-  toggleCard() {
-    // this.accordion.toggle();
-    this.viewMore = !this.viewMore;
   }
 
   endOrViewPost() {
@@ -111,11 +126,14 @@ export class ListCardComponent implements OnInit {
 
   deletePost() {
     // Delete post
-    this.forumService.deleteImage(this.item.images);
+    if (this.imageList != null) {
+      this.forumService.deleteImage(this.item.images);
+    }
     this.forumService.deleteReplyList('postID', this.postId).subscribe();
     this.forumService.deleteCommentList('postID', this.postId).subscribe();
     this.forumService.deleteDocment('post', this.postId);
     this.getCommentCount();
+    this.toastr.success('Post deleted...');
   }
 
   getCommentCount() {
@@ -129,8 +147,39 @@ export class ListCardComponent implements OnInit {
 
   updateForm() {
     // update form
-    // this.accordion.toggle();
     this.createOrUpdate = 'update';
     this.isEdit = !this.isEdit;
+  }
+
+  changeReactState(current: boolean) {
+    this.forumService
+      .changeReact(current, this.user.uid, this.item.key)
+      .then(_ => {
+        this.checkReactState();
+      });
+  }
+
+  checkReactState() {
+    this.forumService
+      .checkReact(this.user.uid, this.item.key)
+      .subscribe(count => {
+        if (count > 0) {
+          this.isReact = true;
+        } else {
+          this.isReact = false;
+        }
+      });
+
+    this.forumService.countReacts(this.item.key).subscribe(count => {
+      this.reactCount = count;
+    });
+  }
+
+  toggelSection() {
+    this.section.toggle();
+  }
+
+  hidePopover() {
+    this.ConfirmDelete.hide();
   }
 }

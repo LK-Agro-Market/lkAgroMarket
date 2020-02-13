@@ -67,6 +67,10 @@
   margin-left: 10px;
   font-size: 13px;
 }
+.updateSection {
+  display: flex;
+  flex-direction: column;
+}
 .card-fotter-container {
   display: flex;
   flex-direction: row;
@@ -78,4 +82,16 @@
   font-size: 15px;
   margin-left: 20px;
   height: 25px;
+}
+
+.update-reply {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: 30px;
+}
+.update-btn {
+  height: 30px;
+  margin-top: 30px;
+  margin-left: 30px;
 }

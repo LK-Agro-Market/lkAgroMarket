@@ -1,15 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { LayoutComponent } from './layout/layout.component';
-import { ChatComponent } from './chat/chat.component';
-import { SupplyAdComponent } from './supply-ad/supply-ad.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ForumComponent } from './forum/forum.component';
-import { DemandAdComponent } from './demand-ad/demand-ad.component';
-import { ViewSupplyAdComponent } from './supply-ad/view-supply-ad/view-supply-ad.component';
-import { ViewDemandAdComponent } from './demand-ad/view-demand-ad/view-demand-ad.component';
-import { ShowallDemandAdComponent } from './demand-ad/showall-demand-ad/showall-demand-ad.component';
 
 const routes: Routes = [
   {
@@ -22,36 +13,42 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'profile/:profileOwner',
+        loadChildren: () =>
+          import('./profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
         path: 'farmer-dashboard',
-        component: SupplyAdComponent
+        loadChildren: () =>
+          import('./supply-ad/supply-ad.module').then(m => m.SupplyAdModule)
       },
       {
         path: 'view-supply-ad/:supplyAdId',
-        component: ViewSupplyAdComponent
+        loadChildren: () =>
+          import('./view-supply-ad/view-supply-ad.module').then(
+            m => m.ViewSupplyAdModule
+          )
       },
       {
-        path: 'chats',
-        component: ChatComponent
-      },
-      {
-        path: 'profile/:profileOwner',
-        component: ProfileComponent
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       },
       {
         path: 'forum',
-        component: ForumComponent
+        loadChildren: () =>
+          import('./forum/forum.module').then(m => m.ForumModule)
       },
       {
         path: 'buyer-dashboard',
-        component: DemandAdComponent
+        loadChildren: () =>
+          import('./demand-ad/demand-ad.module').then(m => m.DemandAdModule)
       },
       {
         path: 'view-demand-ad/:demandAdid',
-        component: ViewDemandAdComponent
-      },
-      {
-        path: 'all-demand-ads',
-        component: ShowallDemandAdComponent
+        loadChildren: () =>
+          import('./view-demand-ad/view-demand-ad.module').then(
+            m => m.ViewDemandAdModule
+          )
       }
     ]
   }

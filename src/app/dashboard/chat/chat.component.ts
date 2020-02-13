@@ -20,7 +20,6 @@ import { finalize, tap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Location } from '@angular/common';
-
 interface Post {
   content: string;
 }
