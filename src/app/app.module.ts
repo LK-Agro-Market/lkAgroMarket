@@ -35,7 +35,7 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
-import { ConfirmButtonDirective } from './shared/directives/confirm-button.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,8 +66,7 @@ import { ConfirmButtonDirective } from './shared/directives/confirm-button.direc
     ToastrModule.forRoot({
       preventDuplicates: false,
       closeButton: true
-    }),
-    NgxDropzoneModule,
+    })
   ],
   providers: [
     AuthGuard,
