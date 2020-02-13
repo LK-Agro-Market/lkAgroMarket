@@ -9,6 +9,7 @@ import { ForumComponent } from './forum/forum.component';
 import { DemandAdComponent } from './demand-ad/demand-ad.component';
 import { ViewSupplyAdComponent } from './supply-ad/view-supply-ad/view-supply-ad.component';
 import { ViewDemandAdComponent } from './demand-ad/view-demand-ad/view-demand-ad.component';
+import { ShowallDemandAdComponent } from './demand-ad/showall-demand-ad/showall-demand-ad.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'view-demand-ad/:demandAdid',
         component: ViewDemandAdComponent
+      },
+      {
+        path: 'all-demand-ads',
+        component: ShowallDemandAdComponent
       }
     ]
   }

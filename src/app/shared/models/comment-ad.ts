@@ -1,9 +1,7 @@
 export class Comment {
-  adId;
-  updatedAt;
-  userName;
+  adId: string;
+  userName:string;
   date: Date = new Date();
   content: string;
   docId: string;
-  docPath: string = '';
 }
