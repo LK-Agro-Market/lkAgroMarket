@@ -56,6 +56,13 @@ const routes: Routes = [
           import('./view-demand-ad/view-demand-ad.module').then(
             m => m.ViewDemandAdModule
           )
+      },
+      {
+        path: 'admin-panel',
+        loadChildren: () =>
+          import('./admin-panel/admin-panel.module').then(
+            m => m.AdminPanelModule
+          )
       }
     ]
   }
