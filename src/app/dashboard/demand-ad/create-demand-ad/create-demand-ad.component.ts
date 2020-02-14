@@ -46,7 +46,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
   Foodtypes = Object.keys(this.foods);
 
   constructor(
-    private formbuilder: FormBuilder,
+    // private formbuilder: FormBuilder,
     private demandadservice: DemandAdService,
     private toastr: ToastrService
   ) {}
@@ -82,6 +82,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
         foodtype: this.formControls.foodtype.value,
         food: this.formControls.food.value,
         expectedamount: this.formControls.expectedamount.value,
+        unit: this.formControls.unit.value,
         priceperunit: this.formControls.priceperunit.value,
         description: this.formControls.description.value,
         organic: this.formControls.organic.value,
@@ -104,6 +105,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
         foodtype: this.formControls.foodtype.value,
         food: this.formControls.food.value,
         expectedamount: this.formControls.expectedamount.value,
+        unit: this.formControls.unit.value,
         priceperunit: this.formControls.priceperunit.value,
         description: this.formControls.description.value,
         organic: this.formControls.organic.value,

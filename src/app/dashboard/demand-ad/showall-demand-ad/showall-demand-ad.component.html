@@ -2,14 +2,29 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        Your Current Advertisments
+        Demand Advertisments
+      </span>
+      <span class="text-right">
+        <div class="col">
+          <nb-select
+            multiple
+            (selectedChange)="onFilterAds($event)"
+            placeholder="Filter By Foods"
+          >
+            <nb-option
+              *ngFor="let category of foodcatogory"
+              [value]="category"
+              >{{ category }}</nb-option
+            >
+          </nb-select>
+        </div>
       </span>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4" *ngFor="let property of demandAdList">
+        <div class="col-sm-4" *ngFor="let property of filteringAds">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
@@ -20,7 +35,7 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                Quantity - {{ property.expectedamount }}{{ property.unit }}
+                Quantity - {{ property.expectedamount }}
               </li>
               <li class="list-group-item">
                 Price per unit - Rs. {{ property.priceperunit }}
@@ -35,15 +50,6 @@
                 [routerLink]="['/view-demand-ad', property.id]"
               >
                 View
-              </button>
-              <button
-                class="btn btn-primary"
-                (click)="demandAdsevice.editAd(property)"
-              >
-                Update
-              </button>
-              <button class="btn btn-danger" (click)="deleteAd(property.id)">
-                Delete
               </button>
             </div>
           </div>
