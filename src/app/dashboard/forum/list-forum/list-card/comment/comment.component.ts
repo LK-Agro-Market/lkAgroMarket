@@ -209,9 +209,9 @@ export class CommentComponent implements OnInit {
   vote(increment) {
     if (this.isVote) {
       if (this.voteAs === 'up') {
-        this.forumService.updateVote(this.comment.key, this.user.uid, 'up', this.voteCount);
+        this.forumService.updateVote(this.comment.key, this.user.uid, 'up');
       } else {
-        this.forumService.updateVote(this.comment.key, this.user.uid, 'down', this.voteCount);      }
+        this.forumService.updateVote(this.comment.key, this.user.uid, 'down');      }
     } else {
       this.forumService.changeVoteState(this.comment.key, increment, this.user.uid);
     }
