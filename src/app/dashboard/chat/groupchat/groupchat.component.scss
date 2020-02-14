@@ -16,8 +16,6 @@ nb-card nb-icon {
 }
 nb-list {
   width: 600px;
-  margin-top: 20px;
-  overflow-x: hidden;
 }
 button-filled-basic-background-color {
   background-color: #edf1f7;
@@ -25,13 +23,6 @@ button-filled-basic-background-color {
 nb-list nb-list-item {
   width: 600px;
   margin: -0.5rem -0.5rem;
-  padding: 10px;
-}
-#farmerList {
-  padding: 15px;
-}
-#buyerList {
-  padding: 15px;
 }
 nb-list nb-list-item button{
   width: 600px;
