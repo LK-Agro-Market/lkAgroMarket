@@ -30,6 +30,13 @@ const routes: Routes = [
           )
       },
       {
+        path: 'search-supply-ads',
+        loadChildren: () =>
+          import('./search-supply-ads/search-supply-ads.module').then(
+            m => m.SearchSupplyAdsModule
+          )
+      },
+      {
         path: 'chat',
         loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       },
