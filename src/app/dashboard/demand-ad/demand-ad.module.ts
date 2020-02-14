@@ -26,13 +26,15 @@ import { DemandAdComponent } from './demand-ad.component';
 import { CreateDemandAdComponent } from './create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './list-demand-ad/list-demand-ad.component';
 import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button.directive';
+import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-demand-ad/showall-demand-ad.component'
 
 @NgModule({
   declarations: [
     DemandAdComponent,
     CreateDemandAdComponent,
     ListDemandAdComponent,
-    ConfirmButtonDirective
+    ConfirmButtonDirective,
+    ShowallDemandAdComponent 
   ],
   imports: [
     CommonModule,
