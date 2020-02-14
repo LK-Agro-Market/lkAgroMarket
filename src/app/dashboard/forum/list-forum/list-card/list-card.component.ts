@@ -11,7 +11,6 @@ import { NbPopoverDirective } from '@nebular/theme';
   styleUrls: ['./list-card.component.scss']
 })
 export class ListCardComponent implements OnInit {
-  viewMore = true;
   comments: any[];
   cmntId: any;
   imageList: any[];
