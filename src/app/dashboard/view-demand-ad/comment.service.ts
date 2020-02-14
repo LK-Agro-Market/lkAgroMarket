@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import * as firebase from 'firebase';
 import { map } from 'rxjs/operators';
@@ -34,7 +32,6 @@ export class CommentService {
     return this.afs.doc('bcomments/' + docid).set(commentData);
   }
 
-
   delete(ref: any) {
     this.afs.doc('bcomments/' + ref).delete();
   }
@@ -52,7 +49,6 @@ export class CommentService {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 
-
   addreplycmt<T>(data): Promise<void> {
     const docid = this.afs.createId();
     const commentData = {
@@ -67,8 +63,7 @@ export class CommentService {
     return this.afs.doc('replycomment/' + docid).set(commentData);
   }
 
-
-  getreplycomments(docId: string){
+  getreplycomments(docId: string) {
     return this.afs
       .collection('replycomment', ref =>
         ref.where('paraentdocId', '==', docId).orderBy('date', 'asc')
@@ -79,7 +74,4 @@ export class CommentService {
   deleteReplay(ref: any) {
     this.afs.doc('replycomment/' + ref).delete();
   }
-
-
-
 }

@@ -11,8 +11,8 @@ import { CommentService } from '../comment.service';
 })
 export class CommentBuyerAdComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
-  viewcommentReply=false;
-  public parentdocId:string;
+  viewcommentReply = false;
+  public parentdocId: string;
 
   constructor(
     private commentservice: CommentService,
@@ -64,13 +64,11 @@ export class CommentBuyerAdComponent implements OnInit {
     this.onComment(comment);
   }
 
-  test(){
-      
-      this.viewcommentReply=!this.viewcommentReply;    
+  test() {
+    this.viewcommentReply = !this.viewcommentReply;
   }
 
-  getdocId(docid:string){
-    this.parentdocId=docid;
+  getdocId(docid: string) {
+    this.parentdocId = docid;
   }
-
 }

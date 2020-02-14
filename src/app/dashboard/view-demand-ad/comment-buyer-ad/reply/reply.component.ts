@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
-import { CommentService } from 'src/app/dashboard/view-demand-ad/comment.service'
+import { CommentService } from 'src/app/dashboard/view-demand-ad/comment.service';
 import { Reply } from 'src/app/shared/models/reply-comment-ad';
-
 
 @Component({
   selector: 'app-reply',
@@ -10,27 +9,22 @@ import { Reply } from 'src/app/shared/models/reply-comment-ad';
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
-
   @Input('parentdocId') public paraentdocId: string;
 
+  user: User = JSON.parse(localStorage.getItem('user'));
 
-  user: User = JSON.parse(localStorage.getItem('user'));  
-
-  constructor(
-    private commentservice: CommentService,
-  ) {
+  constructor(private commentservice: CommentService) {
     this.Rcomment = new Reply();
   }
 
   comments: any;
-  
 
   ngOnInit() {
-    this.commentservice.getreplycomments(this.paraentdocId).subscribe(actionArray=>{
-      this.comments=actionArray;
-    })
-    
-   
+    this.commentservice
+      .getreplycomments(this.paraentdocId)
+      .subscribe(actionArray => {
+        this.comments = actionArray;
+      });
   }
 
   onComment(Rcomment) {
@@ -48,7 +42,7 @@ export class ReplyComponent implements OnInit {
     userName: this.user.displayName,
     date: new Date(),
     content: '',
-    paraentdocId:this.paraentdocId
+    paraentdocId: this.paraentdocId
   };
 
   on(comm) {
@@ -62,4 +56,3 @@ export class ReplyComponent implements OnInit {
     this.onComment(Rcomment);
   }
 }
-

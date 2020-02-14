@@ -25,7 +25,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReplyComponent } from './comment-buyer-ad/reply/reply.component';
 
 @NgModule({
-  declarations: [ViewDemandAdComponent, CommentBuyerAdComponent, ReplyComponent],
+  declarations: [
+    ViewDemandAdComponent,
+    CommentBuyerAdComponent,
+    ReplyComponent
+  ],
   imports: [
     CommonModule,
     ViewDemandAdRoutingModule,
