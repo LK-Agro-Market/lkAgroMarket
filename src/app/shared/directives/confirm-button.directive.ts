@@ -60,6 +60,5 @@ export class ConfirmButtonDirective implements OnInit, OnDestroy {
 
   @HostListener('click', ['$event']) onClick(event) {
     this.clicks$.next(event);
-    console.log('shit');
   }
 }

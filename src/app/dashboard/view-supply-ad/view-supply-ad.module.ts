@@ -7,8 +7,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NbLayoutModule,
   NbIconModule,
-  NbTooltipModule,
-  NbChatModule,
   NbListModule,
   NbUserModule,
   NbCardModule,
@@ -16,8 +14,7 @@ import {
   NbSpinnerModule,
   NbSelectModule,
   NbInputModule,
-  NbBadgeModule,
-  NbMenuModule
+  NbBadgeModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -32,8 +29,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
-    NbTooltipModule,
-    NbChatModule,
     NbListModule,
     NbUserModule,
     NbCardModule,
@@ -43,10 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbInputModule,
     NbUserModule,
     NbBadgeModule,
-    NbMenuModule,
-    NbListModule,
-    NgbModule,
-    NbTooltipModule
+    NgbModule
   ]
 })
 export class ViewSupplyAdModule {}
