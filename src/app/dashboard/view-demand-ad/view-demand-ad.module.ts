@@ -22,9 +22,10 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReplyComponent } from './comment-buyer-ad/reply/reply.component';
 
 @NgModule({
-  declarations: [ViewDemandAdComponent, CommentBuyerAdComponent],
+  declarations: [ViewDemandAdComponent, CommentBuyerAdComponent, ReplyComponent],
   imports: [
     CommonModule,
     ViewDemandAdRoutingModule,

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  DocumentChangeAction
+  AngularFirestore
 } from '@angular/fire/firestore';
 
 import * as firebase from 'firebase';
-import { Observable, from } from 'rxjs';
-import { map, take, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Comment } from 'src/app/shared/models/comment-ad';
 import { ActivatedRoute } from '@angular/router';
+import { Reply } from 'src/app/shared/models/reply-comment-ad';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +34,6 @@ export class CommentService {
     return this.afs.doc('bcomments/' + docid).set(commentData);
   }
 
-  update(ref: any, data: any) {
-    return this.afs.doc('bcomments/' + ref).update({
-      ...data,
-      updatedAt: this.timestamp
-    });
-  }
 
   delete(ref: any) {
     this.afs.doc('bcomments/' + ref).delete();
@@ -59,4 +51,35 @@ export class CommentService {
   get timestamp() {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
+
+
+  addreplycmt<T>(data): Promise<void> {
+    const docid = this.afs.createId();
+    const commentData = {
+      docId: docid,
+      userName: data.userName,
+      date: new Date().toISOString(),
+      content: data.content,
+      paraentdocId: data.paraentdocId
+      //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      // createdAt: new Date().toISOString
+    };
+    return this.afs.doc('replycomment/' + docid).set(commentData);
+  }
+
+
+  getreplycomments(docId: string){
+    return this.afs
+      .collection('replycomment', ref =>
+        ref.where('paraentdocId', '==', docId).orderBy('date', 'asc')
+      )
+      .valueChanges()
+      .pipe(map(ref => ref as Reply[]));
+  }
+  deleteReplay(ref: any) {
+    this.afs.doc('replycomment/' + ref).delete();
+  }
+
+
+
 }
