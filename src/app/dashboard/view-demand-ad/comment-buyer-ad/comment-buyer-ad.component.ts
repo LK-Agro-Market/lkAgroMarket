@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Comment } from 'src/app/shared/models/comment-ad';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/shared/models/user';
 import { CommentService } from '../comment.service';
@@ -12,23 +11,19 @@ import { CommentService } from '../comment.service';
 })
 export class CommentBuyerAdComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
-  comments$: Observable<any[]>;
+  viewcommentReply=false;
+  public parentdocId:string;
 
   constructor(
     private commentservice: CommentService,
     private route: ActivatedRoute
   ) {
     this.comment = new Comment();
-    this.viewReply = '';
   }
 
   cmt: any;
 
   COMMENTS_REF: string = 'comments';
-  COL_NODE: string;
-
-  viewReply: string;
-  editComment: string;
 
   adId = this.getadId();
   ngOnInit() {
@@ -44,12 +39,6 @@ export class CommentBuyerAdComponent implements OnInit {
   getadId() {
     let id = this.route.snapshot.paramMap.get('demandAdid');
     return id;
-  }
-
-  onEdit(comment: Comment) {
-    this.commentservice.update(comment.docId, comment).then(_ => {
-      this.editComment = '';
-    });
   }
 
   onDelete(pass) {
@@ -74,4 +63,14 @@ export class CommentBuyerAdComponent implements OnInit {
     };
     this.onComment(comment);
   }
+
+  test(){
+      
+      this.viewcommentReply=!this.viewcommentReply;    
+  }
+
+  getdocId(docid:string){
+    this.parentdocId=docid;
+  }
+
 }

@@ -2,8 +2,8 @@
   border-radius: 25px;
   border: 2px solid #609;
   padding: 20px;
-  width: 250px;
-  height: 10px;
+  width: 350px;
+  height: 8px;
 }
 .button {
   background-color: #4caf50; /* Green */
@@ -20,4 +20,14 @@
 .button1 {
   padding: 10px 20px;
   background-color: #555555;
+}
+
+.container {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 15px;
+}
+
+.comment-item {
+  margin-top: 5px;
 }
