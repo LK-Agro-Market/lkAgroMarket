@@ -1,1 +1,45 @@
-<p>comment-buyer-ad works!</p>
+<div class="container">
+  <div
+    class="comment-item"
+    *ngFor="let comment of cmt | async; let idx = index"
+  >
+    <br />
+    <div>
+      <b>{{ comment.userName }}</b> -
+      <small>{{ comment.date | date: 'MMM d, h:mm:ss a' }}</small>
+    </div>
+    <div><b> Comment:</b> {{ comment.content }}</div>
+    <!-- Section to edit a comment -->
+    <div *ngIf="editComment == comment.docId">
+      <input type="text" [(ngModel)]="comment.content" style="width: 80%" />
+      <div>
+        <button (click)="onEdit(comment)">save</button>
+        <button (click)="editComment = ''">cancel</button>
+      </div>
+    </div>
+
+    <!-- Buttons to edit, delete and view reply of a comment -->
+    <button (click)="editComment = comment.docId">Edit</button>
+    <button (click)="onDelete(comment.docId)">Delete</button>
+    <button>Reply</button>
+  </div>
+  <br />
+
+  <div class="editor">
+    <!-- Edit to create a new comment 
+  <input type="hidden" class="comment" name="userName" value="adId">-->
+    <input
+      type="text"
+      class="comment"
+      placeholder="Type your comment here..."
+      name="content"
+      [(ngModel)]="comment.content"
+      id="ip2"
+    />
+    <div class="btns">
+      <button class="button button1" (click)="on(comment)">
+        Comment
+      </button>
+    </div>
+  </div>
+</div>
