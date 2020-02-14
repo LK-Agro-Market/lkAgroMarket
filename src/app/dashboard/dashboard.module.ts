@@ -10,16 +10,18 @@ import {
   NbUserModule,
   NbLayoutModule,
   NbIconModule,
-  NbTooltipModule
+  NbTooltipModule,
+  NbButtonModule
 } from '@nebular/theme';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { SearchSupplyAdsComponent } from './search-supply-ads/search-supply-ads.component';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, SearchSupplyAdsComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -33,7 +35,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
-    NbTooltipModule
+    NbTooltipModule,
+    NbButtonModule
   ],
   providers: []
 })
