@@ -10,7 +10,6 @@ import { NbPopoverDirective } from '@nebular/theme';
   templateUrl: './list-card.component.html',
   styleUrls: ['./list-card.component.scss']
 })
-
 export class ListCardComponent implements OnInit {
   viewMore = true;
   comments: any[];
@@ -30,7 +29,8 @@ export class ListCardComponent implements OnInit {
 
   @Input() item: any;
   @ViewChild('postSection', { static: false }) section;
-  @ViewChild(NbPopoverDirective, { static: false }) ConfirmDelete: NbPopoverDirective;
+  @ViewChild(NbPopoverDirective, { static: false })
+  ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
@@ -41,7 +41,8 @@ export class ListCardComponent implements OnInit {
 
   constructor(
     private forumService: ForumService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService
+  ) {}
 
   get comm() {
     return this.commentForm.get('comment');
@@ -54,9 +55,11 @@ export class ListCardComponent implements OnInit {
     this.isEnd = this.item.endThread;
     this.createDate = this.item.date;
 
-    if (this.item.images != null) { // get images from database
+    if (this.item.images != null) {
+      // get images from database
       this.imageList = this.item.images;
-      this.imageObject = this.imageList.map(url => { // set images to forum card
+      this.imageObject = this.imageList.map(url => {
+        // set images to forum card
         return {
           image: url,
           thumbImage: url
@@ -149,9 +152,11 @@ export class ListCardComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
-    this.forumService.changeReact(current, this.user.uid, this.item.key).then(_ => {
-      this.checkReactState();
-    });
+    this.forumService
+      .changeReact(current, this.user.uid, this.item.key)
+      .then(_ => {
+        this.checkReactState();
+      });
   }
 
   checkReactState() {
@@ -165,8 +170,7 @@ export class ListCardComponent implements OnInit {
         }
       });
 
-    this.forumService.countReacts(this.item.key)
-    .subscribe(count => {
+    this.forumService.countReacts(this.item.key).subscribe(count => {
       this.reactCount = count;
     });
   }

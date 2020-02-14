@@ -1,0 +1,274 @@
+<div class="container-fluid" *ngIf="adOwnerUser && viewer">
+  <div class="row">
+    <div class="col-sm-6">
+      <nb-card
+        accent="warning"
+        *ngIf="supplyAd"
+        [nbSpinner]="processing"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+      >
+        <nb-card-header>
+          <div class="card-header-content">
+            <span class="text-left" *ngIf="adOwnerUser.uid == viewer.uid">
+              Update Advertisment
+            </span>
+            <span class="text-left" *ngIf="adOwnerUser.uid != viewer.uid">
+              Supply Advertisment
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="supplyAdForm" (ngSubmit)="updateSupplyAd()">
+            <div class="card">
+              <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                  <div class="picsum-img-wrapper">
+                    <img [src]="image" class="card-img-top" />
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+              <nb-badge
+                text="Organic"
+                status="success"
+                position="top right"
+                *ngIf="supplyAd.organic == 'Organic'"
+              >
+              </nb-badge>
+              <nb-badge
+                text="Expired"
+                status="danger"
+                position="top left"
+                *ngIf="supplyAd.expireDate < currentTime"
+              >
+              </nb-badge>
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ supplyAd.food }}
+                  <span class="food-type">- {{ supplyAd.type }}</span>
+                </h5>
+                <p class="card-text" *ngIf="adOwnerUser.uid != viewer.uid">
+                  {{ supplyAd.description }}
+                </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid == viewer.uid"
+                >
+                  <div class="form-group">
+                    <label>Update ad description</label>
+                    <textarea
+                      nbInput
+                      fullWidth
+                      formControlName="description"
+                      placeholder="Short description about the harvest or agro product"
+                    ></textarea>
+                    <div
+                      *ngIf="attempted && !!formControls.description.errors"
+                      class="text-danger"
+                    >
+                      <span *ngIf="!!formControls.description.errors.required"
+                        >A description about your harvest or agro product is
+                        required</span
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid != viewer.uid"
+                >
+                  Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid == viewer.uid"
+                >
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          formControlName="quantity"
+                          placeholder="Quantity"
+                        />
+                        <div
+                          *ngIf="attempted && !!formControls.quantity.errors"
+                          class="text-danger"
+                        >
+                          <span *ngIf="!!formControls.quantity.errors.required"
+                            >Quantity is required</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Quantity unit</label>
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          formControlName="quantityUnit"
+                          placeholder="Quantity Measure Unit"
+                        />
+                        <div
+                          *ngIf="
+                            attempted && !!formControls.quantityUnit.errors
+                          "
+                          class="text-danger"
+                        >
+                          <span
+                            *ngIf="!!formControls.quantityUnit.errors.required"
+                            >Quantity unit is required</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Price per unit</label>
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          formControlName="pricePerUnit"
+                          placeholder="Price Per Unit"
+                        />
+                        <div
+                          *ngIf="
+                            attempted && !!formControls.pricePerUnit.errors
+                          "
+                          class="text-danger"
+                        >
+                          <span
+                            *ngIf="!!formControls.pricePerUnit.errors.required"
+                            >Price per unit is required</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid != viewer.uid"
+                >
+                  Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid != viewer.uid"
+                >
+                  Expire Date - {{ supplyAd.expireDate }}
+                </li>
+                <li
+                  class="list-group-item"
+                  *ngIf="adOwnerUser.uid == viewer.uid"
+                >
+                  <div class="form-group">
+                    <label>Expire date</label>
+                    <input
+                      nbInput
+                      fullWidth
+                      type="date"
+                      placeholder="Pick ad expire date"
+                      formControlName="expireDate"
+                    />
+                    <div
+                      *ngIf="attempted && !!formControls.expireDate.errors"
+                      class="text-danger"
+                    >
+                      <span *ngIf="!!formControls.expireDate.errors.required"
+                        >Expire date is required</span
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  Published On -
+                  {{ supplyAd.createdAt | date: 'MMM d, y h:mm:ss a' }}
+                </li>
+                <li class="list-group-item">
+                  Views - {{ supplyAd.views }}, Contact Clicks -
+                  {{ supplyAd.contactClicks }}
+                </li>
+              </ul>
+              <div class="card-body" *ngIf="adOwnerUser.uid == viewer.uid">
+                <button type="submit" nbButton>Update Ad</button>
+              </div>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-sm-6">
+      <nb-card accent="success" *ngIf="supplyAd">
+        <nb-card-header>
+          <div class="card-header-content">
+            <span class="text-left">
+              Mark As Sold
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          select buyer
+        </nb-card-body>
+      </nb-card>
+      <nb-card accent="info" *ngIf="supplyAd">
+        <nb-card-header>
+          <div class="card-header-content">
+            <span class="text-left">
+              Comments
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body
+          [nbSpinner]="processingComment"
+          nbSpinnerStatus="primary"
+          nbSpinnerSize="large"
+        >
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let comment of adComments">
+              <nb-user
+                [name]="comment.user.displayName"
+                [picture]="comment.user.photoURL"
+                [routerLink]="['/profile', comment.user.uid]"
+              >
+              </nb-user>
+              <span class="comment-text">{{ comment.content }}</span>
+            </li>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Your comment about this advertisment"
+                [(ngModel)]="newComment"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  (click)="publishComment()"
+                >
+                  Button
+                </button>
+              </div>
+            </div>
+            <div
+              *ngIf="attemptedComment && newComment == ''"
+              class="text-danger"
+            >
+              Please write your comment
+            </div>
+          </ul>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

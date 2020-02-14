@@ -198,7 +198,7 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           description: this.formControls.description.value,
           organic: this.formControls.organic.value,
           expireDate: this.formControls.expireDate.value,
-          createdAt: new Date(),
+          createdAt: new Date().toISOString(),
           views: 0,
           contactClicks: 0,
           owner: this.user.uid,

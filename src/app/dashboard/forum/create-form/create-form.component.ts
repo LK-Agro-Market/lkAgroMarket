@@ -42,7 +42,7 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private forumService: ForumService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.discussionForm.controls;
@@ -55,7 +55,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     if (this.createOrUpdate === 'update') {
       // set form value for update
       this.forumService
@@ -67,16 +66,17 @@ export class CreateFormComponent implements OnInit {
           this.showBuyer = dataSet.data().showBuyer;
           this.showFarmer = dataSet.data().showFarmer;
           this.imageList = dataSet.data().images;
-
         });
     }
   }
 
-  onSelect(event) {  // select images
+  onSelect(event) {
+    // select images
     this.images.push(...event.addedFiles);
   }
 
-  onRemove(event) {  // remove selected images
+  onRemove(event) {
+    // remove selected images
     this.images.splice(this.images.indexOf(event), 1);
   }
 
@@ -97,7 +97,8 @@ export class CreateFormComponent implements OnInit {
         if (this.createOrUpdate === 'create') {
           id = this.forumService.getPostId(); // get new ID for post
           this.toastrStatus = 'Your post is created...';
-          this.forumService.createPost( // create new post
+          this.forumService.createPost(
+            // create new post
             id,
             title,
             des,
@@ -110,35 +111,42 @@ export class CreateFormComponent implements OnInit {
             showBuyer,
             false
           );
-
         } else {
           ///////// shuld udate new image list
           this.toastrStatus = 'Your changes are saved...';
           id = this.postId;
-          this.forumService.updatePost( // update selected post
+          this.forumService.updatePost(
+            // update selected post
             id,
             title,
             des,
             null,
             showFarmer,
-            showBuyer,
+            showBuyer
           );
         }
-        if (this.images != null) { // upload images
+        if (this.images != null) {
+          // upload images
           this.forumService.uploadImg(this.images, 'post', id);
         }
-        if (this.imageList != null) { // delelte images from firebase storage for upload newly
+        if (this.imageList != null) {
+          // delelte images from firebase storage for upload newly
           this.forumService.deleteImage(this.imageList);
         }
         this.discussionForm.reset();
         this.hideForm.emit(false);
         this.toastr.success(this.toastrStatus);
-
       } else {
-        this.toastr.error('Please check the visibility on farmers or buyers or both' , 'Can`t create the post' );
+        this.toastr.error(
+          'Please check the visibility on farmers or buyers or both',
+          'Can`t create the post'
+        );
       }
     } else {
-      this.toastr.error('Please check and fill the form correctly' , 'Can`t create the post');
+      this.toastr.error(
+        'Please check and fill the form correctly',
+        'Can`t create the post'
+      );
     }
   }
 }
