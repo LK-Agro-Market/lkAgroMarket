@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+//import { AngularFireStorage } from '@angular/fire/storage';
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { DemandAd } from 'src/app/shared/models/demand-ad';
-import { forkJoin, Observable, from } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DemandAdService {
   constructor(
-    private afStorage: AngularFireStorage,
+    // private afStorage: AngularFireStorage,
     private afs: AngularFirestore
   ) {}
 
@@ -22,7 +22,8 @@ export class DemandAdService {
     id: new FormControl(null),
     foodtype: new FormControl('', Validators.required),
     food: new FormControl('', Validators.required),
-    expectedamount: new FormControl('1Kg', Validators.required),
+    expectedamount: new FormControl('1', Validators.required),
+    unit: new FormControl('', Validators.required),
     priceperunit: new FormControl('50', Validators.required),
     description: new FormControl('', Validators.required),
     organic: new FormControl('', Validators.required),
@@ -61,6 +62,7 @@ export class DemandAdService {
       foodtype: property.foodtype,
       food: property.food,
       expectedamount: property.expectedamount,
+      unit: property.unit,
       priceperunit: property.priceperunit,
       description: property.description,
       organic: property.organic,
@@ -73,11 +75,15 @@ export class DemandAdService {
       id: null,
       foodtype: '',
       food: '',
-      expectedamount: '50Kg',
+      expectedamount: '50',
+      unit: '',
       priceperunit: 50,
       description: '',
       organic: '',
       deadline: ''
     });
+  }
+  getalldemandAds(): Observable<DemandAd[]> {
+    return this.afs.collection<DemandAd>('demandAd').valueChanges();
   }
 }
