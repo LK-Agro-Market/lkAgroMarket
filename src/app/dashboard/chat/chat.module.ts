@@ -5,11 +5,8 @@ import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
-  NbThemeModule,
   NbLayoutModule,
-  NbSidebarModule,
   NbIconModule,
-  NbTooltipModule,
   NbChatModule,
   NbListModule,
   NbUserModule,
@@ -18,7 +15,8 @@ import {
   NbSpinnerModule,
   NbInputModule,
   NbAccordionModule,
-  NbAlertModule
+  NbAlertModule,
+  NbSidebarModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -30,9 +28,9 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     ReactiveFormsModule,
     FormsModule,
     NbLayoutModule,
+    NbSidebarModule,
     NbEvaIconsModule,
     NbIconModule,
-    NbTooltipModule,
     NbChatModule,
     NbListModule,
     NbUserModule,
