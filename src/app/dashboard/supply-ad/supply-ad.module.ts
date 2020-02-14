@@ -13,8 +13,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import {
   NbLayoutModule,
   NbIconModule,
-  NbTooltipModule,
-  NbChatModule,
   NbListModule,
   NbUserModule,
   NbCardModule,
@@ -22,19 +20,20 @@ import {
   NbSpinnerModule,
   NbSelectModule,
   NbInputModule,
-  NbBadgeModule,
-  NbMenuModule
+  NbBadgeModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button.directive';
 
 @NgModule({
   declarations: [
     SupplyAdComponent,
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
-    StatsComponent
+    StatsComponent,
+    ConfirmButtonDirective
   ],
   imports: [
     CommonModule,
@@ -45,8 +44,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
-    NbTooltipModule,
-    NbChatModule,
     NbListModule,
     NbUserModule,
     NbCardModule,
@@ -56,10 +53,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbInputModule,
     NbUserModule,
     NbBadgeModule,
-    NbListModule,
     ChartsModule,
-    NgbModule,
-    NbTooltipModule
+    NgbModule
   ]
 })
 export class SupplyAdModule {}
