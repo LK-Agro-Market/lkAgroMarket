@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
+import { SearchSupplyAdsService } from './search-supply-ads.service';
 
 @Component({
   selector: 'app-search-supply-ads',
@@ -14,9 +15,16 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
   allSupplyAds: SupplyAd[];
   filteredSupplyAds: SupplyAd[];
 
-  constructor() {}
+  constructor(private searchSupplyAdsService: SearchSupplyAdsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subscriptions.push(
+      this.searchSupplyAdsService.getActiveAds().subscribe(ads => {
+        this.allSupplyAds = ads;
+        this.filteredSupplyAds = ads;
+      })
+    );
+  }
 
   ngOnDestroy() {
     for (const subscription of this.subscriptions) {

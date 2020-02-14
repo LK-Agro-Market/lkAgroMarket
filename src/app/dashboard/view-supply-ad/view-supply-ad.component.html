@@ -201,6 +201,9 @@
               <div class="card-body" *ngIf="adOwnerUser.uid == viewer.uid">
                 <button type="submit" nbButton>Update Ad</button>
               </div>
+              <div class="card-body" *ngIf="adOwnerUser.uid != viewer.uid">
+                <button [routerLink]="['/profile', adOwnerUser.uid]" nbButton status="success">Contact Farmer</button>
+              </div>
             </div>
           </form>
         </nb-card-body>
