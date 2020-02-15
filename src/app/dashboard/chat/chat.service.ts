@@ -10,13 +10,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ChatService {
-
   constructor(
     public afs: AngularFirestore,
     public router: Router,
     public ngZone: NgZone
-  ) { }
-  
+  ) {}
+
   getUserDetails(userId): Observable<UserDetails> {
     return this.afs
       .collection('userDetails')

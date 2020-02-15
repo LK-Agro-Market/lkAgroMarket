@@ -48,9 +48,9 @@ export class ChatComponent {
   selectedUser: any;
   selectedId: any;
   avatar: any;
-  farmerC:  Observable<any[]>;
-  buyerC:  Observable<any[]>;
-  adminC:  Observable<any[]>;
+  farmerC: Observable<any[]>;
+  buyerC: Observable<any[]>;
+  adminC: Observable<any[]>;
   messages: Observable<any[]>;
   replies: Observable<any[]>;
   content: string;
@@ -65,13 +65,13 @@ export class ChatComponent {
 
   chatDoc: AngularFirestoreDocument<Post>;
   chat: Observable<Post>;
-  
-  farmers : boolean = false;
-  buyers : boolean = false;
-  admin : boolean = false;
-  group : boolean = false;
-  farmerLists : boolean = false;
-  buyerLists : boolean = false;
+
+  farmers: boolean = false;
+  buyers: boolean = false;
+  admin: boolean = false;
+  group: boolean = false;
+  farmerLists: boolean = false;
+  buyerLists: boolean = false;
   userDetails: UserDetails;
   seen: any;
   constructor(
@@ -81,11 +81,21 @@ export class ChatComponent {
     private chatService: ChatService,
     private toastr: ToastrService
   ) {
-    this.users = afs.collection('users', ref => ref.orderBy('displayName')).valueChanges();
-    this.userD = afs.collection('userDetails').valueChanges({idField:'id'});
-    this.farmerC = this.afs.collection('userDetails', ref => ref.where('userLevel', '==', 'Farmer')).valueChanges({idField:'id'});
-    this.buyerC = this.afs.collection('userDetails', ref => ref.where('userLevel', '==', 'Buyer')).valueChanges({idField:'id'});
-    this.adminC = this.afs.collection('userDetails', ref => ref.where('userLevel', '==', 'Administrator')).valueChanges({idField:'id'});
+    this.users = afs
+      .collection('users', ref => ref.orderBy('displayName'))
+      .valueChanges();
+    this.userD = afs.collection('userDetails').valueChanges({ idField: 'id' });
+    this.farmerC = this.afs
+      .collection('userDetails', ref => ref.where('userLevel', '==', 'Farmer'))
+      .valueChanges({ idField: 'id' });
+    this.buyerC = this.afs
+      .collection('userDetails', ref => ref.where('userLevel', '==', 'Buyer'))
+      .valueChanges({ idField: 'id' });
+    this.adminC = this.afs
+      .collection('userDetails', ref =>
+        ref.where('userLevel', '==', 'Administrator')
+      )
+      .valueChanges({ idField: 'id' });
   }
   compFn = (a, b) => {
     if (a.time < b.time) {
@@ -95,14 +105,13 @@ export class ChatComponent {
       return 1;
     }
     return 0;
-  }
-  ngOnInit(){
-    this.chatService.getUserDetails(this.user.uid)
-    .subscribe(userDetails => {
+  };
+  ngOnInit() {
+    this.chatService.getUserDetails(this.user.uid).subscribe(userDetails => {
       this.userDetails = userDetails;
     });
   }
-  farmerList(){
+  farmerList() {
     this.farmers = true;
     this.buyers = false;
     this.admin = false;
@@ -110,7 +119,7 @@ export class ChatComponent {
     this.farmerLists = false;
     this.buyerLists = false;
   }
-  buyerList(){
+  buyerList() {
     this.buyers = true;
     this.farmers = false;
     this.admin = false;
@@ -118,7 +127,7 @@ export class ChatComponent {
     this.farmerLists = false;
     this.buyerLists = false;
   }
-  adminList(){
+  adminList() {
     this.admin = true;
     this.farmers = false;
     this.buyers = false;
@@ -126,7 +135,7 @@ export class ChatComponent {
     this.farmerLists = false;
     this.buyerLists = false;
   }
-  farmerGroup(){
+  farmerGroup() {
     this.farmers = false;
     this.buyers = false;
     this.admin = false;
@@ -136,7 +145,7 @@ export class ChatComponent {
     this.avatar = '../../../assets/group.png';
     this.farmerLists = true;
   }
-  buyerGroup(){
+  buyerGroup() {
     this.farmers = false;
     this.buyers = false;
     this.admin = false;
@@ -155,17 +164,17 @@ export class ChatComponent {
     this.currentUser = currentuser.displayName;
     this.currentId = currentuser.uid;
     this.location.replaceState('/chats/', this.selectedId);
-    
+
     this.chatCollection = this.afs.collection('chats', ref =>
-    ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
+      ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
     );
-   
+
     this.repsCollection = this.afs.collection<Chats>('chats', ref =>
-    ref.where('rid', '==', this.currentId).where('sid', '==', this.selectedId)
-  );
-  
+      ref.where('rid', '==', this.currentId).where('sid', '==', this.selectedId)
+    );
+
     this.messages = Observable.combineLatest(
-      this.chatCollection.valueChanges({idField:'id'}),
+      this.chatCollection.valueChanges({ idField: 'id' }),
       this.repsCollection.valueChanges()
     )
       .switchMap(chats => {
@@ -175,21 +184,29 @@ export class ChatComponent {
       })
       .pipe(map(combined => combined.sort(this.compFn)));
 
-      /////////////// seen section //////////
-    this.afs.collection<Chats>('chats', ref =>
-     ref.where('sid', '==', this.selectedId).where('rid', '==', this.currentId)
-     ).snapshotChanges().map(changes=>{
-      return changes.map(a=>{
+    /////////////// seen section //////////
+    this.afs
+      .collection<Chats>('chats', ref =>
+        ref
+          .where('sid', '==', this.selectedId)
+          .where('rid', '==', this.currentId)
+      )
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
-          return {id, ...data}
+          return { id, ...data };
+        });
       })
-    }).subscribe(replies => {
-         replies.forEach(job => {
-           this.afs.collection('chats').doc(job.id).update({seen: 'seened'});
-         });
-     });
-    
+      .subscribe(replies => {
+        replies.forEach(job => {
+          this.afs
+            .collection('chats')
+            .doc(job.id)
+            .update({ seen: 'seened' });
+        });
+      });
   }
 
   sendMessage(content) {
@@ -220,9 +237,9 @@ export class ChatComponent {
   }
   deleteChat(chatId) {
     if (confirm('Are you sure to delete this message?')) {
-    this.afs.doc('chats/' + chatId).delete();
-    this.toastr.warning('Message was removed successfully');
-   }
+      this.afs.doc('chats/' + chatId).delete();
+      this.toastr.warning('Message was removed successfully');
+    }
   }
   uploadFile(event) {
     const user = JSON.parse(localStorage.getItem('user'));
