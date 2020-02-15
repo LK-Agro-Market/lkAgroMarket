@@ -408,16 +408,6 @@
             <h5>
               Rate This Harvest/ Agro Product
             </h5>
-            <star-rating
-              *ngIf="supplyAd.rating"
-              [value]="supplyAd.rating"
-              totalstars="5"
-              checkedcolor="gold"
-              uncheckedcolor="gray"
-              size="32px"
-              readonly="false"
-              (rate)="onRateFarmer($event)"
-            ></star-rating>
           </div>
         </nb-card-body>
       </nb-card>
