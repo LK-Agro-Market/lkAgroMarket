@@ -1,8 +1,13 @@
-nb-sidebar {
-  width: 400px;
+nb-layout nb-sidebar {
+  width: 300px;
+  height: 600px;
 }
-nb-card {
+nb-layout-column nb-card {
+  margin-top: 0px;
   width: 800px;
+}
+nb-layout-header {
+  width: 900px;
 }
 nb-card nb-icon {
   float: right;
@@ -11,23 +16,37 @@ nb-card nb-icon {
 }
 nb-list {
   width: 600px;
+  margin-top: 20px;
+  overflow-x: hidden;
 }
 button-filled-basic-background-color {
   background-color: #edf1f7;
 }
 nb-list nb-list-item {
   width: 600px;
+  margin: -0.5rem -0.5rem;
+  padding: 10px;
 }
+#farmerList {
+  padding: 15px;
+}
+#buyerList {
+  padding: 15px;
+}
+nb-list nb-list-item button {
+  width: 600px;
+}
+
 ul {
   list-style-type: none;
   width: 100%;
-  margin: 0;
+  margin-top: 0px;
   padding: 0;
   align-items: baseline;
 }
 ul li {
   width: 100%;
-  padding: 10px;
+  padding: 0px;
   color: #0b0c0e;
   align-items: baseline;
 }
@@ -38,29 +57,30 @@ ul li {
   border-radius: 25px;
   width: 400px;
   float: right;
-  padding: 10px 10px;
+  padding: 0px 0px;
 }
 #rid {
   margin-top: auto;
   margin-left: 10px;
   border-radius: 25px;
   width: 400px;
-  padding: 10px 10px;
+  padding: 0px 0px;
 }
 #rcontent {
-  margin-top: auto;
+  margin-top: 1px;
   margin-left: 10px;
   border-radius: 25px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   max-width: 300px;
   word-break: break-all;
   text-align: left;
+  background-color: #8b999c;
 }
 #scontent {
   margin-top: auto;
   margin-left: 10px;
   border-radius: 25px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   max-width: 300px;
   word-break: break-all;
   text-align: left;
@@ -90,6 +110,7 @@ ul li {
 .type_msg {
   border-top: 1px solid #c4c4c4;
   position: relative;
+  width: 700px;
 }
 
 #A {
@@ -100,4 +121,28 @@ ul li {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+#delete i {
+  height: 5px;
+  padding: 0px;
+}
+#delete {
+  height: 30px;
+}
+#S {
+  width: 200px;
+}
+#B {
+  margin-top: 20px;
+}
+#S button {
+  color: #162df7;
+}
+#fileInput {
+  display: none;
+}
+#icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }

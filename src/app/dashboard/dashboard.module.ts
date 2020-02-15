@@ -10,7 +10,8 @@ import {
   NbUserModule,
   NbLayoutModule,
   NbIconModule,
-  NbTooltipModule
+  NbTooltipModule,
+  NbButtonModule
 } from '@nebular/theme';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -33,7 +34,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbLayoutModule,
     NbEvaIconsModule,
     NbIconModule,
-    NbTooltipModule
+    NbTooltipModule,
+    NbButtonModule
   ],
   providers: []
 })

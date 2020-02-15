@@ -1,12 +1,7 @@
 <div class="card-cantainer">
   <nb-accordion>
     <nb-accordion-item>
-      <nb-accordion-item-header
-        id="t-header"
-        (click)="viewMore = !viewMore"
-        *ngIf="item"
-        #postSection
-      >
+      <nb-accordion-item-header id="t-header" *ngIf="item" #postSection>
         <div class="gold-members p-4 card-container">
           <div class="media">
             <div class="pro-img-container">
@@ -72,15 +67,6 @@
               <span id="postTitle"> {{ item.title }} </span>
               <hr />
               <div class="card-fotter-container">
-                <button
-                  nbButton
-                  status="primary"
-                  outline
-                  size="small"
-                  class="view-btn"
-                >
-                  {{ viewMore ? 'More' : 'Less' }}
-                </button>
                 <button
                   nbButton
                   status="primary"

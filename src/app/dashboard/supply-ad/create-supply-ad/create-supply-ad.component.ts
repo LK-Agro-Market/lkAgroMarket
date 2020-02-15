@@ -200,9 +200,9 @@ export class CreateSupplyAdComponent implements OnInit, OnDestroy {
           expireDate: this.formControls.expireDate.value,
           createdAt: new Date().toISOString(),
           views: 0,
-          contactClicks: 0,
           owner: this.user.uid,
-          status: 'active'
+          status: 'active',
+          rating: 0
         };
         this.subscriptions.push(
           this.supplyAdService.createAd(supplyAd).subscribe(() => {

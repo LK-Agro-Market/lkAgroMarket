@@ -1,0 +1,36 @@
+<div class="Container">
+  <div class="comment-item" *ngFor="let comment of comments">
+    <br />
+    <div>
+      <b>{{ comment.userName }}</b
+      >-
+      <small>{{ comment.date | date: 'MMM d, h:mm:ss a' }}</small>
+    </div>
+    <div><b> Comment:</b> {{ comment.content }}</div>
+    <!-- Section to edit a comment -->
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-sm"
+      (click)="onDelete(comment.docId)"
+    >
+      Delete
+    </button>
+  </div>
+  <br />
+  <div class="editor">
+    <!-- Edit to create a new comment -->
+    <input
+      id="ip2"
+      type="text"
+      class="comment"
+      placeholder="Type your comment here"
+      name="content"
+      [(ngModel)]="content"
+    />
+    <div class="btns">
+      <button class="button button1" (click)="on(content)">
+        Comment
+      </button>
+    </div>
+  </div>
+</div>
