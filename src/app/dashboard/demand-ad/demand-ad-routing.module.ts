@@ -9,7 +9,7 @@ const routes: Routes = [
     component: DemandAdComponent
   },
   {
-  path: 'all-demand-ads',
+    path: 'all-demand-ads',
     component: ShowallDemandAdComponent
   }
 ];

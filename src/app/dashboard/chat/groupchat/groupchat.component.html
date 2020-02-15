@@ -1,9 +1,11 @@
 <div class="card-body msg_card_body">
-     <ul *ngFor="let msg of fmessages | async"> 
-      <li (click)="getPost(msg.id)"> 
-        <div *ngIf = "userDetails.userLevel == 'Farmer' && msg.userLevel != 'Buyer'">
+  <ul *ngFor="let msg of fmessages | async">
+    <li (click)="getPost(msg.id)">
+      <div
+        *ngIf="userDetails.userLevel == 'Farmer' && msg.userLevel != 'Buyer'"
+      >
         <!-- ///////////////send messages//////////////// -->
-         <div
+        <div
           id="sid"
           *ngIf="msg.sid == this.currentId && msg.userLevel == 'Farmer'"
           class="d-flex justify-content-end mb-6"
@@ -13,45 +15,45 @@
             id="scontent"
             class="p-3 mb-2 bg-primary text-white"
           >
-            {{ msg.content }} <br>
+            {{ msg.content }} <br />
 
-            <button id = "delete" style="float:right"
-            nbButton
-            status="danger"
-            size="tiny"
-            class="delete-btn"
-            (click)="deleteChat(msg.id)"
-          >
-          <i class="fa fa-trash"></i>
-          </button>
-          
+            <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteChat(msg.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
           </div>
-          
-          <div
-            *ngIf="msg.type != 'text'"
-            class="p-3 mb-2 bg-light text-white"
-          >
-            <img
-              id="image"
-              src="{{ msg.url }}"
-              style="max-width:250px;"
-            />
-            <button id = "delete" style="float:right"
-            nbButton
-            status="danger"
-            size="tiny"
-            class="delete-btn"
-            (click)="deleteChat(msg.id)"
-          >
-          <i class="fa fa-trash"></i>
-          </button>
+
+          <div *ngIf="msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
+            <img id="image" src="{{ msg.url }}" style="max-width:250px;" />
+            <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteChat(msg.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
           </div>
-          <p style="font-size:10px;" id="rtime">{{ msg.time | date:'mediumDate' }}<br>{{ msg.time | date: 'h:mm a ' }}</p> 
-        </div> 
-<!-- ///////////////////////////////replies//////////////////////////////////// -->
-         <div
+          <p style="font-size:10px;" id="rtime">
+            {{ msg.time | date: 'mediumDate' }}<br />{{
+              msg.time | date: 'h:mm a '
+            }}
+          </p>
+        </div>
+        <!-- ///////////////////////////////replies//////////////////////////////////// -->
+        <div
           id="rid"
-          *ngIf="msg.sid != this.currentId && msg.userLevel == 'Farmer'" 
+          *ngIf="msg.sid != this.currentId && msg.userLevel == 'Farmer'"
           class="d-flex justify-content-start mb-6"
         >
           <img src="{{ msg.avatar }}" alt="Avatar" class="avatar" />
@@ -59,139 +61,143 @@
             *ngIf="msg.type == 'text'"
             id="rcontent"
             class="p-3 mb-2 bg-light text-dark"
-          ><div style="font-size: 15px;font-style:initial;color: blue;">{{msg.sender}}</div>
+          >
+            <div style="font-size: 15px;font-style:initial;color: blue;">
+              {{ msg.sender }}
+            </div>
             {{ msg.content }}
           </div>
-          <div
-            *ngIf="msg.type != 'text'"
-            class="p-3 mb-2 bg-light text-white"
-          ><div style="font-size: 15px;font-style:initial;color: blue;">{{msg.sender}}</div>
-            <img
-              id="image"
-              src="{{ msg.url }}"
-              style="max-width:250px;"
-            />
+          <div *ngIf="msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
+            <div style="font-size: 15px;font-style:initial;color: blue;">
+              {{ msg.sender }}
+            </div>
+            <img id="image" src="{{ msg.url }}" style="max-width:250px;" />
           </div>
 
-          <p style="font-size:10px;" id="rtime">{{ msg.time | date:'mediumDate' }}<br>{{ msg.time | date: 'h:mm a ' }}</p>
+          <p style="font-size:10px;" id="rtime">
+            {{ msg.time | date: 'mediumDate' }}<br />{{
+              msg.time | date: 'h:mm a '
+            }}
+          </p>
         </div>
+      </div>
+    </li>
+  </ul>
+  <!-- ///////////////////////////////////Buyers msg body///////////////////////////// -->
+  <ul *ngFor="let msg of bmessages | async">
+    <li (click)="getPost(msg.id)">
+      <!-- ///////////////send messages//////////////// -->
+      <div
+        *ngIf="userDetails.userLevel == 'Buyer' && msg.userLevel != 'Farmer'"
+      >
+        <div
+          id="sid"
+          *ngIf="msg.sid == this.currentId && msg.userLevel == 'Buyer'"
+          class="d-flex justify-content-end mb-6"
+        >
+          <div
+            *ngIf="msg.type == 'text' && msg.userLevel == 'Buyer'"
+            id="scontent"
+            class="p-3 mb-2 bg-primary text-white"
+          >
+            {{ msg.content }} <br />
+
+            <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteChat(msg.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+
+          <div *ngIf="msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
+            <img id="image" src="{{ msg.url }}" style="max-width:250px;" />
+            <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteChat(msg.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+          <p style="font-size:10px;" id="rtime">
+            {{ msg.time | date: 'mediumDate' }}<br />{{
+              msg.time | date: 'h:mm a '
+            }}
+          </p>
         </div>
-      </li>
-    </ul> 
-    <!-- ///////////////////////////////////Buyers msg body///////////////////////////// -->
-    <ul *ngFor="let msg of bmessages | async">
-            <li (click)="getPost(msg.id)"> 
-               <!-- ///////////////send messages//////////////// -->
-               <div *ngIf = "userDetails.userLevel == 'Buyer' && msg.userLevel != 'Farmer'">
-               <div
-                 id="sid"
-                 *ngIf="msg.sid == this.currentId && msg.userLevel == 'Buyer'"
-                 class="d-flex justify-content-end mb-6"
-               >
-                 <div
-                   *ngIf="msg.type == 'text' && msg.userLevel == 'Buyer'"
-                   id="scontent"
-                   class="p-3 mb-2 bg-primary text-white"
-                 >
-                   {{ msg.content }} <br>
-       
-                   <button id = "delete" style="float:right"
-                   nbButton
-                   status="danger"
-                   size="tiny"
-                   class="delete-btn"
-                   (click)="deleteChat(msg.id)"
-                 >
-                 <i class="fa fa-trash"></i>
-                 </button>
-                 
-                 </div>
-                 
-                 <div
-                   *ngIf="msg.type != 'text'"
-                   class="p-3 mb-2 bg-light text-white"
-                 >
-                   <img
-                     id="image"
-                     src="{{ msg.url }}"
-                     style="max-width:250px;"
-                   />
-                   <button id = "delete" style="float:right"
-                   nbButton
-                   status="danger"
-                   size="tiny"
-                   class="delete-btn"
-                   (click)="deleteChat(msg.id)"
-                 >
-                 <i class="fa fa-trash"></i>
-                 </button>
-                 </div>
-                 <p style="font-size:10px;" id="rtime">{{ msg.time | date:'mediumDate' }}<br>{{ msg.time | date: 'h:mm a ' }}</p>
-               </div>
-       <!-- ///////////////////////////////replies//////////////////////////////////// -->
-                <div
-                 id="rid"
-                 *ngIf="msg.sid != this.currentId && msg.userLevel == 'Buyer'" 
-                 class="d-flex justify-content-start mb-6"
-               >
-                 <img src="{{ msg.avatar }}" alt="Avatar" class="avatar" />
-                 <div
-                   *ngIf="msg.type == 'text'"
-                   id="rcontent"
-                   class="p-3 mb-2 bg-light text-dark"
-                 >
-                 <div style="font-size: 15px;font-style:initial;color: blue;">{{msg.sender}}</div>
-                   {{ msg.content }}
-                   
-                 </div>
-                 
-                 <div
-                   *ngIf="msg.type != 'text'"
-                   class="p-3 mb-2 bg-light text-white"
-                 >
-                 <div style="font-size: 15px;font-style:unset;color: blue;">{{msg.sender}}</div>
-                   <img
-                     id="image"
-                     src="{{ msg.url }}"
-                     style="max-width:250px;"
-                   />
-                   
-                   
-                 </div>
-       
-                 <p style="font-size:10px;" id="rtime">{{ msg.time | date:'mediumDate' }}<br>{{ msg.time | date: 'h:mm a ' }}</p>
-                 
-               </div>
-               
-              </div>
-              <!-- //////////////////////////////////// -->
-              
-             </li>
-           </ul>
+        <!-- ///////////////////////////////replies//////////////////////////////////// -->
+        <div
+          id="rid"
+          *ngIf="msg.sid != this.currentId && msg.userLevel == 'Buyer'"
+          class="d-flex justify-content-start mb-6"
+        >
+          <img src="{{ msg.avatar }}" alt="Avatar" class="avatar" />
+          <div
+            *ngIf="msg.type == 'text'"
+            id="rcontent"
+            class="p-3 mb-2 bg-light text-dark"
+          >
+            <div style="font-size: 15px;font-style:initial;color: blue;">
+              {{ msg.sender }}
+            </div>
+            {{ msg.content }}
+          </div>
+
+          <div *ngIf="msg.type != 'text'" class="p-3 mb-2 bg-light text-white">
+            <div style="font-size: 15px;font-style:unset;color: blue;">
+              {{ msg.sender }}
+            </div>
+            <img id="image" src="{{ msg.url }}" style="max-width:250px;" />
+          </div>
+
+          <p style="font-size:10px;" id="rtime">
+            {{ msg.time | date: 'mediumDate' }}<br />{{
+              msg.time | date: 'h:mm a '
+            }}
+          </p>
+        </div>
+      </div>
+      <!-- //////////////////////////////////// -->
+    </li>
+  </ul>
 </div>
 <!-- ///////////////////////////////////Form////////////////////////////////// -->
- 
-  <div class="input-group" style="width:800px;">
-    <input
-      type="text"
-      [(ngModel)]="content"
-      class="form-control"
-      placeholder="Type a message"
-    />
-    <span
-      class="msg_send_btn"
-      class="input-group-addon btn btn-primary"
-      (click)="sendMessage($event)"
-      ><i class="fa fa-paper-plane" aria-hidden="true"></i
-    ></span>
-  </div>
 
-  <label for="fileInput"> 
-      UploadImage:
-    <img id="icon" src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg">
-  </label>&nbsp;&nbsp;
-  <input id="fileInput" type="file" (change)="uploadFile($event)"
-  accept=".png,.jpg">
-  
+<div class="input-group" style="width:800px;">
+  <input
+    type="text"
+    [(ngModel)]="content"
+    class="form-control"
+    placeholder="Type a message"
+  />
+  <span
+    class="msg_send_btn"
+    class="input-group-addon btn btn-primary"
+    (click)="sendMessage($event)"
+    ><i class="fa fa-paper-plane" aria-hidden="true"></i
+  ></span>
+</div>
 
-
+<label for="fileInput">
+  UploadImage:
+  <img
+    id="icon"
+    src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg"
+  /> </label
+>&nbsp;&nbsp;
+<input
+  id="fileInput"
+  type="file"
+  (change)="uploadFile($event)"
+  accept=".png,.jpg"
+/>
