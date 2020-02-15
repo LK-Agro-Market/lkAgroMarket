@@ -163,7 +163,7 @@ export class ChatComponent {
     const currentuser = JSON.parse(localStorage.getItem('user'));
     this.currentUser = currentuser.displayName;
     this.currentId = currentuser.uid;
-    this.location.replaceState('/chats/', this.selectedUser);
+    this.location.replaceState('/chats/', this.selectedId);
 
     this.chatCollection = this.afs.collection('chats', ref =>
       ref.where('rid', '==', this.selectedId).where('sid', '==', this.currentId)
