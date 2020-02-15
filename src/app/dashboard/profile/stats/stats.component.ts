@@ -47,20 +47,24 @@ export class StatsComponent implements OnInit, OnDestroy {
   public barChartColors: Color[] = [{ backgroundColor: 'chartreuse' }];
 
   lineChartData: ChartDataSets[] = [
-    { data: [0, 0, 0, 0, 0], label: 'No. of ratings' },
+    { data: [0, 0, 0, 0, 0], label: 'No. of ratings' }
   ];
   lineChartLabels: Label[] = ['1', '2', '3', '4', '5'];
   lineChartColors: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: 'gold',
+      backgroundColor: 'gold'
     }
   ];
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType: ChartType = 'line';
 
-  constructor(private supplyAdService: SupplyAdService, private profileService: ProfileService, private route: ActivatedRoute) {}
+  constructor(
+    private supplyAdService: SupplyAdService,
+    private profileService: ProfileService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.subscriptions.push(
@@ -75,35 +79,49 @@ export class StatsComponent implements OnInit, OnDestroy {
           .subscribe(user => {
             this.profileOwnerUser = user;
             this.subscriptions.push(
-              this.supplyAdService.getAds(this.profileOwnerUser.uid).subscribe(res => {
-                const soldAdCount = res.filter(ad => ad.status === 'sold').length;
-                const activeAdCount = res.filter(ad => ad.status === 'active').length;
-                const deletedAdCount = res.filter(ad => ad.status === 'deleted')
-                  .length;
-                this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]];
-        
-                const dic: Object = {};
-                res.forEach(ad => {
-                  if (ad.food in dic) {
-                    dic[ad.food] = dic[ad.food] + 1;
-                  } else {
-                    dic[ad.food] = 1;
-                  }
-                });
-                this.barChartLabels = Object.keys(dic);
-                this.barChartData[0].data = Object.values(dic);
-        
-                const soldAds = res.filter(ad => ad.status === 'sold');
-                const rate1 = soldAds.filter(ad => ad.rating === 1).length;
-                const rate2 = soldAds.filter(ad => ad.rating === 2).length;
-                const rate3 = soldAds.filter(ad => ad.rating === 3).length;
-                const rate4 = soldAds.filter(ad => ad.rating === 4).length;
-                const rate5 = soldAds.filter(ad => ad.rating === 5).length;
-                this.lineChartData[0].data = [rate1, rate2, rate3, rate4, rate5];
-              })
+              this.supplyAdService
+                .getAds(this.profileOwnerUser.uid)
+                .subscribe(res => {
+                  const soldAdCount = res.filter(ad => ad.status === 'sold')
+                    .length;
+                  const activeAdCount = res.filter(ad => ad.status === 'active')
+                    .length;
+                  const deletedAdCount = res.filter(
+                    ad => ad.status === 'deleted'
+                  ).length;
+                  this.doughnutChartData = [
+                    [soldAdCount, activeAdCount, deletedAdCount]
+                  ];
+
+                  const dic: Object = {};
+                  res.forEach(ad => {
+                    if (ad.food in dic) {
+                      dic[ad.food] = dic[ad.food] + 1;
+                    } else {
+                      dic[ad.food] = 1;
+                    }
+                  });
+                  this.barChartLabels = Object.keys(dic);
+                  this.barChartData[0].data = Object.values(dic);
+
+                  const soldAds = res.filter(ad => ad.status === 'sold');
+                  const rate1 = soldAds.filter(ad => ad.rating === 1).length;
+                  const rate2 = soldAds.filter(ad => ad.rating === 2).length;
+                  const rate3 = soldAds.filter(ad => ad.rating === 3).length;
+                  const rate4 = soldAds.filter(ad => ad.rating === 4).length;
+                  const rate5 = soldAds.filter(ad => ad.rating === 5).length;
+                  this.lineChartData[0].data = [
+                    rate1,
+                    rate2,
+                    rate3,
+                    rate4,
+                    rate5
+                  ];
+                })
             );
           });
-      }));
+      })
+    );
   }
 
   ngOnDestroy() {

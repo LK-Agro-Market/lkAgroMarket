@@ -227,9 +227,11 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
 
   onRateFarmer($event) {
     this.subscriptions.push(
-      this.viewSupplyAdService.rateUser(this.supplyAd.id, $event.newValue).subscribe(() => {
-        this.toastr.success('You rated the farmer');
-      })
+      this.viewSupplyAdService
+        .rateUser(this.supplyAd.id, $event.newValue)
+        .subscribe(() => {
+          this.toastr.success('You rated the farmer');
+        })
     );
   }
 }

@@ -43,13 +43,13 @@ export class StatsComponent implements OnInit, OnDestroy {
   public barChartColors: Color[] = [{ backgroundColor: 'chartreuse' }];
 
   lineChartData: ChartDataSets[] = [
-    { data: [0, 0, 0, 0, 0], label: 'No. of ratings' },
+    { data: [0, 0, 0, 0, 0], label: 'No. of ratings' }
   ];
   lineChartLabels: Label[] = ['1', '2', '3', '4', '5'];
   lineChartColors: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: 'gold',
+      backgroundColor: 'gold'
     }
   ];
   lineChartLegend = true;
@@ -63,8 +63,7 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
         const soldAdCount = res.filter(ad => ad.status === 'sold').length;
         const activeAdCount = res.filter(ad => ad.status === 'active').length;
-        const deletedAdCount = res.filter(ad => ad.status === 'deleted')
-          .length;
+        const deletedAdCount = res.filter(ad => ad.status === 'deleted').length;
         this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]];
 
         const dic: Object = {};
