@@ -158,4 +158,8 @@ export class ViewSupplyAdService {
         .update({ status: 'Approved' });
     });
   }
+
+  rateUser(adId: string, rate: number): Observable<void> {
+    return from(this.afs.collection('supplyAd').doc(adId).update({rating: rate}));
+  }
 }
