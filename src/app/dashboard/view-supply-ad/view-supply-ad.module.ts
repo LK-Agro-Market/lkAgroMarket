@@ -18,6 +18,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [ViewSupplyAdComponent],
@@ -38,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbInputModule,
     NbUserModule,
     NbBadgeModule,
-    NgbModule
+    NgbModule,
+    RatingModule
   ]
 })
 export class ViewSupplyAdModule {}

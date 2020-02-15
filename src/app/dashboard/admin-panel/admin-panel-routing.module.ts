@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchSupplyAdsComponent } from './search-supply-ads.component';
+import { AdminPanelComponent } from './admin-panel.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchSupplyAdsComponent
+    component: AdminPanelComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SearchSupplyAdsRoutingModule {}
+export class AdminPanelRoutingModule {}

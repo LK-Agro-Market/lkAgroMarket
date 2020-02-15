@@ -13,7 +13,6 @@ export interface SupplyAd {
   expireDate: string;
   createdAt: string;
   views: number;
-  contactClicks: number;
   owner: string;
   rating?: number;
   buyer?: User;
