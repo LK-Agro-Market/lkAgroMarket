@@ -30,16 +30,13 @@
           >
             Unfollow
           </button>
-          <button class="btn btn-info" *ngIf="profileOwnerId != viewer.uid">
+          <button
+            [routerLink]="['/chats', profileOwnerId]"
+            class="btn btn-info"
+            *ngIf="profileOwnerId != viewer.uid"
+          >
             Chat
           </button>
-          <!-- <button
-            href="#"
-            class="btn btn-danger"
-            *ngIf="profileOwnerId == viewer.uid"
-          >
-            Delete
-          </button> -->
         </div>
       </div>
     </div>
@@ -282,3 +279,5 @@
     </div>
   </div>
 </div>
+
+<app-stats *ngIf="selectedUserType == 'Farmer'"></app-stats>

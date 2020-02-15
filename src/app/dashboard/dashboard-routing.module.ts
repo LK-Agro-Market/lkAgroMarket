@@ -37,7 +37,7 @@ const routes: Routes = [
           )
       },
       {
-        path: 'chat',
+        path: 'chats',
         loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       },
       {
