@@ -7,6 +7,7 @@ import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SupplyAdComment } from 'src/app/shared/models/supply-ad-comment';
 import { ViewSupplyAdService } from './view-supply-ad.service';
+import { Agreement } from 'src/app/shared/models/agreement';
 
 @Component({
   selector: 'app-view-supply-ad',
@@ -34,6 +35,14 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   attemptedComment = false;
   processingComment = false;
 
+  pendingAgreements: Agreement[];
+  isViewerAgreed: boolean = false;
+  viewersAgreement: Agreement;
+  approvedAgreement: Agreement;
+  agreementDate = new Date().toISOString().split('T')[0];
+  attemptedAgreement = false;
+  processingAgreement = false;
+
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -54,12 +63,13 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.route.params.subscribe(routeParams => {
         this.supplyAdId = routeParams.supplyAdId;
+        this.viewSupplyAdService.increaseViewCount(this.supplyAdId);
+
         this.subscriptions.push(
           this.viewSupplyAdService
             .getAd(this.supplyAdId)
             .subscribe(supplyAd => {
               this.supplyAd = supplyAd;
-
               this.supplyAdForm.patchValue({
                 quantity: supplyAd.quantity,
                 quantityUnit: supplyAd.quantityUnit,
@@ -81,6 +91,31 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
                   .getComments(supplyAd.id)
                   .subscribe(comments => {
                     this.adComments = comments;
+                  })
+              );
+
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getPendingAgreements(supplyAd.id)
+                  .subscribe(agreements => {
+                    this.pendingAgreements = agreements;
+                    this.isViewerAgreed =
+                      agreements.filter(
+                        agreement => agreement.buyer.uid == this.viewer.uid
+                      ).length > 0;
+                    if (this.isViewerAgreed == true) {
+                      this.viewersAgreement = agreements.filter(
+                        agreement => agreement.buyer.uid == this.viewer.uid
+                      )[0];
+                    }
+                  })
+              );
+
+              this.subscriptions.push(
+                this.viewSupplyAdService
+                  .getApprovedAgreements(supplyAd.id)
+                  .subscribe(agreement => {
+                    this.approvedAgreement = agreement;
                   })
               );
             })
@@ -139,13 +174,54 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
       return;
     }
     this.processingComment = true;
-    this.viewSupplyAdService
-      .createComment(this.newComment, this.supplyAdId, this.viewer)
-      .subscribe(() => {
-        this.newComment = '';
-        this.attemptedComment = false;
-        this.processingComment = false;
-        this.toastr.success('Published your comment');
-      });
+    this.subscriptions.push(
+      this.viewSupplyAdService
+        .createComment(this.newComment, this.supplyAdId, this.viewer)
+        .subscribe(() => {
+          this.newComment = '';
+          this.attemptedComment = false;
+          this.processingComment = false;
+          this.toastr.success('Published your comment');
+        })
+    );
+  }
+
+  agreeToBuy() {
+    this.attempted = true;
+    if (this.agreementDate === '') {
+      return;
+    }
+    this.processingAgreement = true;
+    this.subscriptions.push(
+      this.viewSupplyAdService
+        .createPendingAgreement(
+          this.supplyAd.id,
+          this.viewer,
+          this.agreementDate
+        )
+        .subscribe(() => {
+          this.processingAgreement = false;
+        })
+    );
+  }
+
+  cancelPendingAgreement() {
+    this.processingAgreement = true;
+    this.subscriptions.push(
+      this.viewSupplyAdService
+        .deletePendingAgreement(this.viewersAgreement.agreementId)
+        .subscribe(() => {
+          this.processingAgreement = false;
+        })
+    );
+  }
+
+  agreeToSell(agreementId: string) {
+    this.processingAgreement = true;
+    this.subscriptions.push(
+      this.viewSupplyAdService.approveAgreement(agreementId).subscribe(() => {
+        this.processingAgreement = false;
+      })
+    );
   }
 }

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SupplyAd } from 'src/app/shared/models/supply-ad';
 
@@ -13,7 +11,9 @@ export class SearchSupplyAdsService {
 
   getActiveAds(): Observable<SupplyAd[]> {
     return this.afs
-      .collection<SupplyAd>('supplyAd', ref => ref.where('status', '==', 'active').orderBy('createdAt','desc'))
+      .collection<SupplyAd>('supplyAd', ref =>
+        ref.where('status', '==', 'active').orderBy('createdAt', 'desc')
+      )
       .valueChanges();
   }
 }

@@ -34,7 +34,7 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
 
   onFilterAds($event: string[]) {
     if ($event.length) {
-      this.filteredSupplyAds= this.allSupplyAds.filter(ad =>
+      this.filteredSupplyAds = this.allSupplyAds.filter(ad =>
         $event.includes(ad.food)
       );
     } else {

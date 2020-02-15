@@ -1,20 +1,21 @@
 <div class="container-fluid" *ngIf="adOwnerUser && viewer">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <nb-card
         accent="warning"
-        *ngIf="supplyAd"
+        *ngIf="
+          supplyAd &&
+          supplyAd.status == 'active' &&
+          adOwnerUser.uid == viewer.uid
+        "
         [nbSpinner]="processing"
         nbSpinnerStatus="primary"
         nbSpinnerSize="large"
       >
         <nb-card-header>
           <div class="card-header-content">
-            <span class="text-left" *ngIf="adOwnerUser.uid == viewer.uid">
+            <span class="text-left">
               Update Advertisment
-            </span>
-            <span class="text-left" *ngIf="adOwnerUser.uid != viewer.uid">
-              Supply Advertisment
             </span>
           </div>
         </nb-card-header>
@@ -52,10 +53,7 @@
                 </p>
               </div>
               <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item"
-                  *ngIf="adOwnerUser.uid == viewer.uid"
-                >
+                <li class="list-group-item">
                   <div class="form-group">
                     <label>Update ad description</label>
                     <textarea
@@ -74,12 +72,6 @@
                       >
                     </div>
                   </div>
-                </li>
-                <li
-                  class="list-group-item"
-                  *ngIf="adOwnerUser.uid != viewer.uid"
-                >
-                  Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
                 </li>
                 <li
                   class="list-group-item"
@@ -154,22 +146,7 @@
                     </div>
                   </div>
                 </li>
-                <li
-                  class="list-group-item"
-                  *ngIf="adOwnerUser.uid != viewer.uid"
-                >
-                  Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
-                </li>
-                <li
-                  class="list-group-item"
-                  *ngIf="adOwnerUser.uid != viewer.uid"
-                >
-                  Expire Date - {{ supplyAd.expireDate }}
-                </li>
-                <li
-                  class="list-group-item"
-                  *ngIf="adOwnerUser.uid == viewer.uid"
-                >
+                <li class="list-group-item">
                   <div class="form-group">
                     <label>Expire date</label>
                     <input
@@ -193,36 +170,242 @@
                   Published On -
                   {{ supplyAd.createdAt | date: 'MMM d, y h:mm:ss a' }}
                 </li>
-                <li class="list-group-item">
-                  Views - {{ supplyAd.views }}, Contact Clicks -
-                  {{ supplyAd.contactClicks }}
-                </li>
+                <li class="list-group-item">Views - {{ supplyAd.views }}</li>
               </ul>
-              <div class="card-body" *ngIf="adOwnerUser.uid == viewer.uid">
+              <div class="card-body">
                 <button type="submit" nbButton>Update Ad</button>
-              </div>
-              <div class="card-body" *ngIf="adOwnerUser.uid != viewer.uid">
-                <button [routerLink]="['/profile', adOwnerUser.uid]" nbButton status="success">Contact Farmer</button>
               </div>
             </div>
           </form>
         </nb-card-body>
       </nb-card>
-    </div>
 
-    <div class="col-sm-6">
-      <nb-card accent="success" *ngIf="supplyAd">
+      <nb-card
+        accent="warning"
+        *ngIf="
+          supplyAd &&
+          (adOwnerUser.uid != viewer.uid || supplyAd.status == 'sold')
+        "
+        [nbSpinner]="processing"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+      >
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              Mark As Sold
+              Supply Advertisment
             </span>
           </div>
         </nb-card-header>
         <nb-card-body>
-          select buyer
+          <div class="card">
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+            <nb-badge
+              text="Organic"
+              status="success"
+              position="top right"
+              *ngIf="supplyAd.organic == 'Organic'"
+            >
+            </nb-badge>
+            <nb-badge
+              text="Expired"
+              status="danger"
+              position="top left"
+              *ngIf="
+                supplyAd.expireDate < currentTime && supplyAd.status == 'active'
+              "
+            >
+            </nb-badge>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ supplyAd.food }}
+                <span class="food-type">- {{ supplyAd.type }}</span>
+              </h5>
+              <p class="card-text">
+                {{ supplyAd.description }}
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+              </li>
+              <li class="list-group-item">
+                Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+              </li>
+              <li class="list-group-item">
+                Expire Date - {{ supplyAd.expireDate }}
+              </li>
+              <li class="list-group-item">
+                Published On -
+                {{ supplyAd.createdAt | date: 'MMM d, y h:mm:ss a' }}
+              </li>
+              <li class="list-group-item">Views - {{ supplyAd.views }}</li>
+            </ul>
+            <div class="card-body" *ngIf="adOwnerUser.uid != viewer.uid">
+              <button
+                [routerLink]="['/profile', adOwnerUser.uid]"
+                nbButton
+                status="warning"
+              >
+                Contact Farmer
+              </button>
+            </div>
+          </div>
         </nb-card-body>
       </nb-card>
+    </div>
+
+    <div class="col-md-6">
+      <nb-card
+        accent="success"
+        [nbSpinner]="processingAgreement"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+        *ngIf="supplyAd && supplyAd.status == 'active'"
+      >
+        <nb-card-header>
+          <div class="card-header-content">
+            <span class="text-left" *ngIf="adOwnerUser.uid == viewer.uid">
+              Sell Harvest/Agro Product
+            </span>
+            <span class="text-left" *ngIf="adOwnerUser.uid != viewer.uid">
+              Buy Harvest/Agro Product
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body
+          *ngIf="pendingAgreements && adOwnerUser.uid == viewer.uid"
+        >
+          <p *ngIf="pendingAgreements.length == 0">
+            No any buying requests yet
+          </p>
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item"
+              *ngFor="let agreement of pendingAgreements"
+            >
+              <div class="row">
+                <div class="col-sm-5">
+                  <nb-user
+                    [name]="agreement.buyer.displayName"
+                    [picture]="agreement.buyer.photoURL"
+                    [routerLink]="['/profile', agreement.buyer.uid]"
+                  >
+                  </nb-user>
+                </div>
+                <div class="col-sm-3">
+                  need to buy on {{ agreement.agreementDate }}
+                </div>
+                <div class="col-sm-4">
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    (click)="agreeToSell(agreement.agreementId)"
+                  >
+                    Agree To Sell
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nb-card-body>
+        <nb-card-body
+          *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == false"
+        >
+          <p>
+            Tell the farmer that you need to buy this harvest/agro product by
+            clicking on <b>Agree To Buy</b> button
+            <b>on or before the date, mentioned below</b>. If farmer also agree
+            to sell this to you, then an online agreement will be generated
+            automatically.
+          </p>
+          <div class="input-group mb-3">
+            <input
+              type="date"
+              class="form-control"
+              placeholder="Buy on or before"
+              [(ngModel)]="agreementDate"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-success"
+                type="button"
+                (click)="agreeToBuy()"
+              >
+                Agree To Buy
+              </button>
+            </div>
+          </div>
+        </nb-card-body>
+        <nb-card-body
+          *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == true"
+        >
+          <p>
+            You have agreed to buy this harvest/agro product on or before
+            {{ viewersAgreement.agreementDate | date: 'MMM d, y' }}. You can
+            cancel the agreement before farmer sign the agreement if you want
+            to.
+          </p>
+          <button (click)="cancelPendingAgreement()" nbButton status="danger">
+            Cancel Agreement
+          </button>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card
+        accent="success"
+        [nbSpinner]="processingAgreement"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+        *ngIf="supplyAd && supplyAd.status == 'sold' && approvedAgreement"
+      >
+        <nb-card-header>
+          <div class="card-header-content">
+            <span class="text-left">
+              Agreement
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-4">
+              <nb-user
+                [name]="approvedAgreement.buyer.displayName"
+                [picture]="approvedAgreement.buyer.photoURL"
+                [routerLink]="['/profile', approvedAgreement.buyer.uid]"
+              ></nb-user>
+            </div>
+            <div class="col">
+              agreed to buy this harvest on or before
+              {{ approvedAgreement.agreementDate | date: 'MMM d, y' }}
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-4">
+              <nb-user
+                [name]="adOwnerUser.displayName"
+                [picture]="adOwnerUser.photoURL"
+                [routerLink]="['/profile', adOwnerUser.uid]"
+              ></nb-user>
+            </div>
+            <div class="col">
+              accepted the above buyer's agreement and agreed to sell this
+              harvest/agro product to him/her.
+            </div>
+          </div>
+
+          <br />
+          <div class="row"></div>
+        </nb-card-body>
+      </nb-card>
+
       <nb-card accent="info" *ngIf="supplyAd">
         <nb-card-header>
           <div class="card-header-content">

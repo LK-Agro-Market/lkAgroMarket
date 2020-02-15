@@ -6,7 +6,7 @@ nb-layout-column nb-card {
   margin-top: 0px;
   width: 800px;
 }
-nb-layout-header  {
+nb-layout-header {
   width: 900px;
 }
 nb-card nb-icon {
@@ -24,7 +24,7 @@ nb-list nb-list-item {
   width: 600px;
   margin: -0.5rem -0.5rem;
 }
-nb-list nb-list-item button{
+nb-list nb-list-item button {
   width: 600px;
 }
 
@@ -75,7 +75,6 @@ ul li {
   max-width: 300px;
   word-break: break-all;
   text-align: left;
- 
 }
 #stime {
   text-align: left;
@@ -116,9 +115,9 @@ ul li {
 }
 #delete i {
   height: 5px;
-  padding:0px; 
+  padding: 0px;
 }
-#delete  {
+#delete {
   height: 30px;
 }
 #S {
@@ -130,10 +129,10 @@ ul li {
 #S button {
   color: #162df7;
 }
-#fileInput{
+#fileInput {
   display: none;
 }
-#icon{
+#icon {
   width: 20px;
   height: 20px;
   cursor: pointer;

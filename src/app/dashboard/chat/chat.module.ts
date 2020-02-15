@@ -22,7 +22,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
-  declarations: [ChatComponent,GroupchatComponent],
+  declarations: [ChatComponent, GroupchatComponent],
   imports: [
     CommonModule,
     ChatRoutingModule,

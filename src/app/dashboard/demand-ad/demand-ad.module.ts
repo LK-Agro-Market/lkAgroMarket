@@ -24,14 +24,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemandAdComponent } from './demand-ad.component';
 import { CreateDemandAdComponent } from './create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './list-demand-ad/list-demand-ad.component';
-import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-demand-ad/showall-demand-ad.component'
+import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-demand-ad/showall-demand-ad.component';
 
 @NgModule({
   declarations: [
     DemandAdComponent,
     CreateDemandAdComponent,
     ListDemandAdComponent,
-    ShowallDemandAdComponent 
+    ShowallDemandAdComponent
   ],
   imports: [
     CommonModule,

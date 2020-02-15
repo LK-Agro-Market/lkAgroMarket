@@ -8,9 +8,8 @@ describe('GroupchatComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupchatComponent ]
-    })
-    .compileComponents();
+      declarations: [GroupchatComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
