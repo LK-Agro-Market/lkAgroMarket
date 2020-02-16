@@ -32,7 +32,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SupplyAdComponent,
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
-    StatsComponent,
+    StatsComponent
   ],
   imports: [
     CommonModule,

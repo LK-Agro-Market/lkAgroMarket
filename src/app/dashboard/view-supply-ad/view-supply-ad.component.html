@@ -354,8 +354,12 @@
             cancel the agreement before farmer sign the agreement if you want
             to.
           </p>
-          <button appConfirmButton
-          (confirmed)="cancelPendingAgreement()" nbButton status="danger">
+          <button
+            appConfirmButton
+            (confirmed)="cancelPendingAgreement()"
+            nbButton
+            status="danger"
+          >
             Cancel Agreement
           </button>
         </nb-card-body>
@@ -410,13 +414,27 @@
           <div class="rating" *ngIf="approvedAgreement.buyer.uid == viewer.uid">
             <h5>
               Rate This Harvest/ Agro Product
-              <ngx-stars [maxStars]="5" [initialStars]="supplyAd.rating" color="gold" [size]="2" [wholeStars]="true" (ratingOutput)="onRateFarmer($event)"></ngx-stars>
+              <ngx-stars
+                [maxStars]="5"
+                [initialStars]="supplyAd.rating"
+                color="gold"
+                [size]="2"
+                [wholeStars]="true"
+                (ratingOutput)="onRateFarmer($event)"
+              ></ngx-stars>
             </h5>
           </div>
           <div class="rating" *ngIf="adOwnerUser.uid == viewer.uid">
             <h5>
               Ratings You Got for This Ad
-              <ngx-stars [maxStars]="5" [initialStars]="supplyAd.rating" color="gold" [size]="2" [wholeStars]="true" [readonly]="true"></ngx-stars>
+              <ngx-stars
+                [maxStars]="5"
+                [initialStars]="supplyAd.rating"
+                color="gold"
+                [size]="2"
+                [wholeStars]="true"
+                [readonly]="true"
+              ></ngx-stars>
             </h5>
           </div>
         </nb-card-body>
