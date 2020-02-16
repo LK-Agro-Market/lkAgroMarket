@@ -21,6 +21,10 @@ export class SearchSupplyAdsService {
 
   getAgreements(buyer: User): Observable<Agreement[]> {
     console.log(buyer.uid);
-    return this.afs.collection<Agreement>('agreements', ref => ref.where('buyer.uid','==',buyer.uid)).valueChanges();
+    return this.afs
+      .collection<Agreement>('agreements', ref =>
+        ref.where('buyer.uid', '==', buyer.uid)
+      )
+      .valueChanges();
   }
 }

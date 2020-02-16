@@ -32,11 +32,17 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      this.searchSupplyAdsService.getAgreements(this.viewer).subscribe(agreements => {
-        console.log(agreements);
-        this.pendingAgreements = agreements.filter(agreement => agreement.status=='Pending');
-        this.approvedAgreements = agreements.filter(agreement => agreement.status=='Approved');
-      })
+      this.searchSupplyAdsService
+        .getAgreements(this.viewer)
+        .subscribe(agreements => {
+          console.log(agreements);
+          this.pendingAgreements = agreements.filter(
+            agreement => agreement.status == 'Pending'
+          );
+          this.approvedAgreements = agreements.filter(
+            agreement => agreement.status == 'Approved'
+          );
+        })
     );
   }
 

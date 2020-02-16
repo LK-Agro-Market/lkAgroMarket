@@ -147,15 +147,18 @@ export class ViewSupplyAdService {
   }
 
   approveAgreement(agreementId: string, adId: string): Observable<void> {
-    return  from(this.afs
+    return from(
+      this.afs
         .collection('supplyAd')
         .doc(adId)
-        .update({ status: 'sold' }).then(() => {
+        .update({ status: 'sold' })
+        .then(() => {
           this.afs
             .collection('agreements')
             .doc(agreementId)
             .update({ status: 'Approved' });
-        }));
+        })
+    );
   }
 
   rateUser(adId: string, rate: number): Observable<void> {
