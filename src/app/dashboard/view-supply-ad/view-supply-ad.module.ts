@@ -18,6 +18,8 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxStarsModule } from 'ngx-stars';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ViewSupplyAdComponent],
@@ -38,7 +40,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbInputModule,
     NbUserModule,
     NbBadgeModule,
-    NgbModule
+    NgbModule,
+    NgxStarsModule,
+    SharedModule
   ]
 })
 export class ViewSupplyAdModule {}

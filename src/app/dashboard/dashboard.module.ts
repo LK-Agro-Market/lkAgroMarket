@@ -19,6 +19,7 @@ import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module'
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -37,7 +38,8 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module'
     NbIconModule,
     NbTooltipModule,
     NbButtonModule,
-    SharedmoduleModule
+    SharedmoduleModule,
+    SharedModule
   ],
   providers: []
 })
