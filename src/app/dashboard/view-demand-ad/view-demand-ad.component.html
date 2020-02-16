@@ -22,29 +22,25 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-                    {{ 'list.ad.quantity' | translate }} -
+                    <strong>{{ 'list.ad.quantity' | translate }}</strong> -
                     {{ demandAd.expectedamount }}
                   </li>
                   <li class="list-group-item">
-                    {{ 'list.ad.unit' | translate }} - Rs.
+                    <strong> {{ 'list.ad.unit' | translate }}</strong> - Rs.
                     {{ demandAd.priceperunit }}
                   </li>
                   <li class="list-group-item">
-                    {{ 'list.ad.deadline' | translate }} -
+                    <strong>{{ 'list.ad.deadline' | translate }}</strong> -
                     {{ demandAd.deadline }}
                   </li>
                 </ul>
+
                 <div class="card-body">
-                  <div *ngIf="demandAd.owner; else elseBlock">
-                    <a href="buyer-dashboard" class="previous"
-                      >&laquo; Previous</a
-                    >
+                  <div class="container">
+                    <h6>
+                      {{ 'list.ad.view' | translate }} : {{ demandAd.views }}
+                    </h6>
                   </div>
-                  <ng-template #elseBlock>
-                    <a href="all-demand-ads" class="previous"
-                      >&laquo; Previous</a
-                    ></ng-template
-                  >
                 </div>
               </div>
             </div>

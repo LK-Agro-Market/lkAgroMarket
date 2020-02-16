@@ -25,6 +25,7 @@ export class ViewDemandAdComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.route.params.subscribe(routeParams => {
         this.demandAdid = routeParams.demandAdid;
+        this.viewdemandad.countViws(this.demandAdid);
         this.viewdemandad.getdemandad(this.demandAdid).subscribe(demandAd => {
           this.demandAd = demandAd;
           // console.log(this.currentTime);

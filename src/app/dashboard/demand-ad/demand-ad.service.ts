@@ -86,4 +86,21 @@ export class DemandAdService {
   getalldemandAds(): Observable<DemandAd[]> {
     return this.afs.collection<DemandAd>('demandAd').valueChanges();
   }
+  countViws(adId: string) {
+    this.afs
+      .collection('demandAd')
+      .doc(adId)
+      .get()
+      .pipe(
+        map(res => res.data()),
+        map(data => data as DemandAd)
+      )
+      .subscribe(res => {
+        const count = res.views + 1;
+        this.afs
+          .collection('demandAd')
+          .doc(adId)
+          .update({ views: count });
+      });
+  }
 }

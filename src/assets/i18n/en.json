@@ -43,7 +43,8 @@
     "ad": {
       "quantity": "Quantity",
       "unit": "Price per unit",
-      "deadline": "Deadline"
+      "deadline": "Deadline",
+      "view": "View"
     },
     "button": {
       "view": "View",
