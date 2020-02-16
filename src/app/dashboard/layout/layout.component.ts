@@ -29,7 +29,7 @@ export class LayoutComponent implements OnInit {
     private authService: AuthService,
     private userDetailsService: UserDetailsService,
     public translate: TranslateService,
-    private nbMenuService: NbMenuService,
+    private nbMenuService: NbMenuService
   ) {
     translate.addLangs(['en', 'sl', 'tm']);
     translate.setDefaultLang('en');
@@ -48,7 +48,7 @@ export class LayoutComponent implements OnInit {
       .subscribe(userDetails => {
         this.userDetails = userDetails;
       });
-    this.nbMenuService.onItemClick().subscribe((event) => {
+    this.nbMenuService.onItemClick().subscribe(event => {
       if (event.item.title === 'Sign out') {
         this.logout();
       }
