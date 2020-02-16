@@ -306,7 +306,8 @@
                   <button
                     class="btn btn-success"
                     type="button"
-                    (click)="agreeToSell(agreement.agreementId)"
+                    appConfirmButton
+                    (confirmed)="agreeToSell(agreement.agreementId)"
                   >
                     Agree To Sell
                   </button>
@@ -336,7 +337,8 @@
               <button
                 class="btn btn-success"
                 type="button"
-                (click)="agreeToBuy()"
+                appConfirmButton
+                (confirmed)="agreeToBuy()"
               >
                 Agree To Buy
               </button>
@@ -352,7 +354,8 @@
             cancel the agreement before farmer sign the agreement if you want
             to.
           </p>
-          <button (click)="cancelPendingAgreement()" nbButton status="danger">
+          <button appConfirmButton
+          (confirmed)="cancelPendingAgreement()" nbButton status="danger">
             Cancel Agreement
           </button>
         </nb-card-body>
