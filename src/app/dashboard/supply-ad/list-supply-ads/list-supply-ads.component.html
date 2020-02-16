@@ -157,6 +157,14 @@
                 Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
               </li>
             </ul>
+            <div class="card-body">
+              <button
+                class="btn btn-success btn-sm"
+                [routerLink]="['/view-supply-ad', supplyAd.id]"
+              >
+                View Agreement
+              </button>
+            </div>
           </div>
         </div>
       </div>
