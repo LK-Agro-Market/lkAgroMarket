@@ -82,3 +82,76 @@
     </div>
   </nb-card-body>
 </nb-card>
+
+<nb-card accent="success">
+  <nb-card-header>
+    <div class="card-header-content">
+      <span class="text-left">
+        Your Previous Agreements
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let supplyAd of filteredSupplyAds">
+          <div class="card">
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+            <nb-badge
+              text="Organic"
+              status="success"
+              position="top right"
+              *ngIf="supplyAd.organic == 'Organic'"
+            >
+            </nb-badge>
+            <nb-badge
+              text="Expired"
+              status="danger"
+              position="top left"
+              *ngIf="supplyAd.expireDate < currentTime"
+            >
+            </nb-badge>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ supplyAd.food }}
+                <span class="food-type">- {{ supplyAd.type }}</span>
+              </h5>
+              <p class="card-text">{{ supplyAd.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+              </li>
+              <li class="list-group-item">
+                Price per unit - Rs. {{ supplyAd.pricePerUnit }}
+              </li>
+              <li class="list-group-item">
+                Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+              </li>
+            </ul>
+            <div class="card-body">
+              <button
+                class="btn btn-success btn-sm"
+                [routerLink]="['/view-supply-ad', supplyAd.id]"
+              >
+                View Ad
+              </button>
+              <button
+                class="btn btn-primary btn-sm"
+                [routerLink]="['/view-supply-ad', supplyAd.id]"
+              >
+                Comment/ Buy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
