@@ -9,7 +9,7 @@
       >-
       <small>{{ comment.date | date: 'MMM d, h:mm:ss a' }}</small>
     </div>
-    <div><b> Comment:</b> {{ comment.content }}</div>
+    <div><b> {{'comments.comment'|translate}}:</b> {{ comment.content }}</div>
 
     <!-- Buttons to delete and view reply of a comment -->
     <button
@@ -17,14 +17,14 @@
       class="btn btn-outline-danger btn-sm"
       (click)="onDelete(comment.docId)"
     >
-      Delete
+    {{'comments.button.delete'|translate}}
     </button>
     <button
       type="button"
       class="btn btn-outline-info btn-sm"
       (click)="viewcReply = comment.docId; test(); getdocId(comment.docId)"
     >
-      Reply
+    {{'comments.button.reply'|translate}}
     </button>
     <ng-template [ngIf]="viewcReply == comment.docId && viewcommentReply"
       ><div><app-reply [parentdocId]="parentdocId"></app-reply></div
@@ -45,7 +45,7 @@
     />
     <div class="btns">
       <button class="button button1" (click)="on(comment)">
-        Comment
+        {{'comments.button.comment'|translate}}
       </button>
     </div>
   </div>

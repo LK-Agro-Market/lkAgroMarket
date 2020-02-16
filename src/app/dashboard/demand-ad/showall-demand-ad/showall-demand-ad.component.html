@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        Demand Advertisments
+        {{'list.title2'|translate}}
       </span>
       <span class="text-right">
         <div class="col">
@@ -35,13 +35,13 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                Quantity - {{ property.expectedamount }}
+                {{'list.ad.quantity'|translate}}  - {{ property.expectedamount }}
               </li>
               <li class="list-group-item">
-                Price per unit - Rs. {{ property.priceperunit }}
+                {{'list.ad.unit'|translate}} - Rs. {{ property.priceperunit }}
               </li>
               <li class="list-group-item">
-                Deadline - {{ property.deadline }}
+                {{'list.ad.deadline'|translate}} - {{ property.deadline }}
               </li>
             </ul>
             <div class="card-body">
@@ -49,7 +49,7 @@
                 class="btn btn-success"
                 [routerLink]="['/view-demand-ad', property.id]"
               >
-                View
+              {{'list.button.view'|translate}}
               </button>
             </div>
           </div>

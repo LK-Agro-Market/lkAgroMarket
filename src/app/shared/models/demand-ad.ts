@@ -3,7 +3,7 @@ export interface DemandAd {
   foodtype: string;
   food: string;
   expectedamount: number;
-  unit: string;
+   unit: string;
   priceperunit: number;
   description: string;
   organic: string;

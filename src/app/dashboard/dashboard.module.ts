@@ -19,6 +19,7 @@ import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { SearchSupplyAdsComponent } from './search-supply-ads/search-supply-ads.component';
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module'
 
 @NgModule({
   declarations: [LayoutComponent, SearchSupplyAdsComponent],
@@ -36,7 +37,8 @@ import { SearchSupplyAdsComponent } from './search-supply-ads/search-supply-ads.
     NbEvaIconsModule,
     NbIconModule,
     NbTooltipModule,
-    NbButtonModule
+    NbButtonModule,
+    SharedmoduleModule
   ],
   providers: []
 })

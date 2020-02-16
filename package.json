@@ -27,6 +27,8 @@
     "@nebular/eva-icons": "^4.6.0",
     "@nebular/theme": "^4.6.0",
     "@ng-bootstrap/ng-bootstrap": "^5.2.3",
+    "@ngx-translate/core": "^12.1.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "@nrwl/workspace": "^8.12.4",
     "@types/events": "^3.0.0",
     "bootstrap": "^4.4.1",

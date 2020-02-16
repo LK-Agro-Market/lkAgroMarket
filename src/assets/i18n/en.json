@@ -1,0 +1,69 @@
+{
+
+    "create":{
+        "title":"Look for something to buy!",
+        "form":{
+            "catogary":"Select a food category...",
+            "product": "Select what are you looking for...",
+            "amount": "expected amount",
+            "unit":"Unit",
+            "price":"expected price per unit(Rs)",
+            "description":"Description",
+            "type":"Organic or Inorganic",
+            "deadline":"Deadline"
+                },
+        "placeholder":{
+                    "catogary":"Select category",
+                    "product":"Harvest/Agro Products",
+                    "amount":"Quntity...",
+                    "unit":"unit ex: Kg",
+                    "price":"Expected price...",
+                    "description":"Short description about what are you looking for...",
+                    "type":"Choose one"
+    
+                },
+        "button":{
+                    "create":"CREATE AD",
+                    "cancel":"CANCEL AD"
+                 },
+        "requred":{
+            "catogary":"Food category is required",
+            "product": "Food name is required",
+            "amount": "Quantity is required",
+            "unit":"Unit is required",
+            "price":"Price is required",
+            "description":"The short description is required",
+            "type":"This field is required"
+                  }               
+            },
+    "list":{
+        "title":"Your Current Advertisments",
+        "title2":"Demand Advertisments",
+        "ad":{
+            "quantity":"Quantity",
+            "unit":"Price per unit",
+            "deadline":"Deadline"
+
+        },
+        "button":{
+            "view":"View",
+            "update":"Update",
+            "delete":"Delete"
+        }
+     },
+     "view":{
+         "title":"View",
+         "comment":"Comments"
+     },
+     "comments":{
+         "comment":"Comments",
+         "button":{
+         "delete":"Delete",
+         "reply":"Reply",
+         "comment":"Comment"
+        }
+     },
+     "language":"Language"
+
+
+}

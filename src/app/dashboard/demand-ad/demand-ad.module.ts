@@ -27,6 +27,7 @@ import { CreateDemandAdComponent } from './create-demand-ad/create-demand-ad.com
 import { ListDemandAdComponent } from './list-demand-ad/list-demand-ad.component';
 import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button.directive';
 import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-demand-ad/showall-demand-ad.component'
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-de
     CreateDemandAdComponent,
     ListDemandAdComponent,
     ConfirmButtonDirective,
-    ShowallDemandAdComponent 
+    ShowallDemandAdComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +58,8 @@ import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-de
     NbListModule,
     ChartsModule,
     NgbModule,
-    NbTooltipModule
+    NbTooltipModule,
+    SharedmoduleModule
   ]
 })
 export class DemandAdModule {}

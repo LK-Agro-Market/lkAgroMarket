@@ -5,7 +5,7 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              View
+              {{'view.title'|translate}}
             </span>
           </div>
         </nb-card-header>
@@ -22,13 +22,13 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-                    Quantity - {{ demandAd.expectedamount }}
+                    {{'list.ad.quantity'|translate}}  - {{ demandAd.expectedamount }}
                   </li>
                   <li class="list-group-item">
-                    Price per unit - Rs. {{ demandAd.priceperunit }}
+                    {{'list.ad.unit'|translate}} - Rs. {{ demandAd.priceperunit }}
                   </li>
                   <li class="list-group-item">
-                    Deadline - {{ demandAd.deadline }}
+                    {{'list.ad.deadline'|translate}} - {{ demandAd.deadline }}
                   </li>
                 </ul>
                 <div class="card-body">
@@ -54,7 +54,7 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              Comments
+              {{'view.comment'|translate}}
             </span>
           </div>
         </nb-card-header>
