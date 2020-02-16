@@ -35,6 +35,7 @@ import { AuthReverseGuard } from './shared/guards/auth-reverse.guard';
 import { RegistrationGuard } from './shared/guards/registration.guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { RegiReverseGuard } from './shared/guards/regi-reverse.guard';
     ToastrModule.forRoot({
       preventDuplicates: false,
       closeButton: true
-    })
+    }),
+    SharedModule
   ],
   providers: [
     AuthGuard,
