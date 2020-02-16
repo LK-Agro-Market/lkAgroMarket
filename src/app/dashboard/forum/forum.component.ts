@@ -7,7 +7,7 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit {
-  showMyPost = false;
+  postType = 'all';
   isCreate = false;
   createOrUpdate;
 
@@ -17,9 +17,9 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {}
 
-  changePostType(showMyPost: boolean) {
+  changeDisplayPost(postType) {
     // set post type
-    this.showMyPost = showMyPost;
+    this.postType = postType;
   }
 
   toggleForm(event) {

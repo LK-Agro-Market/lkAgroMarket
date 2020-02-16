@@ -8,7 +8,6 @@ import {
 
 import { User } from 'firebase';
 import { UserDetailsService } from 'src/app/shared/services/user-details.service';
-import { UserDetails } from 'src/app/shared/models/user-details';
 
 @Component({
   selector: 'app-user-profile-card',
@@ -19,14 +18,14 @@ export class UserProfileCardComponent implements OnInit {
   userName;
   userEmail;
   userImg;
-  myPostOnly = false;
-  userDetails: UserDetails;
-
+  postType = 'all';
+  userLevel;
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  @Output() showMypostOnly: EventEmitter<boolean> = new EventEmitter();
+  @Output() changePost: EventEmitter<any> = new EventEmitter();
   @ViewChild('my', { static: true }) my;
   @ViewChild('all', { static: true }) all;
+  @ViewChild('admin', { static: true }) admin;
 
   constructor(
     private userDetailsService: UserDetailsService,
@@ -36,24 +35,19 @@ export class UserProfileCardComponent implements OnInit {
     this.userName = this.user.displayName;
     this.userEmail = this.user.email;
     this.userImg = this.user.photoURL;
-    this.showMy(false);
+    this.chnagePostType('all');
 
     this.userDetailsService
       .getUserDetails(this.user.uid)
       .subscribe(userDetails => {
-        this.userDetails = userDetails;
+        this.userLevel = userDetails.userLevel;
       });
 
-    console.log(this.userDetails);
   }
 
-  showMy(showMyPost) {
+  chnagePostType(postType) {
     // change post view my posts/all posts
-    this.showMypostOnly.emit(showMyPost);
-    if (showMyPost) {
-      this.myPostOnly = true;
-    } else {
-      this.myPostOnly = false;
-    }
+    this.changePost.emit(postType);
+    this.postType = postType;
   }
 }

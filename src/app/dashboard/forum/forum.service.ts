@@ -24,7 +24,7 @@ export class ForumService {
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage
-  ) {}
+  ) { }
 
   getPostId() {
     return this.afs.createId();
@@ -292,10 +292,43 @@ export class ForumService {
       });
   }
 
-  getPost() {
+  getPost(userType) {
     // get all
-    return this.afs
+    if (userType === 'admin') {
+      return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
+      .snapshotChanges()
+      .pipe(
+        map(postItems =>
+          postItems.map(postItem => {
+            const data = postItem.payload.doc.data();
+            const key = postItem.payload.doc.id;
+            return { key, ...data };
+          })
+        )
+      );
+    } else {
+      return this.afs
+        .collection('post', ref => ref.where(userType, '==', true).orderBy('date', 'desc'))
+        .snapshotChanges()
+        .pipe(
+          map(postItems =>
+            postItems.map(postItem => {
+              const data = postItem.payload.doc.data();
+              const key = postItem.payload.doc.id;
+              return { key, ...data };
+            })
+          )
+        );
+    }
+  }
+
+  getPostByID(userId) {
+    // get post by user id
+    return this.afs
+      .collection('post', ref =>
+        ref.where('userID', '==', userId).orderBy('date', 'desc')
+      )
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -308,11 +341,11 @@ export class ForumService {
       );
   }
 
-  getPostByID(userId) {
-    // get post by user id
+  getAdminNotes() {
+    // get posts which post by admin
     return this.afs
       .collection('post', ref =>
-        ref.where('userID', '==', userId).orderBy('date', 'desc')
+        ref.where('userID', '==', 'asdasd').orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(
