@@ -30,7 +30,14 @@ const routes: Routes = [
           )
       },
       {
-        path: 'chat',
+        path: 'search-supply-ads',
+        loadChildren: () =>
+          import('./search-supply-ads/search-supply-ads.module').then(
+            m => m.SearchSupplyAdsModule
+          )
+      },
+      {
+        path: 'chats',
         loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
       },
       {
@@ -48,6 +55,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./view-demand-ad/view-demand-ad.module').then(
             m => m.ViewDemandAdModule
+          )
+      },
+      {
+        path: 'admin-panel',
+        loadChildren: () =>
+          import('./admin-panel/admin-panel.module').then(
+            m => m.AdminPanelModule
           )
       }
     ]

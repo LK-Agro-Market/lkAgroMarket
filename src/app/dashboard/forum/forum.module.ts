@@ -13,9 +13,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
-  NbThemeModule,
   NbLayoutModule,
-  NbSidebarModule,
   NbIconModule,
   NbTooltipModule,
   NbChatModule,
