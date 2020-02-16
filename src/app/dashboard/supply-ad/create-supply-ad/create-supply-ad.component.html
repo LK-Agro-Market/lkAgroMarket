@@ -5,17 +5,17 @@
   nbSpinnerSize="large"
 >
   <nb-card-header class="card-header-content">
-    Create New Advertisement
+    {{'farmer.title'|translate}}
   </nb-card-header>
   <nb-card-body>
     <form [formGroup]="supplyAdForm" (ngSubmit)="createSupplyAd()">
       <div class="row">
         <div class="col-sm-6">
-          <label>Harvest/ Agro product category</label>
+          <label>{{'farmer.form.catogary'|translate}}</label>
           <div class="form-group">
             <nb-select
               fullWidth
-              placeholder="Select Category"
+              placeholder="{{'farmer.placeholder.catogary'|translate}}"
               (selectedChange)="retriveFoods()"
               formControlName="type"
             >
@@ -26,17 +26,17 @@
               class="text-danger"
             >
               <span *ngIf="!!formControls.type.errors.required"
-                >Food category is required</span
+                >{{'farmer.required.catogary'|translate}}</span
               >
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Harvest/ Agro product</label>
+            <label>{{'farmer.form.product'|translate}}</label>
             <nb-select
               fullWidth
-              placeholder="Select Harvest/ Agro Product"
+              placeholder="{{'farmer.placeholder.product'|translate}}"
               formControlName="food"
             >
               <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
@@ -48,7 +48,7 @@
               class="text-danger"
             >
               <span *ngIf="!!formControls.food.errors.required"
-                >Food name is required</span
+                >{{'farmer.required.product'|translate}}</span
               >
             </div>
           </div>
@@ -57,60 +57,60 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <label>Quantity</label>
+            <label>{{'farmer.form.quentity'|translate}}</label>
             <input
               type="text"
               nbInput
               fullWidth
               formControlName="quantity"
-              placeholder="Quantity"
+              placeholder="{{'farmer.placeholder.amount'|translate}}"
             />
             <div
               *ngIf="attempted && !!formControls.quantity.errors"
               class="text-danger"
             >
               <span *ngIf="!!formControls.quantity.errors.required"
-                >Quantity is required</span
+                >{{'farmer.required.amount'|translate}}</span
               >
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label>Quantity unit</label>
+            <label>{{'farmer.form.unit'|translate}}</label>
             <input
               type="text"
               nbInput
               fullWidth
               formControlName="quantityUnit"
-              placeholder="Quantity Measure Unit"
+              placeholder="{{'farmer.placeholder.unit'|translate}}"
             />
             <div
               *ngIf="attempted && !!formControls.quantityUnit.errors"
               class="text-danger"
             >
               <span *ngIf="!!formControls.quantityUnit.errors.required"
-                >Quantity unit is required</span
+                >{{'farmer.required.unit'|translate}}</span
               >
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label>Price per unit</label>
+            <label>{{'farmer.form.price'|translate}}</label>
             <input
               type="text"
               nbInput
               fullWidth
               formControlName="pricePerUnit"
-              placeholder="Price Per Unit"
+              placeholder="{{'farmer.placeholder.price'|translate}}"
             />
             <div
               *ngIf="attempted && !!formControls.pricePerUnit.errors"
               class="text-danger"
             >
               <span *ngIf="!!formControls.pricePerUnit.errors.required"
-                >Price per unit is required</span
+                >{{'farmer.required.price'|translate}}</span
               >
             </div>
           </div>
@@ -119,7 +119,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Main image</label>
+            <label>{{'farmer.form.image.mainimage'|translate}}</label>
             <input
               type="file"
               nbInput
@@ -138,14 +138,14 @@
             <img class="imagePreview" [src]="image1LL" />
             <div *ngIf="attempted" class="text-danger">
               <span *ngIf="!supplyAdForm.value.image1">
-                Main image is required
+                {{'farmer.required.image'|translate}}
               </span>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Image2</label>
+            <label>{{'farmer.form.image.image2'|translate}}</label>
             <input
               type="file"
               nbInput
@@ -168,7 +168,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Image3</label>
+            <label>{{'farmer.form.image.image3'|translate}}</label>
             <input
               type="file"
               nbInput
@@ -189,7 +189,7 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Image4</label>
+            <label>{{'farmer.form.image.image4'|translate}}</label>
             <input
               type="file"
               nbInput
@@ -212,20 +212,20 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label>Short description</label>
+            <label>{{'farmer.form.description'|translate}}</label>
             <textarea
               nbInput
               fullWidth
               formControlName="description"
-              placeholder="Short description about the harvest or agro product"
+              placeholder="{{'farmer.placeholder.description'|translate}}"
             ></textarea>
             <div
               *ngIf="attempted && !!formControls.description.errors"
               class="text-danger"
             >
               <span *ngIf="!!formControls.description.errors.required"
-                >A description about your harvest or agro product is
-                required</span
+                >{{'farmer.required.description'|translate}}
+                </span
               >
             </div>
           </div>
@@ -233,11 +233,11 @@
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <label>Organic or Inorganic</label>
+          <label>{{'farmer.form.type'|translate}}</label>
           <div class="form-group">
             <nb-select
               fullWidth
-              placeholder="Organic or Inorganic"
+              placeholder="{{'farmer.placeholder.type'|translate}}"
               formControlName="organic"
             >
               <nb-option value="Organic">Organic</nb-option>
@@ -248,14 +248,14 @@
               class="text-danger"
             >
               <span *ngIf="!!formControls.organic.errors.required"
-                >This field is required</span
+                >{{'farmer.required.type'|translate}}</span
               >
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Expire date</label>
+            <label>{{'farmer.form.deadline'|translate}}</label>
             <input
               nbInput
               fullWidth
@@ -268,7 +268,7 @@
               class="text-danger"
             >
               <span *ngIf="!!formControls.expireDate.errors.required"
-                >Expire date is required</span
+                >{{'farmer.required.date'|translate}}</span
               >
             </div>
           </div>
@@ -276,7 +276,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12 text-right">
-          <button type="submit" nbButton>Create Ad</button>
+          <button type="submit" nbButton>{{'farmer.form.button'|translate}}</button>
         </div>
       </div>
     </form>

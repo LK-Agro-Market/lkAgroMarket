@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
+import { StatsComponent } from './stats/stats.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   NbLayoutModule,
   NbIconModule,
-  NbTooltipModule,
-  NbChatModule,
   NbListModule,
   NbUserModule,
   NbCardModule,
@@ -20,9 +19,10 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, StatsComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -37,7 +37,8 @@ import { environment } from 'src/environments/environment';
     NbSelectModule,
     NbInputModule,
     NbUserModule,
-    AgmCoreModule.forRoot(environment.googleMap)
+    AgmCoreModule.forRoot(environment.googleMap),
+    ChartsModule
   ]
 })
 export class ProfileModule {}

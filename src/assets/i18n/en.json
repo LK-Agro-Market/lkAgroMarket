@@ -63,7 +63,68 @@
          "comment":"Comment"
         }
      },
-     "language":"Language"
-
-
+     "language":"Language",
+"farmer":{
+        "title":"Create New Advertisement",
+    "form":{
+            "catogary":"Harvest/ Agro product category",
+            "product": "Harvest/ Agro product",
+            "quentity": "Quantity",
+            "unit":"Quantity unit",
+            "price":"Price per unit",
+            "image":{
+                    "mainimage":"Main image",
+                    "image2":"Image2",
+                    "image3":"Image3",
+                    "image4":"Image4"
+                    },
+            "description":"Short description",
+            "type":"Organic or Inorganic",
+            "deadline":"Expire date",
+            "button":"Create Ad"
+        },
+"placeholder":{
+                    "catogary":"Select category",
+                    "product":"Select Harvest/ Agro Product",
+                    "amount":"Quntity",
+                    "unit":"Quantity Measure Unit",
+                    "price":"Price Per Unit",
+                    "description":"Short description about the harvest or agro product",
+                    "type":"Organic or Inorganic"
+              },
+                "required":{
+                    "catogary":"Food category is required",
+                    "product": "Food name is required",
+                    "amount": "Quantity is required",
+                    "unit":"Quantity unit is required",
+                    "price":"Price per unit is required",
+                    "image":"Main image is required",
+                    "description":"A description about your harvest or agro product is required",
+                    "type":"This field is required",
+                    "date":"Expire date is required"
+                }
+    
+        },
+        "lists":{
+            "title1":"Your Current Advertisments",
+            "title2":"Your Sold Products' Advertisments",
+            "title3":"Your Deleted Advertisments",
+        "t1":{
+            "quentity":"Quantity",
+            "unit":"Price per unit",
+            "total":" Total"
+            },
+        "button":{
+            "comment":"Comment/ Sell",
+            "update":"Update",
+            "delete":"Delete"
+        }
+           
+    },
+    "stats":{
+        "t1":"Your Ads Summary",
+        "t2":"Your Ad Categories",
+        "t3":"Rates You Got"
+    }
 }
+

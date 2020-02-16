@@ -49,7 +49,46 @@
         nbTooltipPlacement="right"
       ></nb-icon>
     </span>
-    <span class="sidebar-btn" routerLink="/chat" routerLinkActive="green">
+    <span
+      class="sidebar-btn"
+      routerLink="/buyer-dashboard"
+      routerLinkActive="green"
+      *ngIf="userDetails && userDetails.userLevel == 'Buyer'"
+    >
+      <nb-icon
+        icon="home"
+        class="sidebar-icon"
+        nbTooltip="Buyer Dashboard"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
+    <span
+      class="sidebar-btn"
+      routerLink="/admin-panel"
+      routerLinkActive="green"
+      *ngIf="userDetails"
+    >
+      <nb-icon
+        icon="home"
+        class="sidebar-icon"
+        nbTooltip="Admin Panel"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
+    <span
+      class="sidebar-btn"
+      routerLink="/search-supply-ads"
+      routerLinkActive="green"
+      *ngIf="userDetails && userDetails.userLevel == 'Buyer'"
+    >
+      <nb-icon
+        icon="search-outline"
+        class="sidebar-icon"
+        nbTooltip="Search Ads"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
+    <span class="sidebar-btn" routerLink="/chats" routerLinkActive="green">
       <nb-icon
         icon="message-circle-outline"
         class="sidebar-icon"

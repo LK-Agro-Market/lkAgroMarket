@@ -42,15 +42,28 @@ export class StatsComponent implements OnInit, OnDestroy {
   barChartData: ChartDataSets[] = [{ data: [0], label: 'No. Of Ads' }];
   public barChartColors: Color[] = [{ backgroundColor: 'chartreuse' }];
 
+  lineChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0], label: 'No. of ratings' }
+  ];
+  lineChartLabels: Label[] = ['1', '2', '3', '4', '5'];
+  lineChartColors: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'gold'
+    }
+  ];
+  lineChartLegend = true;
+  lineChartPlugins = [];
+  lineChartType: ChartType = 'line';
+
   constructor(private supplyAdService: SupplyAdService) {}
 
   ngOnInit() {
     this.subscriptions.push(
       this.supplyAdService.getAds(this.user.uid).subscribe(res => {
-        const soldAdCount = res.filter(res => res.status === 'sold').length;
-        const activeAdCount = res.filter(res => res.status === 'active').length;
-        const deletedAdCount = res.filter(res => res.status === 'deleted')
-          .length;
+        const soldAdCount = res.filter(ad => ad.status === 'sold').length;
+        const activeAdCount = res.filter(ad => ad.status === 'active').length;
+        const deletedAdCount = res.filter(ad => ad.status === 'deleted').length;
         this.doughnutChartData = [[soldAdCount, activeAdCount, deletedAdCount]];
 
         const dic: Object = {};
@@ -63,6 +76,14 @@ export class StatsComponent implements OnInit, OnDestroy {
         });
         this.barChartLabels = Object.keys(dic);
         this.barChartData[0].data = Object.values(dic);
+
+        const soldAds = res.filter(ad => ad.status === 'sold');
+        const rate1 = soldAds.filter(ad => ad.rating === 1).length;
+        const rate2 = soldAds.filter(ad => ad.rating === 2).length;
+        const rate3 = soldAds.filter(ad => ad.rating === 3).length;
+        const rate4 = soldAds.filter(ad => ad.rating === 4).length;
+        const rate5 = soldAds.filter(ad => ad.rating === 5).length;
+        this.lineChartData[0].data = [rate1, rate2, rate3, rate4, rate5];
       })
     );
   }
