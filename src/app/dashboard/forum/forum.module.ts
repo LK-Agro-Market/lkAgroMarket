@@ -33,6 +33,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
     NbPopoverModule,
     NbCheckboxModule,
     ToastrModule,
-    SharedmoduleModule
+    SharedmoduleModule,
+    TranslateModule
   ]
 })
 export class ForumModule {}
