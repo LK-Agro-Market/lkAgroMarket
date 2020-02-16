@@ -7,19 +7,19 @@
     <nb-sidebar id="S">
       <div id="B">
         <button class="btn btn-default" status="basic" (click)="farmerList()">
-          Farmer's Chats
+          {{ 'chat.fchat' | translate }}
         </button>
       </div>
       <br />
       <div>
         <button class="btn btn-default" status="basic" (click)="buyerList()">
-          Buyer's Chats
+          {{ 'chat.bchat' | translate }}
         </button>
       </div>
       <br />
       <div>
         <button class="btn btn-default" status="basic" (click)="adminList()">
-          Admin's Chats
+          {{ 'chat.achat' | translate }}
         </button>
       </div>
       <br />
@@ -30,8 +30,8 @@
           (click)="farmerGroup()"
           *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
         >
-          Group Chat<br />
-          (Farmers)
+          {{ 'chat.chat' | translate }}<br />
+          {{ 'chat.gfchat' | translate }}
         </button>
       </div>
       <div>
@@ -41,8 +41,8 @@
           (click)="buyerGroup()"
           *ngIf="userDetails && userDetails.userLevel == 'Buyer'"
         >
-          Group Chat<br />
-          (Buyers)
+          {{ 'chat.chat' | translate }}<br />
+          {{ 'chat.gbchat' | translate }}
         </button>
       </div>
     </nb-sidebar>
@@ -263,7 +263,7 @@
                 type="text"
                 [(ngModel)]="content"
                 class="form-control"
-                placeholder="Type a message"
+                placeholder="{{ 'chat.placeholder' | translate }}"
               />
               <span
                 class="msg_send_btn"
@@ -274,7 +274,7 @@
             </div>
 
             <label for="fileInput">
-              UploadImage:
+              {{ 'chat.img' | translate }}
               <img
                 id="icon"
                 src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg"
