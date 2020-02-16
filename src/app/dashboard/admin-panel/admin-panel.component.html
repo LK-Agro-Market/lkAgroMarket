@@ -1,1 +1,147 @@
-<p>admin-panel works!</p>
+<div class="row">
+  <div class="col-sm-6">
+    <nb-card>
+      <h4>Farmer List</h4>
+      <br />
+      <nb-list>
+        <nb-list-item *ngFor="let ud of farmerC | async">
+          <div *ngFor="let u of users | async">
+            <div
+              *ngIf="
+                u.uid == ud.id && ud.userLevel == 'Farmer' && u.uid != user.uid
+              "
+            >
+              <nb-user
+                [name]="u.displayName"
+                [picture]="u.photoURL"
+                [routerLink]="['/profile', u.uid]"
+              ></nb-user>
+              <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteUser(u.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+
+              <div *ngFor="let s of suppAdd | async">
+                <div *ngIf="u.uid == s.owner">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Food</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ s.food }}</td>
+                        <td>{{ s.status }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+  <div class="col-sm-6">
+    <nb-card>
+      <h4>Buyer List</h4>
+      <br />
+      <nb-list>
+        <nb-list-item *ngFor="let ud of buyerC | async">
+          <div *ngFor="let u of users | async">
+            <div
+              *ngIf="
+                u.uid == ud.id && ud.userLevel == 'Buyer' && u.uid != user.uid
+              "
+            >
+              <nb-user
+                [name]="u.displayName"
+                [picture]="u.photoURL"
+                [routerLink]="['/profile', u.uid]"
+              ></nb-user>
+              <!-- /////////// -->
+              <button
+                        id="delete"
+                        style="float:right"
+                        nbButton
+                        status="danger"
+                        size="tiny"
+                        class="delete-btn"
+                        (click)="deleteUser(u.id)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+              <!-- ///////////////// -->
+              <div *ngFor="let s of demAdd | async">
+                <div *ngIf="u.uid == s.owner">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Food</th>
+                        <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ s.food }}</td>
+                        <td>{{s.timestamps.toDate() | date:'yyyy/MM/dd'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <nb-card id="C">
+      <h4 id="A">Admin List</h4>
+      <br />
+      <nb-list id="B">
+        <nb-list-item *ngFor="let ud of adminC | async">
+          <div *ngFor="let u of users | async">
+            <div
+              *ngIf="
+                u.uid == ud.id &&
+                ud.userLevel == 'Administrator' &&
+                u.uid != user.uid
+              "
+            >
+              <nb-user
+                [name]="u.displayName"
+                [picture]="u.photoURL"
+                [routerLink]="['/profile', u.uid]"
+              ></nb-user>
+              <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteUser(u.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+            </div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
