@@ -10,7 +10,7 @@ import { ForumService } from '../forum.service';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { async } from '@angular/core/testing';
+import { UserDetails } from 'src/app/shared/models/user-details';
 
 @Component({
   selector: 'app-create-form',
@@ -45,6 +45,8 @@ export class CreateFormComponent implements OnInit {
   ) {}
 
   user: User = JSON.parse(localStorage.getItem('user'));
+  userd: UserDetails = JSON.parse(localStorage.getItem('user-details'));
+
   formControls = this.discussionForm.controls;
 
   get title() {
@@ -55,6 +57,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.userd.nic);
     if (this.createOrUpdate === 'update') {
       // set form value for update
       this.forumService

@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 .subscribe(follows => {
                   this.numOfFollowers = follows.length;
                   const viewerInFollowers = follows.filter(follow => {
-                    return follow.follower == this.viewer.uid;
+                    return follow.follower === this.viewer.uid;
                   });
                   if (viewerInFollowers.length > 0) {
                     this.isViewerFollowThisProfile = true;

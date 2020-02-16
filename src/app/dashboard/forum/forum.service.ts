@@ -335,29 +335,11 @@ export class ForumService {
       .pipe();
   }
 
-  getCommentForUpdate(commentId) {
-    // get comment data for update
-    return this.afs
-      .collection('comment')
-      .doc(commentId)
-      .get()
-      .pipe();
-  }
-
-  getReplyForUpdate(replyId) {
-    // get reply data for update
-    return this.afs
-      .collection('reply')
-      .doc(replyId)
-      .get()
-      .pipe();
-  }
-
   getComment(postKey) {
     // get comments
     return this.afs
       .collection('comment', ref =>
-        ref.where('postID', '==', postKey).orderBy('date', 'desc')
+        ref.where('postID', '==', postKey).orderBy('voteCount', 'desc').orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(
@@ -369,6 +351,15 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getCommentForUpdate(commentId) {
+    // get comment data for update
+    return this.afs
+      .collection('comment')
+      .doc(commentId)
+      .get()
+      .pipe();
   }
 
   getReply(commentId) {
@@ -387,6 +378,15 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getReplyForUpdate(replyId) {
+    // get reply data for update
+    return this.afs
+      .collection('reply')
+      .doc(replyId)
+      .get()
+      .pipe();
   }
 
   getCount(collection, field, key) {
