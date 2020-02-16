@@ -5,8 +5,9 @@
   nbSpinnerSize="large"
 >
   <nb-card-header class="card-header-content"
-    >Look for something to buy!</nb-card-header
-  >
+    >{{ 'create.title' | translate }}
+  </nb-card-header>
+
   <nb-card-body>
     <form
       [formGroup]="this.demandadservice.buyerAdform"
@@ -15,11 +16,11 @@
       <input type="hidden" formControlName="id" />
       <div class="row">
         <div class="col-sm-6">
-          <label>Select a food category...</label>
+          <label>{{ 'create.form.catogary' | translate }}</label>
           <div class="form-group">
             <nb-select
               fullWidth
-              placeholder="Select Category"
+              placeholder="{{ 'create.placeholder.catogary' | translate }}"
               formControlName="foodtype"
               (selectedChange)="retriveFoods()"
             >
@@ -31,18 +32,18 @@
               *ngIf="attempted && !!formControls.foodtype.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.foodtype.errors.required"
-                >Food category is required</span
-              >
+              <span *ngIf="!!formControls.foodtype.errors.required">{{
+                'create.requred.catogary' | translate
+              }}</span>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Select what are you looking for...</label>
+            <label>{{ 'create.form.product' | translate }}</label>
             <nb-select
               fullWidth
-              placeholder="Harvest/ Agro Product"
+              placeholder="{{ 'create.placeholder.product' | translate }}"
               formControlName="food"
             >
               <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
@@ -53,71 +54,73 @@
               *ngIf="attempted && !!formControls.food.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.food.errors.required"
-                >Food name is required</span
-              >
+              <span *ngIf="!!formControls.food.errors.required">{{
+                'create.requred.product' | translate
+              }}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <label>expected amount</label>
+          <label>{{ 'create.form.amount' | translate }}</label>
           <div class="form-group">
             <input
               type="text"
               nbInput
               fullWidth
-              placeholder="Quntity"
+              placeholder="{{ 'create.placeholder.amount' | translate }}"
               formControlName="expectedamount"
             />
             <div
               *ngIf="attempted && !!formControls.expectedamount.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.expectedamount.errors.required"
-                >Quantity is required</span
-              >
+              <span *ngIf="!!formControls.expectedamount.errors.required">{{
+                'create.requred.amount' | translate
+              }}</span>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label>Unit</label>
+            <label>{{ 'create.form.unit' | translate }}</label>
             <input
               type="text"
               nbInput
               fullWidth
-              placeholder="unit: ex. Kg"
+              placeholder="{{ 'create.placeholder.unit' | translate }}"
               formControlName="unit"
             />
             <div
               *ngIf="attempted && !!formControls.unit.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.unit.errors.required"
-                >Unit is required</span
-              >
+              <span *ngIf="!!formControls.unit.errors.required">{{
+                'create.requred.unit' | translate
+              }}</span>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label>expected price per unit<strong>(Rs)</strong></label>
+            <label
+              >{{ 'create.form.price' | translate }}<strong>(Rs)</strong></label
+            >
             <input
               type="text"
               nbInput
               fullWidth
-              placeholder="Expeted price"
+              placeholder="{{ 'create.placeholder.price' | translate }}"
               formControlName="priceperunit"
             />
             <div
               *ngIf="attempted && !!formControls.priceperunit.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.priceperunit.errors.required"
-                >Price is required</span
-              >
+              <span *ngIf="!!formControls.priceperunit.errors.required">{{
+                'create.requred.price' | translate
+              }}</span>
             </div>
           </div>
         </div>
@@ -125,11 +128,11 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Description</label>
+            <label>{{ 'create.form.description' | translate }}</label>
             <textarea
               nbInput
               fullWidth
-              placeholder="Short description about what are you looking for..."
+              placeholder="{{ 'create.placeholder.description' | translate }}"
               formControlName="description"
             ></textarea>
             <div
@@ -137,7 +140,7 @@
               class="text-danger"
             >
               <span *ngIf="!!formControls.description.errors.required"
-                >The short description is required
+                >{{ 'create.requred.description' | translate }}
               </span>
             </div>
           </div>
@@ -146,10 +149,10 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Organic or Inorganic</label>
+            <label>{{ 'create.form.type' | translate }}</label>
             <nb-select
               fullWidth
-              placeholder="Choose one..."
+              placeholder="{{ 'create.placeholder.type' | translate }}"
               formControlName="organic"
             >
               <nb-option value="Organic">Organic</nb-option>
@@ -159,9 +162,9 @@
               *ngIf="attempted && !!formControls.organic.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.organic.errors.required"
-                >This field is required</span
-              >
+              <span *ngIf="!!formControls.organic.errors.required">{{
+                'create.requred.type' | translate
+              }}</span>
             </div>
           </div>
         </div>
@@ -169,7 +172,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label>Deadline</label>
+            <label>{{ 'create.form.deadline' | translate }}</label>
             <input
               nbInput
               fullWidth
@@ -191,7 +194,9 @@
 
       <div class="row">
         <div class="col-sm-12 text-center">
-          <button type="submit" nbButton>Create Ad</button>
+          <button type="submit" nbButton>
+            {{ 'create.button.create' | translate }}
+          </button>
           <button
             class="btn btn-primary"
             status="warning"
@@ -199,7 +204,7 @@
             (click)="resetAd()"
             nbButton
           >
-            cancel Ad
+            {{ 'create.button.cancel' | translate }}
           </button>
         </div>
       </div>

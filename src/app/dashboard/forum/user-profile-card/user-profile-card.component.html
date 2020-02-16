@@ -3,7 +3,9 @@
     <div class="pro-container">
       <img class="pro-img" src="{{ userImg }}" alt="Profile image" />
       <a href="#" class="pro-name"> {{ userName }} </a>
-      <span class="mb-2 user-level">Administrator</span>
+      <span class="mb-2 user-level">{{
+        'fourm.profile.position' | translate
+      }}</span>
     </div>
 
     <div *ngIf="!myPostOnly">
@@ -15,7 +17,7 @@
         id="card-btn"
         #all
       >
-        Public
+        {{ 'fourm.profile.button1' | translate }}
       </button>
       <br />
       <button
@@ -27,7 +29,7 @@
         id="card-btn"
         #my
       >
-        My Posts
+        {{ 'fourm.profile.button2' | translate }}
       </button>
     </div>
     <div *ngIf="myPostOnly">
@@ -40,7 +42,7 @@
         id="card-btn"
         #all
       >
-        Public
+        {{ 'fourm.profile.button1' | translate }}
       </button>
       <br />
       <button
@@ -51,7 +53,7 @@
         id="card-btn"
         #my
       >
-        My Posts
+        {{ 'fourm.profile.button2' | translate }}
       </button>
     </div>
   </nb-card>
