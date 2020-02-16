@@ -1,29 +1,24 @@
-<div class="main-container">
-  <div class="user-profile">
-    <app-user-profile-card
-      (showMypostOnly)="changePostType($event)"
-    ></app-user-profile-card>
+<div class="row">
+  <div class="col-sm-3">
+      <app-user-profile-card
+        (showMypostOnly)="changePostType($event)"
+      ></app-user-profile-card>
   </div>
-
-  <div class="list-container">
-    <div class="form-container" #item>
-      <app-create-form
-        *ngIf="isCreate"
-        [postId]="postId"
-        (hideForm)="toggleForm($event)"
-        [createOrUpdate]="createOrUpdate"
-      ></app-create-form>
-    </div>
-
-    <div class="post-contaner">
-      <app-list-forum [showMyPost]="showMyPost"></app-list-forum>
-    </div>
-  </div>
-
-  <div class="side-bar-continer">
+  <div class="col-sm-9">
     <button nbButton status="primary" (click)="createPost()" id="add-btn">
       {{ !isCreate ? 'Create New' : 'Cancel' }}
     </button>
-    <nb-card size="medium" class="side-bar"> </nb-card>
+    <br/>
+    <br/>
+      <div #item>
+        <app-create-form
+          *ngIf="isCreate"
+          [postId]="postId"
+          (hideForm)="toggleForm($event)"
+          [createOrUpdate]="createOrUpdate"
+        ></app-create-form>
+      </div>
+  
+      <app-list-forum [showMyPost]="showMyPost"></app-list-forum>
   </div>
 </div>
