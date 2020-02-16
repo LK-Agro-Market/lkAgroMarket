@@ -2,10 +2,6 @@
   height: 3.2rem;
 }
 
-.logout-btn {
-  margin-top: 6px;
-}
-
 .title {
   display: flex;
   align-items: center;
@@ -29,6 +25,51 @@
   font-size: 25px;
 }
 
+.lang-item {
+  margin-top: 8px;
+  margin-right: 6px;
+}
+
 nb-user {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .lang-text {
+    font-size: 20px;
+    display: none;
+  }
+  
+  .header-icon {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  /* For mobile phones: */
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .header-icon {
+    font-size: 35px;
+  }
+  
+  .lang-text {
+    font-size: 25px;
+    display: inline;
+  }
 }

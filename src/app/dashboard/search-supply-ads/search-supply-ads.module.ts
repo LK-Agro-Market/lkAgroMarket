@@ -5,7 +5,6 @@ import { SearchSupplyAdsRoutingModule } from './search-supply-ads-routing.module
 import { SearchSupplyAdsComponent } from './search-supply-ads.component';
 import {
   NbCardModule,
-  NbSpinnerModule,
   NbSelectModule,
   NbBadgeModule
 } from '@nebular/theme';
