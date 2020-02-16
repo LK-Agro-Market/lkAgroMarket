@@ -18,7 +18,7 @@ export class ListDemandAdComponent implements OnInit {
     private demandAdsevice: DemandAdService,
     private afs: AngularFirestore,
     private toastr: ToastrService
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.demandAdsevice.getdemandAds(this.user.uid).subscribe(res => {

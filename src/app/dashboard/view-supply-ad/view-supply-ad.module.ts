@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ViewSupplyAdRoutingModule } from './view-supply-ad-routing.module';
 import { ViewSupplyAdComponent } from './view-supply-ad.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NbLayoutModule,
   NbIconModule,
@@ -21,7 +21,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxStarsModule } from 'ngx-stars';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
-
 
 @NgModule({
   declarations: [ViewSupplyAdComponent],

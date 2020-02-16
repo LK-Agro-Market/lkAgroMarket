@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        {{'list.title2'|translate}}
+        {{ 'list.title2' | translate }}
       </span>
       <span class="text-right">
         <div class="col">
@@ -35,13 +35,15 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{'list.ad.quantity'|translate}}  - {{ property.expectedamount }}
+                {{ 'list.ad.quantity' | translate }} -
+                {{ property.expectedamount }}
               </li>
               <li class="list-group-item">
-                {{'list.ad.unit'|translate}} - Rs. {{ property.priceperunit }}
+                {{ 'list.ad.unit' | translate }} - Rs.
+                {{ property.priceperunit }}
               </li>
               <li class="list-group-item">
-                {{'list.ad.deadline'|translate}} - {{ property.deadline }}
+                {{ 'list.ad.deadline' | translate }} - {{ property.deadline }}
               </li>
             </ul>
             <div class="card-body">
@@ -49,7 +51,7 @@
                 class="btn btn-success"
                 [routerLink]="['/view-demand-ad', property.id]"
               >
-              {{'list.button.view'|translate}}
+                {{ 'list.button.view' | translate }}
               </button>
             </div>
           </div>

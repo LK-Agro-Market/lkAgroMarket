@@ -6,14 +6,16 @@
       >-
       <small>{{ comment.date | date: 'MMM d, h:mm:ss a' }}</small>
     </div>
-    <div><b> {{'comments.comment'|translate}}:</b> {{ comment.content }}</div>
+    <div>
+      <b> {{ 'comments.comment' | translate }}:</b> {{ comment.content }}
+    </div>
     <!-- Section to edit a comment -->
     <button
       type="button"
       class="btn btn-outline-danger btn-sm"
       (click)="onDelete(comment.docId)"
     >
-    {{'comments.button.delete'|translate}}
+      {{ 'comments.button.delete' | translate }}
     </button>
   </div>
   <br />
@@ -29,7 +31,7 @@
     />
     <div class="btns">
       <button class="button button1" (click)="on(content)">
-        {{'comments.button.comment'|translate}}
+        {{ 'comments.button.comment' | translate }}
       </button>
     </div>
   </div>

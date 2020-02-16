@@ -22,7 +22,6 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
-
 @NgModule({
   declarations: [ChatComponent, GroupchatComponent],
   imports: [

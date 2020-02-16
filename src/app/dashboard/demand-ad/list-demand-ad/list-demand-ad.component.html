@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-      {{'list.title'|translate}}
+        {{ 'list.title' | translate }}
       </span>
     </div>
   </nb-card-header>
@@ -20,13 +20,15 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{'list.ad.quantity'|translate}} - {{ property.expectedamount }}{{ property.unit }}
+                {{ 'list.ad.quantity' | translate }} -
+                {{ property.expectedamount }}{{ property.unit }}
               </li>
               <li class="list-group-item">
-                {{'list.ad.unit'|translate}} - Rs. {{ property.priceperunit }}
+                {{ 'list.ad.unit' | translate }} - Rs.
+                {{ property.priceperunit }}
               </li>
               <li class="list-group-item">
-                {{'list.ad.deadline'|translate}} - {{ property.deadline }}
+                {{ 'list.ad.deadline' | translate }} - {{ property.deadline }}
               </li>
             </ul>
             <div class="card-body">
@@ -34,16 +36,16 @@
                 class="btn btn-success"
                 [routerLink]="['/view-demand-ad', property.id]"
               >
-              {{'list.button.view'|translate}}
+                {{ 'list.button.view' | translate }}
               </button>
               <button
                 class="btn btn-primary"
                 (click)="demandAdsevice.editAd(property)"
               >
-              {{'list.button.update'|translate}}
+                {{ 'list.button.update' | translate }}
               </button>
               <button class="btn btn-danger" (click)="deleteAd(property.id)">
-                {{'list.button.delete'|translate}}
+                {{ 'list.button.delete' | translate }}
               </button>
             </div>
           </div>

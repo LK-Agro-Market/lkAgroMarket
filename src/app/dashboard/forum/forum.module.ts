@@ -33,7 +33,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
-
 @NgModule({
   declarations: [
     ForumComponent,

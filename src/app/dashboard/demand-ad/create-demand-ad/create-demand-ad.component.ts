@@ -49,7 +49,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
     // private formbuilder: FormBuilder,
     private demandadservice: DemandAdService,
     private toastr: ToastrService
-    ) {}
+  ) {}
   submited: boolean;
   formControls = this.demandadservice.buyerAdform.controls;
 

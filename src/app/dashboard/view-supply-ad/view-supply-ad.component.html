@@ -15,7 +15,7 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              {{'farmerv.title1'|translate}}
+              {{ 'farmerv.title1' | translate }}
             </span>
           </div>
         </nb-card-header>
@@ -55,7 +55,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <div class="form-group">
-                    <label>{{'farmerv.form.description'|translate}}</label>
+                    <label>{{ 'farmerv.form.description' | translate }}</label>
                     <textarea
                       nbInput
                       fullWidth
@@ -67,9 +67,8 @@
                       class="text-danger"
                     >
                       <span *ngIf="!!formControls.description.errors.required"
-                        >{{'farmerv.required.description'|translate}}
-                       </span
-                      >
+                        >{{ 'farmerv.required.description' | translate }}
+                      </span>
                     </div>
                   </div>
                 </li>
@@ -80,33 +79,38 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label>{{'farmerv.form.quentity'|translate}}</label>
+                        <label>{{ 'farmerv.form.quentity' | translate }}</label>
                         <input
                           type="text"
                           nbInput
                           fullWidth
                           formControlName="quantity"
-                          placeholder="{{'farmerv.placeholder.amount'|translate}}"
+                          placeholder="{{
+                            'farmerv.placeholder.amount' | translate
+                          }}"
                         />
                         <div
                           *ngIf="attempted && !!formControls.quantity.errors"
                           class="text-danger"
                         >
-                          <span *ngIf="!!formControls.quantity.errors.required"
-                            >{{'farmerv.required.amount'|translate}}</span
+                          <span
+                            *ngIf="!!formControls.quantity.errors.required"
+                            >{{ 'farmerv.required.amount' | translate }}</span
                           >
                         </div>
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label>{{'farmerv.form.unit'|translate}}</label>
+                        <label>{{ 'farmerv.form.unit' | translate }}</label>
                         <input
                           type="text"
                           nbInput
                           fullWidth
                           formControlName="quantityUnit"
-                          placeholder="{{'farmerv.placeholder.unit'|translate}}"
+                          placeholder="{{
+                            'farmerv.placeholder.unit' | translate
+                          }}"
                         />
                         <div
                           *ngIf="
@@ -116,20 +120,22 @@
                         >
                           <span
                             *ngIf="!!formControls.quantityUnit.errors.required"
-                            >{{'farmerv.required.unit'|translate}}</span
+                            >{{ 'farmerv.required.unit' | translate }}</span
                           >
                         </div>
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label>{{'farmerv.form.price'|translate}}</label>
+                        <label>{{ 'farmerv.form.price' | translate }}</label>
                         <input
                           type="text"
                           nbInput
                           fullWidth
                           formControlName="pricePerUnit"
-                          placeholder="{{'farmerv.placeholder.price'|translate}}"
+                          placeholder="{{
+                            'farmerv.placeholder.price' | translate
+                          }}"
                         />
                         <div
                           *ngIf="
@@ -139,7 +145,7 @@
                         >
                           <span
                             *ngIf="!!formControls.pricePerUnit.errors.required"
-                            >{{'farmerv.required.price'|translate}}</span
+                            >{{ 'farmerv.required.price' | translate }}</span
                           >
                         </div>
                       </div>
@@ -148,21 +154,23 @@
                 </li>
                 <li class="list-group-item">
                   <div class="form-group">
-                    <label>{{'farmerv.form.deadline'|translate}}</label>
+                    <label>{{ 'farmerv.form.deadline' | translate }}</label>
                     <input
                       nbInput
                       fullWidth
                       type="date"
-                      placeholder="{{'farmerv.placeholder.description'|translate}}"
+                      placeholder="{{
+                        'farmerv.placeholder.description' | translate
+                      }}"
                       formControlName="expireDate"
                     />
                     <div
                       *ngIf="attempted && !!formControls.expireDate.errors"
                       class="text-danger"
                     >
-                      <span *ngIf="!!formControls.expireDate.errors.required"
-                        >{{'farmerv.required.date'|translate}}</span
-                      >
+                      <span *ngIf="!!formControls.expireDate.errors.required">{{
+                        'farmerv.required.date' | translate
+                      }}</span>
                     </div>
                   </div>
                 </li>
@@ -173,7 +181,9 @@
                 <li class="list-group-item">Views - {{ supplyAd.views }}</li>
               </ul>
               <div class="card-body">
-                <button type="submit" nbButton>{{'farmerv.form.button'|translate}}</button>
+                <button type="submit" nbButton>
+                  {{ 'farmerv.form.button' | translate }}
+                </button>
               </div>
             </div>
           </form>
@@ -272,10 +282,10 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left" *ngIf="adOwnerUser.uid == viewer.uid">
-              {{'farmerv.title2'|translate}}
+              {{ 'farmerv.title2' | translate }}
             </span>
             <span class="text-left" *ngIf="adOwnerUser.uid != viewer.uid">
-              {{'farmerv.title3'|translate}}
+              {{ 'farmerv.title3' | translate }}
             </span>
           </div>
         </nb-card-header>
@@ -444,7 +454,7 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              {{'farmerv.title4'|translate}}
+              {{ 'farmerv.title4' | translate }}
             </span>
           </div>
         </nb-card-header>
@@ -467,7 +477,9 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="{{'farmerv.placeholder.description2'|translate}}"
+                placeholder="{{
+                  'farmerv.placeholder.description2' | translate
+                }}"
                 [(ngModel)]="newComment"
               />
               <div class="input-group-append">
@@ -476,7 +488,7 @@
                   type="button"
                   (click)="publishComment()"
                 >
-                  {{'farmerv.button2'|translate}}
+                  {{ 'farmerv.button2' | translate }}
                 </button>
               </div>
             </div>
@@ -484,7 +496,7 @@
               *ngIf="attemptedComment && newComment == ''"
               class="text-danger"
             >
-              {{'farmerv.title5'|translate}}
+              {{ 'farmerv.title5' | translate }}
             </div>
           </ul>
         </nb-card-body>

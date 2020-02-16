@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        {{'lists.title1'|translate}}
+        {{ 'lists.title1' | translate }}
       </span>
       <span class="text-right">
         <div class="col">
@@ -59,13 +59,16 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{'lists.t1.quentity'|translate}} - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+                {{ 'lists.t1.quentity' | translate }} - {{ supplyAd.quantity }}
+                {{ supplyAd.quantityUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.unit'|translate}} - Rs. {{ supplyAd.pricePerUnit }}
+                {{ 'lists.t1.unit' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.total'|translate}} - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+                {{ 'lists.t1.total' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit * supplyAd.quantity }}
               </li>
             </ul>
             <div class="card-body">
@@ -73,13 +76,13 @@
                 class="btn btn-success btn-sm"
                 [routerLink]="['/view-supply-ad', supplyAd.id]"
               >
-              {{'lists.button.comment'|translate}}
+                {{ 'lists.button.comment' | translate }}
               </button>
               <button
                 class="btn btn-primary btn-sm"
                 [routerLink]="['/view-supply-ad', supplyAd.id]"
               >
-              {{'lists.button.update'|translate}}
+                {{ 'lists.button.update' | translate }}
               </button>
               <button
                 type="button"
@@ -87,7 +90,7 @@
                 appConfirmButton
                 (confirmed)="deleteAd(supplyAd.id)"
               >
-              {{'lists.button.delete'|translate}}
+                {{ 'lists.button.delete' | translate }}
               </button>
             </div>
           </div>
@@ -101,7 +104,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        {{'lists.title2'|translate}}
+        {{ 'lists.title2' | translate }}
       </span>
       <span class="text-right">
         <div class="col">
@@ -148,13 +151,16 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{'lists.t1.quentity'|translate}}  - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+                {{ 'lists.t1.quentity' | translate }} - {{ supplyAd.quantity }}
+                {{ supplyAd.quantityUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.unit'|translate}}  - Rs. {{ supplyAd.pricePerUnit }}
+                {{ 'lists.t1.unit' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.total'|translate}}  - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+                {{ 'lists.t1.total' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit * supplyAd.quantity }}
               </li>
             </ul>
             <div class="card-body">
@@ -176,7 +182,7 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        {{'lists.title3'|translate}}
+        {{ 'lists.title3' | translate }}
       </span>
       <span class="text-right">
         <div class="col">
@@ -226,13 +232,16 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                {{'lists.t1.quentity'|translate}}  - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+                {{ 'lists.t1.quentity' | translate }} - {{ supplyAd.quantity }}
+                {{ supplyAd.quantityUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.unit'|translate}} - Rs. {{ supplyAd.pricePerUnit }}
+                {{ 'lists.t1.unit' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit }}
               </li>
               <li class="list-group-item">
-                {{'lists.t1.total'|translate}}  - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+                {{ 'lists.t1.total' | translate }} - Rs.
+                {{ supplyAd.pricePerUnit * supplyAd.quantity }}
               </li>
             </ul>
           </div>

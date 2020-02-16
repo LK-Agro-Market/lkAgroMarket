@@ -25,7 +25,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module'
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
