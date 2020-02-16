@@ -1,6 +1,7 @@
 .main-container {
   display: flex;
   flex-direction: row;
+  margin-left: 10px;
 }
 .reply-card {
   display: flex;
@@ -45,6 +46,7 @@
     'Lucida Sans', Arial, sans-serif;
 }
 .like-container {
+  right: 20px;
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -62,9 +64,10 @@
 }
 .reply-body {
   margin-top: 10px;
+  margin-left: 15px;
 }
 #commReply {
-  margin-left: 10px;
+  margin-left: 30px;
   font-size: 13px;
 }
 .updateSection {

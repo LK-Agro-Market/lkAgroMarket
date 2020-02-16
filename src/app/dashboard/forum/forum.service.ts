@@ -41,7 +41,8 @@ export class ForumService {
     postUserImage,
     showFarmers,
     showBuyers,
-    isEnd
+    isEnd,
+    postState
   ) {
     return this.afs
       .collection('post')
@@ -56,7 +57,8 @@ export class ForumService {
         userImage: postUserImage,
         showFarmer: showFarmers,
         showBuyer: showBuyers,
-        endThread: isEnd
+        endThread: isEnd,
+        isAdminNote: postState,
       });
   }
 
@@ -345,7 +347,7 @@ export class ForumService {
     // get posts which post by admin
     return this.afs
       .collection('post', ref =>
-        ref.where('userID', '==', 'asdasd').orderBy('date', 'desc')
+        ref.where('isAdminNote', '==', true).orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(

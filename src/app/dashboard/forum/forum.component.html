@@ -10,6 +10,7 @@
       <app-create-form
         *ngIf="isCreate"
         [postId]="postId"
+        [isAdminNote]="isAdminNote"
         (hideForm)="toggleForm($event)"
         [createOrUpdate]="createOrUpdate"
       ></app-create-form>
@@ -21,8 +22,10 @@
   </div>
 
   <div class="side-bar-continer">
-    <button class="float-right" nbButton status="primary" (click)="createPost()" id="add-btn">
+    <button class=" add-btn" nbButton status="primary" (click)="createPost(false)" >
       {{ !isCreate ? 'Create New' : 'Cancel' }}
     </button>
+    
+    <button *ngIf="currentUserType == 'Administrator' " class=" add-btn" nbButton outline status="success" style="margin-top: 10px;" (click)="createPost(true)" >  Admin Note</button>
   </div>
 </div>

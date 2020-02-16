@@ -77,11 +77,12 @@ export class ListForumComponent implements OnInit {
   adminPosts() {
     // get admin notes
     this.forumService
-      .getAdminNotes()
-      .pipe()
-      .subscribe(items => {
-        this.items = items;
-      });
+    .getAdminNotes()
+    .pipe()
+    .subscribe(items => {
+      this.items = items;
+    });
+
   }
 
 }

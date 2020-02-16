@@ -26,6 +26,7 @@ export class CreateFormComponent implements OnInit {
   toastrStatus;
 
   @Input() postId: any; // get postID for update
+  @Input() isAdminNote: boolean;
   @Input() createOrUpdate: any;
   @Input() createDate: any; // get create date for update post
 
@@ -42,7 +43,7 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private forumService: ForumService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   user: User = JSON.parse(localStorage.getItem('user'));
   userd: UserDetails = JSON.parse(localStorage.getItem('user-details'));
@@ -57,7 +58,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userd.nic);
     if (this.createOrUpdate === 'update') {
       // set form value for update
       this.forumService
@@ -94,7 +94,6 @@ export class CreateFormComponent implements OnInit {
     const userImage = this.user.photoURL;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
-
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
@@ -112,7 +111,8 @@ export class CreateFormComponent implements OnInit {
             userImage,
             showFarmer,
             showBuyer,
-            false
+            false,
+            this.isAdminNote
           );
         } else {
           ///////// shuld udate new image list

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
+import { UserDetailsService } from 'src/app/shared/services/user-details.service';
 
 @Component({
   selector: 'app-forum',
@@ -10,12 +11,22 @@ export class ForumComponent implements OnInit {
   postType = 'all';
   isCreate = false;
   createOrUpdate;
+  currentUserType;
+  isAdminNote: boolean;
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor() {}
+  constructor(
+    private userDetailsService: UserDetailsService,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userDetailsService
+      .getUserDetails(this.user.uid)
+      .subscribe(userDetails => {
+        this.currentUserType = userDetails.userLevel;
+      });
+  }
 
   changeDisplayPost(postType) {
     // set post type
@@ -27,8 +38,9 @@ export class ForumComponent implements OnInit {
     this.isCreate = event;
   }
 
-  createPost() {
+  createPost(isAdminPost) {
     // create post
+    this.isAdminNote = isAdminPost;
     this.createOrUpdate = 'create';
     this.isCreate = !this.isCreate;
   }
