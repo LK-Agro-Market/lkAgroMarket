@@ -88,6 +88,19 @@
         nbTooltipPlacement="right"
       ></nb-icon>
     </span>
+    <span
+      class="sidebar-btn"
+      routerLink="/search-demand-ads"
+      routerLinkActive="green"
+      *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
+    >
+      <nb-icon
+        icon="search-outline"
+        class="sidebar-icon"
+        nbTooltip="Search Ads"
+        nbTooltipPlacement="right"
+      ></nb-icon>
+    </span>
     <span class="sidebar-btn" routerLink="/chats" routerLinkActive="green">
       <nb-icon
         icon="message-circle-outline"

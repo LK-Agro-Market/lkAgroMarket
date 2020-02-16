@@ -93,14 +93,14 @@ export class ViewSupplyAdService {
   }
 
   createPendingAgreement(
-    adId: string,
+    ad: SupplyAd,
     buyer: User,
     agreementDate: string
   ): Observable<void> {
     const agreementId: string = this.afs.createId();
     const pendingAgreement: Agreement = {
       agreementId: agreementId,
-      adId: adId,
+      ad: ad,
       buyer: {
         displayName: buyer.displayName,
         uid: buyer.uid,
@@ -121,17 +121,17 @@ export class ViewSupplyAdService {
     return this.afs
       .collection<Agreement>('agreements', ref =>
         ref
-          .where('adId', '==', adId)
+          .where('ad.id', '==', adId)
           .where('status', '==', 'Pending')
           .orderBy('createdAt', 'asc')
       )
       .valueChanges();
   }
 
-  getApprovedAgreements(adId: string): Observable<Agreement> {
+  getApprovedAgreement(adId: string): Observable<Agreement> {
     return this.afs
       .collection<Agreement>('agreements', ref =>
-        ref.where('adId', '==', adId).where('status', '==', 'Approved')
+        ref.where('ad.id', '==', adId).where('status', '==', 'Approved')
       )
       .valueChanges()
       .pipe(concatAll(), first());
@@ -146,17 +146,19 @@ export class ViewSupplyAdService {
     );
   }
 
-  approveAgreement(agreementId: string): Observable<void> {
-    return new Observable(() => {
+  approveAgreement(agreementId: string, adId: string): Observable<void> {
+    return from(
       this.afs
         .collection('supplyAd')
-        .doc()
-        .update({ status: 'sold' });
-      this.afs
-        .collection('agreements')
-        .doc(agreementId)
-        .update({ status: 'Approved' });
-    });
+        .doc(adId)
+        .update({ status: 'sold' })
+        .then(() => {
+          this.afs
+            .collection('agreements')
+            .doc(agreementId)
+            .update({ status: 'Approved' });
+        })
+    );
   }
 
   rateUser(adId: string, rate: number): Observable<void> {
