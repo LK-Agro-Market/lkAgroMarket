@@ -21,7 +21,7 @@
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of filteredSupplyAds">
+        <div class="col-sm-3" *ngFor="let supplyAd of filteredSupplyAds">
           <div class="card">
             <ngb-carousel>
               <ng-template ngbSlide *ngFor="let image of supplyAd.images">
@@ -83,21 +83,21 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card accent="success">
+<nb-card accent="warning">
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-left">
-        Your Previous Agreements
+        Your Pending Agreements
       </span>
     </div>
   </nb-card-header>
   <nb-card-body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4" *ngFor="let supplyAd of filteredSupplyAds">
+        <div class="col-sm-4" *ngFor="let agreement of pendingAgreements">
           <div class="card">
             <ngb-carousel>
-              <ng-template ngbSlide *ngFor="let image of supplyAd.images">
+              <ng-template ngbSlide *ngFor="let image of agreement.ad.images">
                 <div class="picsum-img-wrapper">
                   <img [src]="image" class="card-img-top" />
                 </div>
@@ -107,46 +107,112 @@
               text="Organic"
               status="success"
               position="top right"
-              *ngIf="supplyAd.organic == 'Organic'"
+              *ngIf="agreement.ad.organic == 'Organic'"
             >
             </nb-badge>
             <nb-badge
               text="Expired"
               status="danger"
               position="top left"
-              *ngIf="supplyAd.expireDate < currentTime"
+              *ngIf="agreement.ad.expireDate < currentTime"
             >
             </nb-badge>
             <div class="card-body">
               <h5 class="card-title">
-                {{ supplyAd.food }}
-                <span class="food-type">- {{ supplyAd.type }}</span>
+                {{ agreement.ad.food }}
+                <span class="food-type">- {{ agreement.ad.type }}</span>
               </h5>
-              <p class="card-text">{{ supplyAd.description }}</p>
+              <p class="card-text">{{ agreement.ad.description }}</p>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                Quantity - {{ supplyAd.quantity }} {{ supplyAd.quantityUnit }}
+                Quantity - {{ agreement.ad.quantity }} {{ agreement.ad.quantityUnit }}
               </li>
               <li class="list-group-item">
-                Price per unit - Rs. {{ supplyAd.pricePerUnit }}
+                Price per unit - Rs. {{ agreement.ad.pricePerUnit }}
               </li>
               <li class="list-group-item">
-                Total - Rs. {{ supplyAd.pricePerUnit * supplyAd.quantity }}
+                Total - Rs. {{ agreement.ad.pricePerUnit * agreement.ad.quantity }}
               </li>
             </ul>
             <div class="card-body">
               <button
                 class="btn btn-success btn-sm"
-                [routerLink]="['/view-supply-ad', supplyAd.id]"
+                [routerLink]="['/view-supply-ad', agreement.ad.id]"
               >
-                View Ad
+                View
               </button>
               <button
-                class="btn btn-primary btn-sm"
-                [routerLink]="['/view-supply-ad', supplyAd.id]"
+                class="btn btn-danger btn-sm"
+                [routerLink]="['/view-supply-ad', agreement.ad.id]"
               >
-                Comment/ Buy
+                Cancel Agreement
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card accent="success">
+  <nb-card-header>
+    <div class="card-header-content">
+      <span class="text-left">
+        Your Signed Agreements
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let agreement of approvedAgreements">
+          <div class="card">
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let image of agreement.ad.images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" class="card-img-top" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+            <nb-badge
+              text="Organic"
+              status="success"
+              position="top right"
+              *ngIf="agreement.ad.organic == 'Organic'"
+            >
+            </nb-badge>
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ agreement.ad.food }}
+                <span class="food-type">- {{ agreement.ad.type }}</span>
+              </h5>
+              <p class="card-text">{{ agreement.ad.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Quantity - {{ agreement.ad.quantity }} {{ agreement.ad.quantityUnit }}
+              </li>
+              <li class="list-group-item">
+                Price per unit - Rs. {{ agreement.ad.pricePerUnit }}
+              </li>
+              <li class="list-group-item">
+                Total - Rs. {{ agreement.ad.pricePerUnit * agreement.ad.quantity }}
+              </li>
+            </ul>
+            <div class="card-body">
+              <button
+                class="btn btn-success btn-sm"
+                [routerLink]="['/view-supply-ad', agreement.ad.id]"
+              >
+                View
+              </button>
+              <button
+                class="btn btn-warning btn-sm"
+                [routerLink]="['/view-supply-ad', agreement.ad.id]"
+              >
+                Rate This Ad
               </button>
             </div>
           </div>

@@ -113,7 +113,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
 
               this.subscriptions.push(
                 this.viewSupplyAdService
-                  .getApprovedAgreements(supplyAd.id)
+                  .getApprovedAgreement(supplyAd.id)
                   .subscribe(agreement => {
                     this.approvedAgreement = agreement;
                   })
@@ -195,11 +195,12 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.viewSupplyAdService
         .createPendingAgreement(
-          this.supplyAd.id,
+          this.supplyAd,
           this.viewer,
           this.agreementDate
         )
         .subscribe(() => {
+          this.toastr.success('Your agreement request sent to the farmer');
           this.processingAgreement = false;
         })
     );
@@ -219,8 +220,9 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   agreeToSell(agreementId: string) {
     this.processingAgreement = true;
     this.subscriptions.push(
-      this.viewSupplyAdService.approveAgreement(agreementId).subscribe(() => {
+      this.viewSupplyAdService.approveAgreement(agreementId, this.supplyAd.id).subscribe(() => {
         this.processingAgreement = false;
+        this.toastr.success('You signed the agreement');
       })
     );
   }
