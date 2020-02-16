@@ -127,6 +127,17 @@
                 [picture]="u.photoURL"
                 [routerLink]="['/profile', u.uid]"
               ></nb-user>
+              <button
+              id="delete"
+              style="float:right"
+              nbButton
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              (click)="deleteUser(u.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
             </div>
           </div>
         </nb-list-item>
