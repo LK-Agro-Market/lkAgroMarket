@@ -1,0 +1,182 @@
+{
+  "create": {
+    "user1": "Farmer",
+    "user2": "Buyer",
+    "sign": "Sign out",
+    "title": "Look for something to buy!",
+    "form": {
+      "catogary": "Select a food category...",
+      "product": "Select what are you looking for...",
+      "amount": "expected amount",
+      "unit": "Unit",
+      "price": "expected price per unit(Rs)",
+      "description": "Description",
+      "type": "Organic or Inorganic",
+      "deadline": "Deadline"
+    },
+    "placeholder": {
+      "catogary": "Select category",
+      "product": "Harvest/Agro Products",
+      "amount": "Quntity...",
+      "unit": "unit ex: Kg",
+      "price": "Expected price...",
+      "description": "Short description about what are you looking for...",
+      "type": "Choose one"
+    },
+    "button": {
+      "create": "CREATE AD",
+      "cancel": "CANCEL AD"
+    },
+    "requred": {
+      "catogary": "Food category is required",
+      "product": "Food name is required",
+      "amount": "Quantity is required",
+      "unit": "Unit is required",
+      "price": "Price is required",
+      "description": "The short description is required",
+      "type": "This field is required"
+    }
+  },
+  "list": {
+    "title": "Your Current Advertisments",
+    "title2": "Demand Advertisments",
+    "ad": {
+      "quantity": "Quantity",
+      "unit": "Price per unit",
+      "deadline": "Deadline"
+    },
+    "button": {
+      "view": "View",
+      "update": "Update",
+      "delete": "Delete"
+    }
+  },
+  "view": {
+    "title": "View",
+    "comment": "Comments"
+  },
+  "comments": {
+    "comment": "Comments",
+    "button": {
+      "delete": "Delete",
+      "reply": "Reply",
+      "comment": "Comment"
+    }
+  },
+  "language": "Language",
+  "farmer": {
+    "title": "Create New Advertisement",
+    "form": {
+      "catogary": "Harvest/ Agro product category",
+      "product": "Harvest/ Agro product",
+      "quentity": "Quantity",
+      "unit": "Quantity unit",
+      "price": "Price per unit",
+      "image": {
+        "mainimage": "Main image",
+        "image2": "Image2",
+        "image3": "Image3",
+        "image4": "Image4"
+      },
+      "description": "Short description",
+      "type": "Organic or Inorganic",
+      "deadline": "Expire date",
+      "button": "Create Ad"
+    },
+    "placeholder": {
+      "catogary": "Select category",
+      "product": "Select Harvest/ Agro Product",
+      "amount": "Quntity",
+      "unit": "Quantity Measure Unit",
+      "price": "Price Per Unit",
+      "description": "Short description about the harvest or agro product",
+      "type": "Organic or Inorganic"
+    },
+    "required": {
+      "catogary": "Food category is required",
+      "product": "Food name is required",
+      "amount": "Quantity is required",
+      "unit": "Quantity unit is required",
+      "price": "Price per unit is required",
+      "image": "Main image is required",
+      "description": "A description about your harvest or agro product is required",
+      "type": "This field is required",
+      "date": "Expire date is required"
+    }
+  },
+  "lists": {
+    "title1": "Your Current Advertisments",
+    "title2": "Your Sold Products' Advertisments",
+    "title3": "Your Deleted Advertisments",
+    "t1": {
+      "quentity": "Quantity",
+      "unit": "Price per unit",
+      "total": " Total"
+    },
+    "button": {
+      "comment": "Comment/ Sell",
+      "update": "Update",
+      "delete": "Delete"
+    }
+  },
+  "stats": {
+    "t1": "Your Ads Summary",
+    "t2": "Your Ad Categories",
+    "t3": "Rates You Got"
+  },
+
+  "farmerv": {
+    "title1": "Update Advertisment",
+    "title2": "Sell Harvest/Agro Product",
+    "title3": "Buy Harvest/Agro Product",
+    "title4": "Comments",
+    "title5": "Please write your comment",
+    "button2": "Comment",
+
+    "form": {
+      "quentity": "Quantity",
+      "unit": "Quantity unit",
+      "price": "Price per unit",
+      "description": "Update ad description",
+      "deadline": "Expire date",
+      "button": "UPDATE AD"
+    },
+    "placeholder": {
+      "amount": "Quntity",
+      "unit": "Quantity Measure Unit",
+      "price": "Price Per Unit",
+      "description1": "Short description about the harvest or agro product",
+      "description2": "Your comment about this advertisment"
+    },
+    "required": {
+      "amount": "Quantity is required",
+      "unit": "Quantity unit is required",
+      "price": "Price per unit is required",
+      "description": "A description about your harvest or agro product is required",
+      "date": "Expire date is required"
+    }
+  },
+  "fourm": {
+    "title": " Title",
+    "description": " Description",
+    "farmer": "For farmers",
+    "buyer": "For buyers",
+    "drop": "drop files...",
+    "button1": "Submit",
+    "profile": {
+      "position": "Administrator",
+      "button1": "Public",
+      "button2": " My Posts"
+    }
+  },
+  "chat": {
+    "fchat": "Farmer's Chats",
+    "bchat": "Buyer's Chats",
+    "achat": "Admin's Chats",
+    "chat": "Group Chat",
+    "gfchat": "(Farmers)",
+    "gbchat": "(Buyers)",
+    "placeholder": "Type a message",
+    "img": "UploadImage"
+  }
+}

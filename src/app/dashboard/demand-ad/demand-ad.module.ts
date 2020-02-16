@@ -25,6 +25,7 @@ import { DemandAdComponent } from './demand-ad.component';
 import { CreateDemandAdComponent } from './create-demand-ad/create-demand-ad.component';
 import { ListDemandAdComponent } from './list-demand-ad/list-demand-ad.component';
 import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-demand-ad/showall-demand-ad.component';
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ShowallDemandAdComponent } from 'src/app/dashboard/demand-ad/showall-de
     NbListModule,
     ChartsModule,
     NgbModule,
-    NbTooltipModule
+    NbTooltipModule,
+    SharedmoduleModule
   ]
 })
 export class DemandAdModule {}
