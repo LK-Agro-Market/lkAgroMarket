@@ -407,6 +407,7 @@
           <div class="rating" *ngIf="approvedAgreement.buyer.uid == viewer.uid">
             <h5>
               Rate This Harvest/ Agro Product
+              <ngx-stars (ratingOutput)="onRateFarmer($event)"></ngx-stars>
             </h5>
           </div>
         </nb-card-body>

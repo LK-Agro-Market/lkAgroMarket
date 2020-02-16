@@ -25,7 +25,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button.directive';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button
     CreateSupplyAdComponent,
     ListSupplyAdsComponent,
     StatsComponent,
-    ConfirmButtonDirective
   ],
   imports: [
     CommonModule,
@@ -54,7 +53,8 @@ import { ConfirmButtonDirective } from 'src/app/shared/directives/confirm-button
     NbUserModule,
     NbBadgeModule,
     ChartsModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ]
 })
 export class SupplyAdModule {}
