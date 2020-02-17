@@ -17,16 +17,16 @@
                 [routerLink]="['/profile', u.uid]"
               ></nb-user>
               <button
-              id="delete"
-              style="float:right"
-              nbButton
-              status="danger"
-              size="tiny"
-              class="delete-btn"
-              (click)="deleteUser(u.id)"
-            >
-              <i class="fa fa-trash"></i>
-            </button>
+                id="delete"
+                style="float:right"
+                nbButton
+                status="danger"
+                size="tiny"
+                class="delete-btn"
+                (click)="deleteUser(u.id)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
 
               <div *ngFor="let s of suppAdd | async">
                 <div *ngIf="u.uid == s.owner">
@@ -71,16 +71,16 @@
               ></nb-user>
               <!-- /////////// -->
               <button
-                        id="delete"
-                        style="float:right"
-                        nbButton
-                        status="danger"
-                        size="tiny"
-                        class="delete-btn"
-                        (click)="deleteUser(u.id)"
-                      >
-                        <i class="fa fa-trash"></i>
-                      </button>
+                id="delete"
+                style="float:right"
+                nbButton
+                status="danger"
+                size="tiny"
+                class="delete-btn"
+                (click)="deleteUser(u.id)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
               <!-- ///////////////// -->
               <div *ngFor="let s of demAdd | async">
                 <div *ngIf="u.uid == s.owner">
@@ -94,7 +94,9 @@
                     <tbody>
                       <tr>
                         <td>{{ s.food }}</td>
-                        <td>{{s.timestamps.toDate() | date:'yyyy/MM/dd'}}</td>
+                        <td>
+                          {{ s.timestamps.toDate() | date: 'yyyy/MM/dd' }}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -128,16 +130,16 @@
                 [routerLink]="['/profile', u.uid]"
               ></nb-user>
               <button
-              id="delete"
-              style="float:right"
-              nbButton
-              status="danger"
-              size="tiny"
-              class="delete-btn"
-              (click)="deleteUser(u.id)"
-            >
-              <i class="fa fa-trash"></i>
-            </button>
+                id="delete"
+                style="float:right"
+                nbButton
+                status="danger"
+                size="tiny"
+                class="delete-btn"
+                (click)="deleteUser(u.id)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
             </div>
           </div>
         </nb-list-item>

@@ -3,12 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchSupplyAdsRoutingModule } from './search-supply-ads-routing.module';
 import { SearchSupplyAdsComponent } from './search-supply-ads.component';
-import {
-  NbCardModule,
-  NbSpinnerModule,
-  NbSelectModule,
-  NbBadgeModule
-} from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbBadgeModule } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
