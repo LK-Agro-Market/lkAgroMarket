@@ -1,8 +1,8 @@
 <div class="row">
   <!-- //////////////////////////what kind of chat///////////////////////// -->
   <div class="col-sm-2">
-    <nb-card
-      ><nb-card-body>
+    <nb-card id ="S"
+      ><nb-card-body >
         <div id="B">
           <button class="btn btn-default" status="basic" (click)="farmerList()">
             {{ 'chat.fchat' | translate }}
@@ -49,7 +49,7 @@
 
   <!-- //////////////Next side bar ////////////////////////////////////////////// -->
   <div class="col-sm-3">
-    <nb-card
+    <nb-card  id = "S"
       ><nb-card-body>
         <!-- /////////////////Farmers chat list///////////////////// -->
         <nb-list
@@ -160,7 +160,7 @@
     <nb-layout-header subheader>
       <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
     </nb-layout-header>
-
+  <br>
     <nb-card
       ><nb-card-body>
         <div
@@ -171,7 +171,7 @@
             this.group == false
           "
         >
-          <div class="card-body">
+          <div class="card-body msg_card_body">
             <ul *ngFor="let msg of messages | async">
               <li (click)="getPost(msg.id)">
                 <!-- ///////////////send messages//////////////// -->
