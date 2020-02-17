@@ -2,18 +2,36 @@
   <nb-card-header>
     <div class="card-header-content">
       <span class="text-right">
-        <div class="col">
-          <nb-select
-            multiple
-            (selectedChange)="onFilterAds($event)"
-            placeholder="Filter By Foods"
-          >
-            <!-- <nb-option
-                *ngFor="let category of farmersAdCategories"
-                [value]="category"
-                >{{ category }}</nb-option
-              > -->
-          </nb-select>
+        <div class="row">
+          <div class="col-sm-4">
+            <nb-select
+              fullWidth
+              (selectedChange)="retriveFoods($event)"
+              placeholder="Select Food Type"
+            >
+              <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
+            </nb-select>
+          </div>
+          <div class="col-sm-4">
+            <nb-select
+              fullWidth
+              multiple
+              (selectedChange)="onFilterAds($event)"
+              placeholder="Filter By Foods"
+            >
+              <nb-option *ngFor="let f of relatedFoods" [value]="f">{{
+                f
+              }}</nb-option>
+            </nb-select>
+          </div>
+          <div class="col-sm-4">
+            <ng5-slider
+              [(value)]="minPrice"
+              [(highValue)]="maxPrice"
+              [options]="options"
+              (userChangeEnd)="onFilterByPrice()"
+            ></ng5-slider>
+          </div>
         </div>
       </span>
     </div>

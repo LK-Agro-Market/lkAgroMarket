@@ -64,7 +64,7 @@
       class="sidebar-btn"
       routerLink="/admin-panel"
       routerLinkActive="green"
-      *ngIf="userDetails"
+      *ngIf="userDetails && userDetails.userLevel == 'Administrator'"
     >
       <nb-icon
         icon="home"
@@ -88,7 +88,7 @@
     </span>
     <span
       class="sidebar-btn"
-      routerLink="/search-demand-ads"
+      routerLink="/buyer-dashboard/all-demand-ads"
       routerLinkActive="green"
       *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
     >

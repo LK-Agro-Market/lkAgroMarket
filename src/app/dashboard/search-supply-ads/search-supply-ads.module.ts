@@ -5,6 +5,8 @@ import { SearchSupplyAdsRoutingModule } from './search-supply-ads-routing.module
 import { SearchSupplyAdsComponent } from './search-supply-ads.component';
 import { NbCardModule, NbSelectModule, NbBadgeModule } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng5SliderModule } from 'ng5-slider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SearchSupplyAdsComponent],
@@ -14,7 +16,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NbCardModule,
     NbSelectModule,
     NbBadgeModule,
-    NgbModule
+    NgbModule,
+    Ng5SliderModule,
+    FormsModule
   ]
 })
 export class SearchSupplyAdsModule {}
