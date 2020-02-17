@@ -20,6 +20,7 @@ import {
   NbSidebarModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ChatComponent, GroupchatComponent],
@@ -42,7 +43,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbAccordionModule,
     NbUserModule,
     NbAlertModule,
-    NbSidebarModule
+    NbSidebarModule,
+    SharedModule
   ]
 })
 export class ChatModule {}

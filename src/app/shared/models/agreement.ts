@@ -1,9 +1,10 @@
 import { User } from './user';
+import { SupplyAd } from './supply-ad';
 
 export interface Agreement {
   agreementId: string;
   buyer: User;
-  adId: string;
+  ad: SupplyAd;
   status: string;
   agreementDate: string;
   createdAt: string;

@@ -11,13 +11,15 @@ import {
   NbLayoutModule,
   NbIconModule,
   NbTooltipModule,
-  NbButtonModule
+  NbButtonModule,
+  NbContextMenuModule
 } from '@nebular/theme';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { environment } from '../../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -35,7 +37,9 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
     NbIconModule,
     NbTooltipModule,
-    NbButtonModule
+    NbButtonModule,
+    NbContextMenuModule,
+    SharedModule
   ],
   providers: []
 })
