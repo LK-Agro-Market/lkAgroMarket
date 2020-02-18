@@ -5,6 +5,7 @@ import { User } from 'firebase';
 import { UserDetails } from 'src/app/shared/models/user-details';
 import { TranslateService } from '@ngx-translate/core';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-layout',
@@ -14,6 +15,7 @@ import { NbMenuItem, NbMenuService } from '@nebular/theme';
 export class LayoutComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: UserDetails;
+  notificationCount: number;
 
   contextMenu: NbMenuItem[] = [
     { title: 'Profile', link: `/profile/${this.user.uid}` },
@@ -29,7 +31,8 @@ export class LayoutComponent implements OnInit {
     private authService: AuthService,
     private userDetailsService: UserDetailsService,
     public translate: TranslateService,
-    private nbMenuService: NbMenuService
+    private nbMenuService: NbMenuService,
+    private notificationService: NotificationService
   ) {
     translate.addLangs(['en', 'sl', 'tm']);
     translate.setDefaultLang('en');
@@ -60,6 +63,12 @@ export class LayoutComponent implements OnInit {
         this.changeLanguage('tm');
       }
     });
+
+    this.notificationService
+      .getNotifications(this.user.uid)
+      .subscribe(notifications => {
+        this.notificationCount = notifications.length;
+      });
   }
 
   logout() {

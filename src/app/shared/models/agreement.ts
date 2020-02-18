@@ -7,5 +7,6 @@ export interface Agreement {
   ad: SupplyAd;
   status: string;
   agreementDate: string;
+  agreementPrice: number;
   createdAt: string;
 }

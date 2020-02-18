@@ -115,6 +115,28 @@
         nbTooltipPlacement="right"
       ></nb-icon>
     </span>
+    <span
+      class="sidebar-btn"
+      routerLink="/notifications"
+      routerLinkActive="green"
+    >
+      <nb-icon
+        *ngIf="notificationCount == 0"
+        icon="bell-outline"
+        class="sidebar-icon"
+        nbTooltip="Notifications"
+        nbTooltipPlacement="right"
+      >
+      </nb-icon>
+      <nb-icon
+        *ngIf="notificationCount != 0"
+        icon="bell"
+        class="sidebar-icon"
+        nbTooltip="Notifications"
+        nbTooltipPlacement="right"
+      >
+      </nb-icon>
+    </span>
   </nb-sidebar>
 
   <nb-layout-column>
