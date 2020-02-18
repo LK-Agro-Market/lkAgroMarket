@@ -99,7 +99,8 @@ export class ViewSupplyAdService {
   createPendingAgreement(
     ad: SupplyAd,
     buyer: User,
-    agreementDate: string
+    agreementDate: string,
+    agreementPrice: number
   ): Observable<void> {
     const agreementId: string = this.afs.createId();
     const currentUser: User = {
@@ -113,6 +114,7 @@ export class ViewSupplyAdService {
       ad: ad,
       buyer: currentUser,
       agreementDate: agreementDate,
+      agreementPrice: agreementPrice,
       status: 'Pending',
       createdAt: new Date().toISOString()
     };

@@ -23,6 +23,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   supplyAdId: string;
   supplyAd: SupplyAd;
   supplyAdForm: FormGroup;
+  pricePerUnitPlaceholder: string;
   attempted = false;
   processing = false;
 
@@ -40,6 +41,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
   viewersAgreement: Agreement;
   approvedAgreement: Agreement;
   agreementDate = new Date().toISOString().split('T')[0];
+  agreementPrice: number;
   attemptedAgreement = false;
   processingAgreement = false;
 
@@ -69,6 +71,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
           this.viewSupplyAdService
             .getAd(this.supplyAdId)
             .subscribe(supplyAd => {
+              this.agreementPrice = supplyAd.pricePerUnit * supplyAd.quantity;
               this.supplyAd = supplyAd;
               this.supplyAdForm.patchValue({
                 quantity: supplyAd.quantity,
@@ -188,13 +191,13 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
 
   agreeToBuy() {
     this.attempted = true;
-    if (this.agreementDate === '') {
+    if (this.agreementDate === '' || this.agreementPrice === 0) {
       return;
     }
     this.processingAgreement = true;
     this.subscriptions.push(
       this.viewSupplyAdService
-        .createPendingAgreement(this.supplyAd, this.viewer, this.agreementDate)
+        .createPendingAgreement(this.supplyAd, this.viewer, this.agreementDate, this.agreementPrice)
         .subscribe(() => {
           this.toastr.success('Your agreement request sent to the farmer');
           this.processingAgreement = false;
