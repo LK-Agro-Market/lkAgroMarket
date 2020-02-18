@@ -20,6 +20,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { ChartsModule } from 'ng2-charts';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ProfileComponent, StatsComponent],
@@ -38,7 +39,8 @@ import { ChartsModule } from 'ng2-charts';
     NbInputModule,
     NbUserModule,
     AgmCoreModule.forRoot(environment.googleMap),
-    ChartsModule
+    ChartsModule,
+    SharedModule
   ]
 })
 export class ProfileModule {}

@@ -2,43 +2,33 @@
   <nb-layout-header subheader>
     <div class="row header-row">
       <div class="col title">
-        <img class="logo" src="../../../assets/logo2.jpg" />
+        <img class="logo desktop" src="../../../assets/logo2.jpg" />
+        <img class="logo mobile" src="../../../assets/logo3.png" />
       </div>
-      <div>
-        <li>
-          <a href="javascript:void(0)" (click)="changeLanguage('en')"
-            >Engilsh</a
-          >
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="changeLanguage('sl')">සිංහල</a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" (click)="changeLanguage('tm')">தமிழ்</a>
-        </li>
+      <div class="lang-item" [nbContextMenu]="langMenu">
+        <nb-icon class="header-icon" icon="globe-outline"></nb-icon
+        ><span class="lang-text">Lang</span>
       </div>
       <div class="col-auto text-right align-middle" *ngIf="userDetails">
         <nb-user
+          class="desktop"
           size="large"
           [name]="user.displayName"
           [title]="userDetails.userLevel"
           [picture]="user.photoURL"
-          [routerLink]="['/profile', user.uid]"
+          [nbContextMenu]="contextMenu"
         >
         </nb-user>
-      </div>
-      <div class="col-auto text-right align-middle">
-        <button
-          class="logout-btn"
-          nbButton
-          hero
-          status="success"
-          size="small"
-          (click)="logout()"
+        <nb-user
+          class="mobile"
+          size="large"
+          [name]="user.displayName"
+          [title]="userDetails.userLevel"
+          [picture]="user.photoURL"
+          [nbContextMenu]="contextMenu"
+          onlyPicture
         >
-          <nb-icon icon="unlock-outline"></nb-icon
-          >{{ 'create.sign' | translate }}
-        </button>
+        </nb-user>
       </div>
     </div>
   </nb-layout-header>
@@ -74,7 +64,7 @@
       class="sidebar-btn"
       routerLink="/admin-panel"
       routerLinkActive="green"
-      *ngIf="userDetails"
+      *ngIf="userDetails && userDetails.userLevel == 'Administrator'"
     >
       <nb-icon
         icon="home"
@@ -98,7 +88,7 @@
     </span>
     <span
       class="sidebar-btn"
-      routerLink="/search-demand-ads"
+      routerLink="/buyer-dashboard/all-demand-ads"
       routerLinkActive="green"
       *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
     >

@@ -1,305 +1,315 @@
-<div id="A">
-  <nb-layout>
+<div class="row">
+  <!-- //////////////////////////what kind of chat///////////////////////// -->
+  <div class="col-sm-2">
+    <nb-card id ="S"
+      ><nb-card-body >
+        <div id="B">
+          <button class="btn btn-default" status="basic" (click)="farmerList()">
+            {{ 'chat.fchat' | translate }}
+          </button>
+        </div>
+        <br />
+        <div>
+          <button class="btn btn-default" status="basic" (click)="buyerList()">
+            {{ 'chat.bchat' | translate }}
+          </button>
+        </div>
+        <br />
+        <div>
+          <button class="btn btn-default" status="basic" (click)="adminList()">
+            {{ 'chat.achat' | translate }}
+          </button>
+        </div>
+        <br />
+        <div>
+          <button
+            class="btn btn-default"
+            status="basic"
+            (click)="farmerGroup()"
+            *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
+          >
+            {{ 'chat.chat' | translate }}<br />
+            {{ 'chat.gfchat' | translate }}
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-default"
+            status="basic"
+            (click)="buyerGroup()"
+            *ngIf="userDetails && userDetails.userLevel == 'Buyer'"
+          >
+            {{ 'chat.chat' | translate }}<br />
+            {{ 'chat.gbchat' | translate }}
+          </button>
+        </div>
+      </nb-card-body></nb-card
+    >
+  </div>
+
+  <!-- //////////////Next side bar ////////////////////////////////////////////// -->
+  <div class="col-sm-3">
+    <nb-card  id = "S"
+      ><nb-card-body>
+        <!-- /////////////////Farmers chat list///////////////////// -->
+        <nb-list
+          *ngIf="this.farmers && this.buyers != true && this.admin != true"
+        >
+          <nb-list-item *ngFor="let ud of farmerC | async">
+            <div *ngFor="let u of users | async">
+              <div *ngIf="u.uid == ud.id && ud.userLevel == 'Farmer'">
+                <button
+                  class="btn btn-default"
+                  status="basic"
+                  (click)="UserClicked(u)"
+                  *ngIf="user.uid != u.uid"
+                >
+                  <nb-user
+                    [name]="u.displayName"
+                    [picture]="u.photoURL"
+                  ></nb-user>
+                </button>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <!-- /////////////////Buyers chat list///////////////////// -->
+        <nb-list
+          *ngIf="this.buyers && this.farmers != true && this.admin != true"
+        >
+          <nb-list-item *ngFor="let ud of buyerC | async">
+            <div *ngFor="let u of users | async">
+              <div *ngIf="u.uid == ud.id && ud.userLevel == 'Buyer'">
+                <button
+                  class="btn btn-default"
+                  status="basic"
+                  (click)="UserClicked(u)"
+                  *ngIf="user.uid != u.uid"
+                >
+                  <nb-user
+                    [name]="u.displayName"
+                    [picture]="u.photoURL"
+                  ></nb-user>
+                </button>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <!-- /////////////////Admins chat list///////////////// -->
+        <nb-list
+          *ngIf="this.admin && this.buyers != true && this.farmers != true"
+        >
+          <nb-list-item *ngFor="let ud of adminC | async">
+            <div *ngFor="let u of users | async">
+              <div *ngIf="u.uid == ud.id && ud.userLevel == 'Administrator'">
+                <button
+                  class="btn btn-default"
+                  status="basic"
+                  (click)="UserClicked(u)"
+                  *ngIf="user.uid != u.uid"
+                >
+                  <nb-user
+                    [name]="u.displayName"
+                    [picture]="u.photoURL"
+                  ></nb-user>
+                </button>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <!-- /////////////////farmer group list///////////////////// -->
+        <nb-list *ngIf="this.farmerLists == true">
+          <nb-list-item id="farmerList" *ngFor="let ud of farmerC | async">
+            <div *ngFor="let u of users | async">
+              <div
+                *ngIf="
+                  u.uid == ud.id &&
+                  ud.userLevel == 'Farmer' &&
+                  user.uid != u.uid
+                "
+              >
+                <nb-user
+                  [name]="u.displayName"
+                  [picture]="u.photoURL"
+                ></nb-user>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <!-- ////////////////////buyer group list//////////////////////////// -->
+        <nb-list *ngIf="this.buyerLists == true">
+          <nb-list-item id="buyerList" *ngFor="let ud of buyerC | async">
+            <div *ngFor="let u of users | async">
+              <div
+                *ngIf="
+                  u.uid == ud.id && ud.userLevel == 'Buyer' && user.uid != u.uid
+                "
+              >
+                <nb-user
+                  [name]="u.displayName"
+                  [picture]="u.photoURL"
+                ></nb-user>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list> </nb-card-body
+    ></nb-card>
+  </div>
+
+  <div class="col-sm-7">
     <nb-layout-header subheader>
       <nb-user [name]="selectedUser" [picture]="avatar"></nb-user>
     </nb-layout-header>
-    <!-- //////////////////////////what kind of chat///////////////////////// -->
-    <nb-sidebar id="S">
-      <div id="B">
-        <button class="btn btn-default" status="basic" (click)="farmerList()">
-          {{ 'chat.fchat' | translate }}
-        </button>
-      </div>
-      <br />
-      <div>
-        <button class="btn btn-default" status="basic" (click)="buyerList()">
-          {{ 'chat.bchat' | translate }}
-        </button>
-      </div>
-      <br />
-      <div>
-        <button class="btn btn-default" status="basic" (click)="adminList()">
-          {{ 'chat.achat' | translate }}
-        </button>
-      </div>
-      <br />
-      <div>
-        <button
-          class="btn btn-default"
-          status="basic"
-          (click)="farmerGroup()"
-          *ngIf="userDetails && userDetails.userLevel == 'Farmer'"
+  <br>
+    <nb-card
+      ><nb-card-body>
+        <div
+          *ngIf="
+            this.admin == true ||
+            this.buyers == true ||
+            this.farmers == true ||
+            this.group == false
+          "
         >
-          {{ 'chat.chat' | translate }}<br />
-          {{ 'chat.gfchat' | translate }}
-        </button>
-      </div>
-      <div>
-        <button
-          class="btn btn-default"
-          status="basic"
-          (click)="buyerGroup()"
-          *ngIf="userDetails && userDetails.userLevel == 'Buyer'"
-        >
-          {{ 'chat.chat' | translate }}<br />
-          {{ 'chat.gbchat' | translate }}
-        </button>
-      </div>
-    </nb-sidebar>
-    <!-- //////////////Next side bar ////////////////////////////////////////////// -->
-    <!-- /////////////////Farmers chat list///////////////////// -->
-    <nb-sidebar>
-      <nb-list
-        *ngIf="this.farmers && this.buyers != true && this.admin != true"
-      >
-        <nb-list-item *ngFor="let ud of farmerC | async">
-          <div *ngFor="let u of users | async">
-            <div *ngIf="u.uid == ud.id && ud.userLevel == 'Farmer'">
-              <button
-                class="btn btn-default"
-                status="basic"
-                (click)="UserClicked(u)"
-                *ngIf="user.uid != u.uid"
-              >
-                <nb-user
-                  [name]="u.displayName"
-                  [picture]="u.photoURL"
-                ></nb-user>
-              </button>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-      <!-- /////////////////Buyers chat list///////////////////// -->
-      <nb-list
-        *ngIf="this.buyers && this.farmers != true && this.admin != true"
-      >
-        <nb-list-item *ngFor="let ud of buyerC | async">
-          <div *ngFor="let u of users | async">
-            <div *ngIf="u.uid == ud.id && ud.userLevel == 'Buyer'">
-              <button
-                class="btn btn-default"
-                status="basic"
-                (click)="UserClicked(u)"
-                *ngIf="user.uid != u.uid"
-              >
-                <nb-user
-                  [name]="u.displayName"
-                  [picture]="u.photoURL"
-                ></nb-user>
-              </button>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-      <!-- /////////////////Admins chat list///////////////// -->
-      <nb-list
-        *ngIf="this.admin && this.buyers != true && this.farmers != true"
-      >
-        <nb-list-item *ngFor="let ud of adminC | async">
-          <div *ngFor="let u of users | async">
-            <div *ngIf="u.uid == ud.id && ud.userLevel == 'Administrator'">
-              <button
-                class="btn btn-default"
-                status="basic"
-                (click)="UserClicked(u)"
-                *ngIf="user.uid != u.uid"
-              >
-                <nb-user
-                  [name]="u.displayName"
-                  [picture]="u.photoURL"
-                ></nb-user>
-              </button>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-      <!-- /////////////////farmer group list///////////////////// -->
-      <nb-list *ngIf="this.farmerLists == true">
-        <nb-list-item id="farmerList" *ngFor="let ud of farmerC | async">
-          <div *ngFor="let u of users | async">
-            <div
-              *ngIf="
-                u.uid == ud.id && ud.userLevel == 'Farmer' && user.uid != u.uid
-              "
-            >
-              <nb-user [name]="u.displayName" [picture]="u.photoURL"></nb-user>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-      <!-- ////////////////////buyer group list//////////////////////////// -->
-      <nb-list *ngIf="this.buyerLists == true">
-        <nb-list-item id="buyerList" *ngFor="let ud of buyerC | async">
-          <div *ngFor="let u of users | async">
-            <div
-              *ngIf="
-                u.uid == ud.id && ud.userLevel == 'Buyer' && user.uid != u.uid
-              "
-            >
-              <nb-user [name]="u.displayName" [picture]="u.photoURL"></nb-user>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-    </nb-sidebar>
-
-    <nb-layout-column>
-      <div class="container">
-        <div class="row">
-          <div
-            class="col-md-6 col-md-offset-3"
-            *ngIf="
-              this.admin == true ||
-              this.buyers == true ||
-              this.farmers == true ||
-              this.group == false
-            "
-          >
-            <div class="card-body msg_card_body">
-              <ul *ngFor="let msg of messages | async">
-                <li (click)="getPost(msg.id)">
-                  <!-- ///////////////send messages//////////////// -->
+          <div class="card-body msg_card_body">
+            <ul *ngFor="let msg of messages | async">
+              <li (click)="getPost(msg.id)">
+                <!-- ///////////////send messages//////////////// -->
+                <div
+                  id="sid"
+                  *ngIf="msg.sid == this.currentId && msg.rid != this.currentId"
+                  class="d-flex justify-content-end mb-6"
+                >
                   <div
-                    id="sid"
-                    *ngIf="
-                      msg.sid == this.currentId && msg.rid != this.currentId
-                    "
-                    class="d-flex justify-content-end mb-6"
+                    *ngIf="msg.type == 'text'"
+                    id="scontent"
+                    class="p-3 mb-2 bg-primary text-white"
                   >
-                    <div
-                      *ngIf="msg.type == 'text'"
-                      id="scontent"
-                      class="p-3 mb-2 bg-primary text-white"
+                    {{ msg.content }} <br />
+                    <p
+                      style="font-size:15px;color: rgb(235, 14, 14);float: left;"
                     >
-                      {{ msg.content }} <br />
-                      <p
-                        style="font-size:15px;color: rgb(235, 14, 14);float: left;"
-                      >
-                        {{ msg.seen }}
-                      </p>
-                      <button
-                        id="delete"
-                        style="float:right"
-                        nbButton
-                        status="danger"
-                        size="tiny"
-                        class="delete-btn"
-                        (click)="deleteChat(msg.id)"
-                      >
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-
-                    <div
-                      *ngIf="msg.type != 'text'"
-                      class="p-3 mb-2 bg-light text-white"
-                    >
-                      <img
-                        id="image"
-                        src="{{ msg.url }}"
-                        style="max-width:250px;"
-                      /><br />
-                      <p
-                        style="font-size:15px;color: rgb(235, 14, 14);float: left;"
-                      >
-                        {{ msg.seen }}
-                      </p>
-                      <button
-                        id="delete"
-                        style="float:right"
-                        nbButton
-                        status="danger"
-                        size="tiny"
-                        class="delete-btn"
-                        (click)="deleteChat(msg.id)"
-                      >
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-                    <p style="font-size:10px;" id="rtime">
-                      {{ msg.time | date: 'mediumDate' }}<br />{{
-                        msg.time | date: 'h:mm a '
-                      }}
+                      {{ msg.seen }}
                     </p>
+                    <button
+                      id="delete"
+                      style="float:right"
+                      nbButton
+                      status="danger"
+                      size="tiny"
+                      class="delete-btn"
+                      (click)="deleteChat(msg.id)"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
                   </div>
-                  <!-- ///////////////////////////////replies//////////////////////////////////// -->
+
                   <div
-                    id="rid"
-                    *ngIf="msg.sid != this.currentId"
-                    class="d-flex justify-content-start mb-6"
+                    *ngIf="msg.type != 'text'"
+                    class="p-3 mb-2 bg-light text-white"
                   >
-                    <img src="{{ avatar }}" alt="Avatar" class="avatar" />
-                    <div
-                      *ngIf="msg.type == 'text'"
-                      id="rcontent"
-                      class="p-3 mb-2 bg-light text-dark"
+                    <img
+                      id="image"
+                      src="{{ msg.url }}"
+                      style="max-width:250px;"
+                    /><br />
+                    <p
+                      style="font-size:15px;color: rgb(235, 14, 14);float: left;"
                     >
-                      {{ msg.content }}
-                    </div>
-                    <div
-                      *ngIf="msg.type != 'text'"
-                      class="p-3 mb-2 bg-light text-white"
-                    >
-                      <img
-                        id="image"
-                        src="{{ msg.url }}"
-                        style="max-width:250px;"
-                      />
-                    </div>
-
-                    <p style="font-size:10px;" id="rtime">
-                      {{ msg.time | date: 'mediumDate' }}<br />{{
-                        msg.time | date: 'h:mm a '
-                      }}
+                      {{ msg.seen }}
                     </p>
+                    <button
+                      id="delete"
+                      style="float:right"
+                      nbButton
+                      status="danger"
+                      size="tiny"
+                      class="delete-btn"
+                      (click)="deleteChat(msg.id)"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
                   </div>
-                </li>
-              </ul>
-            </div>
-            <!-- ///////////////////////////////////Form////////////////////////////////// -->
-            <div class="input-group" style="width:800px;">
-              <input
-                type="text"
-                [(ngModel)]="content"
-                class="form-control"
-                placeholder="{{ 'chat.placeholder' | translate }}"
-              />
-              <span
-                class="msg_send_btn"
-                class="input-group-addon btn btn-primary"
-                (click)="sendMessage($event)"
-                ><i class="fa fa-paper-plane" aria-hidden="true"></i
-              ></span>
-            </div>
+                  <p style="font-size:10px;" id="rtime">
+                    {{ msg.time | date: 'mediumDate' }}<br />{{
+                      msg.time | date: 'h:mm a '
+                    }}
+                  </p>
+                </div>
+                <!-- ///////////////////////////////replies//////////////////////////////////// -->
+                <div
+                  id="rid"
+                  *ngIf="msg.sid != this.currentId"
+                  class="d-flex justify-content-start mb-6"
+                >
+                  <img src="{{ avatar }}" alt="Avatar" class="avatar" />
+                  <div
+                    *ngIf="msg.type == 'text'"
+                    id="rcontent"
+                    class="p-3 mb-2 bg-light text-dark"
+                  >
+                    {{ msg.content }}
+                  </div>
+                  <div
+                    *ngIf="msg.type != 'text'"
+                    class="p-3 mb-2 bg-light text-white"
+                  >
+                    <img
+                      id="image"
+                      src="{{ msg.url }}"
+                      style="max-width:250px;"
+                    />
+                  </div>
 
-            <label for="fileInput">
-              {{ 'chat.img' | translate }}
-              <img
-                id="icon"
-                src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg"
-              /> </label
-            >&nbsp;&nbsp;
+                  <p style="font-size:10px;" id="rtime">
+                    {{ msg.time | date: 'mediumDate' }}<br />{{
+                      msg.time | date: 'h:mm a '
+                    }}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- ///////////////////////////////////Form////////////////////////////////// -->
+          <div class="input-group" style="width:100%;">
             <input
-              id="fileInput"
-              type="file"
-              (change)="uploadFile($event)"
-              accept=".png,.jpg"
+              type="text"
+              [(ngModel)]="content"
+              class="form-control"
+              placeholder="{{ 'chat.placeholder' | translate }}"
             />
+            <span
+              class="msg_send_btn"
+              class="input-group-addon btn btn-primary"
+              (click)="sendMessage($event)"
+              ><i class="fa fa-paper-plane" aria-hidden="true"></i
+            ></span>
           </div>
-          <div
-            class="col-md-6 col-md-offset-3"
-            *ngIf="
-              this.admin == false &&
-              this.buyers == false &&
-              this.farmers == false &&
-              this.group == true
-            "
-          >
-            <app-groupchat></app-groupchat>
-          </div>
+
+          <label for="fileInput">
+            {{ 'chat.img' | translate }}
+            <img
+              id="icon"
+              src="https://image.freepik.com/free-icon/upload-arrow_318-26670.jpg"
+            /> </label
+          >&nbsp;&nbsp;
+          <input
+            id="fileInput"
+            type="file"
+            (change)="uploadFile($event)"
+            accept=".png,.jpg"
+          />
         </div>
-      </div>
-    </nb-layout-column>
-  </nb-layout>
+        <div
+          *ngIf="
+            this.admin == false &&
+            this.buyers == false &&
+            this.farmers == false &&
+            this.group == true
+          "
+        >
+          <app-groupchat></app-groupchat>
+        </div> </nb-card-body
+    ></nb-card>
+  </div>
 </div>
