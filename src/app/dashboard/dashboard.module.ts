@@ -12,7 +12,9 @@ import {
   NbIconModule,
   NbTooltipModule,
   NbButtonModule,
-  NbContextMenuModule
+  NbContextMenuModule,
+  NbBadgeComponent,
+  NbBadgeModule
 } from '@nebular/theme';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -37,8 +39,8 @@ import { SharedModule } from '../shared/shared.module';
     NbEvaIconsModule,
     NbIconModule,
     NbTooltipModule,
-    NbButtonModule,
     NbContextMenuModule,
+    NbBadgeModule,
     SharedModule
   ],
   providers: []
