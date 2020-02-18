@@ -63,6 +63,13 @@ const routes: Routes = [
           import('./admin-panel/admin-panel.module').then(
             m => m.AdminPanelModule
           )
+      },
+      {
+        path: 'notifications',
+        loadChildren: () =>
+          import('./notification/notification.module').then(
+            m => m.NotificationModule
+          )
       }
     ]
   }

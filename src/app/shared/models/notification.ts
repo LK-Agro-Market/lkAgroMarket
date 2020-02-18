@@ -6,4 +6,5 @@ export interface Notification {
     url: string;
     receiverId: string;
     relatedUser: User;
+    createdAt: string;
 }

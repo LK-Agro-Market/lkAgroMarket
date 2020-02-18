@@ -18,7 +18,8 @@ export class NotificationService {
       content: content,
       url: url,
       receiverId: receiverId,
-      relatedUser: relatedUser
+      relatedUser: relatedUser,
+      createdAt: new Date().toISOString()
     }
     this.afs.collection('notifications').doc(notificationId).set(notification);
   }

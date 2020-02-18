@@ -1,0 +1,28 @@
+.notification {
+    padding: 1.5rem 0.75rem;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+  
+    > div {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+  
+    .text-center {
+      justify-content: center;
+    }
+  
+    .action-btns {
+      flex-direction: row-reverse;
+    }
+  }
+  
+  .notification:hover {
+    background: rgba(0, 0, 0, 0.055);
+  }
+  
+  .btn {
+    margin-left: 5px;
+  }
+  
