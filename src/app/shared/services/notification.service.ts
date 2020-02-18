@@ -8,10 +8,14 @@ import { from } from 'rxjs';
   providedIn: 'root'
 })
 export class NotificationService {
+  constructor(public afs: AngularFirestore) {}
 
-  constructor(public afs: AngularFirestore) { }
-
-  createNotification(content: string, url: string, receiverId: string, relatedUser: User, ) {
+  createNotification(
+    content: string,
+    url: string,
+    receiverId: string,
+    relatedUser: User
+  ) {
     const notificationId = this.afs.createId();
     const notification: Notification = {
       notificationId: notificationId,
@@ -20,15 +24,27 @@ export class NotificationService {
       receiverId: receiverId,
       relatedUser: relatedUser,
       createdAt: new Date().toISOString()
-    }
-    this.afs.collection('notifications').doc(notificationId).set(notification);
+    };
+    this.afs
+      .collection('notifications')
+      .doc(notificationId)
+      .set(notification);
   }
 
   getNotifications(receiverId: string) {
-    return this.afs.collection<Notification>('notifications', ref=> ref.where('receiverId','==',receiverId)).valueChanges();
+    return this.afs
+      .collection<Notification>('notifications', ref =>
+        ref.where('receiverId', '==', receiverId)
+      )
+      .valueChanges();
   }
 
   deleteNotification(notificationId: string) {
-    return from(this.afs.collection<Notification>('notifications').doc(notificationId).delete());
+    return from(
+      this.afs
+        .collection<Notification>('notifications')
+        .doc(notificationId)
+        .delete()
+    );
   }
 }

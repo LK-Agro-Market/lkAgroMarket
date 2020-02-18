@@ -15,7 +15,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   providedIn: 'root'
 })
 export class ViewSupplyAdService {
-  constructor(private afs: AngularFirestore, private notificationService: NotificationService) {}
+  constructor(
+    private afs: AngularFirestore,
+    private notificationService: NotificationService
+  ) {}
 
   getAd(adId: string): Observable<SupplyAd> {
     return this.afs
@@ -72,7 +75,7 @@ export class ViewSupplyAdService {
       uid: user.uid,
       photoURL: user.photoURL,
       email: user.email
-    }
+    };
     const comment: SupplyAdComment = {
       commentId: commentId,
       supplyAdId: ad.id,
@@ -84,7 +87,12 @@ export class ViewSupplyAdService {
       .collection('supplyAdComment')
       .doc(commentId);
 
-    this.notificationService.createNotification(`${currentUser.displayName} commented on your advertisment`, `view-supply-ad/${ad.id}`, ad.owner, currentUser);
+    this.notificationService.createNotification(
+      `${currentUser.displayName} commented on your advertisment`,
+      `view-supply-ad/${ad.id}`,
+      ad.owner,
+      currentUser
+    );
     return from(docRef.set(comment));
   }
 
@@ -108,7 +116,7 @@ export class ViewSupplyAdService {
       uid: buyer.uid,
       photoURL: buyer.photoURL,
       email: buyer.email
-    }
+    };
     const pendingAgreement: Agreement = {
       agreementId: agreementId,
       ad: ad,
@@ -119,7 +127,12 @@ export class ViewSupplyAdService {
       createdAt: new Date().toISOString()
     };
 
-    this.notificationService.createNotification(`${currentUser.displayName} commented on your advertisment`, `view-supply-ad/${ad.id}`, ad.owner, currentUser);
+    this.notificationService.createNotification(
+      `${currentUser.displayName} commented on your advertisment`,
+      `view-supply-ad/${ad.id}`,
+      ad.owner,
+      currentUser
+    );
     const docRef: AngularFirestoreDocument<Agreement> = this.afs
       .collection('agreements')
       .doc(agreementId);
@@ -155,14 +168,24 @@ export class ViewSupplyAdService {
     );
   }
 
-  approveAgreement(agreementId: string, adId: string, buyerId:string, farmer: User): Observable<void> {
+  approveAgreement(
+    agreementId: string,
+    adId: string,
+    buyerId: string,
+    farmer: User
+  ): Observable<void> {
     const currentUser: User = {
       displayName: farmer.displayName,
       uid: farmer.uid,
       photoURL: farmer.photoURL,
       email: farmer.email
-    }
-    this.notificationService.createNotification(`${currentUser.displayName} commented on your advertisment`, `view-supply-ad/${adId}`, buyerId, currentUser);
+    };
+    this.notificationService.createNotification(
+      `${currentUser.displayName} commented on your advertisment`,
+      `view-supply-ad/${adId}`,
+      buyerId,
+      currentUser
+    );
     return from(
       this.afs
         .collection('supplyAd')

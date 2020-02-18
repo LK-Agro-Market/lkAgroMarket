@@ -64,9 +64,11 @@ export class LayoutComponent implements OnInit {
       }
     });
 
-    this.notificationService.getNotifications(this.user.uid).subscribe(notifications => {
-      this.notificationCount = notifications.length;
-    })
+    this.notificationService
+      .getNotifications(this.user.uid)
+      .subscribe(notifications => {
+        this.notificationCount = notifications.length;
+      });
   }
 
   logout() {

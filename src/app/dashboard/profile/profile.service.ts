@@ -11,7 +11,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private afs: AngularFirestore, private notificationService: NotificationService) {}
+  constructor(
+    private afs: AngularFirestore,
+    private notificationService: NotificationService
+  ) {}
 
   getProfileOwner(ownerId: string): Observable<User> {
     return this.afs
@@ -42,7 +45,12 @@ export class ProfileService {
       .collection('followers')
       .doc(viewer.uid + profileOwnerUser.uid);
 
-    this.notificationService.createNotification(`${viewer.displayName} followed you`, `profile/${profileOwnerUser.uid}`, profileOwnerUser.uid, viewer);
+    this.notificationService.createNotification(
+      `${viewer.displayName} followed you`,
+      `profile/${profileOwnerUser.uid}`,
+      profileOwnerUser.uid,
+      viewer
+    );
     return from(
       followerRef.set({
         follower: viewer.uid,

@@ -39,7 +39,6 @@ import { SharedModule } from '../shared/shared.module';
     NbEvaIconsModule,
     NbIconModule,
     NbTooltipModule,
-    NbButtonModule,
     NbContextMenuModule,
     NbBadgeModule,
     SharedModule

@@ -5,7 +5,6 @@ import { NotificationRoutingModule } from './notification-routing.module';
 import { NotificationComponent } from './notification.component';
 import { NbCardModule, NbSpinnerModule, NbUserModule } from '@nebular/theme';
 
-
 @NgModule({
   declarations: [NotificationComponent],
   imports: [
@@ -16,4 +15,4 @@ import { NbCardModule, NbSpinnerModule, NbUserModule } from '@nebular/theme';
     NbUserModule
   ]
 })
-export class NotificationModule { }
+export class NotificationModule {}

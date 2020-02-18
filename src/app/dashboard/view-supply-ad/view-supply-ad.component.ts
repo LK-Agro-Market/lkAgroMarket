@@ -197,7 +197,12 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.processingAgreement = true;
     this.subscriptions.push(
       this.viewSupplyAdService
-        .createPendingAgreement(this.supplyAd, this.viewer, this.agreementDate, this.agreementPrice)
+        .createPendingAgreement(
+          this.supplyAd,
+          this.viewer,
+          this.agreementDate,
+          this.agreementPrice
+        )
         .subscribe(() => {
           this.toastr.success('Your agreement request sent to the farmer');
           this.processingAgreement = false;
@@ -220,7 +225,12 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.processingAgreement = true;
     this.subscriptions.push(
       this.viewSupplyAdService
-        .approveAgreement(agreementId, this.supplyAd.id, buyerId, this.adOwnerUser)
+        .approveAgreement(
+          agreementId,
+          this.supplyAd.id,
+          buyerId,
+          this.adOwnerUser
+        )
         .subscribe(() => {
           this.processingAgreement = false;
           this.toastr.success('You signed the agreement');

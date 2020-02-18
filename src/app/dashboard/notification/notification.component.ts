@@ -14,15 +14,24 @@ import { Router } from '@angular/router';
 export class NotificationComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   notifications: Notification[];
+  notificationCount: number;
   viewer: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor(private notificationService: NotificationService, private toastr: ToastrService, public router: Router) { }
+  constructor(
+    private notificationService: NotificationService,
+    private toastr: ToastrService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     this.subscriptions.push(
-    this.notificationService.getNotifications(this.viewer.uid).subscribe(notifications => {
-      this.notifications = notifications;
-    }));
+      this.notificationService
+        .getNotifications(this.viewer.uid)
+        .subscribe(notifications => {
+          this.notifications = notifications;
+          this.notificationCount = notifications.length;
+        })
+    );
   }
 
   ngOnDestroy() {
@@ -31,19 +40,26 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
   }
 
-  delete(notificationId: string){
+  delete(notificationId: string) {
     this.subscriptions.push(
-    this.notificationService.deleteNotification(notificationId).subscribe(()=>{
-      this.toastr.success('Deleted Notification');
-    }));
+      this.notificationService
+        .deleteNotification(notificationId)
+        .subscribe(() => {
+          this.toastr.success('Deleted Notification');
+        })
+    );
   }
 
-  viewAndDelete(notificationId: string){
-    const notification: Notification = this.notifications.filter(n => n.notificationId == notificationId)[0];
+  viewAndDelete(notificationId: string) {
+    const notification: Notification = this.notifications.filter(
+      n => n.notificationId == notificationId
+    )[0];
     this.subscriptions.push(
-    this.notificationService.deleteNotification(notificationId).subscribe(()=>{
-      this.router.navigate([notification.url]);
-    }));
+      this.notificationService
+        .deleteNotification(notificationId)
+        .subscribe(() => {
+          this.router.navigate([notification.url]);
+        })
+    );
   }
-
 }
