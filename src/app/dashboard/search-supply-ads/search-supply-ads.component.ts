@@ -4,6 +4,7 @@ import { SupplyAd } from 'src/app/shared/models/supply-ad';
 import { SearchSupplyAdsService } from './search-supply-ads.service';
 import { Agreement } from 'src/app/shared/models/agreement';
 import { User } from 'src/app/shared/models/user';
+import { Options, LabelType } from 'ng5-slider';
 
 @Component({
   selector: 'app-search-supply-ads',
@@ -18,8 +19,53 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
   allSupplyAds: SupplyAd[];
   filteredSupplyAds: SupplyAd[];
 
+  minPrice: number = 0;
+  maxPrice: number = 500;
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return 'Min price: Rs.' + value;
+        case LabelType.High:
+          return 'Max price: Rs.' + value;
+        default:
+          return 'Rs.' + value;
+      }
+    }
+  };
+
   pendingAgreements: Agreement[];
   approvedAgreements: Agreement[];
+
+  foods = {
+    Fruits: [
+      'Apple',
+      'Avocado',
+      'Banana',
+      'Grape',
+      'Lemon',
+      'Mango',
+      'Orange',
+      'Papaya',
+      'Pineapple',
+      'Strawberry',
+      'Watermelon'
+    ],
+    Vegitable: [
+      'Beans',
+      'Beetroots',
+      'Cabbage',
+      'Carrot',
+      'Cucumber',
+      'Garlic',
+      'Tomato',
+      'Onion'
+    ]
+  };
+  types = Object.keys(this.foods);
+  relatedFoods: Array<string>;
 
   constructor(private searchSupplyAdsService: SearchSupplyAdsService) {}
 
@@ -35,7 +81,6 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
       this.searchSupplyAdsService
         .getAgreements(this.viewer)
         .subscribe(agreements => {
-          console.log(agreements);
           this.pendingAgreements = agreements.filter(
             agreement => agreement.status == 'Pending'
           );
@@ -52,6 +97,10 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
     }
   }
 
+  retriveFoods($event: string) {
+    this.relatedFoods = this.foods[$event];
+  }
+
   onFilterAds($event: string[]) {
     if ($event.length) {
       this.filteredSupplyAds = this.allSupplyAds.filter(ad =>
@@ -60,5 +109,14 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
     } else {
       this.filteredSupplyAds = this.allSupplyAds;
     }
+    this.filteredSupplyAds = this.filteredSupplyAds.filter(
+      ad => ad.pricePerUnit >= this.minPrice && ad.pricePerUnit <= this.maxPrice
+    );
+  }
+
+  onFilterByPrice() {
+    this.filteredSupplyAds = this.filteredSupplyAds.filter(
+      ad => ad.pricePerUnit >= this.minPrice && ad.pricePerUnit <= this.maxPrice
+    );
   }
 }

@@ -5,6 +5,7 @@ nb-card nb-icon {
 nb-list {
   margin-top: 20px;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 button-filled-basic-background-color {
   background-color: #edf1f7;
@@ -14,10 +15,10 @@ nb-list nb-list-item {
   padding: 10px;
 }
 #farmerList {
-  padding: 15px;
+  padding: 10px;
 }
 #buyerList {
-  padding: 15px;
+  padding: 10px;
 }
 nb-list nb-list-item button {
   width: 600px;
@@ -89,7 +90,7 @@ ul li {
 }
 
 .msg_card_body {
-  width: 800px;
+  width: 780px;
   height: 400px;
   overflow-y: auto;
 }
@@ -122,4 +123,10 @@ ul li {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+#S {
+  height: 600px;
+}
+#H{
+  color: #162df7;
 }
