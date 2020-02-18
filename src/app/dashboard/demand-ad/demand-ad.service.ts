@@ -8,6 +8,7 @@ import { DemandAd } from 'src/app/shared/models/demand-ad';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from 'src/app/shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -102,5 +103,10 @@ export class DemandAdService {
           .doc(adId)
           .update({ views: count });
       });
+  }
+  getUser(uId:string):Observable<User[]>{
+    return this.afs
+    .collection('users', ref=>ref.where('uid','==', uId))
+    .valueChanges().pipe(map(res => res as User[]))
   }
 }

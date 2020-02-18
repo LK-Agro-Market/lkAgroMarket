@@ -24,12 +24,14 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReplyComponent } from './comment-buyer-ad/reply/reply.component';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
     ViewDemandAdComponent,
     CommentBuyerAdComponent,
-    ReplyComponent
+    ReplyComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
