@@ -317,7 +317,7 @@
                     class="btn btn-success"
                     type="button"
                     appConfirmButton
-                    (confirmed)="agreeToSell(agreement.agreementId)"
+                    (confirmed)="agreeToSell(agreement.agreementId, agreement.buyer.uid)"
                   >
                     Agree To Sell
                   </button>

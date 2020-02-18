@@ -176,7 +176,7 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     this.processingComment = true;
     this.subscriptions.push(
       this.viewSupplyAdService
-        .createComment(this.newComment, this.supplyAdId, this.viewer)
+        .createComment(this.newComment, this.supplyAd, this.viewer)
         .subscribe(() => {
           this.newComment = '';
           this.attemptedComment = false;
@@ -213,11 +213,11 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
     );
   }
 
-  agreeToSell(agreementId: string) {
+  agreeToSell(agreementId: string, buyerId: string) {
     this.processingAgreement = true;
     this.subscriptions.push(
       this.viewSupplyAdService
-        .approveAgreement(agreementId, this.supplyAd.id)
+        .approveAgreement(agreementId, this.supplyAd.id, buyerId, this.adOwnerUser)
         .subscribe(() => {
           this.processingAgreement = false;
           this.toastr.success('You signed the agreement');
