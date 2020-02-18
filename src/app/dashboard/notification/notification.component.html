@@ -22,12 +22,8 @@
         ></nb-user>
       </div>
       <div class="col-sm-6">
-        {{ notification.content }}
-        <b
-          ><small>
-            At {{ notification.createdAt | date: 'MMM d, y h:mm:ss a' }}</small
-          ></b
-        >
+        {{ notification.content }} - At
+        {{ notification.createdAt | date: 'MMM d, y h:mm:ss a' }}
       </div>
       <div class="col-sm-4 action-btns">
         <button
