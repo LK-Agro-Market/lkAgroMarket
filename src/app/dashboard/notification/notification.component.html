@@ -1,0 +1,46 @@
+<h5>
+  Notifications - <span class="count">{{ notificationCount }}</span>
+</h5>
+
+<nb-card accent="primary">
+  <nb-card-header>
+    <div class="container-fluid">
+      <div class="row d-none d-lg-flex">
+        <div class="col-sm-3"><b>From</b></div>
+        <div class="col-sm-5"><b>Notification</b></div>
+        <div class="col-sm-4"></div>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="notification row" *ngFor="let notification of notifications">
+      <div class="col-sm-2">
+        <nb-user
+          [name]="notification.relatedUser.displayName"
+          [picture]="notification.relatedUser.photoURL"
+          onlyPicture
+        ></nb-user>
+      </div>
+      <div class="col-sm-6">
+        {{ notification.content }} - At
+        {{ notification.createdAt | date: 'MMM d, y h:mm:ss a' }}
+      </div>
+      <div class="col-sm-4 action-btns">
+        <button
+          type="button"
+          class="btn btn-sm btn-danger"
+          (click)="delete(notification.notificationId)"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="viewAndDelete(notification.notificationId)"
+        >
+          Go there
+        </button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

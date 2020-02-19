@@ -310,14 +310,17 @@
                   </nb-user>
                 </div>
                 <div class="col-sm-3">
-                  need to buy on {{ agreement.agreementDate }}
+                  need to buy for Rs.{{ agreement.agreementPrice }} on or before
+                  {{ agreement.agreementDate }}
                 </div>
                 <div class="col-sm-4">
                   <button
                     class="btn btn-success"
                     type="button"
                     appConfirmButton
-                    (confirmed)="agreeToSell(agreement.agreementId)"
+                    (confirmed)="
+                      agreeToSell(agreement.agreementId, agreement.buyer.uid)
+                    "
                   >
                     Agree To Sell
                   </button>
@@ -330,13 +333,19 @@
           *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == false"
         >
           <p>
-            Tell the farmer that you need to buy this harvest/agro product by
-            clicking on <b>Agree To Buy</b> button
+            Tell the farmer that you need to buy this harvest/agro product for
+            the <b>mentioned price</b> by clicking on <b>Agree To Buy</b> button
             <b>on or before the date, mentioned below</b>. If farmer also agree
             to sell this to you, then an online agreement will be generated
             automatically.
           </p>
           <div class="input-group mb-3">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Suggest a price"
+              [(ngModel)]="agreementPrice"
+            />
             <input
               type="date"
               class="form-control"
@@ -359,7 +368,10 @@
           *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == true"
         >
           <p>
-            You have agreed to buy this harvest/agro product on or before
+            You have agreed to buy this harvest/agro product for Rs.{{
+              viewersAgreement.agreementPrice
+            }}
+            on or before
             {{ viewersAgreement.agreementDate | date: 'MMM d, y' }}. You can
             cancel the agreement before farmer sign the agreement if you want
             to.
@@ -399,7 +411,10 @@
               ></nb-user>
             </div>
             <div class="col">
-              agreed to buy this harvest on or before
+              agreed to buy this harvest for Rs.{{
+                approvedAgreement.agreementPrice
+              }}
+              on or before
               {{ approvedAgreement.agreementDate | date: 'MMM d, y' }}
             </div>
           </div>
