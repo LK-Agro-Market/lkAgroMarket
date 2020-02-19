@@ -17,9 +17,7 @@ export class ForumComponent implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor(
-    private userDetailsService: UserDetailsService,
-  ) {}
+  constructor(private userDetailsService: UserDetailsService) {}
 
   ngOnInit() {
     this.userDetailsService // get user level

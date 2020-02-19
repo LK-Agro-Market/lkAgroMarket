@@ -8,7 +8,6 @@ import { UserDetailsService } from 'src/app/shared/services/user-details.service
   templateUrl: './list-forum.component.html',
   styleUrls: ['./list-forum.component.scss']
 })
-
 export class ListForumComponent implements OnInit {
   items: any[];
   postUser: any;
@@ -21,8 +20,8 @@ export class ListForumComponent implements OnInit {
 
   constructor(
     private forumService: ForumService,
-    private userDetailsService: UserDetailsService,
-  ) { }
+    private userDetailsService: UserDetailsService
+  ) {}
 
   ngOnInit() {
     this.allPosts();
@@ -77,12 +76,10 @@ export class ListForumComponent implements OnInit {
   adminPosts() {
     // get admin notes
     this.forumService
-    .getAdminNotes()
-    .pipe()
-    .subscribe(items => {
-      this.items = items;
-    });
-
+      .getAdminNotes()
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
+      });
   }
-
 }

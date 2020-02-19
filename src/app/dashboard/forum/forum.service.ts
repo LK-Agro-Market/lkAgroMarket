@@ -24,7 +24,7 @@ export class ForumService {
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage
-  ) { }
+  ) {}
 
   getPostId() {
     return this.afs.createId();
@@ -58,7 +58,7 @@ export class ForumService {
         showFarmer: showFarmers,
         showBuyer: showBuyers,
         endThread: isEnd,
-        isAdminNote: postState,
+        isAdminNote: postState
       });
   }
 
@@ -111,7 +111,7 @@ export class ForumService {
   }
 
   changeReact(
-    // change current reacts 
+    // change current reacts
     current: boolean,
     userId,
     postId
@@ -298,20 +298,22 @@ export class ForumService {
     // get all posts
     if (userType === 'admin') {
       return this.afs
-      .collection('post', ref => ref.orderBy('date', 'desc'))
-      .snapshotChanges()
-      .pipe(
-        map(postItems =>
-          postItems.map(postItem => {
-            const data = postItem.payload.doc.data();
-            const key = postItem.payload.doc.id;
-            return { key, ...data };
-          })
-        )
-      );
+        .collection('post', ref => ref.orderBy('date', 'desc'))
+        .snapshotChanges()
+        .pipe(
+          map(postItems =>
+            postItems.map(postItem => {
+              const data = postItem.payload.doc.data();
+              const key = postItem.payload.doc.id;
+              return { key, ...data };
+            })
+          )
+        );
     } else {
       return this.afs
-        .collection('post', ref => ref.where(userType, '==', true).orderBy('date', 'desc'))
+        .collection('post', ref =>
+          ref.where(userType, '==', true).orderBy('date', 'desc')
+        )
         .snapshotChanges()
         .pipe(
           map(postItems =>
@@ -374,7 +376,10 @@ export class ForumService {
     // get comments
     return this.afs
       .collection('comment', ref =>
-        ref.where('postID', '==', postKey).orderBy('voteCount', 'desc').orderBy('date', 'desc')
+        ref
+          .where('postID', '==', postKey)
+          .orderBy('voteCount', 'desc')
+          .orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(

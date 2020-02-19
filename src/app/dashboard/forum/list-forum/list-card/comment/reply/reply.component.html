@@ -3,7 +3,11 @@
   <div class="reply-card">
     <div class="reply">
       <div class="pro-img-container">
-        <img class="pro-img" src="{{ replyItem.userImage }}" alt="Profile image" />
+        <img
+          class="pro-img"
+          src="{{ replyItem.userImage }}"
+          alt="Profile image"
+        />
         <div class="pro-header-container">
           <a href="#" class="pro-name"> {{ replyItem.userName }} </a>
           <span class="text-info" id="postDate">
@@ -11,12 +15,28 @@
             <i> {{ replyItem.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
           </span>
           <div class="like-container">
-            <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
-              status=" success" size="medium" class="float-right btn-like">
+            <button
+              (click)="changeReactState(true)"
+              (click)="toggelSection()"
+              *ngIf="isReact"
+              nbButton
+              ghost
+              status=" success"
+              size="medium"
+              class="float-right btn-like"
+            >
               <nb-icon icon="heart" status="primary"></nb-icon>
             </button>
-            <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
-              status=" success" size="medium" class="float-right btn-like">
+            <button
+              (click)="changeReactState(false)"
+              (click)="toggelSection()"
+              *ngIf="!isReact"
+              nbButton
+              ghost
+              status=" success"
+              size="medium"
+              class="float-right btn-like"
+            >
               <nb-icon icon="star-outline" status="primary"></nb-icon>
             </button>
             <p class="count-like">{{ reactCount }}</p>
@@ -29,41 +49,88 @@
         </p>
         <div class="updateSection">
           <div class="card-fotter-container">
-            <button nbButton status="primary" size="tiny" class="edit-btn" [hidden]="!isLogUser"
-              (click)="updateReply()">
+            <button
+              nbButton
+              status="primary"
+              size="tiny"
+              class="edit-btn"
+              [hidden]="!isLogUser"
+              (click)="updateReply()"
+            >
               {{ isEdit ? 'Cancel' : 'edit' }}
             </button>
-            <button nbButton outline status="danger" size="tiny" class="delete-btn" [hidden]="!isLogUser"
-              [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom">
+            <button
+              nbButton
+              outline
+              status="danger"
+              size="tiny"
+              class="delete-btn"
+              [hidden]="!isLogUser"
+              [nbPopover]="confirmDeleteSecton"
+              nbPopoverPlacement="bottom"
+            >
               Delete
             </button>
           </div>
 
-          <form *ngIf="isEdit" [formGroup]="updateReplyForm" novalidate (ngSubmit)="onUpdate()"
-            #updateReplyform="ngForm">
+          <form
+            *ngIf="isEdit"
+            [formGroup]="updateReplyForm"
+            novalidate
+            (ngSubmit)="onUpdate()"
+            #updateReplyform="ngForm"
+          >
             <hr />
             <div class="update-reply">
-              <textarea class="form-control" formControlName="upReply" nbInput fullWidth status="primary" required
-                style="height: 60px; font-size: 13px;">
+              <textarea
+                class="form-control"
+                formControlName="upReply"
+                nbInput
+                fullWidth
+                status="primary"
+                required
+                style="height: 60px; font-size: 13px;"
+              >
               </textarea>
-              <button nbButton status="primary" outline size="small" class="float-right update-btn" size="small">
+              <button
+                nbButton
+                status="primary"
+                outline
+                size="small"
+                class="float-right update-btn"
+                size="small"
+              >
                 Update
               </button>
             </div>
             <hr />
           </form>
-          
+
           <!-- confirm delete template -->
           <ng-template #confirmDeleteSecton>
             <nb-card style="margin-bottom: -10%;">
               <nb-card-body>
                 Are you sure you wish to delete this post?
-                <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser" (click)="deleteReply()"
-                  style="margin-left: 10px;">
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  (click)="deleteReply()"
+                  style="margin-left: 10px;"
+                >
                   yes
                 </button>
-                <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
-                  style="margin-left: 10px;" (click)="hidePopover()">
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  style="margin-left: 10px;"
+                  (click)="hidePopover()"
+                >
                   No
                 </button>
               </nb-card-body>

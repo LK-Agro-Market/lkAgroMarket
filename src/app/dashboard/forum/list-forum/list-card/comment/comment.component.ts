@@ -43,7 +43,8 @@ export class CommentComponent implements OnInit {
   @Output() isComment = new EventEmitter();
 
   @ViewChild(NbPopoverDirective, { static: false })
-  @ViewChild('commentSection', { static: false }) section;
+  @ViewChild('commentSection', { static: false })
+  section;
 
   updateCommentForm = new FormGroup({
     upComment: new FormControl('', Validators.required)

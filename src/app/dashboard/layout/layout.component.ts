@@ -34,13 +34,11 @@ export class LayoutComponent implements OnInit {
     private nbMenuService: NbMenuService,
     private notificationService: NotificationService
   ) {
-
     translate.addLangs(['en', 'sl', 'tm']);
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|sl|tm/) ? browserLang : 'en');
-
   }
 
   changeLanguage(lang) {

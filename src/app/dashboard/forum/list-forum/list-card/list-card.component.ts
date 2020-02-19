@@ -31,7 +31,6 @@ export class ListCardComponent implements OnInit {
   @Input() item: any;
   @ViewChild('postSection', { static: false }) section;
   @ViewChild(NbPopoverDirective, { static: false })
-
   ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({

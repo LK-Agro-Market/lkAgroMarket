@@ -1,5 +1,4 @@
 <div class="card-cantainer">
- 
   <!-- show admin note  -->
   <nb-card *ngIf="item.isAdminNote" status="success">
     <nb-card-header>
@@ -17,11 +16,25 @@
           </p>
         </div>
         <div class="right: 20px">
-          <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser" (click)="updateForm()">
+          <button
+            nbButton
+            status="primary"
+            size="small"
+            class="edit-btn"
+            [hidden]="!isLogUser"
+            (click)="updateForm()"
+          >
             {{ !isEdit ? 'Edit' : 'Cancel' }}
           </button>
-          <button nbButton status="primary" size="small" class="delete-btn" [hidden]="!isLogUser"
-            [nbPopover]="confirmDeleteSecton1" nbPopoverPlacement="bottom">
+          <button
+            nbButton
+            status="primary"
+            size="small"
+            class="delete-btn"
+            [hidden]="!isLogUser"
+            [nbPopover]="confirmDeleteSecton1"
+            nbPopoverPlacement="bottom"
+          >
             Delete
           </button>
           <!-- delete confirm template -->
@@ -29,29 +42,45 @@
             <nb-card style="margin-bottom: -10%;">
               <nb-card-body>
                 Are you sure you wish to delete this post?
-                <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser" (click)="deletePost()"
-                  style="margin-left: 10px;">
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  (click)="deletePost()"
+                  style="margin-left: 10px;"
+                >
                   yes
                 </button>
-                <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
-                  style="margin-left: 10px;" (click)="hidePopover()">
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  style="margin-left: 10px;"
+                  (click)="hidePopover()"
+                >
                   No
                 </button>
               </nb-card-body>
             </nb-card>
           </ng-template>
-
         </div>
       </div>
-      <p style="margin-left: 30px; margin-top: 20px; margin-right: 30px; color: white;"> {{ item.title }} </p>
+      <p
+        style="margin-left: 30px; margin-top: 20px; margin-right: 30px; color: white;"
+      >
+        {{ item.title }}
+      </p>
     </nb-card-header>
     <nb-card-body>
       <p class="text-dark" id="postDesc">{{ item.description }}</p>
       <div *ngIf="item.images != null">
         <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
-        <hr *ngIf="item.description != '' " />
+        <hr *ngIf="item.description != ''" />
       </div>
-
     </nb-card-body>
   </nb-card>
 
@@ -62,72 +91,134 @@
         <div class="gold-members p-4 card-container">
           <div class="media">
             <div class="pro-img-container">
-              <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
+              <img
+                class="pro-img"
+                src="{{ item.userImage }}"
+                alt="Profile image"
+              />
               <div class="pro-header-container">
-                
                 <div class="user-detail">
                   <a href="#" class="pro-name">
                     {{ item.userName }}
                   </a>
-                  <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
+                  <span *ngIf="isEnd" class="badge badge-pill badge-success"
+                    >This post was end</span
+                  >
                 </div>
-                
+
                 <span class="text-info" id="postDate" style="color: #598bff;">
                   <b>Posted on</b>
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
-                
+
                 <div class="float-right like-container">
-                  <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
-                    status=" success" size="medium" class="float-right btn-like">
+                  <button
+                    (click)="changeReactState(true)"
+                    (click)="toggelSection()"
+                    *ngIf="isReact"
+                    nbButton
+                    ghost
+                    status=" success"
+                    size="medium"
+                    class="float-right btn-like"
+                  >
                     <nb-icon icon="star" status="primary"></nb-icon>
                   </button>
-                  <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
-                    status=" success" size="medium" class="float-right btn-like">
+                  <button
+                    (click)="changeReactState(false)"
+                    (click)="toggelSection()"
+                    *ngIf="!isReact"
+                    nbButton
+                    ghost
+                    status=" success"
+                    size="medium"
+                    class="float-right btn-like"
+                  >
                     <nb-icon icon="star-outline" status="primary"></nb-icon>
                   </button>
                   <p class="count-like">{{ reactCount }}</p>
-                  <button nbButton ghost status="info" size="medium" class="float-right btn-com">
+                  <button
+                    nbButton
+                    ghost
+                    status="info"
+                    size="medium"
+                    class="float-right btn-com"
+                  >
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-com">{{ commCount }}</p>
                 </div>
-
               </div>
             </div>
             <div class="media-body">
               <span id="postTitle"> {{ item.title }} </span>
               <hr />
               <div class="card-fotter-container">
-                <button nbButton status="primary" size="small" class="edit-btn" [hidden]="!isLogUser"
-                  (click)="updateForm()" (click)="toggelSection()">
+                <button
+                  nbButton
+                  status="primary"
+                  size="small"
+                  class="edit-btn"
+                  [hidden]="!isLogUser"
+                  (click)="updateForm()"
+                  (click)="toggelSection()"
+                >
                   {{ !isEdit ? 'Edit' : 'Cancel' }}
                 </button>
-                <button nbButton status="danger" size="small" class="end-btn" [hidden]="!isLogUser"
-                  (click)="endOrViewPost()" (click)="toggelSection()">
+                <button
+                  nbButton
+                  status="danger"
+                  size="small"
+                  class="end-btn"
+                  [hidden]="!isLogUser"
+                  (click)="endOrViewPost()"
+                  (click)="toggelSection()"
+                >
                   {{ !isEnd ? 'End' : 'Restart' }}
                 </button>
-                <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
-                  [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom" (click)="toggelSection()">
+                <button
+                  nbButton
+                  outline
+                  status="danger"
+                  size="small"
+                  class="delete-btn"
+                  [hidden]="!isLogUser"
+                  [nbPopover]="confirmDeleteSecton"
+                  nbPopoverPlacement="bottom"
+                  (click)="toggelSection()"
+                >
                   Delete
-                </button>  
+                </button>
                 <!-- delete confirm template -->
                 <ng-template #confirmDeleteSecton>
                   <nb-card style="margin-bottom: -10%;">
                     <nb-card-body>
                       Are you sure you wish to delete this post?
-                      <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
-                        (click)="deletePost()" style="margin-left: 10px;">
+                      <button
+                        nbButton
+                        shape="round"
+                        status="danger"
+                        size="tiny"
+                        [hidden]="!isLogUser"
+                        (click)="deletePost()"
+                        style="margin-left: 10px;"
+                      >
                         yes
                       </button>
-                      <button nbButton shape="round" status="danger" size="tiny" [hidden]="!isLogUser"
-                        style="margin-left: 10px;" (click)="hidePopover()">
+                      <button
+                        nbButton
+                        shape="round"
+                        status="danger"
+                        size="tiny"
+                        [hidden]="!isLogUser"
+                        style="margin-left: 10px;"
+                        (click)="hidePopover()"
+                      >
                         No
                       </button>
                     </nb-card-body>
                   </nb-card>
                 </ng-template>
-
               </div>
             </div>
           </div>
@@ -142,13 +233,35 @@
         <p class="text-dark" id="postDesc">{{ item.description }}</p>
         <hr />
 
-        <form *ngIf="!isComment" [formGroup]="commentForm" novalidate (ngSubmit)="onCreate()" #commform="ngForm">
+        <form
+          *ngIf="!isComment"
+          [formGroup]="commentForm"
+          novalidate
+          (ngSubmit)="onCreate()"
+          #commform="ngForm"
+        >
           <div class="add-comment-container">
-            <textarea class="form-control" formControlName="comment" nbInput fullWidth required
-              placeholder="Join the discussion..." status="primary" style="height: 40px;" [disabled]="isEnd">
+            <textarea
+              class="form-control"
+              formControlName="comment"
+              nbInput
+              fullWidth
+              required
+              placeholder="Join the discussion..."
+              status="primary"
+              style="height: 40px;"
+              [disabled]="isEnd"
+            >
             </textarea>
-            <button nbButton status="primary" outline size="small" class="float-right comment-btn" size="small"
-              [disabled]="isEnd">
+            <button
+              nbButton
+              status="primary"
+              outline
+              size="small"
+              class="float-right comment-btn"
+              size="small"
+              [disabled]="isEnd"
+            >
               Comment
             </button>
           </div>
@@ -158,14 +271,22 @@
         <div class="comment-sec" *ngIf="!isEdit">
           <p class="comment-title" *ngIf="commCount != 0">Comments</p>
           <div *ngFor="let comment of comments">
-            <app-comment [comment]="comment" [postId]="postId" (isComment)="isComment = $event"
-              (changeCommentCount)="getCommentCount()"></app-comment>
+            <app-comment
+              [comment]="comment"
+              [postId]="postId"
+              (isComment)="isComment = $event"
+              (changeCommentCount)="getCommentCount()"
+            ></app-comment>
           </div>
         </div>
-        
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>
-  <app-create-form *ngIf="isEdit" [postId]="postId" [createOrUpdate]="createOrUpdate" [createDate]="createDate">
+  <app-create-form
+    *ngIf="isEdit"
+    [postId]="postId"
+    [createOrUpdate]="createOrUpdate"
+    [createDate]="createDate"
+  >
   </app-create-form>
 </div>

@@ -43,7 +43,7 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private forumService: ForumService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.discussionForm.controls;

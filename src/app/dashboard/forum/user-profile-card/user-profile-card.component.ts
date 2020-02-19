@@ -29,9 +29,7 @@ export class UserProfileCardComponent implements OnInit {
   @ViewChild('all', { static: true }) all;
   @ViewChild('admin', { static: true }) admin;
 
-  constructor(
-    private userDetailsService: UserDetailsService,
-  ) {}
+  constructor(private userDetailsService: UserDetailsService) {}
 
   ngOnInit() {
     this.userName = this.user.displayName;
@@ -44,7 +42,6 @@ export class UserProfileCardComponent implements OnInit {
       .subscribe(userDetails => {
         this.userLevel = userDetails.userLevel;
       });
-
   }
 
   chnagePostType(postType) {

@@ -6,22 +6,46 @@
       <span class="mb-2 user-level">{{ userLevel }}</span>
     </div>
 
-    <div *ngIf="postType === 'all' ">
+    <div *ngIf="postType === 'all'">
       <button nbButton size="small" status="success" id="card-btn" #all>
         Genaral
       </button>
       <br />
-      <button nbButton outline size="small" status="success" (click)="chnagePostType('my')" id="card-btn" #my>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="chnagePostType('my')"
+        id="card-btn"
+        #my
+      >
         My Posts
       </button>
       <br />
-      <button nbButton outline size="small" status="success" id="card-btn" (click)="chnagePostType('admin')" #admin>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        id="card-btn"
+        (click)="chnagePostType('admin')"
+        #admin
+      >
         Admin Notes
       </button>
     </div>
 
     <div *ngIf="postType === 'my'">
-      <button nbButton outline size="small" status="success" (click)="chnagePostType('all')" id="card-btn" #all>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="chnagePostType('all')"
+        id="card-btn"
+        #all
+      >
         Genaral
       </button>
       <br />
@@ -29,17 +53,41 @@
         My Posts
       </button>
       <br />
-      <button nbButton outline size="small" status="success" (click)="chnagePostType('admin')" id="card-btn" #admin>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="chnagePostType('admin')"
+        id="card-btn"
+        #admin
+      >
         Admin Notes
       </button>
     </div>
 
-    <div *ngIf="postType === 'admin' ">
-      <button nbButton outline size="small" status="success" (click)="chnagePostType('all')" id="card-btn" #all>
+    <div *ngIf="postType === 'admin'">
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="chnagePostType('all')"
+        id="card-btn"
+        #all
+      >
         Genaral
       </button>
       <br />
-      <button nbButton outline size="small" status="success" (click)="chnagePostType('my')" id="card-btn" #my>
+      <button
+        nbButton
+        outline
+        size="small"
+        status="success"
+        (click)="chnagePostType('my')"
+        id="card-btn"
+        #my
+      >
         My Posts
       </button>
       <br />
@@ -47,6 +95,5 @@
         Admin Notes
       </button>
     </div>
-    
   </nb-card>
 </div>

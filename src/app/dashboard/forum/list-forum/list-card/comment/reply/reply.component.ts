@@ -31,7 +31,6 @@ export class ReplyComponent implements OnInit {
   @Output() isReply = new EventEmitter();
 
   @ViewChild(NbPopoverDirective, { static: false })
-
   updateReplyForm = new FormGroup({
     upReply: new FormControl('', Validators.required)
   });
