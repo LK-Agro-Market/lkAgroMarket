@@ -1,1 +1,75 @@
-<p>details works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <nb-card accent="info">
+                <nb-card-header>
+                    <span class="text-left">
+                        Agreement details!
+                    </span>
+                </nb-card-header>
+                <nb-card-body>
+                    <p>This is the online agreement, sign with <strong>you and the buyer</strong></p>
+                    <br>
+                    <br>
+                    <h6>Policy and Legal</h6>
+
+                    <ul>
+                      <li> When you sigend this order your should be hand over Product/Harvest to buyer on or 
+                          before deadline.</li>
+                      <li> You should provide good and quality products for the Buyer.</li>
+                      <li>if you are unable to sully products after singed the agreement you sholud imediatly infor it to buyer.</li>
+                      <li>Buyer can report you if any unauthoried ones happens from you.</li>
+                    </ul>  
+                    </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="col-sm-6">
+            <nb-card accent="warning">
+                <nb-card-header>
+                    <span class="text-left">Sign the Agreement</span>
+                </nb-card-header>
+                <nb-card-body *ngIf="isAgree==false">
+                    <p>I read and clearly undestand the agreemnt details and the products/Harvet 
+                        will be supply on or before the deadline.
+                    </p>
+                    <div class="input-group mb-3">
+                        <input
+                          type="date"
+                          class="form-control"
+                          placeholder="Buy on or before"
+                          [(ngModel)]="agreementDate"
+                        />
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-success"
+                            type="button"
+                            appConfirmButton
+                            (confirmed)="agreetoBuy()"
+                          >
+                            Sign for sell
+                          </button>
+                        </div>
+                      </div>
+                </nb-card-body>
+                <nb-card-body *ngIf="isAgree==true">
+                    <p>Your agreement is sent to the customer and it will <strong>approve</strong>by them. you sign agreement to sell
+                        Harvest/Products on or before {{agreementDate}}. You can <strong>cancel your agreement</strong> before approved by customer. <br><strong>Thank you Using Agro Market!</strong>
+                    </p>
+                    <div class="input-group mb-3">
+                      
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-danger"
+                            type="button"
+                            appConfirmButton
+                            (confirmed)="cancelAgreement"
+                          >
+                            Cancel Agreement
+                          </button>
+                        </div>
+                      </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+</div>

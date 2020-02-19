@@ -4,6 +4,7 @@ import { User } from 'src/app/shared/models/user';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DemandAd } from 'src/app/shared/models/demand-ad';
+import { UserDetails } from 'src/app/shared/models/user-details'
 
 @Component({
   selector: 'app-view-demand-ad',
@@ -15,29 +16,33 @@ export class ViewDemandAdComponent implements OnInit, OnDestroy {
     private viewdemandad: DemandAdService,
     private route: ActivatedRoute
   ) {}
-  demandAd:DemandAd;
+  demandAd: DemandAd;
   viewer: User = JSON.parse(localStorage.getItem('user'));
   subscriptions: Subscription[] = [];
   demandAdid: string;
   currentTime = new Date().toISOString().split('T')[0];
-  ownerId:string;
-  adowner: any;
+  ownerId: string;
+  adowner: User;
+  userDetail:UserDetails
 
   ngOnInit() {
     //this.subscriptions.push(
-      this.route.params.subscribe(routeParams => {
-        this.demandAdid = routeParams.demandAdid;})
-        this.viewdemandad.countViws(this.demandAdid);
-        this.viewdemandad.getdemandad(this.demandAdid).subscribe(demandAd => {
-          this.demandAd = demandAd;
-          this.ownerId=demandAd.owner;
-          console.log(this.ownerId);
+    this.route.params.subscribe(routeParams => {
+      this.demandAdid = routeParams.demandAdid;
+      this.viewdemandad.getdemandad(this.demandAdid).subscribe(demandAd => {
+        this.demandAd = demandAd;
+        this.ownerId = demandAd.owner;
+        this.viewdemandad.getUser(this.ownerId).subscribe(owner => {
+          this.adowner = owner;
         });
+        this.viewdemandad. userDetails(this.ownerId).subscribe(detail=>{
+          this.userDetail=detail;
+        })
+      });
+    });
+    this.viewdemandad.countViws(this.demandAdid);
     //   })
     // );
-    this.viewdemandad.getUser(this.ownerId).subscribe(owner=>{
-      this.adowner=owner;
-    })
   }
   ngOnDestroy() {
     for (const subscription of this.subscriptions) {

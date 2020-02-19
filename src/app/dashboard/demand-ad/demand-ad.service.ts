@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 //import { AngularFireStorage } from '@angular/fire/storage';
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { DemandAd } from 'src/app/shared/models/demand-ad';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user';
+import { UserDetails } from 'src/app/shared/models/user-details';
+import { buyerAgreement } from 'src/app/shared/models/buyer-agreement';
+
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +54,7 @@ export class DemandAdService {
       .pipe(map(res => res as DemandAd[]));
   }
 
-  getdemandad(adId): Observable<DemandAd> {
+  getdemandad(adId: string): Observable<DemandAd> {
     return this.afs
       .collection('demandAd')
       .doc<DemandAd>(adId)
@@ -104,9 +108,32 @@ export class DemandAdService {
           .update({ views: count });
       });
   }
-  getUser(uId:string):Observable<User[]>{
+  getUser(ownerId: string): Observable<User> {
     return this.afs
-    .collection('users', ref=>ref.where('uid','==', uId))
-    .valueChanges().pipe(map(res => res as User[]))
+      .collection('users')
+      .doc<User>(ownerId)
+      .valueChanges();
   }
+
+  userDetails(ownerId:string): Observable<UserDetails>{
+     return this.afs
+     .collection('userDetails')
+     .doc<UserDetails>(ownerId)
+     .valueChanges()
+  }
+createagreement(ad:DemandAd,farmer:User,date:string){
+  const agreementId=this.getdemandAdid();
+  const pendingAgreement:buyerAgreement={
+    agreementId: agreementId,
+    farmer: farmer,
+    ad: ad,
+    status: 'pending',
+    agreementDate: date,
+    createdAt: new Date().toISOString()}
+    const docref:AngularFirestoreDocument<buyerAgreement> = this.afs
+    .collection('buyerAgreement')
+    .doc(agreementId);
+  return from(docref.set(pendingAgreement));
+}
+
 }

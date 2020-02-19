@@ -16,7 +16,22 @@
                 <h5 class="card-header">
                   {{ demandAd.food }}
                   <span class="food-type">- {{ demandAd.foodtype }}</span>
+                  <nb-badge
+                  text="Active"
+                  status="danger"
+                  position="top right"
+                  *ngIf="demandAd.deadline > currentTime"
+                >
+                </nb-badge>
+                  <nb-badge
+                  text="Expired"
+                  status="danger"
+                  position="top right"
+                  *ngIf="demandAd.deadline < currentTime"
+                >
+                </nb-badge>
                 </h5>
+                
 
                 <div class="card-body">
                   <!-- <h5 class="card-title">
@@ -28,7 +43,7 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                     <strong>{{ 'list.ad.quantity' | translate }}</strong> -
-                    {{ demandAd.expectedamount }}
+                    {{ demandAd.expectedamount }}{{demandAd.unit}}
                   </li>
                   <li class="list-group-item">
                     <strong> {{ 'list.ad.unit' | translate }}</strong> - Rs.
@@ -38,13 +53,28 @@
                     <strong>{{ 'list.ad.deadline' | translate }}</strong> -
                     {{ demandAd.deadline }}
                   </li>
+                  <li class="list-group-item">
+                    <strong>Total price</strong> - Rs: 
+                    {{ demandAd.expectedamount*demandAd.priceperunit  }}
+                  </li>
                 </ul>
 
                 <div class="card-body">
+                  
                   <div class="container">
+                    <div class="row">
+                    <div class="col-sm-3">
                     <h6>
                       {{ 'list.ad.view' | translate }} : {{ demandAd.views }}
                     </h6>
+                  </div>
+                  <div class="col-sm-9">
+                   <strong> Expected products/harvest before : {{demandAd.deadline}}</strong>
+                  </div>
+                  </div>
+                  <div align="right" *ngIf="demandAd.deadline > currentTime">
+                    <button nbButton [routerLink]="['agreement']">Sell Harvest/products</button>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -58,32 +88,46 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              Advertisement onwer details
+              Advertisement owner details
             </span>
           </div>
         </nb-card-header>
         <nb-card-body>
           <div class="column" *ngIf="adowner">
-            <div class="card border-success">
+            <div class="card1 border-success">
               <img [src]="adowner.photoURL" class="card-img-top" />
               <div class="card-body">
-                <h6 class="card-title">
-                  {{ adowner.displayName }} - Farmer
-                </h6>
+                <h6 class="card-title">{{ adowner.displayName }} - Buyer</h6>
                 <p class="card-text">{{ adowner.email }}</p>
-                <!-- <p class="card-text">Followers - {{ numOfFollowers }}</p> -->
-
               </div>
             </div>
           </div>
-          <div class="column">
+          <div class="column" *ngIf="userDetail">
             <div class="card border-success">
-    
+
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <strong>Contact</strong> -
+                  {{  userDetail.contact }}
+                </li>
+                <li class="list-group-item">
+                  <strong> District</strong> -
+                {{  userDetail.district}}
+                </li>
+                <li class="list-group-item">
+                  <strong>HomeAddress</strong> -
+                  {{  userDetail.homeAddress }}
+                </li>
+                <!-- <li class="list-group-item">
+                  <strong></strong> - Rs: 
+                  {{ demandAd.expectedamount*demandAd.priceperunit  }}
+                </li> -->
+              </ul>
+
             </div>
           </div>
         </nb-card-body>
       </nb-card>
-
     </div>
   </div>
   <div class="row">
@@ -101,5 +145,6 @@
         </nb-card-body>
       </nb-card>
     </div>
-    </div>
+  </div>
 </div>
+

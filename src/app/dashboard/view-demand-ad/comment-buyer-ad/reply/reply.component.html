@@ -19,18 +19,20 @@
     </button>
   </div>
   <br />
-  <div class="editor">
+  <div class="input-group mb-3">
     <!-- Edit to create a new comment -->
     <input
-      id="ip2"
       type="text"
-      class="comment"
+      class="container1"
       placeholder="Type your comment here"
       name="content"
       [(ngModel)]="content"
     />
-    <div class="btns">
-      <button class="button button1" (click)="on(content)">
+    <div class="input-group-append"
+    >
+      <button 
+      class="btn btn-primary"
+      type="button" (click)="on(content)">
         {{ 'comments.button.comment' | translate }}
       </button>
     </div>
