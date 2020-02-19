@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
+import { UserDetailsService } from 'src/app/shared/services/user-details.service';
 
 @Component({
   selector: 'app-forum',
@@ -7,29 +8,44 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit {
-  showMyPost = false;
+  postType = 'all';
   isCreate = false;
+  isCreateAdmin = false;
   createOrUpdate;
+  currentUserType;
+  isAdminNote: boolean;
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor() {}
+  constructor(private userDetailsService: UserDetailsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userDetailsService // get user level
+      .getUserDetails(this.user.uid)
+      .subscribe(userDetails => {
+        this.currentUserType = userDetails.userLevel;
+      });
+  }
 
-  changePostType(showMyPost: boolean) {
+  changeDisplayPost(postType) {
     // set post type
-    this.showMyPost = showMyPost;
+    this.postType = postType;
   }
 
   toggleForm(event) {
     // hide form when submit
     this.isCreate = event;
+    this.isCreateAdmin = event;
   }
 
-  createPost() {
+  createPost(isAdminPost) {
     // create post
+    if (isAdminPost) {
+      this.isCreateAdmin = !this.isCreateAdmin;
+    } else {
+      this.isCreate = !this.isCreate;
+    }
+    this.isAdminNote = isAdminPost;
     this.createOrUpdate = 'create';
-    this.isCreate = !this.isCreate;
   }
 }

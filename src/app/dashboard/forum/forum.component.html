@@ -1,24 +1,46 @@
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
     <app-user-profile-card
-      (showMypostOnly)="changePostType($event)"
+      (changePost)="changeDisplayPost($event)"
     ></app-user-profile-card>
   </div>
-  <div class="col-sm-9">
-    <button nbButton status="primary" (click)="createPost()" id="add-btn">
-      {{ !isCreate ? 'Create New' : 'Cancel' }}
-    </button>
-    <br />
-    <br />
-    <div #item>
+
+  <div class="list-container ">
+    <div class="form-container" #item>
       <app-create-form
-        *ngIf="isCreate"
+        *ngIf="isCreate || isCreateAdmin"
         [postId]="postId"
+        [isAdminNote]="isAdminNote"
         (hideForm)="toggleForm($event)"
         [createOrUpdate]="createOrUpdate"
       ></app-create-form>
     </div>
+    <div class="post-contaner">
+      <app-list-forum [postType]="postType"></app-list-forum>
+    </div>
+  </div>
 
-    <app-list-forum [showMyPost]="showMyPost"></app-list-forum>
+  <div class="side-bar-continer ">
+    <button
+      class=" add-btn"
+      nbButton
+      status="primary"
+      (click)="createPost(false)"
+      [disabled]="isCreateAdmin"
+    >
+      {{ !isCreate ? 'Create New' : 'Cancel' }}
+    </button>
+    <button
+      *ngIf="currentUserType == 'Administrator'"
+      class=" add-btn"
+      nbButton
+      outline
+      status="success"
+      (click)="createPost(true)"
+      style="margin-top: 10px;"
+      [disabled]="isCreate"
+    >
+      {{ !isCreateAdmin ? 'Admin Note' : 'Cancel' }}
+    </button>
   </div>
 </div>

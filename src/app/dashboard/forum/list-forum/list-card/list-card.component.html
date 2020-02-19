@@ -1,5 +1,91 @@
 <div class="card-cantainer">
-  <nb-accordion>
+  <!-- show admin note  -->
+  <nb-card *ngIf="item.isAdminNote" status="success">
+    <nb-card-header>
+      <div class="pro-img-container" style="margin-top: 10px;">
+        <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
+        <div class="pro-header-container">
+          <div class="user-detail">
+            <a href="#" class="pro-name">
+              {{ item.userName }}
+            </a>
+          </div>
+          <p style="color: floralwhite;" id="postDate">
+            <b>Posted on</b>
+            {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }}
+          </p>
+        </div>
+        <div class="right: 20px">
+          <button
+            nbButton
+            status="primary"
+            size="small"
+            class="edit-btn"
+            [hidden]="!isLogUser"
+            (click)="updateForm()"
+          >
+            {{ !isEdit ? 'Edit' : 'Cancel' }}
+          </button>
+          <button
+            nbButton
+            status="primary"
+            size="small"
+            class="delete-btn"
+            [hidden]="!isLogUser"
+            [nbPopover]="confirmDeleteSecton1"
+            nbPopoverPlacement="bottom"
+          >
+            Delete
+          </button>
+          <!-- delete confirm template -->
+          <ng-template #confirmDeleteSecton1>
+            <nb-card style="margin-bottom: -10%;">
+              <nb-card-body>
+                Are you sure you wish to delete this post?
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  (click)="deletePost()"
+                  style="margin-left: 10px;"
+                >
+                  yes
+                </button>
+                <button
+                  nbButton
+                  shape="round"
+                  status="danger"
+                  size="tiny"
+                  [hidden]="!isLogUser"
+                  style="margin-left: 10px;"
+                  (click)="hidePopover()"
+                >
+                  No
+                </button>
+              </nb-card-body>
+            </nb-card>
+          </ng-template>
+        </div>
+      </div>
+      <p
+        style="margin-left: 30px; margin-top: 20px; margin-right: 30px; color: white;"
+      >
+        {{ item.title }}
+      </p>
+    </nb-card-header>
+    <nb-card-body>
+      <p class="text-dark" id="postDesc">{{ item.description }}</p>
+      <div *ngIf="item.images != null">
+        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+        <hr *ngIf="item.description != ''" />
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- show other post -->
+  <nb-accordion *ngIf="!item.isAdminNote">
     <nb-accordion-item>
       <nb-accordion-item-header id="t-header" *ngIf="item" #postSection>
         <div class="gold-members p-4 card-container">
@@ -19,10 +105,12 @@
                     >This post was end</span
                   >
                 </div>
-                <span class="text-info" id="postDate">
+
+                <span class="text-info" id="postDate" style="color: #598bff;">
                   <b>Posted on</b>
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
+
                 <div class="float-right like-container">
                   <button
                     (click)="changeReactState(true)"
@@ -34,7 +122,7 @@
                     size="medium"
                     class="float-right btn-like"
                   >
-                    <nb-icon icon="heart" status="primary"></nb-icon>
+                    <nb-icon icon="star" status="primary"></nb-icon>
                   </button>
                   <button
                     (click)="changeReactState(false)"
@@ -46,9 +134,8 @@
                     size="medium"
                     class="float-right btn-like"
                   >
-                    <nb-icon icon="heart-outline" status="primary"></nb-icon>
+                    <nb-icon icon="star-outline" status="primary"></nb-icon>
                   </button>
-
                   <p class="count-like">{{ reactCount }}</p>
                   <button
                     nbButton
@@ -102,7 +189,7 @@
                 >
                   Delete
                 </button>
-
+                <!-- delete confirm template -->
                 <ng-template #confirmDeleteSecton>
                   <nb-card style="margin-bottom: -10%;">
                     <nb-card-body>
