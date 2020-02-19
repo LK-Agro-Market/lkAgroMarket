@@ -8,30 +8,23 @@
   flex-direction: row;
 }
 .list-container {
-  width: 1000px;
-  margin-top: 15px;
-  margin-left: 20px;
+  // width: 1000px;
   display: flex;
   flex-direction: column;
 }
 .form-container {
-  margin-top: 20px;
   margin-left: 10px;
-  width: 1000px;
+  // width: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar-continer {
+  margin-left: 30px;
+  text-align: center;
   display: flex;
   flex-direction: column;
 }
 .add-btn {
   height: 40px;
-  margin-left: 20px;
-}
-.side-bar-continer {
-  margin-top: 35px;
-  margin-left: 30px;
-  margin-right: 10px;
-  text-align: center;
-}
-.dropzone {
-  margin-top: 20px;
-  height: 200px;
 }

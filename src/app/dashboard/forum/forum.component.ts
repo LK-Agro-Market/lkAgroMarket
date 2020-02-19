@@ -10,6 +10,7 @@ import { UserDetailsService } from 'src/app/shared/services/user-details.service
 export class ForumComponent implements OnInit {
   postType = 'all';
   isCreate = false;
+  isCreateAdmin = false;
   createOrUpdate;
   currentUserType;
   isAdminNote: boolean;
@@ -36,12 +37,17 @@ export class ForumComponent implements OnInit {
   toggleForm(event) {
     // hide form when submit
     this.isCreate = event;
+    this.isCreateAdmin = event;
   }
 
   createPost(isAdminPost) {
     // create post
+    if (isAdminPost) {
+      this.isCreateAdmin = !this.isCreateAdmin;
+    } else {
+      this.isCreate = !this.isCreate;
+    }
     this.isAdminNote = isAdminPost;
     this.createOrUpdate = 'create';
-    this.isCreate = !this.isCreate;
   }
 }

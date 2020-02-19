@@ -7,11 +7,11 @@
     </div>
 
     <div *ngIf="postType === 'all' ">
-      <button nbButton size="small" status="success" (click)="showMy(false)" id="card-btn" #all>
+      <button nbButton size="small" status="success" id="card-btn" #all>
         Genaral
       </button>
       <br />
-      <button nbButton outline size="small" status="success" (click)="showMy(true)" id="card-btn" #my>
+      <button nbButton outline size="small" status="success" (click)="chnagePostType('my')" id="card-btn" #my>
         My Posts
       </button>
       <br />
