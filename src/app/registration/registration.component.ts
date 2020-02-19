@@ -84,7 +84,7 @@ export class RegistrationComponent implements OnInit {
         return false;
       }
     }
-    if (this.selectedUserType === 'Adminis') {
+    if (this.selectedUserType === 'Administrator') {
       if (
         this.formControls.organization.errors ||
         this.formControls.designation.errors ||

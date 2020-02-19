@@ -1,37 +1,24 @@
-nb-layout nb-sidebar {
-  width: 300px;
-  height: 600px;
-}
-nb-layout-column nb-card {
-  margin-top: 0px;
-  width: 800px;
-}
-nb-layout-header {
-  width: 900px;
-}
 nb-card nb-icon {
   float: right;
   font-size: 2rem;
-  margin-left: 50px;
 }
 nb-list {
-  width: 600px;
   margin-top: 20px;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 button-filled-basic-background-color {
   background-color: #edf1f7;
 }
 nb-list nb-list-item {
-  width: 600px;
   margin: -0.5rem -0.5rem;
   padding: 10px;
 }
 #farmerList {
-  padding: 15px;
+  padding: 10px;
 }
 #buyerList {
-  padding: 15px;
+  padding: 10px;
 }
 nb-list nb-list-item button {
   width: 600px;
@@ -103,7 +90,7 @@ ul li {
 }
 
 .msg_card_body {
-  width: 800px;
+  width: 780px;
   height: 400px;
   overflow-y: auto;
 }
@@ -113,9 +100,6 @@ ul li {
   width: 700px;
 }
 
-#A {
-  position: fixed;
-}
 .avatar {
   vertical-align: middle;
   width: 40px;
@@ -129,12 +113,6 @@ ul li {
 #delete {
   height: 30px;
 }
-#S {
-  width: 200px;
-}
-#B {
-  margin-top: 20px;
-}
 #S button {
   color: #162df7;
 }
@@ -145,4 +123,10 @@ ul li {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+#S {
+  height: 600px;
+}
+#H {
+  color: #162df7;
 }

@@ -23,7 +23,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReplyComponent } from './comment-buyer-ad/reply/reply.component';
-import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
     ChartsModule,
     NgbModule,
     NbTooltipModule,
-    SharedmoduleModule
+    SharedModule
   ]
 })
 export class ViewDemandAdModule {}

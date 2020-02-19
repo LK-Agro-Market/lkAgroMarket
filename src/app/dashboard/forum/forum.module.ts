@@ -31,8 +31,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgImageSliderModule } from 'ng-image-slider';
-import { ToastrModule } from 'ngx-toastr';
-// import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -67,8 +66,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgImageSliderModule,
     NbPopoverModule,
     NbCheckboxModule,
-    ToastrModule,
-    // SharedmoduleModule,
+    SharedModule
   ]
 })
 export class ForumModule {}

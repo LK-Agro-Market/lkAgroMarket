@@ -171,7 +171,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   followUser() {
     this.subscriptions.push(
       this.profileService
-        .followUser(this.profileOwnerUser, this.viewer.uid)
+        .followUser(this.profileOwnerUser, this.viewer)
         .subscribe()
     );
   }

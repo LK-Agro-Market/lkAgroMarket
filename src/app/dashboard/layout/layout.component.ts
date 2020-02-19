@@ -3,7 +3,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserDetailsService } from 'src/app/shared/services/user-details.service';
 import { User } from 'firebase';
 import { UserDetails } from 'src/app/shared/models/user-details';
-// import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-layout',
@@ -13,29 +15,61 @@ import { UserDetails } from 'src/app/shared/models/user-details';
 export class LayoutComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   userDetails: UserDetails;
+  notificationCount: number;
+
+  contextMenu: NbMenuItem[] = [
+    { title: 'Profile', link: `/profile/${this.user.uid}` },
+    { title: 'Sign out' }
+  ];
+  langMenu: NbMenuItem[] = [
+    { title: 'Engilsh' },
+    { title: 'සිංහල' },
+    { title: 'தமிழ்' }
+  ];
 
   constructor(
     private authService: AuthService,
     private userDetailsService: UserDetailsService,
-    // public translate: TranslateService
+    public translate: TranslateService,
+    private nbMenuService: NbMenuService,
+    private notificationService: NotificationService
   ) {
 
-    // translate.addLangs(['en', 'sl', 'tm']);
-    // translate.setDefaultLang('en');
+    translate.addLangs(['en', 'sl', 'tm']);
+    translate.setDefaultLang('en');
 
-    // const browserLang = translate.getBrowserLang();
-    // translate.use(browserLang.match(/en|sl|tm/) ? browserLang : 'en');
-    // translate.use('sl')
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|sl|tm/) ? browserLang : 'en');
+
   }
-  // changeLanguage(lang) {
-  //   this.translate.use(lang);
-  // }
+
+  changeLanguage(lang) {
+    this.translate.use(lang);
+  }
 
   ngOnInit() {
     this.userDetailsService
       .getUserDetails(this.user.uid)
       .subscribe(userDetails => {
         this.userDetails = userDetails;
+      });
+    this.nbMenuService.onItemClick().subscribe(event => {
+      if (event.item.title === 'Sign out') {
+        this.logout();
+      }
+      if (event.item.title === 'Engilsh') {
+        this.changeLanguage('en');
+      } else if (event.item.title === 'සිංහල') {
+        this.changeLanguage('sl');
+      } else if (event.item.title === 'தமிழ்') {
+        this.changeLanguage('tm');
+      }
+    });
+
+    this.notificationService
+      .getNotifications(this.user.uid)
+      .subscribe(notifications => {
+        this.notificationCount = notifications.length;
       });
   }
 
