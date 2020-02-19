@@ -46,8 +46,6 @@ export class CreateFormComponent implements OnInit {
   ) { }
 
   user: User = JSON.parse(localStorage.getItem('user'));
-  userd: UserDetails = JSON.parse(localStorage.getItem('user-details'));
-
   formControls = this.discussionForm.controls;
 
   get title() {
@@ -98,7 +96,6 @@ export class CreateFormComponent implements OnInit {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
           id = this.forumService.getPostId(); // get new ID for post
-          this.toastrStatus = 'Your post is created...';
           this.forumService.createPost(
             // create new post
             id,
@@ -114,9 +111,8 @@ export class CreateFormComponent implements OnInit {
             false,
             this.isAdminNote
           );
+          this.toastrStatus = 'Your post is created...';
         } else {
-          ///////// shuld udate new image list
-          this.toastrStatus = 'Your changes are saved...';
           id = this.postId;
           this.forumService.updatePost(
             // update selected post
@@ -127,6 +123,7 @@ export class CreateFormComponent implements OnInit {
             showFarmer,
             showBuyer
           );
+          this.toastrStatus = 'Your changes are saved...';
         }
         if (this.images != null) {
           // upload images

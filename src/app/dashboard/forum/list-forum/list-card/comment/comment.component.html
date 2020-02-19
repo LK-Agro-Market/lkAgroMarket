@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="vl"></div>
   <div class="card-cantainer">
-    <nb-accordion style="width: 920px;"> 
+    <nb-accordion style="width: 920px;">
       <nb-accordion-item autoCollapse="true">
         <nb-accordion-item-header #commentSection>
           <div class="vote-container">
@@ -9,9 +9,7 @@
               (click)="vote(1)" nbTooltip="Click here to vote up" nbTooltipPlacement="bottom" nbTooltipStatus="info">
             </nb-icon>
             <nb-icon *ngIf="isVote && voteAs == 'up'" icon="arrow-ios-upward-outline" status="primary"></nb-icon>
-
             <p class="count-react">{{ voteCount }}</p>
-
             <nb-icon *ngIf="!isVote || (isVote && voteAs == 'up')" icon="arrow-ios-downward-outline" status="basic"
               (click)="vote(-1)" style="margin-top: -30%;" nbTooltip="Click here to vote down"
               nbTooltipPlacement="bottom" nbTooltipStatus="info">
@@ -22,20 +20,21 @@
 
             <div *ngIf="!isPostOwner" style="margin-top: 10px;">
               <nb-icon *ngIf="isBest" icon="done-all-outline" status="primary"
-                nbTooltip="The post owner accepted this as the best answer" nbTooltipPlacement="bottom"
+                nbTooltip="The post owner accepted this as the best solution" nbTooltipPlacement="bottom"
                 nbTooltipStatus="info">
               </nb-icon>
             </div>
 
             <div *ngIf="isPostOwner" style="margin-top: 10px;">
               <nb-icon *ngIf="isBest" (click)="mark(true)" icon="done-all-outline" status="primary"
-                nbTooltip="You marked this as the best answer (click again to undo)" nbTooltipPlacement="top"
+                nbTooltip="You marked this as the best solution (click again to undo)" nbTooltipPlacement="top"
                 nbTooltipStatus="info">
               </nb-icon>
               <nb-icon *ngIf="!isBest" (click)="mark(false)" icon="done-all-outline" status="basic"
-                nbTooltip="Click to mark as the best answer" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
+                nbTooltip="Click to mark as the best solution" nbTooltipPlacement="top" nbTooltipStatus="info"></nb-icon>
             </div>
           </div>
+
           <div class="comnt-container">
             <div class="pro-img-container">
               <img class="pro-img" src="{{ comment.userImage }}" alt="Profile image" />

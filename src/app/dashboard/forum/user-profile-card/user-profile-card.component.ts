@@ -20,9 +20,11 @@ export class UserProfileCardComponent implements OnInit {
   userImg;
   postType = 'all';
   userLevel;
+
   user: User = JSON.parse(localStorage.getItem('user'));
 
   @Output() changePost: EventEmitter<any> = new EventEmitter();
+
   @ViewChild('my', { static: true }) my;
   @ViewChild('all', { static: true }) all;
   @ViewChild('admin', { static: true }) admin;

@@ -26,16 +26,18 @@ export class ListCardComponent implements OnInit {
   reactCount;
   createDate;
 
+  user: User = JSON.parse(localStorage.getItem('user'));
+
   @Input() item: any;
   @ViewChild('postSection', { static: false }) section;
   @ViewChild(NbPopoverDirective, { static: false })
+
   ConfirmDelete: NbPopoverDirective;
 
   commentForm = new FormGroup({
     comment: new FormControl('', Validators.required)
   });
 
-  user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.commentForm.controls;
 
   constructor(
@@ -128,8 +130,8 @@ export class ListCardComponent implements OnInit {
     if (this.imageList != null) {
       this.forumService.deleteImage(this.item.images);
     }
-    this.forumService.deleteReplyList('postID', this.postId).subscribe();
-    this.forumService.deleteCommentList('postID', this.postId).subscribe();
+    this.forumService.deleteById('comment', 'postID', this.postId).subscribe();
+    this.forumService.deleteById('reply', 'postID', this.postId).subscribe();
     this.forumService.deleteDocment('post', this.postId);
     this.getCommentCount();
     this.toastr.success('Post deleted...');
@@ -151,6 +153,7 @@ export class ListCardComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
+    // change current react
     this.forumService
       .changeReact(current, this.user.uid, this.item.key)
       .then(_ => {
@@ -159,6 +162,7 @@ export class ListCardComponent implements OnInit {
   }
 
   checkReactState() {
+    // update UI (react)
     this.forumService
       .checkReact(this.user.uid, this.item.key)
       .subscribe(count => {

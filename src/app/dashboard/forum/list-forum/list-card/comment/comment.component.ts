@@ -32,6 +32,9 @@ export class CommentComponent implements OnInit {
   voteList: any[];
   isVote = false;
   voteAs;
+  ConfirmDelete: NbPopoverDirective;
+
+  user: User = JSON.parse(localStorage.getItem('user'));
 
   @Input() comment: any;
   @Input() postId: any;
@@ -40,7 +43,6 @@ export class CommentComponent implements OnInit {
   @Output() isComment = new EventEmitter();
 
   @ViewChild(NbPopoverDirective, { static: false })
-  ConfirmDelete: NbPopoverDirective;
   @ViewChild('commentSection', { static: false }) section;
 
   updateCommentForm = new FormGroup({
@@ -51,7 +53,6 @@ export class CommentComponent implements OnInit {
     reply: new FormControl('', Validators.required)
   });
 
-  user: User = JSON.parse(localStorage.getItem('user'));
   formControls = this.replyForm.controls;
 
   constructor(
@@ -174,7 +175,7 @@ export class CommentComponent implements OnInit {
 
   deleteComments() {
     this.forumService
-      .deleteReplyList('commentID', this.comment.key)
+      .deleteById('comment', 'commentID', this.comment.key)
       .subscribe();
     this.forumService.deleteDocment('comment', this.comment.key);
     this.changeCommentCount.emit();
@@ -190,6 +191,7 @@ export class CommentComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
+    // chage current react
     this.forumService
       .changeReact(current, this.user.uid, this.comment.key)
       .then(_ => {
@@ -198,6 +200,7 @@ export class CommentComponent implements OnInit {
   }
 
   checkReactState() {
+    // chech react
     this.forumService
       .checkReact(this.user.uid, this.comment.key)
       .subscribe(count => {

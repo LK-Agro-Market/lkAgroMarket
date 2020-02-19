@@ -111,13 +111,13 @@ export class ForumService {
   }
 
   changeReact(
-    // change current reacts (react -> not react, not react -> react)
+    // change current reacts 
     current: boolean,
     userId,
     postId
   ) {
     if (current) {
-      // if true (currently true)
+      // currently true
       return this.afs
         .collection('react')
         .ref.where('userID', '==', userId)
@@ -127,7 +127,7 @@ export class ForumService {
           return r.docs[0].ref.delete().then(_ => true);
         });
     } else {
-      // if false (currently false)
+      // currently false
       return this.afs
         .collection('react')
         .add({
@@ -167,7 +167,7 @@ export class ForumService {
   changeVoteState(key, increment, user) {
     // vote for comments
     if (increment === 1) {
-      // if currently vote-up, change to vote-down
+      // currently vote-up
       this.afs
         .collection('comment')
         .doc(key)
@@ -179,7 +179,7 @@ export class ForumService {
           })
         });
     } else {
-      // if currently vote-down, change to vote-up
+      // currently vote-down
       this.afs
         .collection('comment')
         .doc(key)
@@ -295,7 +295,7 @@ export class ForumService {
   }
 
   getPost(userType) {
-    // get all
+    // get all posts
     if (userType === 'admin') {
       return this.afs
       .collection('post', ref => ref.orderBy('date', 'desc'))
@@ -389,7 +389,7 @@ export class ForumService {
   }
 
   getCommentForUpdate(commentId) {
-    // get comment data for update
+    // get comment for update
     return this.afs
       .collection('comment')
       .doc(commentId)
@@ -416,7 +416,7 @@ export class ForumService {
   }
 
   getReplyForUpdate(replyId) {
-    // get reply data for update
+    // get reply for update
     return this.afs
       .collection('reply')
       .doc(replyId)
@@ -448,35 +448,17 @@ export class ForumService {
       .delete();
   }
 
-  deleteReplyList(field, id) {
-    // delete replies by feild
+  deleteById(collection, field, id) {
+    // delte by matching field
     return this.afs
-      .collection('reply', ref => ref.where(field, '==', id))
-      .snapshotChanges()
-      .pipe(
-        map(replies =>
-          replies.map(reply => {
-            const key = reply.payload.doc.id;
-            this.afs
-              .collection('reply')
-              .doc(key)
-              .delete();
-          })
-        )
-      );
-  }
-
-  deleteCommentList(field, id) {
-    // delte comments by field
-    return this.afs
-      .collection('comment', ref => ref.where(field, '==', id))
+      .collection(collection, ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
         map(comments =>
           comments.map(comment => {
             const key = comment.payload.doc.id;
             this.afs
-              .collection('comment')
+              .collection(collection)
               .doc(key)
               .delete();
           })
@@ -486,6 +468,7 @@ export class ForumService {
 
   deleteImage(urlList: any[]) {
     // not delete mulitple images
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < urlList.length; i++) {
       this.storage.storage.refFromURL(urlList[i]).delete();
     }

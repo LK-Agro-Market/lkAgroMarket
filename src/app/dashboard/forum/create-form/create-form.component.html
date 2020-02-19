@@ -9,12 +9,14 @@
           </label>
           <input type="text" class="form-control" formControlName="title" nbInput fullWidth fieldSize="small"
             status="primary" placeholder="title" />
+          
           <label for="description" id="form-title" style="margin-top: 20px;">
             description
           </label>
           <textarea formControlName="des" nbInput fullWidth status="primary" style="font-size: 13px; height: 100px;"
             placeholder="description">
           </textarea>
+          
           <div class="form-bottom-container">
             <nb-checkbox status="info" (change)="showFarmer = !showFarmer" [checked]="showFarmer">
               Show Farmers
@@ -26,7 +28,7 @@
 
             <ngx-dropzone (change)="onSelect($event)" class="dropzone" [expandable]="true">
               <ngx-dropzone-label>
-                Frop Images...
+                Click or Drop.. 
               </ngx-dropzone-label>
               <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let image of images" [file]="image"
                 [removable]="true" (removed)="onRemove(image)">
@@ -39,6 +41,7 @@
               Submit
             </button>
           </div>
+        
         </form>
       </div>
     </div>

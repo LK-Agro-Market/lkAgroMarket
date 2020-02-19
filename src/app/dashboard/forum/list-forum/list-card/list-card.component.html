@@ -1,5 +1,6 @@
 <div class="card-cantainer">
-
+ 
+  <!-- show admin note  -->
   <nb-card *ngIf="item.isAdminNote" status="success">
     <nb-card-header>
       <div class="pro-img-container" style="margin-top: 10px;">
@@ -23,7 +24,7 @@
             [nbPopover]="confirmDeleteSecton1" nbPopoverPlacement="bottom">
             Delete
           </button>
-
+          <!-- delete confirm template -->
           <ng-template #confirmDeleteSecton1>
             <nb-card style="margin-bottom: -10%;">
               <nb-card-body>
@@ -46,7 +47,6 @@
     </nb-card-header>
     <nb-card-body>
       <p class="text-dark" id="postDesc">{{ item.description }}</p>
-
       <div *ngIf="item.images != null">
         <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
         <hr *ngIf="item.description != '' " />
@@ -55,6 +55,7 @@
     </nb-card-body>
   </nb-card>
 
+  <!-- show other post -->
   <nb-accordion *ngIf="!item.isAdminNote">
     <nb-accordion-item>
       <nb-accordion-item-header id="t-header" *ngIf="item" #postSection>
@@ -63,16 +64,19 @@
             <div class="pro-img-container">
               <img class="pro-img" src="{{ item.userImage }}" alt="Profile image" />
               <div class="pro-header-container">
+                
                 <div class="user-detail">
                   <a href="#" class="pro-name">
                     {{ item.userName }}
                   </a>
                   <span *ngIf="isEnd" class="badge badge-pill badge-success">This post was end</span>
                 </div>
+                
                 <span class="text-info" id="postDate" style="color: #598bff;">
                   <b>Posted on</b>
                   <i> {{ item.date.toDate() | date: 'MMM d, y h:mm:ss a' }} </i>
                 </span>
+                
                 <div class="float-right like-container">
                   <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
                     status=" success" size="medium" class="float-right btn-like">
@@ -82,13 +86,13 @@
                     status=" success" size="medium" class="float-right btn-like">
                     <nb-icon icon="star-outline" status="primary"></nb-icon>
                   </button>
-
                   <p class="count-like">{{ reactCount }}</p>
                   <button nbButton ghost status="info" size="medium" class="float-right btn-com">
                     <nb-icon icon="email"></nb-icon>
                   </button>
                   <p class="count-com">{{ commCount }}</p>
                 </div>
+
               </div>
             </div>
             <div class="media-body">
@@ -106,8 +110,8 @@
                 <button nbButton outline status="danger" size="small" class="delete-btn" [hidden]="!isLogUser"
                   [nbPopover]="confirmDeleteSecton" nbPopoverPlacement="bottom" (click)="toggelSection()">
                   Delete
-                </button>
-
+                </button>  
+                <!-- delete confirm template -->
                 <ng-template #confirmDeleteSecton>
                   <nb-card style="margin-bottom: -10%;">
                     <nb-card-body>
@@ -158,6 +162,7 @@
               (changeCommentCount)="getCommentCount()"></app-comment>
           </div>
         </div>
+        
       </nb-accordion-item-body>
     </nb-accordion-item>
   </nb-accordion>

@@ -22,7 +22,7 @@ export class ForumComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userDetailsService
+    this.userDetailsService // get user level
       .getUserDetails(this.user.uid)
       .subscribe(userDetails => {
         this.currentUserType = userDetails.userLevel;

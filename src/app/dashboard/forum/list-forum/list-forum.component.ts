@@ -46,16 +46,6 @@ export class ListForumComponent implements OnInit {
     }
   }
 
-  myPosts() {
-    // get my post only
-    this.forumService
-      .getPostByID(this.user.uid)
-      .pipe()
-      .subscribe(items => {
-        this.items = items;
-      });
-  }
-
   allPosts() {
     // get all post
     if (this.currentUserType === 'Farmer') {
@@ -68,6 +58,16 @@ export class ListForumComponent implements OnInit {
 
     this.forumService
       .getPost(this.enebleSearchUser)
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
+      });
+  }
+
+  myPosts() {
+    // get my post only
+    this.forumService
+      .getPostByID(this.user.uid)
       .pipe()
       .subscribe(items => {
         this.items = items;
