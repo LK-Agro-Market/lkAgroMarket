@@ -82,10 +82,10 @@ export class SearchSupplyAdsComponent implements OnInit, OnDestroy {
         .getAgreements(this.viewer)
         .subscribe(agreements => {
           this.pendingAgreements = agreements.filter(
-            agreement => agreement.status == 'Pending'
+            agreement => agreement.status === 'Pending'
           );
           this.approvedAgreements = agreements.filter(
-            agreement => agreement.status == 'Approved'
+            agreement => agreement.status === 'Approved'
           );
         })
     );

@@ -37,7 +37,7 @@ export class LayoutComponent implements OnInit {
     translate.addLangs(['en', 'sl', 'tm']);
     translate.setDefaultLang('en');
 
-    let browserLang = translate.getBrowserLang();
+    const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|sl|tm/) ? browserLang : 'en');
   }
 

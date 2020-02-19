@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireList, snapshotChanges } from '@angular/fire/database';
+import { AngularFireList } from '@angular/fire/database';
 import { map, finalize } from 'rxjs/operators';
 import {
   AngularFireUploadTask,
@@ -41,7 +41,8 @@ export class ForumService {
     postUserImage,
     showFarmers,
     showBuyers,
-    isEnd
+    isEnd,
+    postState
   ) {
     return this.afs
       .collection('post')
@@ -56,7 +57,8 @@ export class ForumService {
         userImage: postUserImage,
         showFarmer: showFarmers,
         showBuyer: showBuyers,
-        endThread: isEnd
+        endThread: isEnd,
+        isAdminNote: postState
       });
   }
 
@@ -109,13 +111,13 @@ export class ForumService {
   }
 
   changeReact(
-    // change current reacts (react -> not react, not react -> react)
+    // change current reacts
     current: boolean,
     userId,
     postId
   ) {
     if (current) {
-      // if true (currently true)
+      // currently true
       return this.afs
         .collection('react')
         .ref.where('userID', '==', userId)
@@ -125,7 +127,7 @@ export class ForumService {
           return r.docs[0].ref.delete().then(_ => true);
         });
     } else {
-      // if false (currently false)
+      // currently false
       return this.afs
         .collection('react')
         .add({
@@ -165,7 +167,7 @@ export class ForumService {
   changeVoteState(key, increment, user) {
     // vote for comments
     if (increment === 1) {
-      // if currently vote-up, change to vote-down
+      // currently vote-up
       this.afs
         .collection('comment')
         .doc(key)
@@ -177,7 +179,7 @@ export class ForumService {
           })
         });
     } else {
-      // if currently vote-down, change to vote-up
+      // currently vote-down
       this.afs
         .collection('comment')
         .doc(key)
@@ -292,10 +294,45 @@ export class ForumService {
       });
   }
 
-  getPost() {
-    // get all
+  getPost(userType) {
+    // get all posts
+    if (userType === 'admin') {
+      return this.afs
+        .collection('post', ref => ref.orderBy('date', 'desc'))
+        .snapshotChanges()
+        .pipe(
+          map(postItems =>
+            postItems.map(postItem => {
+              const data = postItem.payload.doc.data();
+              const key = postItem.payload.doc.id;
+              return { key, ...data };
+            })
+          )
+        );
+    } else {
+      return this.afs
+        .collection('post', ref =>
+          ref.where(userType, '==', true).orderBy('date', 'desc')
+        )
+        .snapshotChanges()
+        .pipe(
+          map(postItems =>
+            postItems.map(postItem => {
+              const data = postItem.payload.doc.data();
+              const key = postItem.payload.doc.id;
+              return { key, ...data };
+            })
+          )
+        );
+    }
+  }
+
+  getPostByID(userId) {
+    // get post by user id
     return this.afs
-      .collection('post', ref => ref.orderBy('date', 'desc'))
+      .collection('post', ref =>
+        ref.where('userID', '==', userId).orderBy('date', 'desc')
+      )
       .snapshotChanges()
       .pipe(
         map(postItems =>
@@ -308,11 +345,11 @@ export class ForumService {
       );
   }
 
-  getPostByID(userId) {
-    // get post by user id
+  getAdminNotes() {
+    // get posts which post by admin
     return this.afs
       .collection('post', ref =>
-        ref.where('userID', '==', userId).orderBy('date', 'desc')
+        ref.where('isAdminNote', '==', true).orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(
@@ -335,29 +372,14 @@ export class ForumService {
       .pipe();
   }
 
-  getCommentForUpdate(commentId) {
-    // get comment data for update
-    return this.afs
-      .collection('comment')
-      .doc(commentId)
-      .get()
-      .pipe();
-  }
-
-  getReplyForUpdate(replyId) {
-    // get reply data for update
-    return this.afs
-      .collection('reply')
-      .doc(replyId)
-      .get()
-      .pipe();
-  }
-
   getComment(postKey) {
     // get comments
     return this.afs
       .collection('comment', ref =>
-        ref.where('postID', '==', postKey).orderBy('date', 'desc')
+        ref
+          .where('postID', '==', postKey)
+          .orderBy('voteCount', 'desc')
+          .orderBy('date', 'desc')
       )
       .snapshotChanges()
       .pipe(
@@ -369,6 +391,15 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getCommentForUpdate(commentId) {
+    // get comment for update
+    return this.afs
+      .collection('comment')
+      .doc(commentId)
+      .get()
+      .pipe();
   }
 
   getReply(commentId) {
@@ -387,6 +418,15 @@ export class ForumService {
           })
         )
       );
+  }
+
+  getReplyForUpdate(replyId) {
+    // get reply for update
+    return this.afs
+      .collection('reply')
+      .doc(replyId)
+      .get()
+      .pipe();
   }
 
   getCount(collection, field, key) {
@@ -413,35 +453,17 @@ export class ForumService {
       .delete();
   }
 
-  deleteReplyList(field, id) {
-    // delete replies by feild
+  deleteById(collection, field, id) {
+    // delte by matching field
     return this.afs
-      .collection('reply', ref => ref.where(field, '==', id))
-      .snapshotChanges()
-      .pipe(
-        map(replies =>
-          replies.map(reply => {
-            const key = reply.payload.doc.id;
-            this.afs
-              .collection('reply')
-              .doc(key)
-              .delete();
-          })
-        )
-      );
-  }
-
-  deleteCommentList(field, id) {
-    // delte comments by field
-    return this.afs
-      .collection('comment', ref => ref.where(field, '==', id))
+      .collection(collection, ref => ref.where(field, '==', id))
       .snapshotChanges()
       .pipe(
         map(comments =>
           comments.map(comment => {
             const key = comment.payload.doc.id;
             this.afs
-              .collection('comment')
+              .collection(collection)
               .doc(key)
               .delete();
           })
@@ -451,6 +473,7 @@ export class ForumService {
 
   deleteImage(urlList: any[]) {
     // not delete mulitple images
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < urlList.length; i++) {
       this.storage.storage.refFromURL(urlList[i]).delete();
     }

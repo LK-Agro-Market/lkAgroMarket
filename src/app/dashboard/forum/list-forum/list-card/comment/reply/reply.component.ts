@@ -22,18 +22,18 @@ export class ReplyComponent implements OnInit {
   isEdit = false;
   isReact;
   reactCount;
+  ConfirmDelete: NbPopoverDirective;
+
+  user: User = JSON.parse(localStorage.getItem('user'));
 
   @Input() replyItem: any;
   @Output() changeReplyCount = new EventEmitter();
   @Output() isReply = new EventEmitter();
-  @ViewChild(NbPopoverDirective, { static: false })
-  ConfirmDelete: NbPopoverDirective;
 
+  @ViewChild(NbPopoverDirective, { static: false })
   updateReplyForm = new FormGroup({
     upReply: new FormControl('', Validators.required)
   });
-
-  user: User = JSON.parse(localStorage.getItem('user'));
 
   constructor(
     private forumService: ForumService,
@@ -86,6 +86,7 @@ export class ReplyComponent implements OnInit {
   }
 
   changeReactState(current: boolean) {
+    // change current react
     this.forumService
       .changeReact(current, this.user.uid, this.replyItem.key)
       .then(_ => {
@@ -94,6 +95,7 @@ export class ReplyComponent implements OnInit {
   }
 
   checkReactState() {
+    // chech react
     this.forumService
       .checkReact(this.user.uid, this.replyItem.key)
       .subscribe(count => {

@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="vl"></div>
   <div class="card-cantainer">
-    <nb-accordion>
+    <nb-accordion style="width: 920px;">
       <nb-accordion-item autoCollapse="true">
         <nb-accordion-item-header #commentSection>
           <div class="vote-container">
@@ -20,9 +20,7 @@
               icon="arrow-ios-upward-outline"
               status="primary"
             ></nb-icon>
-
             <p class="count-react">{{ voteCount }}</p>
-
             <nb-icon
               *ngIf="!isVote || (isVote && voteAs == 'up')"
               icon="arrow-ios-downward-outline"
@@ -47,7 +45,7 @@
                 *ngIf="isBest"
                 icon="done-all-outline"
                 status="primary"
-                nbTooltip="The post owner accepted this as the best answer"
+                nbTooltip="The post owner accepted this as the best solution"
                 nbTooltipPlacement="bottom"
                 nbTooltipStatus="info"
               >
@@ -60,7 +58,7 @@
                 (click)="mark(true)"
                 icon="done-all-outline"
                 status="primary"
-                nbTooltip="You marked this as the best answer (click again to undo)"
+                nbTooltip="You marked this as the best solution (click again to undo)"
                 nbTooltipPlacement="top"
                 nbTooltipStatus="info"
               >
@@ -70,12 +68,13 @@
                 (click)="mark(false)"
                 icon="done-all-outline"
                 status="basic"
-                nbTooltip="Click to mark as the best answer"
+                nbTooltip="Click to mark as the best solution"
                 nbTooltipPlacement="top"
                 nbTooltipStatus="info"
               ></nb-icon>
             </div>
           </div>
+
           <div class="comnt-container">
             <div class="pro-img-container">
               <img
@@ -109,7 +108,7 @@
                     size="medium"
                     class="float-right btn-like"
                   >
-                    <nb-icon icon="heart" status="primary"></nb-icon>
+                    <nb-icon icon="star" status="primary"></nb-icon>
                   </button>
                   <button
                     (click)="changeReactState(false)"
@@ -121,7 +120,7 @@
                     size="medium"
                     class="float-right btn-like"
                   >
-                    <nb-icon icon="heart-outline" status="primary"></nb-icon>
+                    <nb-icon icon="star-outline" status="primary"></nb-icon>
                   </button>
                   <p class="count-like">{{ reactCount }}</p>
                   <button
@@ -277,7 +276,13 @@
           </form>
           <hr />
           <div>
-            <p class="reply-title" *ngIf="repCount != 0">Replies</p>
+            <p
+              class="reply-title"
+              *ngIf="repCount != 0"
+              style="margin-left: 30px;"
+            >
+              Replies
+            </p>
             <div *ngFor="let replyItem of replies">
               <app-reply
                 *ngIf="!isEdit"

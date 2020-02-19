@@ -3,9 +3,9 @@
     <div class="list-container">
       <div class="form-container">
         <form [formGroup]="discussionForm" novalidate (ngSubmit)="onCreate()">
-          <label for="title" id="form-title">{{
-            'fourm.title' | translate
-          }}</label>
+          <label for="title" id="form-title">
+            title
+          </label>
           <input
             type="text"
             class="form-control"
@@ -14,10 +14,11 @@
             fullWidth
             fieldSize="small"
             status="primary"
-            placeholder="{{ 'fourm.title' | translate }}"
+            placeholder="title"
           />
+
           <label for="description" id="form-title" style="margin-top: 20px;">
-            {{ 'fourm.description' | translate }}
+            description
           </label>
           <textarea
             formControlName="des"
@@ -25,16 +26,17 @@
             fullWidth
             status="primary"
             style="font-size: 13px; height: 100px;"
-            placeholder="{{ 'fourm.description' | translate }}"
+            placeholder="description"
           >
           </textarea>
+
           <div class="form-bottom-container">
             <nb-checkbox
               status="info"
               (change)="showFarmer = !showFarmer"
               [checked]="showFarmer"
             >
-              {{ 'fourm.farmer' | translate }}
+              Show Farmers
             </nb-checkbox>
             <nb-checkbox
               status="info"
@@ -42,7 +44,7 @@
               [checked]="showBuyer"
               style="margin-left: 10px;"
             >
-              {{ 'fourm.buyer' | translate }}
+              Show Buyers
             </nb-checkbox>
 
             <ngx-dropzone
@@ -50,9 +52,9 @@
               class="dropzone"
               [expandable]="true"
             >
-              <ngx-dropzone-label>{{
-                'fourm.drop' | translate
-              }}</ngx-dropzone-label>
+              <ngx-dropzone-label>
+                Click or Drop..
+              </ngx-dropzone-label>
               <ngx-dropzone-image-preview
                 ngProjectAs="ngx-dropzone-preview"
                 *ngFor="let image of images"
@@ -75,7 +77,7 @@
               [disabled]="!discussionForm.valid"
               style="margin-top: 10px;"
             >
-              {{ 'fourm.button1' | translate }}
+              Submit
             </button>
           </div>
         </form>

@@ -10,7 +10,7 @@ import { ForumService } from '../forum.service';
 import { User } from 'firebase';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { async } from '@angular/core/testing';
+import { UserDetails } from 'src/app/shared/models/user-details';
 
 @Component({
   selector: 'app-create-form',
@@ -26,6 +26,7 @@ export class CreateFormComponent implements OnInit {
   toastrStatus;
 
   @Input() postId: any; // get postID for update
+  @Input() isAdminNote: boolean;
   @Input() createOrUpdate: any;
   @Input() createDate: any; // get create date for update post
 
@@ -91,12 +92,10 @@ export class CreateFormComponent implements OnInit {
     const userImage = this.user.photoURL;
     const showFarmer = this.showFarmer;
     const showBuyer = this.showBuyer;
-
     if (this.discussionForm.valid) {
       if (this.showFarmer === true || this.showBuyer === true) {
         if (this.createOrUpdate === 'create') {
           id = this.forumService.getPostId(); // get new ID for post
-          this.toastrStatus = 'Your post is created...';
           this.forumService.createPost(
             // create new post
             id,
@@ -109,11 +108,11 @@ export class CreateFormComponent implements OnInit {
             userImage,
             showFarmer,
             showBuyer,
-            false
+            false,
+            this.isAdminNote
           );
+          this.toastrStatus = 'Your post is created...';
         } else {
-          ///////// shuld udate new image list
-          this.toastrStatus = 'Your changes are saved...';
           id = this.postId;
           this.forumService.updatePost(
             // update selected post
@@ -124,6 +123,7 @@ export class CreateFormComponent implements OnInit {
             showFarmer,
             showBuyer
           );
+          this.toastrStatus = 'Your changes are saved...';
         }
         if (this.images != null) {
           // upload images

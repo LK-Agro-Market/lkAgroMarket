@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ForumService } from '../forum.service';
 import { User } from 'firebase';
+import { UserDetailsService } from 'src/app/shared/services/user-details.service';
 
 @Component({
   selector: 'app-list-forum',
@@ -10,28 +11,59 @@ import { User } from 'firebase';
 export class ListForumComponent implements OnInit {
   items: any[];
   postUser: any;
+  currentUserType;
+  enebleSearchUser;
 
-  @Input() showMyPost;
+  @Input() postType;
 
   user: User = JSON.parse(localStorage.getItem('user'));
 
-  constructor(private forumService: ForumService) {}
+  constructor(
+    private forumService: ForumService,
+    private userDetailsService: UserDetailsService
+  ) {}
 
   ngOnInit() {
     this.allPosts();
+
+    this.userDetailsService
+      .getUserDetails(this.user.uid)
+      .subscribe(userDetails => {
+        this.currentUserType = userDetails.userLevel;
+      });
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnChanges() {
     // change post view
-    if (this.showMyPost) {
-      this.myPost();
-    } else {
+    if (this.postType === 'all') {
       this.allPosts();
+    } else if (this.postType === 'my') {
+      this.myPosts();
+    } else if (this.postType === 'admin') {
+      this.adminPosts();
     }
   }
 
-  myPost() {
+  allPosts() {
+    // get all post
+    if (this.currentUserType === 'Farmer') {
+      this.enebleSearchUser = 'showFarmer';
+    } else if (this.currentUserType === 'Buyer') {
+      this.enebleSearchUser = 'showBuyer';
+    } else {
+      this.enebleSearchUser = 'admin';
+    }
+
+    this.forumService
+      .getPost(this.enebleSearchUser)
+      .pipe()
+      .subscribe(items => {
+        this.items = items;
+      });
+  }
+
+  myPosts() {
     // get my post only
     this.forumService
       .getPostByID(this.user.uid)
@@ -41,10 +73,10 @@ export class ListForumComponent implements OnInit {
       });
   }
 
-  allPosts() {
-    // get all post
+  adminPosts() {
+    // get admin notes
     this.forumService
-      .getPost()
+      .getAdminNotes()
       .pipe()
       .subscribe(items => {
         this.items = items;
