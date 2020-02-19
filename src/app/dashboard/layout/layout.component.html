@@ -4,7 +4,7 @@
       <div class="col title">
         <img class="logo" src="../../../assets/logo2.jpg" />
       </div>
-      <div>
+      <!-- <div>
         <li>
           <a href="javascript:void(0)" (click)="changeLanguage('en')"
             >Engilsh</a
@@ -16,7 +16,7 @@
         <li>
           <a href="javascript:void(0)" (click)="changeLanguage('tm')">தமிழ்</a>
         </li>
-      </div>
+      </div> -->
       <div class="col-auto text-right align-middle" *ngIf="userDetails">
         <nb-user
           size="large"
@@ -37,7 +37,7 @@
           (click)="logout()"
         >
           <nb-icon icon="unlock-outline"></nb-icon
-          >{{ 'create.sign' | translate }}
+          >{{ 'create.sign'  }}
         </button>
       </div>
     </div>

@@ -55,11 +55,11 @@
                 <div class="float-right like-container">
                   <button (click)="changeReactState(true)" (click)="toggelSection()" *ngIf="isReact" nbButton ghost
                     status=" success" size="medium" class="float-right btn-like">
-                    <nb-icon icon="heart" status="primary"></nb-icon>
+                    <nb-icon icon="star" status="primary"></nb-icon>
                   </button>
                   <button (click)="changeReactState(false)" (click)="toggelSection()" *ngIf="!isReact" nbButton ghost
                     status=" success" size="medium" class="float-right btn-like">
-                    <nb-icon icon="heart-outline" status="primary"></nb-icon>
+                    <nb-icon icon="star-outline" status="primary"></nb-icon>
                   </button>
                   <p class="count-like">{{ reactCount }}</p>
                   <button nbButton ghost status="info" size="medium" class="float-right btn-com">
