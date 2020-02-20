@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="adOwner && viewer">
     <div class="row">
         <div class="col-sm-6">
             <nb-card accent="info">
@@ -17,7 +17,7 @@
                       <li> When you sigend this order your should be hand over Product/Harvest to buyer on or 
                           before deadline.</li>
                       <li> You should provide good and quality products for the Buyer.</li>
-                      <li>if you are unable to sully products after singed the agreement you sholud imediatly infor it to buyer.</li>
+                      <li>if you are unable to supply products after singed the agreement you sholud imediatly infor it to buyer.</li>
                       <li>Buyer can report you if any unauthoried ones happens from you.</li>
                     </ul>  
                     </nb-card-body>
@@ -28,7 +28,7 @@
                 <nb-card-header>
                     <span class="text-left">Sign the Agreement</span>
                 </nb-card-header>
-                <nb-card-body *ngIf="isAgree==false">
+                <nb-card-body *ngIf="adOwner.uid != viewer.uid && isAgree==false">
                     <p>I read and clearly undestand the agreemnt details and the products/Harvet 
                         will be supply on or before the deadline.
                     </p>
@@ -51,9 +51,9 @@
                         </div>
                       </div>
                 </nb-card-body>
-                <nb-card-body *ngIf="isAgree==true">
+                <nb-card-body *ngIf="adOwner.uid != viewer.uid && isAgree == true">
                     <p>Your agreement is sent to the customer and it will <strong>approve</strong>by them. you sign agreement to sell
-                        Harvest/Products on or before {{agreementDate}}. You can <strong>cancel your agreement</strong> before approved by customer. <br><strong>Thank you Using Agro Market!</strong>
+                        Harvest/Products on or before {{viewersAgreement.agreementDate}}. You can <strong>cancel your agreement</strong> before approved by customer. <br><br><strong>Thank you Using Agro Market!</strong>
                     </p>
                     <div class="input-group mb-3">
                       
@@ -62,7 +62,7 @@
                             class="btn btn-danger"
                             type="button"
                             appConfirmButton
-                            (confirmed)="cancelAgreement"
+                            (confirmed)="cancelAgreement()"
                           >
                             Cancel Agreement
                           </button>

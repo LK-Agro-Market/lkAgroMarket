@@ -25,6 +25,8 @@ demandAd:DemandAd;
 adOwner:User;
 currentTime = new Date().toISOString().split('T')[0];
 isAgree:boolean=false;
+viewersAgreement:buyerAgreement;
+pendingAgreements:buyerAgreement[];
 
 
 
@@ -37,15 +39,31 @@ isAgree:boolean=false;
         this.adOwner=user; 
        // console.log(demandAd)   
            });
+        
         });
+        this.viewAdservice.getPendingDemandads(this.demandAdid).subscribe(pAgreements=>{
+          this.pendingAgreements=pAgreements;
+          this.isAgree=pAgreements.filter
+          (pAgreements=>pAgreements.farmer.uid==this.viewer.uid
+            ).length>0;
+             console.log(this.isAgree)
+             if(this.isAgree == true){
+                this.viewersAgreement=pAgreements.filter(
+                  pAgreements=>pAgreements.farmer.uid==this.viewer.uid
+                  )[0];
+             }
+         console.log(this.isAgree);
+        })
     })
   }
 agreetoBuy(){
   if(this.agreementDate===''){
     return;
   }
-  this.isAgree=!this.isAgree;
+ 
   this.viewAdservice.createagreement(this.demandAd,this.viewer,this.agreementDate)
 }
-
+cancelAgreement(){
+  this.viewAdservice.deletePendingad(this.viewersAgreement.agreementId);
+  }
 }

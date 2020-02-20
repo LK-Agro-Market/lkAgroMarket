@@ -27,13 +27,15 @@ export class ReplyComponent implements OnInit {
       });
   }
 
-  onComment(Rcomment) {
-    this.commentservice.addreplycmt(Rcomment).then(_ => {
-      this.Rcomment = new Reply();
-    });
+  onComment(Rcomment:Reply) {
+    this.commentservice.addreplycmt(Rcomment)
+    // .then(_ => {
+    //   this.Rcomment = new Reply();
+    // });
+    this.Rcomment = new Reply();
   }
 
-  onDelete(pass) {
+  onDelete(pass:string) {
     this.commentservice.deleteReplay(pass);
   }
 
@@ -45,7 +47,7 @@ export class ReplyComponent implements OnInit {
     paraentdocId: this.paraentdocId
   };
 
-  on(comm) {
+  on(comm:string) {
     const Rcomment: Reply = {
       docId: '',
       userName: this.user.displayName,

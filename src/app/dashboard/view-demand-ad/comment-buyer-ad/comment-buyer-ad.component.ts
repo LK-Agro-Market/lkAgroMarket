@@ -27,13 +27,17 @@ export class CommentBuyerAdComponent implements OnInit {
 
   adId = this.getadId();
   ngOnInit() {
-    this.cmt = this.commentservice.getcomments(this.adId);
+    this.commentservice.getcomments(this.adId).subscribe(comment=>{
+      this.cmt=comment;
+    })
   }
 
-  onComment(comment) {
-    this.commentservice.add(comment).then(_ => {
-      this.comment = new Comment();
-    });
+  onComment(comment:Comment) {
+    this.commentservice.add(comment)
+    this.comment= new Comment();
+    // .then(_ => {
+    //   this.comment = new Comment();
+    // });
   }
 
   getadId() {

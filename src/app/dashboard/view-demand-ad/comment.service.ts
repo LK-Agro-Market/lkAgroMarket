@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import * as firebase from 'firebase';
 import { map } from 'rxjs/operators';
 import { Comment } from 'src/app/shared/models/comment-ad';
 import { ActivatedRoute } from '@angular/router';
 import { Reply } from 'src/app/shared/models/reply-comment-ad';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CommentService {
     return id;
   }
 
-  add<T>(data): Promise<void> {
+  add<T>(data:Comment){
     const docid = this.afs.createId();
     const commentData = {
       adId: data.adId,
@@ -29,20 +30,22 @@ export class CommentService {
       //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       // createdAt: new Date().toISOString
     };
-    return this.afs.doc('bcomments/' + docid).set(commentData);
+    const bcmt :  AngularFirestoreCollection<Comment> = this.afs.collection('bcomments');
+   // return this.afs.doc('bcomments/' + docid).set(commentData);
+   return from(bcmt.doc(docid).set(commentData));
   }
 
   delete(ref: any) {
     this.afs.doc('bcomments/' + ref).delete();
   }
 
-  getcomments(adId: string) {
+  getcomments(adId: string):Observable<Comment[]> {
     return this.afs
-      .collection('bcomments', ref =>
+      .collection<Comment>('bcomments', ref =>
         ref.where('adId', '==', adId).orderBy('date', 'asc')
       )
       .valueChanges()
-      .pipe(map(ref => ref as Comment[]));
+      //.pipe(map(ref => ref as Comment[]));
   }
 
   get timestamp() {

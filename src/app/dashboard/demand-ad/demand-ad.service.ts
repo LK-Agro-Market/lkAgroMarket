@@ -49,9 +49,9 @@ export class DemandAdService {
   }
   getdemandAds(userID: string): Observable<DemandAd[]> {
     return this.afs
-      .collection('demandAd', ref => ref.where('owner', '==', userID))
+      .collection<DemandAd>('demandAd', ref => ref.where('owner', '==', userID))
       .valueChanges()
-      .pipe(map(res => res as DemandAd[]));
+     // .pipe(map(res => res as DemandAd[]));
   }
 
   getdemandad(adId: string): Observable<DemandAd> {
@@ -89,8 +89,11 @@ export class DemandAdService {
     });
   }
   getalldemandAds(): Observable<DemandAd[]> {
-    return this.afs.collection<DemandAd>('demandAd').valueChanges();
-  }
+    return this.afs
+      .collection<DemandAd>('demandAd')
+      .valueChanges();
+    }
+
   countViws(adId: string) {
     this.afs
       .collection('demandAd')
@@ -121,19 +124,40 @@ export class DemandAdService {
      .doc<UserDetails>(ownerId)
      .valueChanges()
   }
+
 createagreement(ad:DemandAd,farmer:User,date:string){
   const agreementId=this.getdemandAdid();
+  const customer:User={
+    uid: farmer.uid,
+    email: farmer.email,
+    displayName: farmer.displayName,
+    photoURL: farmer.photoURL
+                      }
   const pendingAgreement:buyerAgreement={
     agreementId: agreementId,
-    farmer: farmer,
+    farmer: customer,
     ad: ad,
     status: 'pending',
     agreementDate: date,
-    createdAt: new Date().toISOString()}
+    createdAt: new Date().toISOString()
+                                        }
     const docref:AngularFirestoreDocument<buyerAgreement> = this.afs
     .collection('buyerAgreement')
     .doc(agreementId);
   return from(docref.set(pendingAgreement));
 }
+
+getPendingDemandads(adId:string):Observable<buyerAgreement[]>{
+  return this.afs.collection<buyerAgreement>('buyerAgreement',ref=>ref
+    .where('ad.id','==',adId)
+    .where('status','==','pending')
+    .orderBy('createdAt', 'asc'))
+    .valueChanges()
+  }
+
+  deletePendingad(agreementId:string):Observable<void>{
+    return from(
+    this.afs.collection('buyerAgreement').doc(agreementId).delete());
+  }
 
 }

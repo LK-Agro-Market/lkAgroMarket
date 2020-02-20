@@ -18,7 +18,7 @@
                   <span class="food-type">- {{ demandAd.foodtype }}</span>
                   <nb-badge
                   text="Active"
-                  status="danger"
+                  status="success"
                   position="top right"
                   *ngIf="demandAd.deadline > currentTime"
                 >
@@ -54,7 +54,7 @@
                     {{ demandAd.deadline }}
                   </li>
                   <li class="list-group-item">
-                    <strong>Total price</strong> - Rs: 
+                    <strong>{{ 'list.ad.tprice' | translate }}</strong> - Rs: 
                     {{ demandAd.expectedamount*demandAd.priceperunit  }}
                   </li>
                 </ul>
@@ -69,11 +69,11 @@
                     </h6>
                   </div>
                   <div class="col-sm-9">
-                   <strong> Expected products/harvest before : {{demandAd.deadline}}</strong>
+                   <strong>  {{ 'list.ad.date' | translate }} : {{demandAd.deadline}}</strong>
                   </div>
                   </div>
                   <div align="right" *ngIf="demandAd.deadline > currentTime">
-                    <button nbButton [routerLink]="['agreement']">Sell Harvest/products</button>
+                    <button nbButton [routerLink]="['agreement']">{{ 'list.ad.button' | translate }}</button>
                   </div>
                   </div>
                 </div>
@@ -88,7 +88,7 @@
         <nb-card-header>
           <div class="card-header-content">
             <span class="text-left">
-              Advertisement owner details
+              {{ 'list.ad.title3' | translate }}
             </span>
           </div>
         </nb-card-header>
@@ -107,15 +107,15 @@
 
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  <strong>Contact</strong> -
+                  <strong> {{ 'list.ad.bname' | translate }}</strong> -
                   {{  userDetail.contact }}
                 </li>
                 <li class="list-group-item">
-                  <strong> District</strong> -
+                  <strong>  {{ 'list.ad.bdistrict' | translate }}</strong> -
                 {{  userDetail.district}}
                 </li>
                 <li class="list-group-item">
-                  <strong>HomeAddress</strong> -
+                  <strong>{{ 'list.ad.badress' | translate }}</strong> -
                   {{  userDetail.homeAddress }}
                 </li>
                 <!-- <li class="list-group-item">

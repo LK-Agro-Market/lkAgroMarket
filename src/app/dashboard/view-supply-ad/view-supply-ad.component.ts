@@ -106,11 +106,13 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
                       agreements.filter(
                         agreement => agreement.buyer.uid == this.viewer.uid
                       ).length > 0;
+                      console.log(this.isViewerAgreed);
                     if (this.isViewerAgreed == true) {
                       this.viewersAgreement = agreements.filter(
                         agreement => agreement.buyer.uid == this.viewer.uid
                       )[0];
                     }
+                    console.log(this.isViewerAgreed);
                   })
               );
 

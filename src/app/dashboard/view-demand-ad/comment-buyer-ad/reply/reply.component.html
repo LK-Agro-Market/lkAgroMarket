@@ -1,4 +1,4 @@
-<div class="Container">
+<div class="Container" *ngIf="user">
   <div class="comment-item" *ngFor="let comment of comments">
     <br />
     <div>
@@ -14,6 +14,7 @@
       type="button"
       class="btn btn-outline-danger btn-sm"
       (click)="onDelete(comment.docId)"
+      *ngIf="comment.userName==user.displayName"
     >
       {{ 'comments.button.delete' | translate }}
     </button>

@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="user">
   <div
     class="comment-item"
-    *ngFor="let comment of cmt | async; let idx = index"
+    *ngFor="let comment of cmt"
   >
     <br />
     <div>
@@ -14,14 +14,20 @@
     </div>
 
     <!-- Buttons to delete and view reply of a comment -->
-    <button
-      type="button"
-      class="btn btn-outline-danger btn-sm"
-      (click)="onDelete(comment.docId)"
-    >
-      {{ 'comments.button.delete' | translate }}
-    </button>
-    <button
+  
+    
+        <button
+        type="button"
+        class="btn btn-outline-danger btn-sm"
+        (click)="onDelete(comment.docId)"
+        *ngIf="comment.userName==user.displayName"
+      
+      >
+        {{ 'comments.button.delete' | translate }}
+      </button>
+      
+     
+      <button
       type="button"
       class="btn btn-outline-info btn-sm"
       (click)="viewcReply = comment.docId; test(); getdocId(comment.docId)"
@@ -31,6 +37,9 @@
     <ng-template [ngIf]="viewcReply == comment.docId && viewcommentReply"
       ><div><app-reply [parentdocId]="parentdocId"></app-reply></div
     ></ng-template>
+    
+   
+    
   </div>
   <br />
 

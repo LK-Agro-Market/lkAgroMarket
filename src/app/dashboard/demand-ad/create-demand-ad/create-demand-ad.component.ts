@@ -93,6 +93,7 @@ export class CreateDemandAdComponent implements OnInit, OnDestroy {
         owner: this.user.uid
       };
       this.attempted = true;
+      this.processing = true;
       if (this.demandadservice.buyerAdform.invalid) {
         return;
       }

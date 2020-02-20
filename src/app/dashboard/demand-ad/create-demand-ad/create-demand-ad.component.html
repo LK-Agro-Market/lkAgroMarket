@@ -29,10 +29,10 @@
               </nb-option>
             </nb-select>
             <div
-              *ngIf="attempted && !!formControls.foodtype.errors"
+              *ngIf="attempted && formControls.foodtype.errors"
               class="text-danger"
             >
-              <span *ngIf="!!formControls.foodtype.errors.required">{{
+              <span *ngIf="formControls.foodtype.errors.required">{{
                 'create.requred.catogary' | translate
               }}</span>
             </div>

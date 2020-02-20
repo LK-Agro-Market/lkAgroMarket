@@ -44,6 +44,13 @@
       "quantity": "Quantity",
       "unit": "Price per unit",
       "deadline": "Deadline",
+      "tprice": "Total price",
+      "date":"Expected products/harvest before",
+      "title3":" Advertisement owner details",
+      "button":"Sell Harvest/products",
+      "bname":"Contact",
+      "bdistrict":"District",
+      "badress":"HomeAddress ",
       "view": "View"
     },
     "button": {
