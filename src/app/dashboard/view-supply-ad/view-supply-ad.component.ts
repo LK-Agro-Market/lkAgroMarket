@@ -247,4 +247,12 @@ export class ViewSupplyAdComponent implements OnInit, OnDestroy {
         })
     );
   }
+
+  onDeleteComment(commentId: string) {
+    this.subscriptions.push(
+      this.viewSupplyAdService.deleteComment(commentId).subscribe(() => {
+        this.toastr.success('Deleted your comment');
+      })
+    );
+  }
 }
