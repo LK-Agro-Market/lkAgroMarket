@@ -87,12 +87,14 @@ export class ViewSupplyAdService {
       .collection('supplyAdComment')
       .doc(commentId);
 
-    this.notificationService.createNotification(
-      `${currentUser.displayName} commented on your advertisment`,
-      `view-supply-ad/${ad.id}`,
-      ad.owner,
-      currentUser
-    );
+    if (currentUser.uid != ad.owner) {
+      this.notificationService.createNotification(
+        `${currentUser.displayName} commented on your advertisment`,
+        `view-supply-ad/${ad.id}`,
+        ad.owner,
+        currentUser
+      );
+    }
     return from(docRef.set(comment));
   }
 
@@ -102,6 +104,15 @@ export class ViewSupplyAdService {
         ref.where('supplyAdId', '==', adId)
       )
       .valueChanges();
+  }
+
+  deleteComment(commentId: string): Observable<void> {
+    return from(
+      this.afs
+        .collection('supplyAdComment')
+        .doc(commentId)
+        .delete()
+    );
   }
 
   createPendingAgreement(

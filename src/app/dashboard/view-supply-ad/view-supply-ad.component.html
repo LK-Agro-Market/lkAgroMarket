@@ -289,6 +289,7 @@
             </span>
           </div>
         </nb-card-header>
+        <!-- Listing buying requests for farmar -->
         <nb-card-body
           *ngIf="pendingAgreements && adOwnerUser.uid == viewer.uid"
         >
@@ -329,6 +330,7 @@
             </li>
           </ul>
         </nb-card-body>
+        <!-- Buy button (agreement request button) for buyers -->
         <nb-card-body
           *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == false"
         >
@@ -364,6 +366,7 @@
             </div>
           </div>
         </nb-card-body>
+        <!-- Cancel agreement button for buyers -->
         <nb-card-body
           *ngIf="adOwnerUser.uid != viewer.uid && isViewerAgreed == true"
         >
@@ -386,7 +389,7 @@
           </button>
         </nb-card-body>
       </nb-card>
-
+      <!-- Approved agreement details and rating -->
       <nb-card
         accent="success"
         [nbSpinner]="processingAgreement"
@@ -465,6 +468,7 @@
         </nb-card-body>
       </nb-card>
 
+      <!-- comment section -->
       <nb-card accent="info" *ngIf="supplyAd">
         <nb-card-header>
           <div class="card-header-content">
@@ -487,6 +491,14 @@
               >
               </nb-user>
               <span class="comment-text">{{ comment.content }}</span>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                *ngIf="viewer.uid == comment.user.uid"
+                (click)="onDeleteComment(comment.commentId)"
+              >
+                Delete
+              </button>
             </li>
             <div class="input-group mb-3">
               <input
