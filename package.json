@@ -32,7 +32,7 @@
     "@nrwl/workspace": "^8.12.6",
     "@types/events": "^3.0.0",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "eva-icons": "^1.1.1",
     "firebase": "^6.4.0",
     "font-awesome": "^4.7.0",
